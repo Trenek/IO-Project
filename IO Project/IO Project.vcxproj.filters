@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Pliki źródłowe\renderer">
+      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\player">
+      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -22,12 +28,18 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="renderer.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="player.c">
+      <Filter>Pliki źródłowe\player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Pliki źródłowe\player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

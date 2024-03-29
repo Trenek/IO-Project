@@ -327,6 +327,7 @@ Image LoadImageRaw(const char *fileName, int width, int height, int format, int 
 
     return image;
 }
+#define SUPPORT_FILEFORMAT_SVG 1
 
 // Load an image from a SVG file or string with custom size
 Image LoadImageSvg(const char *fileNameOrString, int width, int height)
