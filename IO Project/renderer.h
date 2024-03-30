@@ -7,7 +7,7 @@ struct Object2D {
     Vector3 position;
     Texture2D* texture;
     Vector2 sizeV;
-    Texture2D Animation[4][4];
+    Texture (*Animation)[4][4];
     int animFrame;
     int state;
 };

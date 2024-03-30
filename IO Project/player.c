@@ -1,7 +1,11 @@
 #define _USE_MATH_DEFINES
+
 #include <math.h>
-#include "player.h"
+
+#include <raylib.h>
 #include <raymath.h>
+
+#include "player.h"
 
 void movePlayer(struct player* player, Camera* cam) {
     Vector2 ve = {
@@ -76,9 +80,6 @@ void movePlayer(struct player* player, Camera* cam) {
 
 void gravity(struct player* player, Camera* cam) {
     float deltaTime = GetFrameTime();
-
-    if (player->object->position.y == player->object->sizeV.y / 2)
-        if (IsKeyPressed(KEY_SPACE)) player->speedY = 5;
 
     if (player->object->position.y >= player->object->sizeV.y / 2) {
         if (!(player->object->position.y == player->object->sizeV.y / 2 && player->speedY == 0)) {

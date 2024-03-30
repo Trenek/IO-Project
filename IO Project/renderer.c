@@ -1,7 +1,6 @@
-#include "raylib.h"
-#include "raymath.h"
-#include "rlgl.h"
-#include <stddef.h>
+#include <raylib.h>
+#include <raymath.h>
+#include <rlgl.h>
 
 #include "renderer.h"
 
@@ -52,9 +51,6 @@ void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2
     //a += 0.004f;
     a += 0.01;
 }
-
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
     float deltaX = camera.target.x - camera.position.x;
@@ -107,15 +103,14 @@ void Mod_InsertionSort(struct ObjectsToRender* render, int n, Camera3D camera) {
         render[j + 1].objects = tmp;
     }
 }
-#include <stdlib.h>
-#include <string.h>
+
 void RenderTextures(struct ObjectsToRender* render, int n, Camera3D camera) {
     int i = 0;
 
     Mod_InsertionSort(render, n, camera);
     while (i < n) {
         if (render[i].objects->state != 0) {
-            Draw3DBillboard(camera, render[i].objects->Animation[render[i].objects->state - 1][(render[i].objects->animFrame >> 6) % 4], render[i].objects->position, render[i].objects->sizeV, WHITE);
+            Draw3DBillboard(camera, (*render[i].objects->Animation)[render[i].objects->state - 1][(render[i].objects->animFrame >> 6) % 4], render[i].objects->position, render[i].objects->sizeV, WHITE);
             render[i].objects->animFrame += 1;
         }
         else {

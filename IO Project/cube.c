@@ -50,22 +50,23 @@ int example2(void) {
         .fovy = 45,
     };
 
-    Texture2D box = LoadTexture("resources/ludzik2.png");
+    Texture2D ludz = LoadTexture("resources/ludzik2.png");
     Texture2D mag = LoadTexture("resources/mag.png");
-    Texture2D pixel = LoadTexture("resources/arystokrata2.png");
-    Texture2D arys = LoadTexture("resources/pixel/WarriorFront0.png");
+    Texture2D arys = LoadTexture("resources/arystokrata2.png");
 
-    Matrix mat = { 0 };
-    struct Object2D objects[4] = {
-        { .position = (Vector3){ 4, 1, 0 }, .sizeV = { arys.width / (0.5f * arys.height), arys.height / (0.5f * arys.height) }, .texture = &arys, .Animation = {
+    Texture2D pixel[4][4] = {
         { LoadTexture("resources/pixel/WarriorBack0.png"), LoadTexture("resources/pixel/WarriorBack1.png"), LoadTexture("resources/pixel/WarriorBack0.png"), LoadTexture("resources/pixel/WarriorBack2.png") },
         { LoadTexture("resources/pixel/WarriorRight0.png"), LoadTexture("resources/pixel/WarriorRight1.png"), LoadTexture("resources/pixel/WarriorRight0.png"), LoadTexture("resources/pixel/WarriorRight2.png") },
         { LoadTexture("resources/pixel/WarriorFront0.png"), LoadTexture("resources/pixel/WarriorFront1.png"), LoadTexture("resources/pixel/WarriorFront0.png"), LoadTexture("resources/pixel/WarriorFront2.png") },
         { LoadTexture("resources/pixel/WarriorLeft0.png"), LoadTexture("resources/pixel/WarriorLeft1.png"), LoadTexture("resources/pixel/WarriorLeft0.png"), LoadTexture("resources/pixel/WarriorLeft2.png") }
-    }, .animFrame = 0, .state = 0 },
-        { .position = (Vector3){ -4, 1, 0 }, .sizeV = { pixel.width / (0.5f * pixel.height), pixel.height / (0.5f * pixel.height) }, .texture = &pixel, .Animation = NULL, .animFrame = NULL, .state = 0 },
+    };
+
+    Matrix mat = { 0 };
+    struct Object2D objects[4] = {
+        { .position = (Vector3){ 4, 1, 0 }, .sizeV = { pixel[2][0].width / (0.5f * pixel[2][0].height), pixel[2][0].height / (0.5f * pixel[2][0].height) }, .texture = &pixel[2][0], .Animation = &pixel, .animFrame = 0, .state = 0 },
+        { .position = (Vector3){ -4, 1, 0 }, .sizeV = { arys.width / (0.5f * arys.height), arys.height / (0.5f * arys.height) }, .texture = &arys, .Animation = NULL, .animFrame = NULL, .state = 0 },
         { .position = (Vector3){ 0, 1, 4 }, .sizeV = { mag.width / (0.5f * mag.height), mag.height / (0.5f * mag.height) }, .texture = &mag, .Animation = NULL, .animFrame = NULL, .state = 0 },
-        { .position = (Vector3){ 0, 1, -4 }, .sizeV = { 2, 2 }, .texture = &box, .Animation = NULL, .animFrame = NULL, .state = 0 }
+        { .position = (Vector3){ 0, 1, -4 }, .sizeV = { 2, 2 }, .texture = &ludz, .Animation = NULL, .animFrame = NULL, .state = 0 }
     };
     struct player player = {
         .object = objects,
