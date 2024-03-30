@@ -7,6 +7,9 @@
 
 #include "player.h"
 
+#define GRAVITY -9.81f
+#define M_PIF ((float)M_PI)
+
 void movePlayer(struct player* player, Camera* cam) {
     Vector2 ve = {
         .x = player->object->position.x - cam->position.x,
@@ -33,7 +36,7 @@ void movePlayer(struct player* player, Camera* cam) {
         player->object->state = 1;
     }
     else if (IsKeyDown(KEY_K)) {
-        veH = Vector2Rotate(ve, M_PI);
+        veH = Vector2Rotate(ve, M_PIF);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
@@ -41,7 +44,7 @@ void movePlayer(struct player* player, Camera* cam) {
         player->object->state = 3;
     }
     else if (IsKeyDown(KEY_L)) {
-        veH = Vector2Rotate(ve, M_PI / 2);
+        veH = Vector2Rotate(ve, M_PIF / 2);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
@@ -49,7 +52,7 @@ void movePlayer(struct player* player, Camera* cam) {
         player->object->state = 2;
     }
     else if (IsKeyDown(KEY_J)) {
-        veH = Vector2Rotate(ve, (3 * M_PI) / 2);
+        veH = Vector2Rotate(ve, (3 * M_PIF) / 2);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
@@ -65,11 +68,11 @@ void movePlayer(struct player* player, Camera* cam) {
 
     if (player->object->position.y >= player->object->sizeV.y / 2) {
         if (!(player->object->position.y == player->object->sizeV.y / 2 && player->speedY == 0)) {
-            player->object->position.y += ((player->speedY) + ((-9.81f) * deltaTime / 2.0f)) * deltaTime;
+            player->object->position.y += ((player->speedY) + ((GRAVITY) * deltaTime / 2.0f)) * deltaTime;
             if (player->object->position.y < player->object->sizeV.y / 2) {
                 player->object->position.y = player->object->sizeV.y / 2;
             }
-            player->speedY = player->speedY + (-9.81f * deltaTime);
+            player->speedY = player->speedY + (GRAVITY * deltaTime);
         }
     }
     else {
@@ -78,16 +81,16 @@ void movePlayer(struct player* player, Camera* cam) {
     }
 }
 
-void gravity(struct player* player, Camera* cam) {
+void gravity(struct player* player) {
     float deltaTime = GetFrameTime();
 
     if (player->object->position.y >= player->object->sizeV.y / 2) {
         if (!(player->object->position.y == player->object->sizeV.y / 2 && player->speedY == 0)) {
-            player->object->position.y += ((player->speedY) + ((-9.81f) * deltaTime / 2.0f)) * deltaTime;
+            player->object->position.y += ((player->speedY) + ((GRAVITY) * deltaTime / 2.0f)) * deltaTime;
             if (player->object->position.y < player->object->sizeV.y / 2) {
                 player->object->position.y = player->object->sizeV.y / 2;
             }
-            player->speedY = player->speedY + (-9.81f * deltaTime);
+            player->speedY = player->speedY + (GRAVITY * deltaTime);
         }
     }
     else {

@@ -1,43 +1,20 @@
-#include "raylib.h"
-#include "raymath.h"
-#include "rlgl.h"
-#include <stddef.h>
-
-#define _USE_MATH_DEFINES
-#include <math.h>
+#include <raylib.h>
+#include <raymath.h>
+#include <rlgl.h>
 
 #include "renderer.h"
 #include "player.h"
 
-#define SUPPORT_FILEFORMAT_SVG 1
-
-/*******************************************************************************************
-*
-*   raylib [textures] example - gif playing
-*
-*   Example originally created with raylib 4.2, last time updated with raylib 4.2
-*
-*   Example licensed under an unmodified zlib/libpng license, which is an OSI-certified,
-*   BSD-like license that allows static linking with closed source software
-*
-*   Copyright (c) 2021-2024 Ramon Santamaria (@raysan5)
-*
-********************************************************************************************/
-
-#include "raylib.h"
-
-#define MAX_FRAME_DELAY     20
-#define MIN_FRAME_DELAY      1
+//#define FULL_SCREEN
 
 int example2(void) {
-    // Initialization
-    //--------------------------------------------------------------------------------------
-    const int screenWidth = 800;
-    const int screenHeight = 450;
 
-   // InitWindow(screenWidth, screenHeight, "raylib [shaders] example - Full 3D billboards");
-    InitWindow(GetScreenWidth(), GetScreenHeight(), "lol");
+#ifdef FULL_SCREEN
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "Prototype");
     ToggleFullscreen();
+#else
+    InitWindow(800, 450, "Prototype");
+#endif
 
     rlEnableDepthTest();
     SetTargetFPS(240);
@@ -64,13 +41,13 @@ int example2(void) {
     Matrix mat = { 0 };
     struct Object2D objects[4] = {
         { .position = (Vector3){ 4, 1, 0 }, .sizeV = { pixel[2][0].width / (0.5f * pixel[2][0].height), pixel[2][0].height / (0.5f * pixel[2][0].height) }, .texture = &pixel[2][0], .Animation = &pixel, .animFrame = 0, .state = 0 },
-        { .position = (Vector3){ -4, 1, 0 }, .sizeV = { arys.width / (0.5f * arys.height), arys.height / (0.5f * arys.height) }, .texture = &arys, .Animation = NULL, .animFrame = NULL, .state = 0 },
-        { .position = (Vector3){ 0, 1, 4 }, .sizeV = { mag.width / (0.5f * mag.height), mag.height / (0.5f * mag.height) }, .texture = &mag, .Animation = NULL, .animFrame = NULL, .state = 0 },
-        { .position = (Vector3){ 0, 1, -4 }, .sizeV = { 2, 2 }, .texture = &ludz, .Animation = NULL, .animFrame = NULL, .state = 0 }
+        { .position = (Vector3){ -4, 1, 0 }, .sizeV = { arys.width / (0.5f * arys.height), arys.height / (0.5f * arys.height) }, .texture = &arys, .Animation = NULL, .animFrame = 0, .state = 0 },
+        { .position = (Vector3){ 0, 1, 4 }, .sizeV = { mag.width / (0.5f * mag.height), mag.height / (0.5f * mag.height) }, .texture = &mag, .Animation = NULL, .animFrame = 0, .state = 0 },
+        { .position = (Vector3){ 0, 1, -4 }, .sizeV = { 2, 2 }, .texture = &ludz, .Animation = NULL, .animFrame = 0, .state = 0 }
     };
     struct player player = {
         .object = objects,
-        .speedY = 0,
+        .speedY = 0
     };
     struct ObjectsToRender render[] = {
         { objects + 0, 4 },
@@ -89,8 +66,6 @@ int example2(void) {
                 DisableCursor();
         }
 
-        //movePlayer(&player, &cam);
-
         if (IsCursorHidden()) {
             movePlayer(&player, &cam);
 
@@ -99,7 +74,7 @@ int example2(void) {
         }
         else {
             player.object->state = 0;
-            gravity(&player, &cam);
+            gravity(&player);
 
             cam.target = (Vector3){ 0, 0, 0 };
             // rotate the camera around the center
@@ -121,7 +96,6 @@ int example2(void) {
         else if (cam.position.y < 0.5) {
             cam.position.y = 0.5f;
         }
-       // move(&player);
 
         BeginDrawing();
             ClearBackground(WHITE);
@@ -129,17 +103,14 @@ int example2(void) {
             BeginMode3D(cam);
                 DrawGrid(100, 1);
         
-                // draw a reference cube      
                 DrawPlane((Vector3) { 0, 0, 0 }, (Vector2) { 100, 100 }, VIOLET);
                 DrawCube((Vector3) { 0, 0.5f, 0 }, 1, 1, 1, GRAY);
 
                 DrawCube((Vector3) { 1, 0.125f, 0 }, 0.25f, 0.25f, 0.25f, RED);
                 DrawCube((Vector3) { 0, 0.125f, 1 }, 0.25f, 0.25f, 0.25f, BLUE);
 
-                // draw 4 billboards
                 RenderTextures(render, 4, cam);
             EndMode3D();
-            //DrawText(TextFormat("(x, y, z) = (%4.1f, %4.1f, %4.1f)", cam.position.x, cam.position.y, cam.position.z), 0, 0, 20, VIOLET);
             DrawText(TextFormat("(x, y, z) = (%3.0f, %3.0f, %3.0f)", cam.position.x, cam.position.y, cam.position.z), 0, 0, 20, VIOLET);
         EndDrawing();
     }

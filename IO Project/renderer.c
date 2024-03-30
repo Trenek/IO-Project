@@ -4,12 +4,11 @@
 
 #include "renderer.h"
 
-void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint) {
+void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint, float a) {
     Rectangle source = { .x = 0, .y = 0, .width = (float)texture.width, .height = (float)texture.height };
 
     float width = size.x / 2;
     float height = size.y / 2;
-    static float a = 0.0f;
 
     rlPushMatrix();
 
@@ -34,22 +33,19 @@ void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2
         rlNormal3f(0.0f, 0.0f, 1.0f);                  // Normal Pointing Towards Viewer
         /**/
         rlTexCoord2f((float)source.x / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(-width, -height, -sin(a) / 16);  // Bottom Left Of The Texture and Quad
+        rlVertex3f(-width, -height, -sinf(a) / 16);  // Bottom Left Of The Texture and Quad
         /**/
         rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(+width, -height, -sin(a) / 16);  // Bottom Right Of The Texture and Quad
+        rlVertex3f(+width, -height, -sinf(a) / 16);  // Bottom Right Of The Texture and Quad
 
         rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)source.y / texture.height);
-        rlVertex3f(+width, +height, sin(a) / 16);  // Top Right Of The Texture and Quad
+        rlVertex3f(+width, +height, sinf(a) / 16);  // Top Right Of The Texture and Quad
 
         rlTexCoord2f((float)source.x / texture.width, (float)source.y / texture.height);
-        rlVertex3f(-width, +height, sin(a) / 16);  // Top Left Of The Texture and Quad
+        rlVertex3f(-width, +height, sinf(a) / 16);  // Top Left Of The Texture and Quad
     rlEnd();
     rlSetTexture(0);
     rlPopMatrix();
-
-    //a += 0.004f;
-    a += 0.01;
 }
 
 int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
@@ -106,18 +102,21 @@ void Mod_InsertionSort(struct ObjectsToRender* render, int n, Camera3D camera) {
 
 void RenderTextures(struct ObjectsToRender* render, int n, Camera3D camera) {
     int i = 0;
+    static float a = 0.0f;
 
     Mod_InsertionSort(render, n, camera);
     while (i < n) {
         if (render[i].objects->state != 0) {
-            Draw3DBillboard(camera, (*render[i].objects->Animation)[render[i].objects->state - 1][(render[i].objects->animFrame >> 6) % 4], render[i].objects->position, render[i].objects->sizeV, WHITE);
+            Draw3DBillboard(camera, (*render[i].objects->Animation)[render[i].objects->state - 1][(render[i].objects->animFrame >> 6) % 4], render[i].objects->position, render[i].objects->sizeV, WHITE, a);
             render[i].objects->animFrame += 1;
         }
         else {
-            Draw3DBillboard(camera, *render[i].objects->texture, render[i].objects->position, render[i].objects->sizeV, WHITE);
+            Draw3DBillboard(camera, *render[i].objects->texture, render[i].objects->position, render[i].objects->sizeV, WHITE, a);
             render[i].objects->animFrame = 0;
         }
 
         i += 1;
     }
+
+    a += GetFrameTime() * 5;
 }

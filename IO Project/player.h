@@ -5,5 +5,5 @@ struct player {
     float speedY;
 };
 
-void gravity(struct player* player, Camera* cam);
+void gravity(struct player* player);
 void movePlayer(struct player* player, Camera* cam);
