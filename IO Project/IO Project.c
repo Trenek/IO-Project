@@ -18,22 +18,26 @@ int main(void) {
         [EXPLORE] = explore
     };
 
-    SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT);
+    do {
+        state = MENU;
+
+        SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT);
 #ifdef FULLSCREEN
-    int display = GetCurrentMonitor();
-    InitWindow(GetMonitorWidth(display), GetMonitorHeight(display), "Project");
-    ToggleFullscreen();
+        int display = GetCurrentMonitor();
+        InitWindow(GetMonitorWidth(display), GetMonitorHeight(display), "Project");
+        ToggleFullscreen();
 #else
-    InitWindow(800, 600, "Project");
+        InitWindow(800, 600, "Project");
 #endif
 
-    SetTargetFPS(240);
+        SetTargetFPS(240);
 
-    while (!WindowShouldClose() && (state != EXIT)) {
-        function[state](&state);
-    }
+        while (!WindowShouldClose() && (state != EXIT)) {
+            function[state](&state);
+        }
 
-    CloseWindow();
+        CloseWindow();
+    } while (state == RELOAD);
 
     return 0;
 }
