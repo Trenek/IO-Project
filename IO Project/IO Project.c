@@ -11,11 +11,11 @@ int main(void) {
     enum state state = MENU;
     void (*function[])(enum state *state) = {
         [MENU] = menu,
-        [NEW_GAME] = newGame,
-        [LOAD_GAME] = loadGame,
-        [SETTINGS] = settings,
-        [ACHIVEMENTS] = achivements,
-        [EXPLORE] = explore
+        //[NEW_GAME] = newGame,
+        //[LOAD_GAME] = loadGame,
+        //[SETTINGS] = settings,
+        //[ACHIVEMENTS] = achivements,
+        //[EXPLORE] = explore
     };
 
     do {
