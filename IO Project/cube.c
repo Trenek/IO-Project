@@ -27,15 +27,15 @@ int example2(void) {
         .fovy = 45,
     };
 
-    Texture2D ludz = LoadTexture("resources/ludzik2.png");
-    Texture2D mag = LoadTexture("resources/mag.png");
-    Texture2D arys = LoadTexture("resources/arystokrata2.png");
+    Texture2D ludz = LoadTexture("resources/textures/ludzik2.png");
+    Texture2D mag = LoadTexture("resources/textures/mag.png");
+    Texture2D arys = LoadTexture("resources/textures/arystokrata2.png");
 
     Texture2D pixel[4][4] = {
-        { LoadTexture("resources/pixel/WarriorBack0.png"), LoadTexture("resources/pixel/WarriorBack1.png"), LoadTexture("resources/pixel/WarriorBack0.png"), LoadTexture("resources/pixel/WarriorBack2.png") },
-        { LoadTexture("resources/pixel/WarriorRight0.png"), LoadTexture("resources/pixel/WarriorRight1.png"), LoadTexture("resources/pixel/WarriorRight0.png"), LoadTexture("resources/pixel/WarriorRight2.png") },
-        { LoadTexture("resources/pixel/WarriorFront0.png"), LoadTexture("resources/pixel/WarriorFront1.png"), LoadTexture("resources/pixel/WarriorFront0.png"), LoadTexture("resources/pixel/WarriorFront2.png") },
-        { LoadTexture("resources/pixel/WarriorLeft0.png"), LoadTexture("resources/pixel/WarriorLeft1.png"), LoadTexture("resources/pixel/WarriorLeft0.png"), LoadTexture("resources/pixel/WarriorLeft2.png") }
+        { LoadTexture("resources/pixel/textures/WarriorBack0.png"), LoadTexture("resources/pixel/textures/WarriorBack1.png"), LoadTexture("resources/pixel/textures/WarriorBack0.png"), LoadTexture("resources/pixel/textures/WarriorBack2.png") },
+        { LoadTexture("resources/pixel/textures/WarriorRight0.png"), LoadTexture("resources/pixel/textures/WarriorRight1.png"), LoadTexture("resources/pixel/textures/WarriorRight0.png"), LoadTexture("resources/pixel/textures/WarriorRight2.png") },
+        { LoadTexture("resources/pixel/textures/WarriorFront0.png"), LoadTexture("resources/pixel/textures/WarriorFront1.png"), LoadTexture("resources/pixel/textures/WarriorFront0.png"), LoadTexture("resources/pixel/textures/WarriorFront2.png") },
+        { LoadTexture("resources/pixel/textures/WarriorLeft0.png"), LoadTexture("resources/pixel/textures/WarriorLeft1.png"), LoadTexture("resources/pixel/textures/WarriorLeft0.png"), LoadTexture("resources/pixel/textures/WarriorLeft2.png") }
     };
 
     Matrix mat = { 0 };
@@ -57,7 +57,17 @@ int example2(void) {
     };
     int i = 1;
 
+    InitAudioDevice();              // Initialize audio device
+    Music music1 = LoadMusicStream("resources/music/music1.mp3");
+    Music music2 = LoadMusicStream("resources/music/music1.mp3");
+
+    PlayMusicStream(music1);
+    PlayMusicStream(music2);
+
     while (!WindowShouldClose()) {
+        if (IsKeyDown(KEY_B)) UpdateMusicStream(music1);
+        else UpdateMusicStream(music2);
+
         // Toggle camera controls
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
             if (IsCursorHidden())
@@ -114,6 +124,11 @@ int example2(void) {
             DrawText(TextFormat("(x, y, z) = (%3.0f, %3.0f, %3.0f)", cam.position.x, cam.position.y, cam.position.z), 0, 0, 20, VIOLET);
         EndDrawing();
     }
+
+    UnloadMusicStream(music1);
+    UnloadMusicStream(music2);
+
+    CloseAudioDevice();         // Close audio device (music streaming is automatically stopped)
 
     CloseWindow();
 

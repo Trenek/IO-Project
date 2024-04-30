@@ -109,7 +109,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;4711;4710</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4820;4711;4710;5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,7 +131,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;4711;4710</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4820;4711;4710;5045</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,14 +143,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="achivements.c" />
     <ClCompile Include="cube.c" />
+    <ClCompile Include="dialog.c" />
+    <ClCompile Include="equipement.c" />
+    <ClCompile Include="explore.c" />
+    <ClCompile Include="fight.c" />
     <ClCompile Include="IO Project.c" />
+    <ClCompile Include="loadGame.c" />
+    <ClCompile Include="map.c" />
+    <ClCompile Include="menu.c" />
+    <ClCompile Include="menuElement.c" />
+    <ClCompile Include="newGame.c" />
+    <ClCompile Include="pause.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="renderer.c" />
+    <ClCompile Include="save.c" />
+    <ClCompile Include="settings.c" />
+    <ClCompile Include="shop.c" />
+    <ClCompile Include="training.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="menuElement.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="state.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

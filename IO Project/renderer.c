@@ -33,16 +33,16 @@ void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2
         rlNormal3f(0.0f, 0.0f, 1.0f);                  // Normal Pointing Towards Viewer
         /**/
         rlTexCoord2f((float)source.x / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(-width, -height, -sinf(a) / 16);  // Bottom Left Of The Texture and Quad
+        rlVertex3f(-width, -height, -atanf(a) / 20);  // Bottom Left Of The Texture and Quad
         /**/
         rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(+width, -height, -sinf(a) / 16);  // Bottom Right Of The Texture and Quad
+        rlVertex3f(+width, -height, atanf(a) / 20);  // Bottom Right Of The Texture and Quad
 
         rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)source.y / texture.height);
-        rlVertex3f(+width, +height, sinf(a) / 16);  // Top Right Of The Texture and Quad
+        rlVertex3f(+width, +height, atanf(a) / 20);  // Top Right Of The Texture and Quad
 
         rlTexCoord2f((float)source.x / texture.width, (float)source.y / texture.height);
-        rlVertex3f(-width, +height, sinf(a) / 16);  // Top Left Of The Texture and Quad
+        rlVertex3f(-width, +height, -atanf(a) / 20);  // Top Left Of The Texture and Quad
     rlEnd();
     rlSetTexture(0);
     rlPopMatrix();
