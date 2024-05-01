@@ -32,7 +32,7 @@ int main(void) {
 
         SetTargetFPS(240);
 
-        while (!WindowShouldClose() && (state != EXIT)) {
+        while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
             function[state](&state);
         }
 
