@@ -53,7 +53,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement loadGame = {
-        .text = "Wczytaj Gr\xc4\x99",
+        .text = u8"Wczytaj Grê",
         .x = GetScreenWidth() >> 1,
         .y = height + space,
         .incX = INC_X,
@@ -79,7 +79,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement achivements = {
-        .text = "\x4f\x73\x69\xc4\x85\x67\x6e\x69\xc4\x99\x63\x69\x61",
+        .text = u8"Osi¹gniêcia",
         .x = GetScreenWidth() >> 1,
         .y = height + 3 * space,
         .incX = INC_X,
@@ -92,7 +92,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement exit = {
-        .text = "Wyjd\xc5\xba do Pulpitu",
+        .text = u8"WyjdŸ do Pulpitu",
         .x = GetScreenWidth() >> 1,
         .y = height + 4 * space,
         .incX = INC_X,
