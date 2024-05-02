@@ -1,7 +1,4 @@
-﻿// raylib.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
-
-#include <raylib.h>
+﻿#include <raylib.h>
 
 #include "state.h"
 
