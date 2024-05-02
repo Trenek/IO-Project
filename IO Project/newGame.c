@@ -28,7 +28,7 @@ void newGame(enum state *state) {
     SetTextureFilter(element.texture, TEXTURE_FILTER_POINT);
 
     struct menuElement title = {
-        .text = u8"Nowa gra",
+        .text = "Nowa gra",
         .x = GetScreenWidth() >> 1,
         .y = 100,
         .incX = 0,
@@ -42,7 +42,7 @@ void newGame(enum state *state) {
     };
 
     struct menuElement startGame = {
-        .text = u8"Rozpocznij grę",
+        .text = "Rozpocznij grę",
         .x = ( GetScreenWidth() >> 1 ) - spaceX,
         .y = height + 4 * spaceY,
         .incX = INC_X,
@@ -56,7 +56,7 @@ void newGame(enum state *state) {
     };
 
     struct menuElement goBack = {
-        .text = u8"Powrót",
+        .text = "Powrót",
         .x = ( GetScreenWidth() >> 1 ) + spaceX,
         .y = height + 4 * spaceY,
         .incX = INC_X,

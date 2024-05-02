@@ -27,7 +27,7 @@ void menu(enum state *state) {
     SetTextureFilter(element.texture, TEXTURE_FILTER_POINT);
 
     struct menuElement menuTitle = {
-        .text = u8"Menu Startowe",
+        .text = "Menu Startowe",
         .x = GetScreenWidth() >> 1,
         .y = 100,
         .incX = 0,
@@ -40,7 +40,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement newGame = {
-        .text = u8"Nowa Gra",
+        .text = "Nowa Gra",
         .x = GetScreenWidth() >> 1,
         .y = height,
         .incX = INC_X,
@@ -53,7 +53,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement loadGame = {
-        .text = u8"Wczytaj Grê",
+        .text = "Wczytaj GrÄ™",
         .x = GetScreenWidth() >> 1,
         .y = height + space,
         .incX = INC_X,
@@ -66,7 +66,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement settings = {
-        .text = u8"Ustawienia",
+        .text = "Ustawienia",
         .x = GetScreenWidth() >> 1,
         .y = height + 2 * space,
         .incX = INC_X,
@@ -79,7 +79,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement achivements = {
-        .text = u8"Osi¹gniêcia",
+        .text = "OsiÄ…gniÄ™cia",
         .x = GetScreenWidth() >> 1,
         .y = height + 3 * space,
         .incX = INC_X,
@@ -92,7 +92,7 @@ void menu(enum state *state) {
         .spaceing = 0
     };
     struct menuElement exit = {
-        .text = u8"WyjdŸ do Pulpitu",
+        .text = "WyjdÅº do Pulpitu",
         .x = GetScreenWidth() >> 1,
         .y = height + 4 * space,
         .incX = INC_X,
