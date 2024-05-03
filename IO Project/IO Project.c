@@ -1,6 +1,7 @@
 ﻿#include <raylib.h>
 
 #include "state.h"
+#include "menuInfo.h"
 
 //#define FULLSCREEN
 
@@ -12,7 +13,7 @@ int main(void) {
         //[LOAD_GAME] = loadGame,
         //[SETTINGS] = settings,
         //[ACHIVEMENTS] = achivements,
-        //[EXPLORE] = explore
+        [PLAY] = play
     };
 
     do {
@@ -33,14 +34,13 @@ int main(void) {
             LoadFontEx("resources/fonts/font2.ttf", 100, NULL, 512)
         };
 
-        GenTextureMipmaps(&fonts[0].texture);
-        SetTextureFilter(fonts[0].texture, TEXTURE_FILTER_POINT);
+        SetFontsFilter(fonts, sizeof(fonts) / sizeof(Font));
 
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
             function[state](&state, fonts);
         }
 
-        UnloadFont(fonts[0]);
+        UnloadFonts(fonts, sizeof(fonts) / sizeof(Font));
 
         CloseWindow();
     } while (state == RELOAD);

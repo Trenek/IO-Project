@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include <raylib.h>
 
 #include "state.h"
@@ -69,7 +67,7 @@ void newGame(enum state *state, Font fonts[]) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(startGame)) *state = EXPLORE;
+            if (isMouseOver(startGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }
     }

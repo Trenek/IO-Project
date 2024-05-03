@@ -158,8 +158,10 @@
     <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="menuElement.c" />
+    <ClCompile Include="menuInfo.c" />
     <ClCompile Include="newGame.c" />
     <ClCompile Include="pause.c" />
+    <ClCompile Include="play.c" />
     <ClCompile Include="player.c" />
     <ClCompile Include="renderer.c" />
     <ClCompile Include="save.c" />
@@ -169,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="menuElement.h" />
+    <ClInclude Include="menuInfo.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="state.h" />
