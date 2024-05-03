@@ -6,7 +6,7 @@
 
 int main(void) {
     enum state state = MENU;
-    void (*function[])(enum state *state) = {
+    void (*function[])(enum state *state, Font fonts[]) = {
         [MENU] = menu,
         [NEW_GAME] = newGame,
         //[LOAD_GAME] = loadGame,
@@ -29,9 +29,18 @@ int main(void) {
 
         SetTargetFPS(240);
 
+        Font fonts[] = {
+            LoadFontEx("resources/fonts/font2.ttf", 100, NULL, 512)
+        };
+
+        GenTextureMipmaps(&fonts[0].texture);
+        SetTextureFilter(fonts[0].texture, TEXTURE_FILTER_POINT);
+
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
-            function[state](&state);
+            function[state](&state, fonts);
         }
+
+        UnloadFont(fonts[0]);
 
         CloseWindow();
     } while (state == RELOAD);

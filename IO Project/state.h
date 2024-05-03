@@ -21,11 +21,11 @@ enum state {
     EXIT
 };
 
-void menu(enum state *state);
-void newGame(enum state *state);
-void loadGame(enum state *state);
-void settings(enum state *state);
-void achivements(enum state *state);
-void explore(enum state *state);
+void menu(enum state *state, Font fonts[]);
+void newGame(enum state *state, Font fonts[]);
+void loadGame(enum state *state, Font fonts[]);
+void settings(enum state *state, Font fonts[]);
+void achivements(enum state *state, Font fonts[]);
+void explore(enum state *state, Font fonts[]);
 
 #endif

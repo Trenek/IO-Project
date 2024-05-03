@@ -10,7 +10,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void menu(enum state *state) {
+void menu(enum state *state, Font fonts[]) {
     const int height = GetScreenHeight() >> 1;
     const int space = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -18,21 +18,13 @@ void menu(enum state *state) {
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
-    Font title = LoadFontEx("resources/fonts/font2.ttf", 100, NULL, 512);
-    Font element = LoadFontEx("resources/fonts/font2.ttf", 100, NULL, 512);
-
-    GenTextureMipmaps(&title.texture);
-    GenTextureMipmaps(&element.texture);
-    SetTextureFilter(title.texture, TEXTURE_FILTER_POINT);
-    SetTextureFilter(element.texture, TEXTURE_FILTER_POINT);
-
     struct menuElement menuTitle = {
         .text = "Menu Startowe",
         .x = GetScreenWidth() >> 1,
         .y = 100,
         .incX = 0,
         .incY = 0,
-        .font = &title,
+        .font = &fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -45,7 +37,7 @@ void menu(enum state *state) {
         .y = height,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &element,
+        .font = &fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -58,7 +50,7 @@ void menu(enum state *state) {
         .y = height + space,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &element,
+        .font = &fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -71,7 +63,7 @@ void menu(enum state *state) {
         .y = height + 2 * space,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &element,
+        .font = &fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -84,7 +76,7 @@ void menu(enum state *state) {
         .y = height + 3 * space,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &element,
+        .font = &fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -97,7 +89,7 @@ void menu(enum state *state) {
         .y = height + 4 * space,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &element,
+        .font = &fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -125,7 +117,4 @@ void menu(enum state *state) {
             else if (isMouseOver(exit)) *state = EXIT;
         }
     }
-
-    UnloadFont(title);
-    UnloadFont(element);
 }
