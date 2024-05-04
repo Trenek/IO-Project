@@ -31,7 +31,10 @@
     <Filter Include="Pliki nagłówkowe\menuInfo">
       <UniqueIdentifier>{d06f8d09-57e4-439e-8054-00d14e4a34f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\menuElement">
+    <Filter Include="Pliki źródłowe\menu">
+      <UniqueIdentifier>{05bc2e26-0e57-49f9-b54f-9910c5d94584}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\button">
       <UniqueIdentifier>{f8247681-2ac7-4638-9278-327f71bbb5cb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -48,8 +51,8 @@
     <ClCompile Include="menu.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="menuElement.c">
-      <Filter>Pliki źródłowe\menuElement</Filter>
+    <ClCompile Include="button.c">
+      <Filter>Pliki źródłowe\menu\button</Filter>
     </ClCompile>
     <ClCompile Include="cube.c">
       <Filter>Pliki źródłowe\TEST_RENDER</Filter>
@@ -110,8 +113,8 @@
     <ClInclude Include="state.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
-    <ClInclude Include="menuElement.h">
-      <Filter>Pliki źródłowe\menuElement</Filter>
+    <ClInclude Include="button.h">
+      <Filter>Pliki źródłowe\menu\button</Filter>
     </ClInclude>
     <ClInclude Include="menuInfo.h">
       <Filter>Pliki nagłówkowe\menuInfo</Filter>

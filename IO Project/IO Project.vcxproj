@@ -157,7 +157,7 @@
     <ClCompile Include="loadGame.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
-    <ClCompile Include="menuElement.c" />
+    <ClCompile Include="button.c" />
     <ClCompile Include="menuInfo.c" />
     <ClCompile Include="newGame.c" />
     <ClCompile Include="pause.c" />
@@ -170,7 +170,7 @@
     <ClCompile Include="training.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="menuElement.h" />
+    <ClInclude Include="button.h" />
     <ClInclude Include="menuInfo.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="renderer.h" />

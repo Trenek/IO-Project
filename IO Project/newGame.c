@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-#include "menuElement.h"
+#include "button.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -17,7 +17,7 @@ void newGame(enum state *state, Font fonts[]) {
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
-    struct menuElement title = {
+    struct button title = {
         .text = "Nowa gra",
         .x = GetScreenWidth() >> 1,
         .y = 100,
@@ -30,7 +30,7 @@ void newGame(enum state *state, Font fonts[]) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-    struct menuElement startGame = {
+    struct button startGame = {
         .text = "Rozpocznij grę",
         .x = ( GetScreenWidth() >> 1 ) - spaceX,
         .y = height + 4 * spaceY,
@@ -43,7 +43,7 @@ void newGame(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct menuElement goBack = {
+    struct button goBack = {
         .text = "Powrót",
         .x = ( GetScreenWidth() >> 1 ) + spaceX,
         .y = height + 4 * spaceY,
@@ -61,9 +61,9 @@ void newGame(enum state *state, Font fonts[]) {
         BeginDrawing();
             ClearBackground(color);
 
-            DrawMenuElement(title);
-            DrawMenuElement(startGame);
-            DrawMenuElement(goBack);
+            DrawButton(title);
+            DrawButton(startGame);
+            DrawButton(goBack);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

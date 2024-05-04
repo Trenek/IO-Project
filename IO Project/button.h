@@ -5,7 +5,7 @@
 #ifndef MENU_ELEMENT_H
 #define MENU_ELEMENT_H
 
-struct menuElement {
+struct button {
     const char *text;
     int x;
     int y;
@@ -19,7 +19,7 @@ struct menuElement {
     int spaceing;
 };
 
-inline bool isMouseOver(struct menuElement element) {
+inline bool isMouseOver(struct button element) {
     Vector2 size = MeasureTextEx(*element.font, element.text, (float)element.fontSize, (float)element.spaceing);
     Rectangle rec = { element.x - (size.x / 2) - element.incX, element.y - (size.y / 2) - element.incY, size.x + (element.incX << 1), size.y + (element.incY << 1) };
 
@@ -28,4 +28,4 @@ inline bool isMouseOver(struct menuElement element) {
 
 #endif
 
-void DrawMenuElement(struct menuElement element);
+void DrawButton(struct button element);

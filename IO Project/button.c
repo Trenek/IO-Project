@@ -1,6 +1,6 @@
-#include "menuElement.h"
+#include "button.h"
 
-void DrawMenuElement(struct menuElement element) {
+void DrawButton(struct button element) {
     Vector2 size = MeasureTextEx(*element.font, element.text, (float)element.fontSize, (float)element.spaceing);
     Rectangle rec = { element.x - (size.x / 2) - element.incX, element.y - (size.y / 2) - element.incY, size.x + (element.incX << 1), size.y + (element.incY << 1) };
 

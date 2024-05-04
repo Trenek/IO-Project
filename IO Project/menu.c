@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-#include "menuElement.h"
+#include "button.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -16,7 +16,7 @@ void menu(enum state *state, Font fonts[]) {
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
-    struct menuElement menuTitle = {
+    struct button menuTitle = {
         .text = "Menu Startowe",
         .x = GetScreenWidth() >> 1,
         .y = 100,
@@ -29,7 +29,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-    struct menuElement newGame = {
+    struct button newGame = {
         .text = "Nowa Gra",
         .x = GetScreenWidth() >> 1,
         .y = height,
@@ -42,7 +42,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct menuElement loadGame = {
+    struct button loadGame = {
         .text = "Wczytaj Grę",
         .x = GetScreenWidth() >> 1,
         .y = height + space,
@@ -55,7 +55,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct menuElement settings = {
+    struct button settings = {
         .text = "Ustawienia",
         .x = GetScreenWidth() >> 1,
         .y = height + 2 * space,
@@ -68,7 +68,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct menuElement achivements = {
+    struct button achivements = {
         .text = "Osiągnięcia",
         .x = GetScreenWidth() >> 1,
         .y = height + 3 * space,
@@ -81,7 +81,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct menuElement exit = {
+    struct button exit = {
         .text = "Wyjdź do Pulpitu",
         .x = GetScreenWidth() >> 1,
         .y = height + 4 * space,
@@ -99,12 +99,12 @@ void menu(enum state *state, Font fonts[]) {
         BeginDrawing();
             ClearBackground(color);
 
-            DrawMenuElement(menuTitle);
-            DrawMenuElement(newGame);
-            DrawMenuElement(loadGame);
-            DrawMenuElement(settings);
-            DrawMenuElement(achivements);
-            DrawMenuElement(exit);
+            DrawButton(menuTitle);
+            DrawButton(newGame);
+            DrawButton(loadGame);
+            DrawButton(settings);
+            DrawButton(achivements);
+            DrawButton(exit);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
