@@ -7,6 +7,20 @@
 
 //#define FULL_SCREEN
 
+void UnloadTextures(Texture2D texture[][4]) {
+    int i = 0;
+    int j = 0;
+
+    while (i < 4) {
+        j = 0;
+        while (j < 4) {
+            UnloadTexture(texture[i][j]);
+            j += 1;
+        }
+        i += 1;
+    }
+}
+
 int example2(void) {
 
 #ifdef FULL_SCREEN
@@ -32,10 +46,10 @@ int example2(void) {
     Texture2D arys = LoadTexture("resources/textures/arystokrata2.png");
 
     Texture2D pixel[4][4] = {
-        { LoadTexture("resources/pixel/textures/WarriorBack0.png"), LoadTexture("resources/pixel/textures/WarriorBack1.png"), LoadTexture("resources/pixel/textures/WarriorBack0.png"), LoadTexture("resources/pixel/textures/WarriorBack2.png") },
-        { LoadTexture("resources/pixel/textures/WarriorRight0.png"), LoadTexture("resources/pixel/textures/WarriorRight1.png"), LoadTexture("resources/pixel/textures/WarriorRight0.png"), LoadTexture("resources/pixel/textures/WarriorRight2.png") },
-        { LoadTexture("resources/pixel/textures/WarriorFront0.png"), LoadTexture("resources/pixel/textures/WarriorFront1.png"), LoadTexture("resources/pixel/textures/WarriorFront0.png"), LoadTexture("resources/pixel/textures/WarriorFront2.png") },
-        { LoadTexture("resources/pixel/textures/WarriorLeft0.png"), LoadTexture("resources/pixel/textures/WarriorLeft1.png"), LoadTexture("resources/pixel/textures/WarriorLeft0.png"), LoadTexture("resources/pixel/textures/WarriorLeft2.png") }
+        { LoadTexture("resources/textures/pixel/WarriorBack0.png"), LoadTexture("resources/textures/pixel/WarriorBack1.png"), LoadTexture("resources/textures/pixel/WarriorBack0.png"), LoadTexture("resources/textures/pixel/WarriorBack2.png") },
+        { LoadTexture("resources/textures/pixel/WarriorRight0.png"), LoadTexture("resources/textures/pixel/WarriorRight1.png"), LoadTexture("resources/textures/pixel/WarriorRight0.png"), LoadTexture("resources/textures/pixel/WarriorRight2.png") },
+        { LoadTexture("resources/textures/pixel/WarriorFront0.png"), LoadTexture("resources/textures/pixel/WarriorFront1.png"), LoadTexture("resources/textures/pixel/WarriorFront0.png"), LoadTexture("resources/textures/pixel/WarriorFront2.png") },
+        { LoadTexture("resources/textures/pixel/WarriorLeft0.png"), LoadTexture("resources/textures/pixel/WarriorLeft1.png"), LoadTexture("resources/textures/pixel/WarriorLeft0.png"), LoadTexture("resources/textures/pixel/WarriorLeft2.png") }
     };
 
     Matrix mat = { 0 };
@@ -124,6 +138,11 @@ int example2(void) {
             DrawText(TextFormat("(x, y, z) = (%3.0f, %3.0f, %3.0f)", cam.position.x, cam.position.y, cam.position.z), 0, 0, 20, VIOLET);
         EndDrawing();
     }
+
+    UnloadTexture(ludz);
+    UnloadTexture(mag);
+    UnloadTexture(arys);
+    UnloadTextures(pixel);
 
     UnloadMusicStream(music1);
     UnloadMusicStream(music2);

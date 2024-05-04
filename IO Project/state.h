@@ -37,4 +37,6 @@ void play(enum state *state, Font fonts[]);
 
 void explore(enum state *state, Font fonts[]);
 
+int example2(void);
+
 #endif
