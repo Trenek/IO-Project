@@ -11,15 +11,14 @@
 void achievements(enum state* state, Font fonts[]) {
     const int height = GetScreenHeight() >> 1;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
-    const int spaceX = 90;
 
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
     struct button goBack = {
-        .text = "Powrót",
-        .x = (GetScreenWidth() >> 1) + spaceX,
+        .text = "PowrÃ³t",
+        .x = GetScreenWidth() >> 1,
         .y = height + 4 * spaceY,
         .incX = INC_X,
         .incY = INC_Y,
