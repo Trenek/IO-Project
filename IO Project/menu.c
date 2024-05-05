@@ -68,7 +68,7 @@ void menu(enum state *state, Font fonts[]) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct button achivements = {
+    struct button achievements = {
         .text = "Osiągnięcia",
         .x = GetScreenWidth() >> 1,
         .y = height + 3 * space,
@@ -103,7 +103,7 @@ void menu(enum state *state, Font fonts[]) {
             DrawButton(newGame);
             DrawButton(loadGame);
             DrawButton(settings);
-            DrawButton(achivements);
+            DrawButton(achievements);
             DrawButton(exit);
         EndDrawing();
 
@@ -111,7 +111,7 @@ void menu(enum state *state, Font fonts[]) {
             if (isMouseOver(newGame)) *state = NEW_GAME;
             else if (isMouseOver(loadGame)) *state = LOAD_GAME;
             else if (isMouseOver(settings)) *state = SETTINGS;
-            else if (isMouseOver(achivements)) *state = ACHIVEMENTS;
+            else if (isMouseOver(achievements)) *state = ACHIEVEMENTS;
             else if (isMouseOver(exit)) *state = EXIT;
         }
     }

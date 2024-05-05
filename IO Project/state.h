@@ -6,7 +6,7 @@ enum state {
     NEW_GAME,
     LOAD_GAME,
     SETTINGS,
-    ACHIVEMENTS,
+    ACHIEVEMENTS,
     PLAY,
 
     RELOAD,
@@ -32,7 +32,7 @@ void menu(enum state *state, Font fonts[]);
 void newGame(enum state *state, Font fonts[]);
 void loadGame(enum state *state, Font fonts[]);
 void settings(enum state *state, Font fonts[]);
-void achivements(enum state *state, Font fonts[]);
+void achievements(enum state *state, Font fonts[]);
 void play(enum state *state, Font fonts[]);
 
 void explore(enum state *state, Font fonts[]);
