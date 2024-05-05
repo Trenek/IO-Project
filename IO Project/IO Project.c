@@ -12,7 +12,7 @@ int main(void) {
         [NEW_GAME] = newGame,
         //[LOAD_GAME] = loadGame,
         //[SETTINGS] = settings,
-        [ACHIVEMENTS] = achivements,
+        [ACHIEVEMENTS] = achievements,
         [PLAY] = play
     };
 

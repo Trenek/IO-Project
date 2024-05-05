@@ -8,7 +8,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void achiebements(enum state* state, Font fonts[]) {
+void achievements(enum state* state, Font fonts[]) {
     const int height = GetScreenHeight() >> 1;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
     const int spaceX = 90;
@@ -31,7 +31,7 @@ void achiebements(enum state* state, Font fonts[]) {
         .spaceing = 0
     };
 
-    while (!WindowShouldClose() && *state == ACHIVEMENTS) {
+    while (!WindowShouldClose() && *state == ACHIEVEMENTS) {
         BeginDrawing();
         ClearBackground(color);
 
