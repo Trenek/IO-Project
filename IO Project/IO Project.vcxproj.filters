@@ -66,7 +66,7 @@
     <ClCompile Include="settings.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="achivements.c">
+    <ClCompile Include="achievements.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
     <ClCompile Include="equipement.c">

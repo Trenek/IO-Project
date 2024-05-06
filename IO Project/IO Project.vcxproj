@@ -147,7 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="achivements.c" />
+    <ClCompile Include="achievements.c" />
     <ClCompile Include="cube.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
