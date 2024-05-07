@@ -44,7 +44,7 @@ void loadGame(enum state* state, Font fonts[]) {
         .spaceing = 0
     };
     struct button goBack = {
-        .text = "Powrót",
+        .text = "PowrÃ³t",
         .x = (GetScreenWidth() >> 1) + spaceX,
         .y = height + 4 * spaceY,
         .incX = INC_X,
