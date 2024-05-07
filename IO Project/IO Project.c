@@ -10,7 +10,7 @@ int main(void) {
     void (*function[])(enum state *state, Font fonts[]) = {
         [MENU] = menu,
         [NEW_GAME] = newGame,
-        //[LOAD_GAME] = loadGame,
+        [LOAD_GAME] = loadGame,
         [SETTINGS] = settings,
         [ACHIEVEMENTS] = achievements,
         [PLAY] = play
