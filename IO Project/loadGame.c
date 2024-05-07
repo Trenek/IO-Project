@@ -67,7 +67,7 @@ void loadGame(enum state* state, Font fonts[]) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(loadGame)) *state = LOAD_GAME;
+            if (isMouseOver(loadGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }
     }
