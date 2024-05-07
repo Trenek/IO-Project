@@ -59,11 +59,11 @@ void loadGame(enum state* state, Font fonts[]) {
 
     while (!WindowShouldClose() && *state == LOAD_GAME) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(title);
-        DrawButton(loadGame);
-        DrawButton(goBack);
+            DrawButton(title);
+            DrawButton(loadGame);
+            DrawButton(goBack);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

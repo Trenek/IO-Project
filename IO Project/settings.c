@@ -85,13 +85,13 @@ void settings(enum state* state, Font fonts[]) {
 
     while (!WindowShouldClose() && *state == SETTINGS) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(title);
-        DrawButton(fullScreen);
-        DrawButton(resetSettings);
-        DrawButton(restart);
-        DrawButton(goBack);
+            DrawButton(title);
+            DrawButton(fullScreen);
+            DrawButton(resetSettings);
+            DrawButton(restart);
+            DrawButton(goBack);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
