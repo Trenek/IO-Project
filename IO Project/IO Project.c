@@ -11,7 +11,7 @@ int main(void) {
         [MENU] = menu,
         [NEW_GAME] = newGame,
         //[LOAD_GAME] = loadGame,
-        //[SETTINGS] = settings,
+        [SETTINGS] = settings,
         [ACHIEVEMENTS] = achievements,
         [PLAY] = play
     };
