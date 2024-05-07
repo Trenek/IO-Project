@@ -30,7 +30,45 @@ void settings(enum state* state, Font fonts[]) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-
+    struct button fullScreen = {
+        .text = "Tryb Pełnoekranowy",
+        .x = (GetScreenWidth() >> 1),
+        .y = height + 2 * spaceY,
+        .incX = INC_X,
+        .incY = INC_Y,
+        .font = &fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+    struct button resetSettings = { //ewentualnie domyślne ustawienia
+        .text = "Zresetuj ustawienia",
+        .x = (GetScreenWidth() >> 1),
+        .y = height + 3 * spaceY,
+        .incX = INC_X,
+        .incY = INC_Y,
+        .font = &fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+    struct button restart = {  //tutaj nie do końca wiem na czym stanęlśmy z restar/reload/akceptuj/zapisz
+        .text = "Restart",
+        .x = (GetScreenWidth() >> 1) - spaceX,
+        .y = height + 4 * spaceY,
+        .incX = INC_X,
+        .incY = INC_Y,
+        .font = &fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
     struct button goBack = {
         .text = "Powrót",
         .x = (GetScreenWidth() >> 1) + spaceX,
@@ -50,6 +88,9 @@ void settings(enum state* state, Font fonts[]) {
         ClearBackground(color);
 
         DrawButton(title);
+        DrawButton(fullScreen);
+        DrawButton(resetSettings);
+        DrawButton(restart);
         DrawButton(goBack);
         EndDrawing();
 
