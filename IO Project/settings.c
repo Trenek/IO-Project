@@ -96,6 +96,7 @@ void settings(enum state* state, Font fonts[]) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) *state = MENU;
+            else if (isMouseOver(restart)) *state = RELOAD;
         }
     }
 }
