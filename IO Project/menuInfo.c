@@ -5,7 +5,7 @@
 #include "menuInfo.h"
 
 void SetFonts(struct menuInfo *info) {
-    int letters[] = U"a¹bcædeêfghijkl³mnoópqrsœtuvwxyzŸ¿A¥BCÆDEÊFGHIJKL£MNOÓPQRSŒTUVWXYZ¯";
+    int letters[] = U"?!,.a¹bcædeêfghijkl³mnoópqrsœtuvwxyzŸ¿A¥BCÆDEÊFGHIJKL£MNOÓPQRSŒTUVWXYZ¯";
     Font fonts[] = {
         LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int))
     };    
