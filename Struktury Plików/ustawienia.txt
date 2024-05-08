@@ -1,0 +1,12 @@
+[rozdzielczość]
+[szerokość okna] [wysokość okna]
+[0 / 1 - wyłączony / włączony tryb pełnoekranowy]
+
+rozdzielczość:
+    0 - niska
+    1 - średnia
+    2 - wysoka
+
+tryb pełnoekranowy:
+    0 - wyłączony
+    1 - włączony

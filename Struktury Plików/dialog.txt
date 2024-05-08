@@ -1,0 +1,7 @@
+Zawiera oddzielone znakiem nowej linii kwestie, jest identyfikowany przez nazwę pliku
+[kwestia]
+[kwestia]
+[kwestia]
+
+Skład Kwestii:
+[id_adresanta] [spacja] [wypowiedź]

@@ -1,0 +1,12 @@
+Nazwa Pliku to ID
+[nazwa] [cena] [typ] [statystyki]
+
+typ:
+    0 - pancerz
+    1 - broń
+    2 - inne
+
+statystyki:
+    dla 0 - [siła]
+    dla 1 - [obrona]
+    dla 2 - brak
