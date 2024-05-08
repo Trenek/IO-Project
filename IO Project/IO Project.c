@@ -3,7 +3,7 @@
 #include "state.h"
 #include "menuInfo.h"
 
-//#define FULLSCREEN
+#include "loadSettings.h"
 
 int main(void) {
     enum state state = MENU;
@@ -16,28 +16,21 @@ int main(void) {
         [ACHIEVEMENTS] = achievements,
         [PLAY] = play
     };
+    int letters[] = U"aąbcćdeęfghijklłmnoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNOÓPQRSŚTUVWXYZŹŻ";
 
     do {
         state = MENU;
 
-        SetConfigFlags(FLAG_MSAA_4X_HINT | FLAG_VSYNC_HINT);
-#ifdef FULLSCREEN
-        int display = GetCurrentMonitor();
-        InitWindow(GetMonitorWidth(display), GetMonitorHeight(display), "Project");
-        ToggleFullscreen();
-#else
-        InitWindow(800, 600, "Project");
-#endif
-
-        SetTargetFPS(240);
+        loadSettings();
 
         Font fonts[] = {
-            LoadFontEx("resources/fonts/font2.ttf", 100, NULL, 512)
+            LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int))
         };
 
         SetFontsFilter(fonts, sizeof(fonts) / sizeof(Font));
 
         info.fonts = fonts;
+
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
             function[state](&state, &info);
         }

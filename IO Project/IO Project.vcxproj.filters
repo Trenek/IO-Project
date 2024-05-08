@@ -37,6 +37,9 @@
     <Filter Include="Pliki źródłowe\menu\button">
       <UniqueIdentifier>{f8247681-2ac7-4638-9278-327f71bbb5cb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\loadSettings">
+      <UniqueIdentifier>{8932b5ee-13f1-44a4-be25-5d09806b3e1e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -102,6 +105,9 @@
     <ClCompile Include="menuInfo.c">
       <Filter>Pliki nagłówkowe\menuInfo</Filter>
     </ClCompile>
+    <ClCompile Include="loadSettings.c">
+      <Filter>Pliki źródłowe\loadSettings</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
@@ -118,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="menuInfo.h">
       <Filter>Pliki nagłówkowe\menuInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="loadSettings.h">
+      <Filter>Pliki źródłowe\loadSettings</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
