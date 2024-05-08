@@ -37,7 +37,7 @@ void settings(enum state *state, struct menuInfo fonts[]);
 void achievements(enum state *state, struct menuInfo fonts[]);
 void play(enum state *state, struct menuInfo fonts[]);
 
-void explore(enum state *state, struct menuInfo fonts[]);
+void explore(enum playState *playState, struct menuInfo fonts[]);
 
 int example2(void);
 
