@@ -16,26 +16,18 @@ int main(void) {
         [ACHIEVEMENTS] = achievements,
         [PLAY] = play
     };
-    int letters[] = U"aąbcćdeęfghijklłmnoópqrsśtuvwxyzźżAĄBCĆDEĘFGHIJKLŁMNOÓPQRSŚTUVWXYZŹŻ";
 
     do {
         state = MENU;
 
         loadSettings();
-
-        Font fonts[] = {
-            LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int))
-        };
-
-        SetFontsFilter(fonts, sizeof(fonts) / sizeof(Font));
-
-        info.fonts = fonts;
+        SetFonts(&info);
 
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
             function[state](&state, &info);
         }
 
-        UnloadFonts(fonts, sizeof(fonts) / sizeof(Font));
+        UnloadFonts(&info);
 
         CloseWindow();
     } while (state == RELOAD);

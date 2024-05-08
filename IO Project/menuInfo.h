@@ -1,7 +1,8 @@
 struct menuInfo {
 	Font *fonts;
+	int fontsQuantity;
 	const char *saveName;
 };
 
-void SetFontsFilter(Font fonts[], int size);
-void UnloadFonts(Font fonts[], int size);
+void SetFonts(struct menuInfo *info);
+void UnloadFonts(struct menuInfo *info);

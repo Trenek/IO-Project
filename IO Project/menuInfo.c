@@ -1,24 +1,35 @@
 #include <raylib.h>
 
+#include <stdlib.h>
+
 #include "menuInfo.h"
 
-void SetFontsFilter(Font fonts[], int size) {
+void SetFonts(struct menuInfo *info) {
+    int letters[] = U"aπbcÊdeÍfghijkl≥mnoÛpqrsútuvwxyzüøA•BC∆DE FGHIJKL£MNO”PQRSåTUVWXYZèØ";
+    Font fonts[] = {
+        LoadFontEx("resources/fonts/font2.ttf", 1000, letters, sizeof(letters) / sizeof(int))
+    };    
     int i = 0;
 
-    while (i < size) {
-        GenTextureMipmaps(&fonts[i].texture);
-        SetTextureFilter(fonts[i].texture, TEXTURE_FILTER_POINT);
+    info->fontsQuantity = sizeof(fonts) / sizeof(Font);
+    info->fonts = malloc(sizeof(fonts));
+
+    while (i < info->fontsQuantity) {
+        info->fonts[i] = fonts[i];
+        GenTextureMipmaps(&info->fonts[i].texture);
+        SetTextureFilter(info->fonts[i].texture, TEXTURE_FILTER_POINT);
 
         i += 1;
     }
 }
 
-void UnloadFonts(Font fonts[], int size) {
+void UnloadFonts(struct menuInfo *info) {
     int i = 0;
 
-    while (i < size) {
-        UnloadFont(fonts[i]);
+    while (i < info->fontsQuantity) {
+        UnloadFont(info->fonts[i]);
 
         i += 1;
     }
+    free(info->fonts);
 }
