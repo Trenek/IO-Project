@@ -1,6 +1,7 @@
 #include <raylib.h>
 
 #include "state.h"
+#include "menuInfo.h"
 
 #include "button.h"
 
@@ -8,7 +9,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void loadGame(enum state* state, Font fonts[]) {
+void loadGame(enum state *state, struct menuInfo *info) {
     const int height = GetScreenHeight() >> 1;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
     const int spaceX = 90;
@@ -23,7 +24,7 @@ void loadGame(enum state* state, Font fonts[]) {
         .y = 100,
         .incX = 0,
         .incY = 0,
-        .font = &fonts[0],
+        .font = &info->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -36,7 +37,7 @@ void loadGame(enum state* state, Font fonts[]) {
         .y = height + 4 * spaceY,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &fonts[0],
+        .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -49,7 +50,7 @@ void loadGame(enum state* state, Font fonts[]) {
         .y = height + 4 * spaceY,
         .incX = INC_X,
         .incY = INC_Y,
-        .font = &fonts[0],
+        .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,

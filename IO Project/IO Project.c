@@ -7,7 +7,8 @@
 
 int main(void) {
     enum state state = MENU;
-    void (*function[])(enum state *state, Font fonts[]) = {
+    struct menuInfo info = { 0 };
+    void (*function[])(enum state *state, struct menuInfo *info) = {
         [MENU] = menu,
         [NEW_GAME] = newGame,
         [LOAD_GAME] = loadGame,
@@ -36,8 +37,9 @@ int main(void) {
 
         SetFontsFilter(fonts, sizeof(fonts) / sizeof(Font));
 
+        info.fonts = fonts;
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
-            function[state](&state, fonts);
+            function[state](&state, &info);
         }
 
         UnloadFonts(fonts, sizeof(fonts) / sizeof(Font));

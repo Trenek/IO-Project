@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+struct menuInfo;
+
 enum state {
     MENU,
     NEW_GAME,
@@ -28,14 +30,14 @@ enum playState {
     DESKTOP
 };
 
-void menu(enum state *state, Font fonts[]);
-void newGame(enum state *state, Font fonts[]);
-void loadGame(enum state *state, Font fonts[]);
-void settings(enum state *state, Font fonts[]);
-void achievements(enum state *state, Font fonts[]);
-void play(enum state *state, Font fonts[]);
+void menu(enum state *state, struct menuInfo fonts[]);
+void newGame(enum state *state, struct menuInfo fonts[]);
+void loadGame(enum state *state, struct menuInfo fonts[]);
+void settings(enum state *state, struct menuInfo fonts[]);
+void achievements(enum state *state, struct menuInfo fonts[]);
+void play(enum state *state, struct menuInfo fonts[]);
 
-void explore(enum state *state, Font fonts[]);
+void explore(enum state *state, struct menuInfo fonts[]);
 
 int example2(void);
 
