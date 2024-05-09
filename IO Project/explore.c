@@ -78,6 +78,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             DrawButtonLeft(map);
             DrawButtonRight(pause);
         EndTextureMode();
+
         BeginDrawing();
             DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
         EndDrawing();

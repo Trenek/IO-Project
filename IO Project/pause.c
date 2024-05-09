@@ -70,11 +70,12 @@ void pause(enum playState *state, struct playInfo *info) {
         .spaceing = 0
     };
 
-    *state = PAUSE;
-    do {
+    while (*state == PAUSE && !WindowShouldClose()) {
         BeginDrawing();
             ClearBackground(color1);
-            if (info->screenCamera != NULL) DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+            if (info->screenCamera != NULL) {
+                DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+            }
             DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
             DrawButton(title);
@@ -91,5 +92,5 @@ void pause(enum playState *state, struct playInfo *info) {
         else if (IsKeyPressed(KEY_P)) {
             *state = EXPLORE;
         }
-    } while (*state == PAUSE && !WindowShouldClose());
+    }
 }

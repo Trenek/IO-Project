@@ -3,8 +3,6 @@
 #ifndef PLAYSTATE_H
 #define PLAYSTATE_H
 
-struct playInfo;
-
 enum playState {
     EXPLORE,
     EQUIPEMENT,
