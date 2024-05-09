@@ -1,7 +1,6 @@
 #include <raylib.h>
 
-#include "state.h"
-#include "menuInfo.h"
+#include "playState.h"
 
 #include "button.h"
 
@@ -9,7 +8,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void explore(enum playState *playState, struct menuInfo *info) {
+void explore(enum playState *playState, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
     
@@ -71,13 +70,16 @@ void explore(enum playState *playState, struct menuInfo *info) {
     };
 
     while (!WindowShouldClose() && *playState == EXPLORE) {
-        BeginDrawing();
+        BeginTextureMode(*info->screenCamera);
             ClearBackground(color);
 
             DrawButtonLeft(save);
             DrawButtonLeft(equipment);
             DrawButtonLeft(map);
             DrawButtonRight(pause);
+        EndTextureMode();
+        BeginDrawing();
+            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

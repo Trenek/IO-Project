@@ -102,7 +102,7 @@
     <ClCompile Include="play.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="menuInfo.c">
+    <ClCompile Include="state.c">
       <Filter>Pliki nagłówkowe\menuInfo</Filter>
     </ClCompile>
     <ClCompile Include="loadSettings.c">
@@ -116,17 +116,17 @@
     <ClInclude Include="player.h">
       <Filter>Pliki źródłowe\TEST_RENDER\player</Filter>
     </ClInclude>
-    <ClInclude Include="state.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Pliki źródłowe\menu\button</Filter>
     </ClInclude>
-    <ClInclude Include="menuInfo.h">
-      <Filter>Pliki nagłówkowe\menuInfo</Filter>
-    </ClInclude>
     <ClInclude Include="loadSettings.h">
       <Filter>Pliki źródłowe\loadSettings</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Pliki nagłówkowe\menuInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="playState.h">
+      <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

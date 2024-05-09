@@ -2,7 +2,7 @@
 
 #include <stdlib.h>
 
-#include "menuInfo.h"
+#include "state.h"
 
 void SetFonts(struct menuInfo *info) {
     int letters[] = U"?!,.a¹bcædeêfghijkl³mnoópqrsœtuvwxyzŸ¿A¥BCÆDEÊFGHIJKL£MNOÓPQRSŒTUVWXYZ¯";

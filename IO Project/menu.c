@@ -1,7 +1,6 @@
 #include <raylib.h>
 
 #include "state.h"
-#include "menuInfo.h"
 
 #include "button.h"
 
