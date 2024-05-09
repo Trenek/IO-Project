@@ -6,7 +6,7 @@
 void play(enum state *state, struct menuInfo *info) {
     enum playState playState = EXPLORE;
     void (*function[])(enum playState *state, struct menuInfo *info) = {
-        //[EXPLORE] = explore,
+        [EXPLORE] = explore,
     };
 
     while (!WindowShouldClose() && (playState != RETURN) && (playState != DESKTOP)) {
