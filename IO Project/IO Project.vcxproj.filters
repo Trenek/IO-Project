@@ -28,9 +28,6 @@
     <Filter Include="Pliki źródłowe\state\play">
       <UniqueIdentifier>{d9a7c3d5-f111-42c9-a4b2-541cd4cb925e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki nagłówkowe\menuInfo">
-      <UniqueIdentifier>{d06f8d09-57e4-439e-8054-00d14e4a34f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu">
       <UniqueIdentifier>{05bc2e26-0e57-49f9-b54f-9910c5d94584}</UniqueIdentifier>
     </Filter>
@@ -39,6 +36,9 @@
     </Filter>
     <Filter Include="Pliki źródłowe\loadSettings">
       <UniqueIdentifier>{8932b5ee-13f1-44a4-be25-5d09806b3e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\state">
+      <UniqueIdentifier>{d06f8d09-57e4-439e-8054-00d14e4a34f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,7 +103,7 @@
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
     <ClCompile Include="state.c">
-      <Filter>Pliki nagłówkowe\menuInfo</Filter>
+      <Filter>Pliki nagłówkowe\state</Filter>
     </ClCompile>
     <ClCompile Include="loadSettings.c">
       <Filter>Pliki źródłowe\loadSettings</Filter>
@@ -123,7 +123,7 @@
       <Filter>Pliki źródłowe\loadSettings</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
-      <Filter>Pliki nagłówkowe\menuInfo</Filter>
+      <Filter>Pliki nagłówkowe\state</Filter>
     </ClInclude>
     <ClInclude Include="playState.h">
       <Filter>Pliki nagłówkowe</Filter>
