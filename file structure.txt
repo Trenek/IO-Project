@@ -1,0 +1,198 @@
+Game Fiels
+├── config.cfg
+├── broń.txt
+├── pancerz.txt
+├── przedmioty.txt
+├── ataki.txt
+├── pozycje.txt
+├── umiejętności.txt
+├── dialogi
+├── postacie
+├── tekstury
+│   ├── body
+│   │   ├── head
+│   │   ├── face
+│   │   ├── hair
+│   │   ├── beard
+│   │   ├── torso
+│   │   ├── arms
+│   │   ├── hands
+│   │   ├── legs
+│   │   └── feet
+│   ├── armor
+│   │   ├── head
+│   │   ├── torso
+│   │   ├── arms
+│   │   ├── hands
+│   │   ├── legs
+│   │   └── feet
+│   ├── weapons
+│   ├── floors
+│   └── objects
+├── zapisy
+│   └── zapis
+│       ├── ekwipunek.txt
+│       ├── postać.txt
+│       ├── postać.png
+│       └── mapy
+└── mapy
+    └── mapa
+        ├── mapa.txt
+        └── sklepy
+
+
+
+
+
+
+config.cfg - plik zawierający zapisane ustawienia
+    Struktura pliku:
+        [liczba klatek na sekundę]
+        [rozdzielczość]
+        [szerokość okna] [wysokość okna]
+        [tryb pełnoekranowy]
+
+    [rozdzielczość] określa rozdzielczość tekstur poprzez
+        0 - niska
+        1 - średnia
+        2 - wysoka
+        3 - ultra
+
+    [tryb pełnoekranowy] określa jego włączoność
+        0 - tryb pełnoekranowy jest wyłączony
+        1 - tryb pełnoekranowy jest włączony
+
+ekwipunek.txt - plik zawierający informacje o ekwipunku id_postaci
+    Struktura pliku:
+        32x [typ przedmiotu] [ID przedmiotu]
+
+    [typ przedmiotu]:
+        [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
+        [1] - broń
+        [2] - pancerz:
+            [0] - head
+            [1] - torso
+            [2] - arms
+            [3] - hands
+            [4] - legs
+            [5] - feet
+        [3] - inne
+
+broń.txt - plik zawierający informacje o wszystkich broniach
+    Struktura pliku:
+        [liczba]
+        [ID] [siła] [nazwa] [opis]
+        ...
+
+pancerz.txt - plik zawierający informacje o wszystkich pancerzach
+    Struktura pliku:
+        [typ] [liczba]
+            [ID] [obrona] [nazwa] [opis]
+        ...
+
+    [typ] określa typ przedmiotu poprzez:
+        [0] - head
+        [1] - torso
+        [2] - arms
+        [3] - hands
+        [4] - legs
+        [5] - feet
+
+przedmioty.txt - plik zawierający informacje o wszystkich przedmiotach
+    Struktura pliku:
+        [liczba]
+        [ID] [nazwa] [opis]
+        ...
+
+postać.txt - plik zawierający informacje o postaciach
+    Struktura pliku:
+        [nazwa]
+        [szerokość] [wysokość]
+
+        [head id]
+        [face id]
+        [hair id]
+        [beard id]
+        [torso id]
+        [arms id]
+        [hands id]
+        [legs id]
+        [feet id]
+
+        [head armor id]
+        [torso armor id]
+        [arms armor id]
+        [hands armor id]
+        [legs armor id]
+        [feet armor id]
+        [weapon id]
+
+        [liczba akcji]
+            [długość akcji]
+                [typ ruchu] [id]
+
+ataki.txt - plik zawierający informacje o atakach
+    Struktura pliku:
+        [id]
+            [łączne obrażenia]
+            [strona wyprowadzenia ataku]
+            [cel ataku]
+            [nazwa] 
+            [opis]
+
+pozycje.txt - plik zawierający informacje o pozycjach
+    Struktura pliku:
+        [id] 
+            [broniona strona]
+            [nazwa] 
+            [opis]
+
+umiejętności.txt - plik zawierający informacje o umiejętnościach
+    Struktura pliku:
+        [id] 
+            [obrażenia] 
+            [strona] 
+            [cel] 
+            [nazwa] 
+            [opis]
+
+dialog.txt - plik zawierający pewien dialog
+    Struktura pliku:
+        [id adresanta] [wypowiedź]
+
+sklep.txt - plik opisujący przedmioty znajdujące się w sklepie
+    Struktura pliku:
+        [id_postaci]
+        16x [typ przedmiotu] [ID przedmiotu]
+
+    [typ przedmiotu]:
+        [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
+        [1] - broń
+        [2] - pancerz:
+            [0] - head
+            [1] - torso
+            [2] - arms
+            [3] - hands
+            [4] - legs
+            [5] - feet
+        [3] - inne
+
+mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
+    Struktura pliku:
+        [długość mapy] [szerokość mapy]
+        [liczba podłóg]
+            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY]
+        [liczba obiektów nieprzenikliwych]:
+            [id_tekstury] [szerokość] [wysokość] [coordynatX] [coordynatY]
+        [liczba przeciwników] 
+            [id_przeciwnika] [szerokość] [wysokość] [coordynatX] [coordynatY]
+        [liczba obiektów interaktywnych]
+            [id_tekstury] [typ interakcji] [szerokość] [wysokość] [coordynatX] [coordynatY] [* dodatkowa informacja]
+
+    [typ interakcji]:
+        [0] - dialog [id_dialogu]
+        [1] - sklep [id_sklepu]
+        [2] - trening
+        [3] - dialog rozpoczynający walkę z bossem [id_dialogu] [id_postaci]
+        [4] - dialog rozczynający misję [id_dialogu] [id_misji]
+

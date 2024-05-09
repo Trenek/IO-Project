@@ -1,2 +1,0 @@
-[id_postaci]
-16x [id_przedmiotu]
