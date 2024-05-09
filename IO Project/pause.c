@@ -88,7 +88,7 @@ void pause(enum playState *state, struct playInfo *info) {
             else if (isMouseOver(menu)) *state = RETURN;
             else if (isMouseOver(exit)) *state = DESKTOP;
         }
-        if (IsKeyPressed(KEY_P)) {
+        else if (IsKeyPressed(KEY_P)) {
             *state = EXPLORE;
         }
     } while (*state == PAUSE && !WindowShouldClose());

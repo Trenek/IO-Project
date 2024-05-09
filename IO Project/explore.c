@@ -88,5 +88,8 @@ void explore(enum playState *playState, struct playInfo *info) {
             else if (isMouseOverLeft(equipment)) *playState = EQUIPEMENT;
             else if (isMouseOverRight(pause)) *playState = PAUSE;
         }
+        else if (IsKeyPressed(KEY_P)) {
+            *playState = PAUSE;
+        }
     }
 }
