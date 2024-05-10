@@ -23,5 +23,7 @@ void play(enum state *state, struct menuInfo *info) {
         function[playState](&playState, &playInfo);
     }
 
+    UnloadRenderTexture(screenCamera);
+
     *state = (playState == RETURN) ? MENU : EXIT;
 }
