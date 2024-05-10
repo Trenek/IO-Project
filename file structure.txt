@@ -1,13 +1,20 @@
 Game Fiels
 ├── config.cfg
-├── broń.txt
-├── pancerz.txt
-├── przedmioty.txt
-├── ataki.txt
-├── pozycje.txt
-├── umiejętności.txt
-├── dialogi
-├── postacie
+├── dane
+│   ├── przedmioty
+│   │   ├── broń.txt
+│   │   ├── pancerz.txt
+│   │   └── przedmioty.txt
+│   ├── walka
+│   │   ├── ataki.txt
+│   │   ├── pozycje.txt
+│   │   └── umiejętności.txt
+│   ├── mapy
+│   │   └── mapa
+│   │       ├── mapa.txt
+│   │       └── sklepy
+│   ├── dialogi
+│   └── postacie
 ├── tekstury
 │   ├── body
 │   │   ├── head
@@ -29,21 +36,12 @@ Game Fiels
 │   ├── weapons
 │   ├── floors
 │   └── objects
-├── zapisy
-│   └── zapis
-│       ├── ekwipunek.txt
-│       ├── postać.txt
-│       ├── postać.png
-│       └── mapy
-└── mapy
-    └── mapa
-        ├── mapa.txt
-        └── sklepy
-
-
-
-
-
+└── zapisy
+    └── zapis
+        ├── ekwipunek.txt
+        ├── postać.txt
+        ├── postać.png
+        └── mapy
 
 config.cfg - plik zawierający zapisane ustawienia
     Struktura pliku:
@@ -195,4 +193,3 @@ mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
         [2] - trening
         [3] - dialog rozpoczynający walkę z bossem [id_dialogu] [id_postaci]
         [4] - dialog rozczynający misję [id_dialogu] [id_misji]
-
