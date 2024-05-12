@@ -28,55 +28,55 @@ void movePlayer(struct player* player, Camera* cam) {
         ve.y *= 1.5;
     }
 
-    if (IsKeyDown(KEY_I)) {
+    if (IsKeyDown(KEY_W)) {
         player->object->position.x += ve.x;
         player->object->position.z += ve.y;
         cam->position.x += ve.x;
         cam->position.z += ve.y;
-        player->object->state = 1;
+        //player->object->state = 1;
     }
-    else if (IsKeyDown(KEY_K)) {
+    else if (IsKeyDown(KEY_S)) {
         veH = Vector2Rotate(ve, M_PIF);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
-        player->object->state = 3;
+        //player->object->state = 3;
     }
-    else if (IsKeyDown(KEY_L)) {
+    else if (IsKeyDown(KEY_D)) {
         veH = Vector2Rotate(ve, M_PIF / 2);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
-        player->object->state = 2;
+        //player->object->state = 2;
     }
-    else if (IsKeyDown(KEY_J)) {
+    else if (IsKeyDown(KEY_A)) {
         veH = Vector2Rotate(ve, (3 * M_PIF) / 2);
         player->object->position.x += veH.x;
         player->object->position.z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
-        player->object->state = 4;
+        //player->object->state = 4;
     }
     else {
-        player->object->state = 0;
+        //player->object->state = 0;
     }
 
-    if (player->object->position.y == player->object->sizeV.y / 2)
+    if (player->object->position.y == 0.0f)
         if (IsKeyPressed(KEY_SPACE)) player->speedY = 5;
 
-    if (player->object->position.y >= player->object->sizeV.y / 2) {
-        if (!(player->object->position.y == player->object->sizeV.y / 2 && player->speedY == 0)) {
+    if (player->object->position.y >= 0.0f) {
+        if (!(player->object->position.y == 0.0f && player->speedY == 0)) {
             player->object->position.y += ((player->speedY) + ((GRAVITY) * deltaTime / 2.0f)) * deltaTime;
-            if (player->object->position.y < player->object->sizeV.y / 2) {
-                player->object->position.y = player->object->sizeV.y / 2;
+            if (player->object->position.y < 0.0f) {
+                player->object->position.y = 0.0f;
             }
             player->speedY = player->speedY + (GRAVITY * deltaTime);
         }
     }
     else {
-        player->object->position.y = player->object->sizeV.y / 2;
+        player->object->position.y = 0.0f;
         player->speedY = 0;
     }
 }
@@ -84,17 +84,17 @@ void movePlayer(struct player* player, Camera* cam) {
 void gravity(struct player* player) {
     float deltaTime = GetFrameTime();
 
-    if (player->object->position.y >= player->object->sizeV.y / 2) {
-        if (!(player->object->position.y == player->object->sizeV.y / 2 && player->speedY == 0)) {
+    if (player->object->position.y >= 0.0f) {
+        if (!(player->object->position.y == 0.0f && player->speedY == 0)) {
             player->object->position.y += ((player->speedY) + ((GRAVITY) * deltaTime / 2.0f)) * deltaTime;
-            if (player->object->position.y < player->object->sizeV.y / 2) {
-                player->object->position.y = player->object->sizeV.y / 2;
+            if (player->object->position.y < 0.0f) {
+                player->object->position.y = 0.0f;
             }
             player->speedY = player->speedY + (GRAVITY * deltaTime);
         }
     }
     else {
-        player->object->position.y = player->object->sizeV.y / 2;
+        player->object->position.y = 0.0f;
         player->speedY = 0;
     }
 }

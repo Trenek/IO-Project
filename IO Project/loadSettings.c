@@ -1,4 +1,5 @@
 #include <raylib.h>
+#include <rlgl.h>
 
 //#define FULLSCREEN
 
@@ -18,4 +19,5 @@ void loadSettings(void) {
 #endif
 
     SetTargetFPS(240);
+    rlEnableDepthTest();
 }

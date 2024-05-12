@@ -16,11 +16,13 @@ enum state {
 struct menuInfo {
     Font *fonts;
     int fontsQuantity;
+    Music *music;
+    int musicQuantity;
     const char *saveName;
 };
 
-void SetFonts(struct menuInfo *info);
-void UnloadFonts(struct menuInfo *info);
+void initializeState(struct menuInfo *info);
+void freeState(struct menuInfo *info);
 
 void menu(enum state *state, struct menuInfo *info);
 void newGame(enum state *state, struct menuInfo *info);

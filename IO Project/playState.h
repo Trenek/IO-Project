@@ -3,6 +3,12 @@
 #ifndef PLAYSTATE_H
 #define PLAYSTATE_H
 
+#include "player.h"
+
+struct menuInfo;
+struct Object2D;
+struct player;
+
 enum playState {
     EXPLORE,
     EQUIPEMENT,
@@ -23,9 +29,22 @@ struct playInfo {
     int fontsQuantity;
     RenderTexture *screenCamera;
     Rectangle *screenRect;
+    Music *music;
+    int musicQuantity;
+    Camera camera;
+    struct Object2D *objects;
+    int objectsQuantity;
+    Texture2D *textures;
+    int texturesQuantity;
+    struct player player;
+    enum playState resumeState;
 };
+
+struct playInfo initializePlayInfo(struct menuInfo *info);
+void freePlayInfo(struct playInfo *info);
 
 void explore(enum playState *playState, struct playInfo *info);
 void pause(enum playState *state, struct playInfo *info);
+void fight(enum playState *playState, struct playInfo *info);
 
 #endif

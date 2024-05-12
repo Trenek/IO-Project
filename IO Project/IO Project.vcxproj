@@ -148,17 +148,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="achievements.c" />
-    <ClCompile Include="cube.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
     <ClCompile Include="IO Project.c" />
+    <ClCompile Include="ModUpdateCamera.c" />
     <ClCompile Include="loadGame.c" />
     <ClCompile Include="loadSettings.c" />
     <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="button.c" />
+    <ClCompile Include="playState.c" />
     <ClCompile Include="state.c" />
     <ClCompile Include="newGame.c" />
     <ClCompile Include="pause.c" />
@@ -173,6 +174,7 @@
   <ItemGroup>
     <ClInclude Include="button.h" />
     <ClInclude Include="loadSettings.h" />
+    <ClInclude Include="ModUpdateCamera.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playState.h" />
     <ClInclude Include="renderer.h" />

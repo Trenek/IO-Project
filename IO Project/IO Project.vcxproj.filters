@@ -16,15 +16,6 @@
     <Filter Include="Pliki źródłowe\state">
       <UniqueIdentifier>{dc908ce2-b141-4292-b36d-49f5f506bdca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\TEST_RENDER">
-      <UniqueIdentifier>{33f1a303-aa26-4ee2-a448-4120c52647cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\TEST_RENDER\player">
-      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\TEST_RENDER\renderer">
-      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\state\play">
       <UniqueIdentifier>{d9a7c3d5-f111-42c9-a4b2-541cd4cb925e}</UniqueIdentifier>
     </Filter>
@@ -40,25 +31,34 @@
     <Filter Include="Pliki nagłówkowe\state">
       <UniqueIdentifier>{d06f8d09-57e4-439e-8054-00d14e4a34f3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\playState">
+      <UniqueIdentifier>{77db7327-ca52-4001-ad93-e464a64bf249}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\Key">
+      <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\renderer">
+      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\player">
+      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="renderer.c">
-      <Filter>Pliki źródłowe\TEST_RENDER\renderer</Filter>
+      <Filter>Pliki źródłowe\renderer</Filter>
     </ClCompile>
     <ClCompile Include="player.c">
-      <Filter>Pliki źródłowe\TEST_RENDER\player</Filter>
+      <Filter>Pliki źródłowe\player</Filter>
     </ClCompile>
     <ClCompile Include="menu.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
     <ClCompile Include="button.c">
       <Filter>Pliki źródłowe\menu\button</Filter>
-    </ClCompile>
-    <ClCompile Include="cube.c">
-      <Filter>Pliki źródłowe\TEST_RENDER</Filter>
     </ClCompile>
     <ClCompile Include="newGame.c">
       <Filter>Pliki źródłowe\state</Filter>
@@ -108,13 +108,19 @@
     <ClCompile Include="loadSettings.c">
       <Filter>Pliki źródłowe\loadSettings</Filter>
     </ClCompile>
+    <ClCompile Include="playState.c">
+      <Filter>Pliki nagłówkowe\playState</Filter>
+    </ClCompile>
+    <ClCompile Include="ModUpdateCamera.c">
+      <Filter>Pliki źródłowe\Key</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
-      <Filter>Pliki źródłowe\TEST_RENDER\renderer</Filter>
+      <Filter>Pliki źródłowe\renderer</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Pliki źródłowe\TEST_RENDER\player</Filter>
+      <Filter>Pliki źródłowe\player</Filter>
     </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Pliki źródłowe\menu\button</Filter>
@@ -126,7 +132,10 @@
       <Filter>Pliki nagłówkowe\state</Filter>
     </ClInclude>
     <ClInclude Include="playState.h">
-      <Filter>Pliki nagłówkowe</Filter>
+      <Filter>Pliki nagłówkowe\playState</Filter>
+    </ClInclude>
+    <ClInclude Include="ModUpdateCamera.h">
+      <Filter>Pliki źródłowe\Key</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

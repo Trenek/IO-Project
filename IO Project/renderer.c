@@ -4,15 +4,14 @@
 
 #include "renderer.h"
 
-void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint, float a) {
-    Rectangle source = { .x = 0, .y = 0, .width = (float)texture.width, .height = (float)texture.height };
-
+static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint) {  
     float width = size.x / 2;
     float height = size.y / 2;
 
     rlPushMatrix();
 
     // get the camera view matrix
+    camera.position.y = height + position.y;
     Matrix mat = MatrixInvert(MatrixLookAt(camera.position, camera.target, camera.up));
     // peel off just the rotation
     Quaternion quat = QuaternionFromMatrix(mat);
@@ -20,6 +19,7 @@ void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2
 
     // apply just the rotation
     rlMultMatrixf(MatrixToFloat(mat));
+
 
     // translate backwards in the inverse rotated matrix to put the item where it goes in world space
     position = Vector3Transform(position, MatrixInvert(mat));
@@ -30,31 +30,33 @@ void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2
     rlBegin(RL_QUADS);
         rlColor4ub(tint.r, tint.g, tint.b, tint.a);
         // Front Face
-        rlNormal3f(0.0f, 0.0f, 1.0f);                  // Normal Pointing Towards Viewer
-        /**/
-        rlTexCoord2f((float)source.x / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(-width, -height, -atanf(a) / 20);  // Bottom Left Of The Texture and Quad
-        /**/
-        rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)(source.y + source.height) / texture.height);
-        rlVertex3f(+width, -height, atanf(a) / 20);  // Bottom Right Of The Texture and Quad
+        rlNormal3f(0.0f, 0.0f, 1.0f); // Normal Pointing Towards Viewer
 
-        rlTexCoord2f((float)(source.x + source.width) / texture.width, (float)source.y / texture.height);
-        rlVertex3f(+width, +height, atanf(a) / 20);  // Top Right Of The Texture and Quad
+        rlTexCoord2f(0.0f, 1.0f); // Bottom Left Of The Texture and Quad
+        rlVertex3f(-width, 0, 0);
 
-        rlTexCoord2f((float)source.x / texture.width, (float)source.y / texture.height);
-        rlVertex3f(-width, +height, -atanf(a) / 20);  // Top Left Of The Texture and Quad
+        rlTexCoord2f(1.0f, 1.0f); // Bottom Right Of The Texture and Quad
+        rlVertex3f(+width, 0, 0);
+
+        rlTexCoord2f(1.0f, 0.0f); // Top Right Of The Texture and Quad
+        rlVertex3f(+width, 2 * height, 0);
+
+        rlTexCoord2f(0.0f, 0.0f); // Top Left Of The Texture and Quad
+        rlVertex3f(-width, 2 * height, 0);
     rlEnd();
     rlSetTexture(0);
     rlPopMatrix();
 }
 
-int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
+static int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
     float deltaX = camera.target.x - camera.position.x;
     float deltaY = camera.target.z - camera.position.z;
 
+    // line
     float a1 = deltaY / deltaX;
     float b1 = camera.target.z - (a1 * camera.target.x);
 
+    // prostopad³e linie
     float a23 = -1 / a1;
     float b2 = object1->position.z - (a23 * object1->position.x);
     float b3 = object2->position.z - (a23 * object2->position.x);
@@ -73,50 +75,41 @@ int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera
     return ((x3 * x3) + (y3 * y3)) > ((x4 * x4) + (y4 * y4));
 }
 
-void Mod_InsertionSort(struct ObjectsToRender* render, int n, Camera3D camera) {
+static void Mod_InsertionSort(struct Object2D *render[], int n, Camera3D camera) {
     int min = 0;
     int i = 0;
     struct Object2D *tmp = 0;
     int j = 0;
 
     for (i = 1; i < n; i++) {
-        if (isCloser(render[i].objects, render[min].objects, camera)) {
+        if (isCloser(render[i], render[min], camera)) {
             min = i;
         }
     }
 
-    tmp = render[min].objects;
-    render[min].objects = render[0].objects;
-    render[0].objects = tmp;
+    tmp = render[min];
+    render[min] = render[0];
+    render[0] = tmp;
     
     for (i = 2; i < n; i++) {
-        tmp = render[i].objects;
+        tmp = render[i];
         j = i - 1;
-        while (isCloser(tmp, render[j].objects, camera)) {
-            render[j + 1].objects = render[j].objects;
+        while (isCloser(tmp, render[j], camera)) {
+            render[j + 1] = render[j];
             j--;
         }
-        render[j + 1].objects = tmp;
+        render[j + 1] = tmp;
     }
 }
 
-void RenderTextures(struct ObjectsToRender* render, int n, Camera3D camera) {
+void RenderTextures(struct Object2D *render[], int n, Camera3D camera) {
     int i = 0;
-    static float a = 0.0f;
 
     Mod_InsertionSort(render, n, camera);
     while (i < n) {
-        if (render[i].objects->state != 0) {
-            Draw3DBillboard(camera, (*render[i].objects->Animation)[render[i].objects->state - 1][(render[i].objects->animFrame >> 6) % 4], render[i].objects->position, render[i].objects->sizeV, WHITE, a);
-            render[i].objects->animFrame += 1;
-        }
-        else {
-            Draw3DBillboard(camera, *render[i].objects->texture, render[i].objects->position, render[i].objects->sizeV, WHITE, a);
-            render[i].objects->animFrame = 0;
-        }
+        Draw3DBillboard(camera, *render[i]->texture, render[i]->position, render[i]->sizeV, WHITE);
+        render[i]->animFrame = 0;
 
         i += 1;
     }
-
-    a += GetFrameTime() * 5;
 }

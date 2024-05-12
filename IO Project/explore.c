@@ -1,8 +1,14 @@
 #include <raylib.h>
+#include <raymath.h>
+
+#include "ModUpdateCamera.h"
 
 #include "playState.h"
 
 #include "button.h"
+
+#include "renderer.h"
+#include "player.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -11,7 +17,7 @@
 void explore(enum playState *playState, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
-    
+
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
@@ -68,15 +74,58 @@ void explore(enum playState *playState, struct playInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+    struct button fight = {
+        .text = "Walcz",
+        .x = GetScreenWidth() - (GetScreenWidth() >> 4),
+        .y = height + 1 * spaceY,
+        .incX = INC_X,
+        .incY = INC_Y,
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
 
+    struct Object2D *render[] = {
+        info->objects + 0,
+        info->objects + 1,
+        info->objects + 2,
+        info->objects + 3
+    };
+
+    info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
+        UpdateMusicStream(info->music[0]);
+        movePlayer(&info->player, &info->camera);
+
+        if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
+            if (IsCursorHidden())
+                EnableCursor();
+            else
+                DisableCursor();
+        }
+        if (IsCursorHidden()) {
+            ModUpdateCamera(&info->camera, CAMERA_THIRD_PERSON);
+        }
+        info->camera.target = info->player.object->position;
+        info->camera.target.y += info->player.object->sizeV.y / 2;
+
         BeginTextureMode(*info->screenCamera);
             ClearBackground(color);
+
+            BeginMode3D(info->camera);
+                DrawGrid(100, 1);
+
+                RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), info->camera);
+            EndMode3D();
 
             DrawButtonLeft(save);
             DrawButtonLeft(equipment);
             DrawButtonLeft(map);
             DrawButtonRight(pause);
+            DrawButtonRight(fight);
         EndTextureMode();
 
         BeginDrawing();
@@ -88,8 +137,10 @@ void explore(enum playState *playState, struct playInfo *info) {
             else if (isMouseOverLeft(map)) *playState = MAP;
             else if (isMouseOverLeft(equipment)) *playState = EQUIPEMENT;
             else if (isMouseOverRight(pause)) *playState = PAUSE;
+            else if (isMouseOverRight(fight)) *playState = FIGHT;
         }
         else if (IsKeyPressed(KEY_P)) {
+            EnableCursor();
             *playState = PAUSE;
         }
     }

@@ -20,13 +20,13 @@ int main(void) {
         state = MENU;
 
         loadSettings();
-        SetFonts(&info);
+        initializeState(&info);
 
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {
             function[state](&state, &info);
         }
 
-        UnloadFonts(&info);
+        freeState(&info);
 
         CloseWindow();
     } while (state == RELOAD);

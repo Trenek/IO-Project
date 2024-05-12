@@ -15,29 +15,32 @@ Game Fiels
 │   │       └── sklepy
 │   ├── dialogi
 │   └── postacie
-├── tekstury
-│   ├── body
-│   │   ├── head
-│   │   ├── face
-│   │   ├── hair
-│   │   ├── beard
-│   │   ├── torso
-│   │   ├── arms
-│   │   ├── hands
-│   │   ├── legs
-│   │   └── feet
-│   ├── armor
-│   │   ├── head
-│   │   ├── torso
-│   │   ├── arms
-│   │   ├── hands
-│   │   ├── legs
-│   │   └── feet
-│   ├── weapons
-│   ├── floors
-│   └── objects
-└── zapisy
-    └── zapis
+├── resources
+│   ├── textures
+│   │   ├── body
+│   │   │   ├── head
+│   │   │   ├── face
+│   │   │   ├── hair
+│   │   │   ├── beard
+│   │   │   ├── torso
+│   │   │   ├── arms
+│   │   │   ├── hands
+│   │   │   ├── legs
+│   │   │   └── feet
+│   │   ├── armor
+│   │   │   ├── head
+│   │   │   ├── torso
+│   │   │   ├── arms
+│   │   │   ├── hands
+│   │   │   ├── legs
+│   │   │   └── feet
+│   │   ├── weapons
+│   │   ├── floors
+│   │   └── objects
+│   ├── music
+│   └── fonts
+└── saves
+    └── save
         ├── ekwipunek.txt
         ├── postać.txt
         ├── postać.png
@@ -138,10 +141,12 @@ ataki.txt - plik zawierający informacje o atakach
             [nazwa] 
             [opis]
 
+    [cel ataku] - określa zaatakowaną część ciała
+
 pozycje.txt - plik zawierający informacje o pozycjach
     Struktura pliku:
         [id] 
-            [broniona strona]
+            ["ulepszona" strona]
             [nazwa] 
             [opis]
 

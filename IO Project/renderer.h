@@ -12,11 +12,6 @@ struct Object2D {
     int state;
 };
 
-struct ObjectsToRender {
-    struct Object2D* objects;
-    int size;
-};
-
-void RenderTextures(struct ObjectsToRender* render, int n, Camera3D camera);
+void RenderTextures(struct Object2D *render[], int n, Camera3D camera);
 
 #endif

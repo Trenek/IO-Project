@@ -83,12 +83,12 @@ void pause(enum playState *state, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(resume)) *state = EXPLORE;
+            if (isMouseOver(resume)) *state = info->resumeState;
             else if (isMouseOver(menu)) *state = RETURN;
             else if (isMouseOver(exit)) *state = DESKTOP;
         }
         else if (IsKeyPressed(KEY_P)) {
-            *state = EXPLORE;
+            *state = info->resumeState;
         }
     }
 }

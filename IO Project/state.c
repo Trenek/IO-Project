@@ -4,7 +4,7 @@
 
 #include "state.h"
 
-void SetFonts(struct menuInfo *info) {
+static void SetFonts(struct menuInfo *info) {
     int letters[] = U"?!,.aπbcÊdeÍfghijkl≥mnoÛpqrsútuvwxyzüøA•BC∆DE FGHIJKL£MNO”PQRSåTUVWXYZèØ";
     Font fonts[] = {
         LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int))
@@ -23,7 +23,7 @@ void SetFonts(struct menuInfo *info) {
     }
 }
 
-void UnloadFonts(struct menuInfo *info) {
+static void UnloadFonts(struct menuInfo *info) {
     int i = 0;
 
     while (i < info->fontsQuantity) {
@@ -32,4 +32,49 @@ void UnloadFonts(struct menuInfo *info) {
         i += 1;
     }
     free(info->fonts);
+}
+
+static void loadMusic(struct menuInfo *info) {
+    InitAudioDevice();
+
+    Music music[] = {
+        LoadMusicStream("resources/music/music1.mp3"),
+        LoadMusicStream("resources/music/music2.mp3")
+    };
+    int i = 0;
+
+    info->music = malloc(sizeof(music));
+    info->musicQuantity = sizeof(music) / sizeof(Music);
+    while (i < info->musicQuantity) {
+        info->music[i] = music[i];
+        i += 1;
+    }
+
+    i = 0;
+    while (i < info->musicQuantity) {
+        PlayMusicStream(info->music[i]);
+        i += 1;
+    }
+}
+
+static void unloadMusic(struct menuInfo *info) {
+    int i = 0;
+
+    while (i < info->musicQuantity) {
+        UnloadMusicStream(info->music[i]);
+        i += 1;
+    }
+
+    CloseAudioDevice();
+    free(info->music);
+}
+
+void initializeState(struct menuInfo *info) {
+    SetFonts(info);
+    loadMusic(info);
+}
+
+void freeState(struct menuInfo *info) {
+    UnloadFonts(info);
+    unloadMusic(info);
 }
