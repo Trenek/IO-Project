@@ -43,6 +43,12 @@
     <Filter Include="Pliki źródłowe\player">
       <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\inputBox">
+      <UniqueIdentifier>{fe5dfbd7-6480-429e-8bc8-879c743cf454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\choiceBox">
+      <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -114,6 +120,12 @@
     <ClCompile Include="ModUpdateCamera.c">
       <Filter>Pliki źródłowe\Key</Filter>
     </ClCompile>
+    <ClCompile Include="inputBox.c">
+      <Filter>Pliki źródłowe\menu\inputBox</Filter>
+    </ClCompile>
+    <ClCompile Include="choiceBox.c">
+      <Filter>Pliki źródłowe\menu\choiceBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="renderer.h">
@@ -136,6 +148,12 @@
     </ClInclude>
     <ClInclude Include="ModUpdateCamera.h">
       <Filter>Pliki źródłowe\Key</Filter>
+    </ClInclude>
+    <ClInclude Include="inputBox.h">
+      <Filter>Pliki źródłowe\menu\inputBox</Filter>
+    </ClInclude>
+    <ClInclude Include="choiceBox.h">
+      <Filter>Pliki źródłowe\menu\choiceBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

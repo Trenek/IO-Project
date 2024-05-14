@@ -148,10 +148,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="achievements.c" />
+    <ClCompile Include="choiceBox.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
+    <ClCompile Include="inputBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />
     <ClCompile Include="loadGame.c" />
@@ -173,6 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
+    <ClInclude Include="choiceBox.h" />
+    <ClInclude Include="inputBox.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="ModUpdateCamera.h" />
     <ClInclude Include="player.h" />
