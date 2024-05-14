@@ -12,17 +12,14 @@ static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, 
 
     // get the camera view matrix
     camera.position.y = height + position.y;
-    Matrix mat = MatrixInvert(MatrixLookAt(camera.position, camera.target, camera.up));
-    // peel off just the rotation
-    Quaternion quat = QuaternionFromMatrix(mat);
-    mat = QuaternionToMatrix(quat);
+    camera.target.y = height + position.y;
+    Matrix mat = MatrixLookAt(camera.position, camera.target, camera.up);
 
     // apply just the rotation
-    rlMultMatrixf(MatrixToFloat(mat));
-
+    rlMultMatrixf(MatrixToFloat(MatrixInvert(mat)));
 
     // translate backwards in the inverse rotated matrix to put the item where it goes in world space
-    position = Vector3Transform(position, MatrixInvert(mat));
+    position = Vector3Transform(position, mat);
     rlTranslatef(position.x, position.y, position.z);
 
     rlCheckRenderBatchLimit(6);
@@ -50,10 +47,9 @@ static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, 
 
 static int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
     float deltaX = camera.target.x - camera.position.x;
-    float deltaY = camera.target.z - camera.position.z;
+    float deltaZ = camera.target.z - camera.position.z;
 
-    // line
-    float a1 = deltaY / deltaX;
+    float a1 = deltaZ / deltaX;
     float b1 = camera.target.z - (a1 * camera.target.x);
 
     // prostopad³e linie
@@ -62,17 +58,17 @@ static int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D
     float b3 = object2->position.z - (a23 * object2->position.x);
 
     float x3 = (b1 - b2) / (a23 - a1);
-    float y3 = (a1 * x3) + b1;
+    float z3 = (a1 * x3) + b1;
 
     float x4 = (b1 - b3) / (a23 - a1);
-    float y4 = (a1 * x3) + b1;
+    float z4 = (a1 * x4) + b1;
 
     x3 -= camera.position.x;
-    y3 -= camera.position.z;
+    z3 -= camera.position.z;
     x4 -= camera.position.x;
-    y4 -= camera.position.z;
+    z4 -= camera.position.z;
 
-    return ((x3 * x3) + (y3 * y3)) > ((x4 * x4) + (y4 * y4));
+    return ((x3 * x3) + (z3 * z3)) > ((x4 * x4) + (z4 * z4));
 }
 
 static void Mod_InsertionSort(struct Object2D *render[], int n, Camera3D camera) {

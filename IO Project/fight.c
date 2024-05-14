@@ -50,7 +50,7 @@ void fight(enum playState *playState, struct playInfo *info) {
         .up.y = 1,
         .fovy = 45
     };
-
+    
     info->resumeState = FIGHT;
     while (!WindowShouldClose() && *playState == FIGHT) {
         UpdateMusicStream(info->music[0]);
