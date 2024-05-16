@@ -1,9 +1,9 @@
+#ifndef MENU_ELEMENT_H
+#define MENU_ELEMENT_H
+
 #include <raylib.h>
 
 #include "state.h"
-
-#ifndef MENU_ELEMENT_H
-#define MENU_ELEMENT_H
 
 struct buttonPositionParameters {
     int x;
