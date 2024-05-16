@@ -19,10 +19,14 @@ void settings(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Ustawienia",
-        .x = GetScreenWidth() >> 1,
-        .y = 100,
-        .incX = 0,
-        .incY = 0,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = 100,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
@@ -32,10 +36,14 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button fullScreen = {
         .text = "Tryb Pełnoekranowy",
-        .x = (GetScreenWidth() >> 1),
-        .y = height + 2 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height + 2 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -45,10 +53,14 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button resetSettings = { //ewentualnie domyślne ustawienia
         .text = "Zresetuj ustawienia",
-        .x = (GetScreenWidth() >> 1),
-        .y = height + 3 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height + 3 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -58,10 +70,14 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button restart = {  //tutaj nie do końca wiem na czym stanęlśmy z restar/reload/akceptuj/zapisz
         .text = "Restart",
-        .x = (GetScreenWidth() >> 1) - spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) - spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -71,10 +87,14 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
-        .x = (GetScreenWidth() >> 1) + spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) + spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -82,6 +102,12 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+
+    CalculateButtonPosition(&title);
+    CalculateButtonPosition(&fullScreen);
+    CalculateButtonPosition(&resetSettings);
+    CalculateButtonPosition(&restart);
+    CalculateButtonPosition(&goBack);
 
     while (!WindowShouldClose() && *state == SETTINGS) {
         BeginDrawing();

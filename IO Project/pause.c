@@ -17,10 +17,14 @@ void pause(enum playState *state, struct playInfo *info) {
 
     struct button title = {
         .text = "Pauza",
-        .x = GetScreenWidth() >> 1,
-        .y = GetScreenHeight() >> 2,
-        .incX = 10,
-        .incY = 10,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = GetScreenHeight() >> 2,
+            .incX = 10,
+            .incY = 10,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
@@ -30,10 +34,14 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button resume = {
         .text = "Wznów",
-        .x = GetScreenWidth() >> 1,
-        .y = height,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = height,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -43,10 +51,14 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button menu = {
         .text = "Wyjdź do Menu",
-        .x = GetScreenWidth() >> 1,
-        .y = height + space,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = height + space,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -56,10 +68,14 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button exit = {
         .text = "Wyjdź do Pulpitu",
-        .x = GetScreenWidth() >> 1,
-        .y = height + 2 * space,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = height + 2 * space,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -67,6 +83,11 @@ void pause(enum playState *state, struct playInfo *info) {
         .hoverColor = color2,
         .spaceing = 0
     };
+
+    CalculateButtonPosition(&title);
+    CalculateButtonPosition(&resume);
+    CalculateButtonPosition(&menu);
+    CalculateButtonPosition(&exit);
 
     while (*state == PAUSE && !WindowShouldClose()) {
         BeginDrawing();

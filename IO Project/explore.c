@@ -24,10 +24,14 @@ void explore(enum playState *playState, struct playInfo *info) {
 
     struct button save = {
         .text = "Zapisz",
-        .x = GetScreenWidth() >> 4,
-        .y = height + 0 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 4,
+            .y = height + 0 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -37,10 +41,14 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button equipment = {
         .text = "Ekwipunek",
-        .x = GetScreenWidth() >> 4,
-        .y = height + 1 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 4,
+            .y = height + 1 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -50,10 +58,14 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button map = {
         .text = "Mapa",
-        .x = GetScreenWidth() >> 4,
-        .y = height + 2 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 4,
+            .y = height + 2 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -63,10 +75,14 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button pause = {
         .text = "Pauza",
-        .x = GetScreenWidth() - (GetScreenWidth() >> 4),
-        .y = height,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() - (GetScreenWidth() >> 4),
+            .y = height,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 2,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -76,10 +92,14 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button fight = {
         .text = "Walcz",
-        .x = GetScreenWidth() - (GetScreenWidth() >> 4),
-        .y = height + 1 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() - (GetScreenWidth() >> 4),
+            .y = height + 1 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 2,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -94,6 +114,12 @@ void explore(enum playState *playState, struct playInfo *info) {
         info->objects + 2,
         info->objects + 3
     };
+
+    CalculateButtonPosition(&save);
+    CalculateButtonPosition(&equipment);
+    CalculateButtonPosition(&map);
+    CalculateButtonPosition(&pause);
+    CalculateButtonPosition(&fight);
 
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
@@ -121,11 +147,11 @@ void explore(enum playState *playState, struct playInfo *info) {
                 RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), info->camera);
             EndMode3D();
 
-            DrawButtonLeft(save);
-            DrawButtonLeft(equipment);
-            DrawButtonLeft(map);
-            DrawButtonRight(pause);
-            DrawButtonRight(fight);
+            DrawButton(save);
+            DrawButton(equipment);
+            DrawButton(map);
+            DrawButton(pause);
+            DrawButton(fight);
         EndTextureMode();
 
         BeginDrawing();
@@ -133,11 +159,11 @@ void explore(enum playState *playState, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOverLeft(save)) *playState = SAVE;
-            else if (isMouseOverLeft(map)) *playState = MAP;
-            else if (isMouseOverLeft(equipment)) *playState = EQUIPEMENT;
-            else if (isMouseOverRight(pause)) *playState = PAUSE;
-            else if (isMouseOverRight(fight)) *playState = FIGHT;
+            if (isMouseOver(save)) *playState = SAVE;
+            else if (isMouseOver(map)) *playState = MAP;
+            else if (isMouseOver(equipment)) *playState = EQUIPEMENT;
+            else if (isMouseOver(pause)) *playState = PAUSE;
+            else if (isMouseOver(fight)) *playState = FIGHT;
         }
         else if (IsKeyPressed(KEY_P)) {
             EnableCursor();

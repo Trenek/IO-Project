@@ -5,12 +5,24 @@
 #ifndef MENU_ELEMENT_H
 #define MENU_ELEMENT_H
 
-struct button {
-    const char *text;
+struct buttonPositionParameters {
     int x;
     int y;
     int incX;
     int incY;
+    int posX;
+    int posY;
+};
+
+struct button {
+    const char *text;
+    union {
+        struct buttonPositionParameters init;
+        struct {
+            Vector2 textLeftCorner;
+            Rectangle boxRectangle;
+        };
+    };
     Font *font;
     int fontSize;
     Color fontColor;
@@ -19,29 +31,27 @@ struct button {
     int spaceing;
 };
 
+inline void CalculateButtonPosition(struct button *element) {
+    Vector2 size = MeasureTextEx(*element->font, element->text, (float)element->fontSize, (float)element->spaceing);
+    struct buttonPositionParameters initial = element->init;
+
+    element->textLeftCorner = (Vector2) {
+        .x = initial.x - initial.posX * size.x / 2,
+        .y = initial.y - initial.posY * size.y / 2
+    };
+
+    element->boxRectangle = (Rectangle){
+        .x = element->textLeftCorner.x - initial.incX,
+        .y = element->textLeftCorner.y - initial.incY,
+        .width = size.x + 2 * initial.incX,
+        .height = size.y + 2 * initial.incY
+    };
+}
+
 inline bool isMouseOver(struct button element) {
-    Vector2 size = MeasureTextEx(*element.font, element.text, (float)element.fontSize, (float)element.spaceing);
-    Rectangle rec = { element.x - (size.x / 2) - element.incX, element.y - (size.y / 2) - element.incY, size.x + (element.incX << 1), size.y + (element.incY << 1) };
-
-    return CheckCollisionPointRec(GetMousePosition(), rec);
-}
-
-inline bool isMouseOverLeft(struct button element) {
-    Vector2 size = MeasureTextEx(*element.font, element.text, (float)element.fontSize, (float)element.spaceing);
-    Rectangle rec = { (float)element.x - element.incX, element.y - (size.y / 2) - element.incY, size.x + (element.incX << 1), size.y + (element.incY << 1) };
-
-    return CheckCollisionPointRec(GetMousePosition(), rec);
-}
-
-inline bool isMouseOverRight(struct button element) {
-    Vector2 size = MeasureTextEx(*element.font, element.text, (float)element.fontSize, (float)element.spaceing);
-    Rectangle rec = { element.x - size.x- element.incX, element.y - (size.y / 2) - element.incY, size.x + (element.incX << 1), size.y + (element.incY << 1) };
-
-    return CheckCollisionPointRec(GetMousePosition(), rec);
+    return CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);
 }
 
 #endif
 
 void DrawButton(struct button element);
-void DrawButtonLeft(struct button element);
-void DrawButtonRight(struct button element);

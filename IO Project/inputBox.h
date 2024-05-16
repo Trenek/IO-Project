@@ -1,6 +1,5 @@
-#pragma once
-#ifndef INPUTBOX
-#define INPUTBOX
+#ifndef INPUTBOX_H
+#define INPUTBOX_H
 
 #include <raylib.h>
 
@@ -8,6 +7,7 @@ struct inputBox {
     char text[128];
     int currentLength;
     bool isActive;
+
     int x;
     int y;
     int width;
@@ -23,6 +23,12 @@ struct inputBox {
 };
 
 void DrawInputBox(struct inputBox* input);
-int updateInputBox(struct inputBox* input);
+void internalUpdateInputBox(struct inputBox *input);
+
+inline void UpdateInputBox(struct inputBox *input) {
+    if (input->isActive) internalUpdateInputBox(input);
+}
+
+
 
 #endif // !INPUTBOX

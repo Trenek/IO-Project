@@ -8,22 +8,17 @@ void DrawInputBox(struct inputBox* element) {
     int width = (int)size.x + (element->incX << 1);
     int height = (int)size.y + (element->incY << 1);
     Rectangle rec = { (float)element->x, (float)y, (float)width, (float)height };
-
+    
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) 
         element->isActive = CheckCollisionPointRec(GetMousePosition(), rec);
-    
     DrawRectangleRec(rec, element->color);
-    DrawRectangleLines(element->x, y, width, height,  
-        element->isActive ? 
-        element->borderActiveColor : 
-        element->borderColor
-    );
+    DrawRectangleLinesEx(rec, 1, element->isActive ?
+        element->borderActiveColor :
+        element->borderColor);
     DrawTextEx(*(element->font), element->text, (Vector2) {.x = (float)element->x + element->incX, .y = (float)element->y - size.y / 2.0f }, (float)element->fontSize, (float)element->spaceing, element->fontColor);
-
-    if (element->isActive) updateInputBox(element);
 }
 
-int updateInputBox(struct inputBox* element) {
+void internalUpdateInputBox(struct inputBox* element) {
     // Get char pressed
     int key = GetCharPressed();
 
@@ -43,6 +38,4 @@ int updateInputBox(struct inputBox* element) {
         if (element->currentLength < 0) element->currentLength = 0;
         element->text[element->currentLength] = '\0';
     }
-
-    return 0;
 }

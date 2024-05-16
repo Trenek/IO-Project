@@ -22,10 +22,14 @@ void fight(enum playState *playState, struct playInfo *info) {
 
     struct button back = {
         .text = "Wróć",
-        .x = GetScreenWidth() >> 4,
-        .y = height + 0 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = GetScreenWidth() >> 4,
+            .y = height + 0 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -50,6 +54,8 @@ void fight(enum playState *playState, struct playInfo *info) {
         .up.y = 1,
         .fovy = 45
     };
+
+    CalculateButtonPosition(&back);
     
     info->resumeState = FIGHT;
     while (!WindowShouldClose() && *playState == FIGHT) {
@@ -64,7 +70,7 @@ void fight(enum playState *playState, struct playInfo *info) {
                 RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
             EndMode3D();
 
-            DrawButtonLeft(back);
+            DrawButton(back);
         EndTextureMode();
 
         BeginDrawing();
@@ -72,7 +78,7 @@ void fight(enum playState *playState, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOverLeft(back)) *playState = EXPLORE;
+            if (isMouseOver(back)) *playState = EXPLORE;
         }
         else if (IsKeyPressed(KEY_P)) {
             *playState = PAUSE;

@@ -21,10 +21,14 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Nowa gra",
-        .x = GetScreenWidth() >> 1,
-        .y = 100,
-        .incX = 0,
-        .incY = 0,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = 100,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
@@ -34,10 +38,14 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button startGame = {
         .text = "Rozpocznij grę",
-        .x = ( GetScreenWidth() >> 1 ) - spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) - spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -47,10 +55,14 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
-        .x = ( GetScreenWidth() >> 1 ) + spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) + spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -60,10 +72,14 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button gameSaveName = {
         .text = "Nazwa zapisu",
-        .x = 80,
-        .y = 300,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = 80,
+            .y = 300,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -71,6 +87,24 @@ void newGame(enum state *state, struct menuInfo *info) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
+    struct button characterName = {
+        .text = "Nazwa postaci",
+        .init = {
+            .x = 80,
+            .y = 400,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = BLANK,
+        .hoverColor = BLANK,
+        .spaceing = 0
+    };
+
     struct inputBox inputGameSaveName = {
         .text = "      \0",
         .currentLength = 0,
@@ -85,19 +119,6 @@ void newGame(enum state *state, struct menuInfo *info) {
         .color = inputColor,
         .borderActiveColor = activeBorderColor,
         .borderColor = borderColor,
-        .spaceing = 0
-    };
-    struct button characterName = {
-        .text = "Nazwa postaci",
-        .x = 80,
-        .y = 400,
-        .incX = INC_X,
-        .incY = INC_Y,
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = BLANK,
-        .hoverColor = BLANK,
         .spaceing = 0
     };
     struct inputBox inputCharacterName = {
@@ -117,22 +138,32 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
+    CalculateButtonPosition(&title);
+    CalculateButtonPosition(&startGame);
+    CalculateButtonPosition(&goBack);
+    CalculateButtonPosition(&gameSaveName);
+    CalculateButtonPosition(&characterName);
+
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();
             ClearBackground(backgroundColor);
 
             DrawButton(gameSaveName);
-            DrawInputBox(&inputGameSaveName);
             DrawButton(characterName);
-            DrawInputBox(&inputCharacterName);
             DrawButton(title);
             DrawButton(startGame);
             DrawButton(goBack);
+
+            DrawInputBox(&inputGameSaveName);
+            DrawInputBox(&inputCharacterName);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }
+
+        UpdateInputBox(&inputGameSaveName);
+        UpdateInputBox(&inputCharacterName);
     }
 }

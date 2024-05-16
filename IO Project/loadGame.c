@@ -19,10 +19,14 @@ void loadGame(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Wczytywanie gry",
-        .x = GetScreenWidth() >> 1,
-        .y = 100,
-        .incX = 0,
-        .incY = 0,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = 100,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
@@ -32,10 +36,14 @@ void loadGame(enum state *state, struct menuInfo *info) {
     };
     struct button loadGame = {
         .text = "Wczytaj",
-        .x = (GetScreenWidth() >> 1) - spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) - spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -45,10 +53,14 @@ void loadGame(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
-        .x = (GetScreenWidth() >> 1) + spaceX,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = (GetScreenWidth() >> 1) + spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -56,6 +68,10 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+
+    CalculateButtonPosition(&title);
+    CalculateButtonPosition(&loadGame);
+    CalculateButtonPosition(&goBack);
 
     while (!WindowShouldClose() && *state == LOAD_GAME) {
         BeginDrawing();
