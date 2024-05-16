@@ -7,7 +7,8 @@
 static void SetFonts(struct menuInfo *info) {
     int letters[] = U"?!,.aπbcÊdeÍfghijkl≥mnoÛpqrsútuvwxyzüøA•BC∆DE FGHIJKL£MNO”PQRSåTUVWXYZèØ";
     Font fonts[] = {
-        LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int))
+        LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int)),
+        LoadFontEx("resources/fonts/font5.ttf", 100, letters, sizeof(letters) / sizeof(int))
     };    
     int i = 0;
 

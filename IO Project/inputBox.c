@@ -1,6 +1,9 @@
+#include <string.h>
+
 #include "inputBox.h"
 
 #define MAX_INPUT_CHARS 30
+#define BACKSPACE 20
 
 void CalculateInputBoxPosition(struct inputBox *element) {
     Vector2 size = MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing);
@@ -25,32 +28,50 @@ void DrawInputBox(struct inputBox *element) {
     DrawTextEx(*(element->font), element->text, element->textLeftCorner, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void internalUpdateInputBox(struct inputBox *element) {
-    // Get char pressed
+void InternalUpdateInputBox(struct inputBox *element) {
+    static int backspace = 0;
+    static int interval = 0;
     int key = GetCharPressed();
+    int size = 0;
 
-    // Check if more characters have been pressed on the same frame
     while (key > 0) {
-        if ((key >= 32) && (key <= 125) && (element->currentLength < MAX_INPUT_CHARS)) {
+        if (element->currentLength < MAX_INPUT_CHARS) {
             element->boxRectangle.width -= MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
+            element->text[element->currentLength] = '\0';
 
-            element->text[element->currentLength] = (char)key;
-            element->text[element->currentLength + 1] = '\0'; // Add null terminator at the end of the string.
-            element->currentLength++;
+            strcat(element->text, CodepointToUTF8(key, &size));
+            element->currentLength += size;
 
+            element->text[element->currentLength] = '\0';
             element->boxRectangle.width += MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
         }
 
-        key = GetCharPressed();  // Check next character in the queue
+        key = GetCharPressed();
     }
 
-    if (IsKeyPressed(KEY_BACKSPACE)) {
+    if ((backspace < BACKSPACE ? IsKeyPressed : IsKeyDown)(KEY_BACKSPACE)) {
         element->boxRectangle.width -= MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
 
-        element->currentLength--;
-        if (element->currentLength < 0) element->currentLength = 0;
+        if (interval == 0) {
+            if (element->currentLength > 0) {
+                element->currentLength -= 1; // TODO: Delete whole character by single click
+            }
+        }
+
         element->text[element->currentLength] = '\0';
 
         element->boxRectangle.width += MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
     }
+
+    // TODO: connect this to GetFrameTime
+    if (IsKeyDown(KEY_BACKSPACE)) {
+        backspace += 1;
+        interval += 1;
+    }
+    else {
+        backspace = 0;
+        interval = 0;
+    }
+
+    interval %= 2;
 }

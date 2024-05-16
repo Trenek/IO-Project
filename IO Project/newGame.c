@@ -106,7 +106,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
 
     struct inputBox inputGameSaveName = {
-        .text = "      \0",
+        .text = "Wpisz Nazwę Zapisu",
         .currentLength = 0,
         .isActive = false,
         .init = {
@@ -117,7 +117,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = inputColor,
@@ -126,7 +126,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     struct inputBox inputCharacterName = {
-        .text = "      \0",
+        .text = "Wpisz Nazwę Postaci",
         .currentLength = 0,
         .isActive = false,
         .init = {
@@ -137,7 +137,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = inputColor,
