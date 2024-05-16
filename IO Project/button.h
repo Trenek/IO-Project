@@ -10,8 +10,8 @@ struct buttonPositionParameters {
     int y;
     int incX;
     int incY;
-    int posX;
-    int posY;
+    int posX; // 0 - left, 1 - center, 2 - right
+    int posY; // 0 - up, 1 - center, 2 - bottom
 };
 
 struct button {
