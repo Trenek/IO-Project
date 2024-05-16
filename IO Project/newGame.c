@@ -109,10 +109,14 @@ void newGame(enum state *state, struct menuInfo *info) {
         .text = "      \0",
         .currentLength = 0,
         .isActive = false,
-        .x = 170,
-        .y = 300,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = 170,
+            .y = 300,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -125,10 +129,14 @@ void newGame(enum state *state, struct menuInfo *info) {
         .text = "      \0",
         .currentLength = 0,
         .isActive = false,
-        .x = 170,
-        .y = 400,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .init = {
+            .x = 170,
+            .y = 400,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
@@ -143,6 +151,9 @@ void newGame(enum state *state, struct menuInfo *info) {
     CalculateButtonPosition(&goBack);
     CalculateButtonPosition(&gameSaveName);
     CalculateButtonPosition(&characterName);
+
+    CalculateInputBoxPosition(&inputGameSaveName);
+    CalculateInputBoxPosition(&inputCharacterName);
 
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();

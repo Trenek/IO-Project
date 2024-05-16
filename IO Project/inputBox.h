@@ -3,16 +3,28 @@
 
 #include <raylib.h>
 
+struct inputBoxPositionParameters {
+    int x;
+    int y;
+    int incX;
+    int incY;
+    int posX;
+    int posY;
+};
+
 struct inputBox {
     char text[128];
     int currentLength;
     bool isActive;
 
-    int x;
-    int y;
-    int width;
-    int incX;
-    int incY;
+    union {
+        struct inputBoxPositionParameters init;
+        struct {
+            Vector2 textLeftCorner;
+            Rectangle boxRectangle;
+        };
+    };
+
     Font *font;
     int fontSize;
     Color fontColor;
@@ -22,13 +34,16 @@ struct inputBox {
     int spaceing;
 };
 
-void DrawInputBox(struct inputBox* input);
-void internalUpdateInputBox(struct inputBox *input);
+#define MAX_INPUT_CHARS 30
+
+void CalculateInputBoxPosition(struct inputBox *element);
+void DrawInputBox(struct inputBox *element);
+void internalUpdateInputBox(struct inputBox *element);
 
 inline void UpdateInputBox(struct inputBox *input) {
+    if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+        input->isActive = CheckCollisionPointRec(GetMousePosition(), input->boxRectangle);
     if (input->isActive) internalUpdateInputBox(input);
 }
 
-
-
-#endif // !INPUTBOX
+#endif
