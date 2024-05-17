@@ -154,6 +154,7 @@
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
     <ClCompile Include="inputBox.c" />
+    <ClCompile Include="selectionBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />
     <ClCompile Include="loadGame.c" />
