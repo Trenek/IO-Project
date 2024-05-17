@@ -4,6 +4,8 @@
 
 #include "menuElements.h"
 
+#include "tutorialSlide.h"
+
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
@@ -16,28 +18,11 @@ void tutorial(enum state* state, struct menuInfo* info) {
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
-    struct button menuTitle = {
-        .text = "Samouczek",
-        .init = {
-            .x = GetScreenWidth() >> 1,
-            .y = 100,
-            .incX = 0,
-            .incY = 0,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = 100,
-        .fontColor = BLACK,
-        .color = BLANK,
-        .hoverColor = BLANK,
-        .spaceing = 0
-    };
     struct button goBack = {
         .text = "Powrót",
         .init = {
-            .x = GetScreenWidth() >> 1,
-            .y = height + 4 * spaceY,
+            .x = 50,
+            .y = 50,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -51,15 +36,36 @@ void tutorial(enum state* state, struct menuInfo* info) {
         .spaceing = 0
     };
 
-    CalculateButtonPosition(&menuTitle);
+    struct tutorialSlide slide = {
+    .text = "Test",
+    .init = {
+        .x = GetScreenWidth() >> 1,
+        .y = height + 4 * spaceY,
+        .incX = INC_X,
+        .incY = INC_Y,
+        .posX = 1,
+        .posY = 1
+    },
+    .font = &info->fonts[0],
+    .fontSize = FONT_SIZE,
+    .fontColor = BLACK,
+    .backgroundColor = color2,
+    .titleDescriptionColor = BLUE,
+    .borderColor = RED,
+    .spaceing = 0
+    };
+
     CalculateButtonPosition(&goBack);
+    CalculateSlidePosition(&slide);
+
 
     while (!WindowShouldClose() && *state == TUTORIAL) {
         BeginDrawing();
         ClearBackground(color);
 
-        DrawButton(menuTitle);
         DrawButton(goBack);
+        DrawSlide(slide);
+
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

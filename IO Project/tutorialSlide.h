@@ -1,6 +1,5 @@
-#pragma once
-#ifndef MENU_ELEMENT_H
-#define MENU_ELEMENT_H
+#ifndef TUTORIAL_SLIDE_H
+#define TUTORIAL_SLIDE_H
 
 #include <raylib.h>
 
@@ -15,25 +14,32 @@ struct slidePositionParameters {
     int posY; // 0 - up, 1 - center, 2 - bottom
 };
 
-struct slide {
+struct tutorialSlide {
     const char* text;
     union {
         struct slidePositionParameters init;
         struct {
-            Vector2 textLeftCorner;
-            Rectangle boxRectangle;
+            Vector2 BackgroundLeftCorner;
+            Vector2 TitleTextBoxLeftCorner;
+            Vector2 DescriptionTextBoxLeftCorner;
+
+            Rectangle backgroundBoxRectangle;
+            Rectangle titleBoxRectangle;
+            Rectangle descriptionBoxRectangle;
+
         };
     };
     Font* font;
     int fontSize;
     Color fontColor;
-    Color color;
-    Color hoverColor;
+    Color backgroundColor;
+    Color titleDescriptionColor;
+    Color borderColor;
     int spaceing;
 };
 
-void CalculateSlidePosition(struct slide* element);
-void DrawSlide(struct slide element);
+void CalculateSlidePosition(struct tutorialSlide* element);
+void DrawSlide(struct tutorialSlide element);
 
 
 
