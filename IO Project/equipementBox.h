@@ -59,14 +59,18 @@ inline void InitializeEquipementBox(struct equipementBox *element) {
 
 inline void UpdateEquipementBox(struct equipementBox* element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        element->activeItem = -1;
         for (int i = 0; i < 25; i++) {
             if (isMouseOverItemBox(element->items[i])) {
                 element->activeItem = i;
             }
         }
-        for (int i = 0; i < 7; i++) {
-            if (isMouseOverItemBox(element->itemTypes[i])) {
-                element->activeItemType = i;
+        if (element->activeItem == -1) { //nie kliknieto na zaden item, sprawdzamy czy kliknieto na itemType
+            element->activeItemType = -1;
+            for (int i = 0; i < 7; i++) {
+                if (isMouseOverItemBox(element->itemTypes[i])) {
+                    element->activeItemType = i;
+                }
             }
         }
     }
