@@ -1,23 +1,47 @@
 #include "tutorialSlide.h"
 
-void CalculateSlidePosition(struct slide* element) {
-    Vector2 size = MeasureTextEx(*element->font, element->text, (float)element->fontSize, (float)element->spaceing);
-    struct slidePositionParameters initial = element->init;
+void CalculateSlidePosition(struct tutorialSlide* element) {
 
-    element->textLeftCorner = (Vector2){
-        .x = initial.x - initial.posX * size.x / 2,
-        .y = initial.y - initial.posY * size.y / 2
+    element->BackgroundLeftCorner = (Vector2){
+        .x = 125,
+        .y = 50
     };
 
-    element->boxRectangle = (Rectangle){
-        .x = element->textLeftCorner.x - initial.incX,
-        .y = element->textLeftCorner.y - initial.incY,
-        .width = size.x + 2 * initial.incX,
-        .height = size.y + 2 * initial.incY
+    element->TitleTextBoxLeftCorner = (Vector2){
+        .x = element->BackgroundLeftCorner.x + 5,
+        .y = element->BackgroundLeftCorner.y + 5
+    };
+
+    element->TitleTextBoxLeftCorner = (Vector2){
+        .x = 125,
+        .y = 50
+    };
+
+    element->backgroundBoxRectangle = (Rectangle){
+        .x = element->BackgroundLeftCorner.x,
+        .y = element->BackgroundLeftCorner.y,
+        .width = 550,
+        .height = 500
+    };
+
+    element->titleBoxRectangle = (Rectangle){
+        .x = element->TitleTextBoxLeftCorner.x + 24,
+        .y = element->TitleTextBoxLeftCorner.y + 20,
+        .width = 500,
+        .height = 100
+    };
+
+    element->descriptionBoxRectangle = (Rectangle){
+        .x = element->TitleTextBoxLeftCorner.x + 24,
+        .y = element->TitleTextBoxLeftCorner.y + 200,
+        .width = 500,
+        .height = 100
     };
 }
 
-void DrawSlide(struct slide element) {
-    DrawRectangleRec(element.boxRectangle, CheckCollisionPointRec(GetMousePosition(), element.boxRectangle) ? element.hoverColor : element.color);
-    DrawTextEx(*element.font, element.text, element.textLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+void DrawSlide(struct tutorialSlide element) {
+    DrawRectangleRec(element.backgroundBoxRectangle, element.backgroundColor);
+    DrawRectangleRec(element.titleBoxRectangle, element.titleDescriptionColor);
+    DrawRectangleRec(element.descriptionBoxRectangle, element.titleDescriptionColor);
+    DrawTextEx(*element.font, element.text, element.BackgroundLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 }
