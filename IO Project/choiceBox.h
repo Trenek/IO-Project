@@ -1,4 +1,3 @@
-#pragma once
 #ifndef CHOICEBOX_H
 #define CHOICEBOX_H
 
@@ -26,8 +25,6 @@ struct choiceBox {
             Rectangle numBoxRectangle[6];
             Rectangle nameBoxRectangle[6];
             Rectangle dateBoxRectangle[6];
-
-
         };
     };
 
@@ -43,9 +40,5 @@ struct choiceBox {
 
 void CalculateChoiceBoxPosition(struct choiceBox* element);
 void DrawChoiceBox(struct choiceBox element);
-
-inline bool isMouseOver_2(struct choiceBox element) {
-    return CheckCollisionPointRec(GetMousePosition(), element.mainBoxRectangle[0]);
-}
 
 #endif

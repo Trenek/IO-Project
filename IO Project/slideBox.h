@@ -1,5 +1,5 @@
-#ifndef SELECTIONBOX_H
-#define SELECTIONBOX_H
+#ifndef SLIDEBOX_H
+#define SLIDEBOX_H
 
 #include <raylib.h>
 
@@ -40,9 +40,9 @@ struct slideBox {
 
 void CalculateSlideBoxPosition(struct slideBox *element);
 void DrawSlideBox(struct slideBox *element);
-void InternalUpdateSelectionBox(struct slideBox *element);
+void InternalUpdateSlideBox(struct slideBox *element);
 
-inline void UpdateSelectionBox(struct slideBox *element) {
+inline void UpdateSlideBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         element->isActive = CheckCollisionPointRec(GetMousePosition(), element->boxRectangle);
         if (CheckCollisionPointRec(GetMousePosition(), element->boxLeftRectangle)) {
@@ -61,7 +61,7 @@ inline void UpdateSelectionBox(struct slideBox *element) {
         }
     }
 
-    if (element->isActive) InternalUpdateSelectionBox(element);
+    if (element->isActive) InternalUpdateSlideBox(element);
 }
 
 #endif

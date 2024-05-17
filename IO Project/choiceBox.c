@@ -2,9 +2,6 @@
 
 #include "choiceBox.h"
 
-#define MAX_CHOICE_CHARS 30
-#define BACKSPACE 20
-
 void CalculateChoiceBoxPosition(struct choiceBox* element) {
     struct choiceBoxPositionParameters init = element->init;
 
@@ -16,7 +13,7 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
     for (int i = 0; i < 6; i++) {
         element->mainBoxRectangle[i] = (Rectangle){
             .x = element->LeftCorner.x,
-            .y = element->LeftCorner.y + 50.0f*i,
+            .y = element->LeftCorner.y + 50.0f * i,
             .width = 650.0f,
             .height = 50.0f
         };
@@ -53,21 +50,14 @@ void DrawChoiceBox(struct choiceBox element) {
         DrawRectangleLinesEx(element.mainBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
         DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 
-    };
-
-    for (int i = 0; i < 6; i++) {
         DrawRectangleRec(element.numBoxRectangle[i], element.color );
         DrawRectangleLinesEx(element.numBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
         DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
-    };
 
-    for (int i = 0; i < 6; i++) {
         DrawRectangleRec(element.nameBoxRectangle[i], element.color);
         DrawRectangleLinesEx(element.nameBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
         DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
-    };
 
-    for (int i = 0; i < 6; i++) {
         DrawRectangleRec(element.dateBoxRectangle[i], element.color);
         DrawRectangleLinesEx(element.dateBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
         DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
