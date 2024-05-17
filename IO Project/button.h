@@ -1,5 +1,5 @@
-#ifndef MENU_ELEMENT_H
-#define MENU_ELEMENT_H
+#ifndef BUTTON_H
+#define BUTTON_H
 
 #include <raylib.h>
 
