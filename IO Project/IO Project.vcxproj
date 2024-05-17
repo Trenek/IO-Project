@@ -187,6 +187,7 @@
     <ClInclude Include="playState.h" />
     <ClInclude Include="object2D.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="selectionBox.h" />
     <ClInclude Include="state.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
