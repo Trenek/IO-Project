@@ -1,0 +1,9 @@
+Przesunięcie punktu (0,0) danej części ciała od punktu (0,0) całego obrazka wyrażona w pikselach. dla obrazu postaci wielkości (330x720)
+
+		x		y
+Głowa		0		0
+Tors		10		170
+Lewa Ręka	90		260
+Lewa Dłoń	80		450
+Lewa Noga	400		490
+Lewa Stopa	60		680
