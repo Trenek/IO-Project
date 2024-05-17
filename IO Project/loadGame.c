@@ -4,6 +4,8 @@
 
 #include "button.h"
 
+#include "choiceBox.h"
+
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
@@ -68,21 +70,42 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+    struct choiceBox loadSave = {
+        .text = "",
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = 100,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = 100,
+        .fontColor = BLUE,
+        .color = GREEN,
+        .borderColor = RED,
+        .spaceing = 0,
+  };
+
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&loadGame);
     CalculateButtonPosition(&goBack);
+    CalculateChoiceBoxPosition(&loadSave);
+
 
     while (!WindowShouldClose() && *state == LOAD_GAME) {
         BeginDrawing();
             ClearBackground(color);
-
+            DrawChoiceBox(loadSave);
             DrawButton(title);
             DrawButton(loadGame);
             DrawButton(goBack);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            if (isMouseOver_2(loadSave)) *state = PLAY; //TODO: implement loading
             if (isMouseOver(loadGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }

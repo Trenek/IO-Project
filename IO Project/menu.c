@@ -4,11 +4,13 @@
 
 #include "button.h"
 
+
+
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void menu(enum state *state, struct menuInfo *info) {
+void menu(enum state* state, struct menuInfo* info) {
     const int height = GetScreenHeight() >> 1;
     const int space = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -128,14 +130,14 @@ void menu(enum state *state, struct menuInfo *info) {
 
     while (!WindowShouldClose() && *state == MENU) {
         BeginDrawing();
-            ClearBackground(color);
+        ClearBackground(color);
 
-            DrawButton(menuTitle);
-            DrawButton(newGame);
-            DrawButton(loadGame);
-            DrawButton(settings);
-            DrawButton(achievements);
-            DrawButton(exit);
+        DrawButton(menuTitle);
+        DrawButton(newGame);
+        DrawButton(loadGame);
+        DrawButton(settings);
+        DrawButton(achievements);
+        DrawButton(exit);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

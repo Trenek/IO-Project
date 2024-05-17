@@ -134,9 +134,6 @@
     <ClInclude Include="player.h">
       <Filter>Pliki źródłowe\player</Filter>
     </ClInclude>
-    <ClInclude Include="button.h">
-      <Filter>Pliki źródłowe\menu\button</Filter>
-    </ClInclude>
     <ClInclude Include="loadSettings.h">
       <Filter>Pliki źródłowe\loadSettings</Filter>
     </ClInclude>
@@ -151,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="inputBox.h">
       <Filter>Pliki źródłowe\menu\inputBox</Filter>
+    </ClInclude>
+    <ClInclude Include="button.h">
+      <Filter>Pliki źródłowe\menu\button</Filter>
     </ClInclude>
     <ClInclude Include="choiceBox.h">
       <Filter>Pliki źródłowe\menu\choiceBox</Filter>
