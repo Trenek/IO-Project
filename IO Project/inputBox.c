@@ -40,7 +40,7 @@ void DrawInputBox(struct inputBox *element) {
         if (((framesCounter / 25) % 2) == 0) {
             width = MeasureTextEx(*element->font, element->text + first, (float)element->fontSize, (float)element->spaceing).x;
 
-            DrawTextEx(*element->font, "_", (Vector2) { element->textLeftCorner.x + width, element->textLeftCorner.y }, (float)element->fontSize, (float)element->spaceing, MAROON);
+            DrawTextEx(*element->font, "_", (Vector2) { element->textLeftCorner.x + width, element->textLeftCorner.y }, (float)element->fontSize, (float)element->spaceing, element->fontColor);
         }
 
         framesCounter += 1;
