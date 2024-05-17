@@ -2,6 +2,7 @@
 #include "state.h"
 #include "button.h"
 #include "inputBox.h"
+#include "selectionBox.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -74,7 +75,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .text = "Nazwa zapisu",
         .init = {
             .x = 80,
-            .y = 300,
+            .y = height,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -91,7 +92,24 @@ void newGame(enum state *state, struct menuInfo *info) {
         .text = "Nazwa postaci",
         .init = {
             .x = 80,
-            .y = 400,
+            .y = height + spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = BLANK,
+        .hoverColor = BLANK,
+        .spaceing = 0
+    };
+    struct button difficultyLevel = {
+        .text = "Poziom trudności",
+        .init = {
+            .x = 80,
+            .y = height + 2 * spaceY,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -111,7 +129,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .isActive = false,
         .init = {
             .x = 170,
-            .y = 300,
+            .y = height,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 0,
@@ -132,7 +150,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .isActive = false,
         .init = {
             .x = 170,
-            .y = 400,
+            .y = height + spaceY,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 0,
@@ -147,15 +165,40 @@ void newGame(enum state *state, struct menuInfo *info) {
         .borderColor = borderColor,
         .spaceing = 0
     };
+    char *difficultyLevelOptions[] = {"Easy", "Medium", "Hard"};
+    struct selectionBox setDifficultyLevel = {
+        .numberOfOptions = 3,
+        .isActive = false,
+        .currentOption = 0,
+        .options = difficultyLevelOptions,
+        .init = {
+            .x = 320,
+            .y = height + 2 * spaceY,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1,
+            .width = 150
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = inputColor,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&startGame);
     CalculateButtonPosition(&goBack);
     CalculateButtonPosition(&gameSaveName);
     CalculateButtonPosition(&characterName);
+    CalculateButtonPosition(&difficultyLevel);
 
     CalculateInputBoxPosition(&inputGameSaveName);
     CalculateInputBoxPosition(&inputCharacterName);
+    CalculateSelectionBoxPosition(&setDifficultyLevel);
 
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();
@@ -163,12 +206,14 @@ void newGame(enum state *state, struct menuInfo *info) {
 
             DrawButton(gameSaveName);
             DrawButton(characterName);
+            DrawButton(difficultyLevel);
             DrawButton(title);
             DrawButton(startGame);
             DrawButton(goBack);
 
             DrawInputBox(&inputGameSaveName);
             DrawInputBox(&inputCharacterName);
+            DrawSelectionBox(&setDifficultyLevel);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -178,5 +223,6 @@ void newGame(enum state *state, struct menuInfo *info) {
 
         UpdateInputBox(&inputGameSaveName);
         UpdateInputBox(&inputCharacterName);
+        UpdateSelectionBox(&setDifficultyLevel);
     }
 }
