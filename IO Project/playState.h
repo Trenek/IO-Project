@@ -38,6 +38,9 @@ struct playInfo {
     int texturesQuantity;
     struct player player;
     enum playState resumeState;
+
+    struct character *npc;
+    struct character enemy;
 };
 
 struct playInfo initializePlayInfo(struct menuInfo *info);

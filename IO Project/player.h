@@ -1,10 +1,10 @@
-#include "renderer.h"
-
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "character.h"
+
 struct player {
-    struct Object2D* object;
+    struct character character;
     float speedY;
 };
 

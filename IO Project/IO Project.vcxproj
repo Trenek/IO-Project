@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="achievements.c" />
+    <ClCompile Include="character.c" />
     <ClCompile Include="choiceBox.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
@@ -162,12 +163,13 @@
     <ClCompile Include="menu.c" />
     <ClCompile Include="button.c" />
     <ClCompile Include="playState.c" />
+    <ClCompile Include="renderer.c" />
     <ClCompile Include="state.c" />
     <ClCompile Include="newGame.c" />
     <ClCompile Include="pause.c" />
     <ClCompile Include="play.c" />
     <ClCompile Include="player.c" />
-    <ClCompile Include="renderer.c" />
+    <ClCompile Include="object2D.c" />
     <ClCompile Include="save.c" />
     <ClCompile Include="settings.c" />
     <ClCompile Include="shop.c" />
@@ -175,12 +177,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
+    <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="ModUpdateCamera.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playState.h" />
+    <ClInclude Include="object2D.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="state.h" />
   </ItemGroup>

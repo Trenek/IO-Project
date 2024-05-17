@@ -4,7 +4,8 @@
 #include "state.h"
 #include "playState.h"
 
-#include "renderer.h"
+#include "character.h"
+#include "object2D.h"
 #include "player.h"
 
 static void loadTextures(struct playInfo *info) {
@@ -78,6 +79,21 @@ static void destroyObjects(struct playInfo *info) {
     free(info->objects);
 }
 
+static void createNPCs(struct playInfo *info) {
+    int i = 1;
+
+    info->npc = malloc(sizeof(struct character) * (info->objectsQuantity));
+    while (i < info->objectsQuantity) {
+        if (i != 0) info->npc[i - 1].object = info->objects[i];
+
+        i += 1;
+    }
+}
+
+static void destroyNPCs(struct playInfo *info) {
+    free(info->npc);
+}
+
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
         .fonts = info->fonts,
@@ -103,10 +119,13 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     loadTextures(&result);
 
     createObjects(&result);
+    createNPCs(&result);
     result.player = (struct player){
-        .object = result.objects,
+        .character.object = *result.objects,
         .speedY = 0
     };
+
+
     return result;
 }
 
@@ -116,6 +135,7 @@ void freePlayInfo(struct playInfo *info) {
     unloadTextures(info);
 
     destroyObjects(info);
+    destroyNPCs(info);
 
     free(info->screenCamera);
     free(info->screenRect);

@@ -37,28 +37,37 @@
     <Filter Include="Pliki źródłowe\Key">
       <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\renderer">
-      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\player">
-      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\inputBox">
       <UniqueIdentifier>{fe5dfbd7-6480-429e-8bc8-879c743cf454}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\menu\choiceBox">
       <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\objects">
+      <UniqueIdentifier>{ff3bef83-ecae-413f-9085-c7c960712b50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\player">
+      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\object">
+      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\renderer">
+      <UniqueIdentifier>{035bd3bb-d6c0-448f-aba1-390e349b54a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\character">
+      <UniqueIdentifier>{5888ec3f-4de9-4b56-9bd5-cd2a092b601f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="renderer.c">
-      <Filter>Pliki źródłowe\renderer</Filter>
+    <ClCompile Include="object2D.c">
+      <Filter>Pliki źródłowe\objects\object</Filter>
     </ClCompile>
     <ClCompile Include="player.c">
-      <Filter>Pliki źródłowe\player</Filter>
+      <Filter>Pliki źródłowe\objects\player</Filter>
     </ClCompile>
     <ClCompile Include="menu.c">
       <Filter>Pliki źródłowe\state</Filter>
@@ -126,13 +135,19 @@
     <ClCompile Include="choiceBox.c">
       <Filter>Pliki źródłowe\menu\choiceBox</Filter>
     </ClCompile>
+    <ClCompile Include="character.c">
+      <Filter>Pliki źródłowe\objects\character</Filter>
+    </ClCompile>
+    <ClCompile Include="renderer.c">
+      <Filter>Pliki źródłowe\menu\renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="renderer.h">
-      <Filter>Pliki źródłowe\renderer</Filter>
+    <ClInclude Include="object2D.h">
+      <Filter>Pliki źródłowe\objects\object</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Pliki źródłowe\player</Filter>
+      <Filter>Pliki źródłowe\objects\player</Filter>
     </ClInclude>
     <ClInclude Include="button.h">
       <Filter>Pliki źródłowe\menu\button</Filter>
@@ -154,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="choiceBox.h">
       <Filter>Pliki źródłowe\menu\choiceBox</Filter>
+    </ClInclude>
+    <ClInclude Include="character.h">
+      <Filter>Pliki źródłowe\objects\character</Filter>
+    </ClInclude>
+    <ClInclude Include="renderer.h">
+      <Filter>Pliki źródłowe\menu\renderer</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
