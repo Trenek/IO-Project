@@ -58,6 +58,12 @@
     <Filter Include="Pliki źródłowe\objects\character">
       <UniqueIdentifier>{5888ec3f-4de9-4b56-9bd5-cd2a092b601f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\itemBox">
+      <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\itemBox\equipementBox">
+      <UniqueIdentifier>{9d06fa99-3430-4661-acd5-512e1bc5d9da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -141,6 +147,15 @@
     <ClCompile Include="renderer.c">
       <Filter>Pliki źródłowe\menu\renderer</Filter>
     </ClCompile>
+    <ClCompile Include="slideBox.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="itemBox.c">
+      <Filter>Pliki źródłowe\menu\itemBox</Filter>
+    </ClCompile>
+    <ClCompile Include="equipementsBox.c">
+      <Filter>Pliki źródłowe\menu\itemBox\equipementBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -175,6 +190,18 @@
     </ClInclude>
     <ClInclude Include="renderer.h">
       <Filter>Pliki źródłowe\menu\renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="menuElements.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="slideBox.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="itemBox.h">
+      <Filter>Pliki źródłowe\menu\itemBox</Filter>
+    </ClInclude>
+    <ClInclude Include="equipementBox.h">
+      <Filter>Pliki źródłowe\menu\itemBox\equipementBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

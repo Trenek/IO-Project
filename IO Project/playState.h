@@ -47,6 +47,7 @@ struct playInfo initializePlayInfo(struct menuInfo *info);
 void freePlayInfo(struct playInfo *info);
 
 void explore(enum playState *playState, struct playInfo *info);
+void equipement(enum playState* playState, struct playInfo* info);
 void pause(enum playState *state, struct playInfo *info);
 void fight(enum playState *playState, struct playInfo *info);
 
