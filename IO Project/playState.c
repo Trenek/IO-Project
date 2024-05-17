@@ -125,21 +125,40 @@ static void loadBodyPart(int num, struct playInfo *info) {
     }
 }
 
+static void unloadBodyPart(int num, struct playInfo *info) {
+    const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
+    FilePathList files = LoadDirectoryFiles(directory);
+    unsigned int i = 0;
+
+    while (i < files.capacity) {
+        UnloadTexture(info->texturePosition[num][i].front);
+        UnloadTexture(info->texturePosition[num][i].back);
+
+        i += 1;
+    }
+
+    free(info->texturePosition[num]);
+}
+
+
 static void loadBodyParts(struct playInfo *info) {
-    loadBodyPart(HEAD, info);
-    loadBodyPart(TORSO, info);
+    int i = 0;
 
-    loadBodyPart(LEFT_ARM, info);
-    loadBodyPart(RIGHT_ARM, info);
+    while (i <= RIGHT_FOOT) {
+        loadBodyPart(i, info);
 
-    loadBodyPart(LEFT_HAND, info);
-    loadBodyPart(RIGHT_HAND, info);
+        i += 1;
+    }
+}
 
-    loadBodyPart(LEFT_LEG, info);
-    loadBodyPart(RIGHT_LEG, info);
+static void unloadBodyParts(struct playInfo *info) {
+    int i = 0;
 
-    loadBodyPart(LEFT_FOOT, info);
-    loadBodyPart(RIGHT_FOOT, info);
+    while (i <= RIGHT_FOOT) {
+        unloadBodyPart(i, info);
+
+        i += 1;
+    }
 }
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
@@ -182,6 +201,7 @@ void freePlayInfo(struct playInfo *info) {
     UnloadRenderTexture(*info->screenCamera);
 
     unloadTextures(info);
+    unloadBodyParts(info);
 
     destroyObjects(info);
     destroyNPCs(info);
