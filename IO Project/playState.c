@@ -1,12 +1,28 @@
 #include <stdlib.h>
 #include <raylib.h>
 
+#include <stdio.h>
+
 #include "state.h"
 #include "playState.h"
 
 #include "character.h"
 #include "object2D.h"
 #include "player.h"
+
+static const char *bodyPartsNames[] = {
+    [HEAD] = "head",
+    [TORSO] = "torso",
+    [LEFT_ARM] = "left arm",
+    [RIGHT_ARM] = "right arm",
+    [LEFT_HAND] = "left hand",
+    [RIGHT_HAND] = "right hand",
+    [LEFT_LEG] = "left leg",
+    [RIGHT_LEG] = "right leg",
+    [LEFT_FOOT] = "left foot",
+    [RIGHT_FOOT] = "right foot"
+};
+
 
 static void loadTextures(struct playInfo *info) {
     int i = 0;
@@ -94,6 +110,38 @@ static void destroyNPCs(struct playInfo *info) {
     free(info->npc);
 }
 
+static void loadBodyPart(int num, struct playInfo *info) {
+    const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
+    FilePathList files = LoadDirectoryFiles(directory);
+    unsigned int i = 0;
+
+    info->texturePosition[num] = malloc(sizeof(struct TexturePosition) * files.capacity);
+    
+    while (i < files.capacity) {
+        info->texturePosition[num][i].front = LoadTexture(TextFormat("%s\\%i\\Front.png", directory, i));
+        info->texturePosition[num][i].back = LoadTexture(TextFormat("%s\\%i\\Back.png", directory, i));
+
+        i += 1;
+    }
+}
+
+static void loadBodyParts(struct playInfo *info) {
+    loadBodyPart(HEAD, info);
+    loadBodyPart(TORSO, info);
+
+    loadBodyPart(LEFT_ARM, info);
+    loadBodyPart(RIGHT_ARM, info);
+
+    loadBodyPart(LEFT_HAND, info);
+    loadBodyPart(RIGHT_HAND, info);
+
+    loadBodyPart(LEFT_LEG, info);
+    loadBodyPart(RIGHT_LEG, info);
+
+    loadBodyPart(LEFT_FOOT, info);
+    loadBodyPart(RIGHT_FOOT, info);
+}
+
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
         .fonts = info->fonts,
@@ -117,6 +165,7 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
     
     loadTextures(&result);
+    loadBodyParts(&result);
 
     createObjects(&result);
     createNPCs(&result);

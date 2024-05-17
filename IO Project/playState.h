@@ -24,6 +24,24 @@ enum playState {
     DESKTOP
 };
 
+struct TexturePosition {
+    Texture2D front;
+    Texture2D back;
+};
+
+enum BodyPartTexture {
+    HEAD,
+    TORSO,
+    LEFT_ARM,
+    RIGHT_ARM,
+    LEFT_HAND,
+    RIGHT_HAND,
+    LEFT_LEG,
+    RIGHT_LEG,
+    LEFT_FOOT,
+    RIGHT_FOOT
+};
+
 struct playInfo {
     Font *fonts;
     int fontsQuantity;
@@ -41,6 +59,8 @@ struct playInfo {
 
     struct character *npc;
     struct character enemy;
+
+    struct TexturePosition *texturePosition[10];
 };
 
 struct playInfo initializePlayInfo(struct menuInfo *info);

@@ -6,11 +6,13 @@
 #include "object2D.h"
 
 struct character {
-	char name[135];
+	char* name;
 	int health;
 	int attack;
 	int exhaustion;
 	struct Object2D object;
+	//Texture2D *head;
+	//Texture2D *body;
 };
 
 #endif
