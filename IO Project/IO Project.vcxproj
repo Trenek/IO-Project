@@ -175,6 +175,8 @@
     <ClCompile Include="settings.c" />
     <ClCompile Include="shop.c" />
     <ClCompile Include="training.c" />
+    <ClCompile Include="tutorial.c" />
+    <ClCompile Include="tutorialSlide.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
@@ -190,6 +192,7 @@
     <ClInclude Include="renderer.h" />
     <ClInclude Include="slideBox.h" />
     <ClInclude Include="state.h" />
+    <ClInclude Include="tutorialSlide.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
