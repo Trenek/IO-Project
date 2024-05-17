@@ -17,7 +17,6 @@ struct slideBox {
     int numberOfOptions;
     bool isActive;
     int currentOption;
-    char **options;
 
     union {
         struct slideBoxPositionParameters init;
@@ -25,6 +24,7 @@ struct slideBox {
             Rectangle boxRectangle;
             Rectangle boxLeftRectangle;
             Rectangle boxRightRectangle;
+            Vector2 textPosition;
         };
     };
 
@@ -35,10 +35,11 @@ struct slideBox {
     Color borderActiveColor;
     Color borderColor;
     int spaceing;
+    char * const options[];
 };
 
-void CalculateSelectionBoxPosition(struct slideBox *element);
-void DrawSelectionBox(struct slideBox *element);
+void CalculateSlideBoxPosition(struct slideBox *element);
+void DrawSlideBox(struct slideBox *element);
 void InternalUpdateSelectionBox(struct slideBox *element);
 
 inline void UpdateSelectionBox(struct slideBox *element) {

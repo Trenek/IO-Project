@@ -165,12 +165,16 @@ void newGame(enum state *state, struct menuInfo *info) {
         .borderColor = borderColor,
         .spaceing = 0
     };
-    char *difficultyLevelOptions[] = {"Easy", "Medium", "Hard"};
+
     struct slideBox setDifficultyLevel = {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 0,
-        .options = difficultyLevelOptions,
+        .options = {
+            "Easy", 
+            "Medium", 
+            "Hard"
+        },
         .init = {
             .x = 320,
             .y = height + 2 * spaceY,
@@ -198,7 +202,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     CalculateInputBoxPosition(&inputGameSaveName);
     CalculateInputBoxPosition(&inputCharacterName);
-    CalculateSelectionBoxPosition(&setDifficultyLevel);
+    CalculateSlideBoxPosition(&setDifficultyLevel);
 
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();
@@ -213,7 +217,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
             DrawInputBox(&inputGameSaveName);
             DrawInputBox(&inputCharacterName);
-            DrawSelectionBox(&setDifficultyLevel);
+            DrawSlideBox(&setDifficultyLevel);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

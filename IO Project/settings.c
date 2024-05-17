@@ -68,52 +68,6 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-    char *windowDimensionsOptions[] = {"1000x1000", "2000x2000", "3000x3000"};
-    struct slideBox setWindowDimensions = {
-        .numberOfOptions = 3,
-        .isActive = false,
-        .currentOption = 0,
-        .options = windowDimensionsOptions,
-        .init = {
-            .x = (GetScreenWidth() >> 1),
-            .y = height,
-            .incX = 0,
-            .incY = 0,
-            .posX = 1,
-            .posY = 1,
-            .width = 150
-        },
-        .font = &info->fonts[1],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .borderActiveColor = RED,
-        .borderColor = BLACK,
-        .spaceing = 0
-    };
-    char *textureResolutionOptions[] = {"Low", "Medium", "High"};
-    struct slideBox setTextureResolution = {
-        .numberOfOptions = 3,
-        .isActive = false,
-        .currentOption = 1,
-        .options = textureResolutionOptions,
-        .init = {
-            .x = (GetScreenWidth() >> 1),
-            .y = height + spaceY,
-            .incX = 0,
-            .incY = 0,
-            .posX = 1,
-            .posY = 1,
-            .width = 150
-        },
-        .font = &info->fonts[1],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .borderActiveColor = RED,
-        .borderColor = BLACK,
-        .spaceing = 0
-    };
     struct button fullScreen = {
         .text = "Tryb Pełnoekranowy",
         .init = {
@@ -183,15 +137,69 @@ void settings(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
+    struct slideBox setWindowDimensions = {
+        .numberOfOptions = 3,
+        .isActive = false,
+        .currentOption = 0,
+        .options = {
+            "1000x1000",
+            "2000x2000",
+            "3000x3000"
+        },
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1,
+            .width = 150
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
+    struct slideBox setTextureResolution = {
+        .numberOfOptions = 3,
+        .isActive = false,
+        .currentOption = 1,
+        .options = {
+            "Low",
+            "Medium",
+            "High"
+        },
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height + spaceY,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1,
+            .width = 150
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
+
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&textureResolution);
     CalculateButtonPosition(&windowDimensions);
-    CalculateSelectionBoxPosition(&setWindowDimensions);
-    CalculateSelectionBoxPosition(&setTextureResolution);
     CalculateButtonPosition(&fullScreen);
     CalculateButtonPosition(&resetSettings);
     CalculateButtonPosition(&restart);
     CalculateButtonPosition(&goBack);
+
+    CalculateSlideBoxPosition(&setWindowDimensions);
+    CalculateSlideBoxPosition(&setTextureResolution);
 
     while (!WindowShouldClose() && *state == SETTINGS) {
         BeginDrawing();
@@ -200,8 +208,8 @@ void settings(enum state *state, struct menuInfo *info) {
             DrawButton(title);
             DrawButton(textureResolution);
             DrawButton(windowDimensions);
-            DrawSelectionBox(&setWindowDimensions);
-            DrawSelectionBox(&setTextureResolution);
+            DrawSlideBox(&setWindowDimensions);
+            DrawSlideBox(&setTextureResolution);
             DrawButton(fullScreen);
             DrawButton(resetSettings);
             DrawButton(restart);
