@@ -2,9 +2,7 @@
 
 #include "state.h"
 
-#include "button.h"
-
-#include "selectionBox.h"
+#include "menuElements.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -71,7 +69,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     char *windowDimensionsOptions[] = {"1000x1000", "2000x2000", "3000x3000"};
-    struct selectionBox setWindowDimensions = {
+    struct slideBox setWindowDimensions = {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 0,
@@ -94,7 +92,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     char *textureResolutionOptions[] = {"Low", "Medium", "High"};
-    struct selectionBox setTextureResolution = {
+    struct slideBox setTextureResolution = {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 1,

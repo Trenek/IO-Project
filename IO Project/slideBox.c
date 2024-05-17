@@ -1,10 +1,10 @@
 #include <string.h>
 
-#include "selectionBox.h"
+#include "slideBox.h"
 
-void CalculateSelectionBoxPosition(struct selectionBox *element) {
+void CalculateSelectionBoxPosition(struct slideBox *element) {
     Vector2 size = MeasureTextEx(*(element->font), element->options[element->currentOption], (float)element->fontSize, (float)element->spaceing);
-    struct selectionBoxPositionParameters init = element->init;
+    struct slideBoxPositionParameters init = element->init;
 
     element->boxRectangle = (Rectangle){
         .x = init.x - init.width / 2.0f,
@@ -26,7 +26,7 @@ void CalculateSelectionBoxPosition(struct selectionBox *element) {
     };
 }
 
-void DrawSelectionBox(struct selectionBox *element) {
+void DrawSelectionBox(struct slideBox *element) {
     DrawRectangleRec(element->boxRectangle, element->color);
     DrawRectangleRec(element->boxLeftRectangle, element->color);
     DrawRectangleRec(element->boxRightRectangle, element->color);
@@ -42,7 +42,7 @@ void DrawSelectionBox(struct selectionBox *element) {
     DrawTextEx(*(element->font), element->options[element->currentOption], textPosition, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void InternalUpdateSelectionBox(struct selectionBox *element) {
+void InternalUpdateSelectionBox(struct slideBox *element) {
     if (IsKeyPressed(KEY_LEFT)) {
         if (element->currentOption == 0) {
             element->currentOption = element->numberOfOptions - 1;

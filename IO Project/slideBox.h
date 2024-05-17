@@ -3,7 +3,7 @@
 
 #include <raylib.h>
 
-struct selectionBoxPositionParameters {
+struct slideBoxPositionParameters {
     int x;
     int y;
     int incX;
@@ -13,14 +13,14 @@ struct selectionBoxPositionParameters {
     int width;
 };
 
-struct selectionBox {
+struct slideBox {
     int numberOfOptions;
     bool isActive;
     int currentOption;
     char **options;
 
     union {
-        struct selectionBoxPositionParameters init;
+        struct slideBoxPositionParameters init;
         struct {
             Rectangle boxRectangle;
             Rectangle boxLeftRectangle;
@@ -37,11 +37,11 @@ struct selectionBox {
     int spaceing;
 };
 
-void CalculateSelectionBoxPosition(struct selectionBox *element);
-void DrawSelectionBox(struct selectionBox *element);
-void InternalUpdateSelectionBox(struct selectionBox *element);
+void CalculateSelectionBoxPosition(struct slideBox *element);
+void DrawSelectionBox(struct slideBox *element);
+void InternalUpdateSelectionBox(struct slideBox *element);
 
-inline void UpdateSelectionBox(struct selectionBox *element) {
+inline void UpdateSelectionBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         element->isActive = CheckCollisionPointRec(GetMousePosition(), element->boxRectangle);
         if (CheckCollisionPointRec(GetMousePosition(), element->boxLeftRectangle)) {

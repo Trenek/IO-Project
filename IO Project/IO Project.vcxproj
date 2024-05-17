@@ -155,7 +155,7 @@
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
     <ClCompile Include="inputBox.c" />
-    <ClCompile Include="selectionBox.c" />
+    <ClCompile Include="slideBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />
     <ClCompile Include="loadGame.c" />
@@ -182,12 +182,13 @@
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="loadSettings.h" />
+    <ClInclude Include="menuElements.h" />
     <ClInclude Include="ModUpdateCamera.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playState.h" />
     <ClInclude Include="object2D.h" />
     <ClInclude Include="renderer.h" />
-    <ClInclude Include="selectionBox.h" />
+    <ClInclude Include="slideBox.h" />
     <ClInclude Include="state.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

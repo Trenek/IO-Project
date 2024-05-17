@@ -1,8 +1,8 @@
 #include <raylib.h>
+
 #include "state.h"
-#include "button.h"
-#include "inputBox.h"
-#include "selectionBox.h"
+
+#include "menuElements.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -166,7 +166,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     char *difficultyLevelOptions[] = {"Easy", "Medium", "Hard"};
-    struct selectionBox setDifficultyLevel = {
+    struct slideBox setDifficultyLevel = {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 0,
