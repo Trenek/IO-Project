@@ -2,7 +2,7 @@
 
 #include "inputBox.h"
 
-#define MAX_INPUT_CHARS 30
+#define MAX_INPUT_CHARS 120
 #define BACKSPACE 20
 
 void CalculateInputBoxPosition(struct inputBox *element) {
@@ -17,15 +17,35 @@ void CalculateInputBoxPosition(struct inputBox *element) {
     element->boxRectangle = (Rectangle){
         .x = element->textLeftCorner.x - init.incX,
         .y = element->textLeftCorner.y - init.incY,
-        .width = size.x + (init.incX << 1),
+        .width = (float)init.width + (init.incX << 1),
         .height = size.y + (init.incY << 1)
     };
 }
 
 void DrawInputBox(struct inputBox *element) {
+    static int framesCounter = 0;
+    int first = 0;
+
+    float incX = element->textLeftCorner.x - element->boxRectangle.x;
+    float width = 0;
+
     DrawRectangleRec(element->boxRectangle, element->color);
     DrawRectangleLinesEx(element->boxRectangle, 1, element->isActive ? element->borderActiveColor : element->borderColor);
-    DrawTextEx(*(element->font), element->text, element->textLeftCorner, (float)element->fontSize, (float)element->spaceing, element->fontColor);
+    while (MeasureTextEx(*element->font, element->text + first, (float)element->fontSize, (float)element->spaceing).x + 2 * incX > element->boxRectangle.width) {
+        first += 1;
+    }
+    DrawTextEx(*(element->font), element->text + first, element->textLeftCorner, (float)element->fontSize, (float)element->spaceing, element->fontColor);
+
+    if (element->isActive) {
+        if (((framesCounter / 25) % 2) == 0) {
+            width = MeasureTextEx(*element->font, element->text + first, (float)element->fontSize, (float)element->spaceing).x;
+
+            DrawTextEx(*element->font, "_", (Vector2) { element->textLeftCorner.x + width, element->textLeftCorner.y }, (float)element->fontSize, (float)element->spaceing, MAROON);
+        }
+
+        framesCounter += 1;
+    }
+
 }
 
 void InternalUpdateInputBox(struct inputBox *element) {
@@ -36,22 +56,18 @@ void InternalUpdateInputBox(struct inputBox *element) {
 
     while (key > 0) {
         if (element->currentLength < MAX_INPUT_CHARS) {
-            element->boxRectangle.width -= MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
             element->text[element->currentLength] = '\0';
 
             strcat(element->text, CodepointToUTF8(key, &size));
             element->currentLength += size;
 
             element->text[element->currentLength] = '\0';
-            element->boxRectangle.width += MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
         }
 
         key = GetCharPressed();
     }
 
     if ((backspace < BACKSPACE ? IsKeyPressed : IsKeyDown)(KEY_BACKSPACE)) {
-        element->boxRectangle.width -= MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
-
         if (interval == 0) {
             if (element->currentLength > 0) {
                 element->currentLength -= 1; // TODO: Delete whole character by single click
@@ -59,8 +75,6 @@ void InternalUpdateInputBox(struct inputBox *element) {
         }
 
         element->text[element->currentLength] = '\0';
-
-        element->boxRectangle.width += MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing).x;
     }
 
     // TODO: connect this to GetFrameTime

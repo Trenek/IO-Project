@@ -115,7 +115,8 @@ void newGame(enum state *state, struct menuInfo *info) {
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 0,
-            .posY = 1
+            .posY = 1,
+            .width = 400
         },
         .font = &info->fonts[1],
         .fontSize = FONT_SIZE,
@@ -135,7 +136,8 @@ void newGame(enum state *state, struct menuInfo *info) {
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 0,
-            .posY = 1
+            .posY = 1,
+            .width = 400
         },
         .font = &info->fonts[1],
         .fontSize = FONT_SIZE,
