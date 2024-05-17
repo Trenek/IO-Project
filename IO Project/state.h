@@ -8,6 +8,7 @@ enum state {
     SETTINGS,
     ACHIEVEMENTS,
     PLAY,
+    TUTORIAL,
 
     RELOAD,
     EXIT
@@ -30,5 +31,6 @@ void loadGame(enum state *state, struct menuInfo *info);
 void settings(enum state *state, struct menuInfo *info);
 void achievements(enum state *state, struct menuInfo *info);
 void play(enum state *state, struct menuInfo *info);
+void tutorial(enum state* state, struct menuInfo* info);
 
 #endif

@@ -3,3 +3,4 @@
 #include "inputBox.h"
 #include "slideBox.h"
 #include "choiceBox.h"
+#include "tutorialSlide.h"

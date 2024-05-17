@@ -87,7 +87,7 @@ void menu(enum state* state, struct menuInfo* info) {
         .spaceing = 0
     };
     struct button achievements = {
-        .text = "Osiągnięcia",
+        .text = "Samouczek",
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 3 * space,
@@ -144,7 +144,7 @@ void menu(enum state* state, struct menuInfo* info) {
             if (isMouseOver(newGame)) *state = NEW_GAME;
             else if (isMouseOver(loadGame)) *state = LOAD_GAME;
             else if (isMouseOver(settings)) *state = SETTINGS;
-            else if (isMouseOver(achievements)) *state = ACHIEVEMENTS;
+            else if (isMouseOver(achievements)) *state = TUTORIAL;
             else if (isMouseOver(exit)) *state = EXIT;
         }
     }

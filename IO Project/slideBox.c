@@ -43,7 +43,7 @@ void DrawSlideBox(struct slideBox *element) {
     DrawTextEx(*(element->font), element->options[element->currentOption], element->textPosition, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void InternalUpdateSelectionBox(struct slideBox *element) {
+void InternalUpdateSlideBox(struct slideBox *element) {
     if (IsKeyPressed(KEY_LEFT)) {
         if (element->currentOption == 0) {
             element->currentOption = element->numberOfOptions - 1;

@@ -6,6 +6,7 @@
 #include "object2D.h"
 
 struct character {
+	char name[135];
 	int health;
 	int attack;
 	int exhaustion;
