@@ -8,6 +8,7 @@ void play(enum state *state, struct menuInfo *info) {
     struct playInfo playInfo = initializePlayInfo(info);
     void (*function[])(enum playState *state, struct playInfo *info) = {
         [EXPLORE] = explore,
+        [EQUIPEMENT] = equipement,
         [PAUSE] = pause,
         [FIGHT] = fight
     };

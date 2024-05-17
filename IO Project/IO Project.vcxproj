@@ -152,9 +152,11 @@
     <ClCompile Include="choiceBox.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
+    <ClCompile Include="equipementsBox.c" />
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
     <ClCompile Include="inputBox.c" />
+    <ClCompile Include="itemBox.c" />
     <ClCompile Include="slideBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />
@@ -182,7 +184,9 @@
     <ClInclude Include="button.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
+    <ClInclude Include="equipementBox.h" />
     <ClInclude Include="inputBox.h" />
+    <ClInclude Include="itemBox.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="ModUpdateCamera.h" />

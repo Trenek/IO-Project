@@ -19,7 +19,7 @@ struct menuInfo {
     int fontsQuantity;
     Music *music;
     int musicQuantity;
-    const char *saveName;
+    char saveName[125];
 };
 
 void initializeState(struct menuInfo *info);
