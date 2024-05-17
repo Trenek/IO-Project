@@ -103,7 +103,6 @@ void loadGame(enum state *state, struct menuInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver_2(loadSave)) *state = PLAY; //TODO: implement loading
             if (isMouseOver(loadGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }
