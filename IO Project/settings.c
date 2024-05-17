@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-#include "button.h"
+#include "menuElements.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -34,10 +34,90 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
+    struct button textureResolution = {
+        .text = "Rozdzielczość tekstur",
+        .init = {
+            .x = 150,
+            .y = height,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = BLANK,
+        .hoverColor = BLANK,
+        .spaceing = 0
+    };
+    struct button windowDimensions = {
+        .text = "Wymiary okna",
+        .init = {
+            .x = 150,
+            .y = height + spaceY,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = BLANK,
+        .hoverColor = BLANK,
+        .spaceing = 0
+    };
+    char *windowDimensionsOptions[] = {"1000x1000", "2000x2000", "3000x3000"};
+    struct slideBox setWindowDimensions = {
+        .numberOfOptions = 3,
+        .isActive = false,
+        .currentOption = 0,
+        .options = windowDimensionsOptions,
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1,
+            .width = 150
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
+    char *textureResolutionOptions[] = {"Low", "Medium", "High"};
+    struct slideBox setTextureResolution = {
+        .numberOfOptions = 3,
+        .isActive = false,
+        .currentOption = 1,
+        .options = textureResolutionOptions,
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = height + spaceY,
+            .incX = 0,
+            .incY = 0,
+            .posX = 1,
+            .posY = 1,
+            .width = 150
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
     struct button fullScreen = {
         .text = "Tryb Pełnoekranowy",
         .init = {
-            .x = (GetScreenWidth() >> 1),
+            .x = 150,
             .y = height + 2 * spaceY,
             .incX = INC_X,
             .incY = INC_Y,
@@ -54,7 +134,7 @@ void settings(enum state *state, struct menuInfo *info) {
     struct button resetSettings = { //ewentualnie domyślne ustawienia
         .text = "Zresetuj ustawienia",
         .init = {
-            .x = (GetScreenWidth() >> 1),
+            .x = 150,
             .y = height + 3 * spaceY,
             .incX = INC_X,
             .incY = INC_Y,
@@ -104,6 +184,10 @@ void settings(enum state *state, struct menuInfo *info) {
     };
 
     CalculateButtonPosition(&title);
+    CalculateButtonPosition(&textureResolution);
+    CalculateButtonPosition(&windowDimensions);
+    CalculateSelectionBoxPosition(&setWindowDimensions);
+    CalculateSelectionBoxPosition(&setTextureResolution);
     CalculateButtonPosition(&fullScreen);
     CalculateButtonPosition(&resetSettings);
     CalculateButtonPosition(&restart);
@@ -114,6 +198,10 @@ void settings(enum state *state, struct menuInfo *info) {
             ClearBackground(color);
 
             DrawButton(title);
+            DrawButton(textureResolution);
+            DrawButton(windowDimensions);
+            DrawSelectionBox(&setWindowDimensions);
+            DrawSelectionBox(&setTextureResolution);
             DrawButton(fullScreen);
             DrawButton(resetSettings);
             DrawButton(restart);
@@ -124,5 +212,8 @@ void settings(enum state *state, struct menuInfo *info) {
             if (isMouseOver(goBack)) *state = MENU;
             else if (isMouseOver(restart)) *state = RELOAD;
         }
+
+        UpdateSelectionBox(&setWindowDimensions);
+        UpdateSelectionBox(&setTextureResolution);
     }
 }

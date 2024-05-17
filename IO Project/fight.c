@@ -3,7 +3,7 @@
 
 #include "playState.h"
 
-#include "button.h"
+#include "menuElements.h"
 
 #include "renderer.h"
 #include "player.h"
@@ -38,11 +38,12 @@ void fight(enum playState *playState, struct playInfo *info) {
         .spaceing = 0
     };
 
+    struct character player = info->player.character;
+    struct character enemy = info->enemy;
+
     struct Object2D *render[] = {
-        info->objects + 0,
-        info->objects + 1,
-        info->objects + 2,
-        info->objects + 3
+        &player.object,
+        &enemy.object
     };
 
     Camera3D fightCamera = {
@@ -54,6 +55,9 @@ void fight(enum playState *playState, struct playInfo *info) {
         .up.y = 1,
         .fovy = 45
     };
+
+    player.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
+    enemy.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
 
     CalculateButtonPosition(&back);
     

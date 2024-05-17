@@ -1,11 +1,10 @@
 #include <raylib.h>
 #include <raymath.h>
-
 #include "ModUpdateCamera.h"
 
 #include "playState.h"
 
-#include "button.h"
+#include "menuElements.h"
 
 #include "renderer.h"
 #include "player.h"
@@ -109,10 +108,10 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
 
     struct Object2D *render[] = {
-        info->objects + 0,
-        info->objects + 1,
-        info->objects + 2,
-        info->objects + 3
+        &info->player.character.object,
+        &info->npc[0].object,
+        &info->npc[1].object,
+        &info->npc[2].object
     };
 
     CalculateButtonPosition(&save);
@@ -135,8 +134,8 @@ void explore(enum playState *playState, struct playInfo *info) {
         if (IsCursorHidden()) {
             ModUpdateCamera(&info->camera, CAMERA_THIRD_PERSON);
         }
-        info->camera.target = info->player.object->position;
-        info->camera.target.y += info->player.object->sizeV.y / 2;
+        info->camera.target = info->player.character.object.position;
+        info->camera.target.y += info->player.character.object.sizeV.y / 2;
 
         BeginTextureMode(*info->screenCamera);
             ClearBackground(color);
@@ -163,7 +162,10 @@ void explore(enum playState *playState, struct playInfo *info) {
             else if (isMouseOver(map)) *playState = MAP;
             else if (isMouseOver(equipment)) *playState = EQUIPEMENT;
             else if (isMouseOver(pause)) *playState = PAUSE;
-            else if (isMouseOver(fight)) *playState = FIGHT;
+            else if (isMouseOver(fight)) {
+                *playState = FIGHT;
+                info->enemy = info->npc[0];
+            }
         }
         else if (IsKeyPressed(KEY_P)) {
             EnableCursor();

@@ -2,9 +2,10 @@
 #include <raymath.h>
 #include <rlgl.h>
 
+#include "object2D.h"
 #include "renderer.h"
 
-static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint) {  
+static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint) {
     float width = size.x / 2;
     float height = size.y / 2;
 
@@ -25,50 +26,72 @@ static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, 
     rlCheckRenderBatchLimit(6);
     rlSetTexture(texture.id);
     rlBegin(RL_QUADS);
-        rlColor4ub(tint.r, tint.g, tint.b, tint.a);
-        // Front Face
-        rlNormal3f(0.0f, 0.0f, 1.0f); // Normal Pointing Towards Viewer
+    rlColor4ub(tint.r, tint.g, tint.b, tint.a);
+    // Front Face
+    rlNormal3f(0.0f, 0.0f, 1.0f); // Normal Pointing Towards Viewer
 
-        rlTexCoord2f(0.0f, 1.0f); // Bottom Left Of The Texture and Quad
-        rlVertex3f(-width, 0, 0);
+    rlTexCoord2f(0.0f, 1.0f); // Bottom Left Of The Texture and Quad
+    rlVertex3f(-width, 0, 0);
 
-        rlTexCoord2f(1.0f, 1.0f); // Bottom Right Of The Texture and Quad
-        rlVertex3f(+width, 0, 0);
+    rlTexCoord2f(1.0f, 1.0f); // Bottom Right Of The Texture and Quad
+    rlVertex3f(+width, 0, 0);
 
-        rlTexCoord2f(1.0f, 0.0f); // Top Right Of The Texture and Quad
-        rlVertex3f(+width, 2 * height, 0);
+    rlTexCoord2f(1.0f, 0.0f); // Top Right Of The Texture and Quad
+    rlVertex3f(+width, 2 * height, 0);
 
-        rlTexCoord2f(0.0f, 0.0f); // Top Left Of The Texture and Quad
-        rlVertex3f(-width, 2 * height, 0);
+    rlTexCoord2f(0.0f, 0.0f); // Top Left Of The Texture and Quad
+    rlVertex3f(-width, 2 * height, 0);
     rlEnd();
     rlSetTexture(0);
     rlPopMatrix();
 }
 
-static int isCloser(struct Object2D* object1, struct Object2D* object2, Camera3D camera) {
+static int isCloser(struct Object2D *object1, struct Object2D *object2, Camera3D camera) {
+    int result = 0;
+
     float deltaX = camera.target.x - camera.position.x;
     float deltaZ = camera.target.z - camera.position.z;
 
-    float a1 = deltaZ / deltaX;
-    float b1 = camera.target.z - (a1 * camera.target.x);
+    if (fabsf(deltaX) == 0.0f) {
+        if (deltaZ > 0.0f) {
+            result = object1->position.z - camera.position.z > object2->position.z - camera.position.z;
+        }
+        else {
+            result = -(object1->position.z - camera.position.z) > -(object2->position.z - camera.position.z);
+        }
+    }
+    else if (fabsf(deltaZ) == 0.0f) {
+        if (deltaX > 0.0f) {
+            result = object1->position.x - camera.position.x > object2->position.x - camera.position.x;
+        }
+        else {
+            result = -(object1->position.x - camera.position.x) > -(object2->position.x - camera.position.x);
+        }
+    }
+    else {
+        float a1 = deltaZ / deltaX;
+        float b1 = camera.target.z - (a1 * camera.target.x);
 
-    // prostopad³e linie
-    float a23 = -1 / a1;
-    float b2 = object1->position.z - (a23 * object1->position.x);
-    float b3 = object2->position.z - (a23 * object2->position.x);
+        // prostopad³e linie
+        float a23 = -1 / a1;
+        float b2 = object1->position.z - (a23 * object1->position.x);
+        float b3 = object2->position.z - (a23 * object2->position.x);
 
-    float x3 = (b1 - b2) / (a23 - a1);
-    float z3 = (a1 * x3) + b1;
+        float x3 = (b1 - b2) / (a23 - a1);
+        float z3 = (a1 * x3) + b1;
 
-    float x4 = (b1 - b3) / (a23 - a1);
-    float z4 = (a1 * x4) + b1;
+        float x4 = (b1 - b3) / (a23 - a1);
+        float z4 = (a1 * x4) + b1;
 
-    x3 -= camera.position.x;
-    z3 -= camera.position.z;
-    x4 -= camera.position.x;
-    z4 -= camera.position.z;
+        x3 -= camera.position.x;
+        z3 -= camera.position.z;
+        x4 -= camera.position.x;
+        z4 -= camera.position.z;
 
-    return ((x3 * x3) + (z3 * z3)) > ((x4 * x4) + (z4 * z4));
+        result = ((x3 * x3) + (z3 * z3)) > ((x4 * x4) + (z4 * z4));
+    }
+
+    return result;
 }
 
 static void Mod_InsertionSort(struct Object2D *render[], int n, Camera3D camera) {
@@ -86,7 +109,7 @@ static void Mod_InsertionSort(struct Object2D *render[], int n, Camera3D camera)
     tmp = render[min];
     render[min] = render[0];
     render[0] = tmp;
-    
+
     for (i = 2; i < n; i++) {
         tmp = render[i];
         j = i - 1;

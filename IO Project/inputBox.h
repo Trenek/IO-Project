@@ -10,6 +10,7 @@ struct inputBoxPositionParameters {
     int incY;
     int posX;
     int posY;
+    int width;
 };
 
 struct inputBox {
