@@ -1,4 +1,4 @@
-﻿#include <raylib.h>
+#include <raylib.h>
 #include "playState.h"
 #include "button.h"
 #include "equipementBox.h"
@@ -86,6 +86,8 @@ void equipement(enum playState* state, struct playInfo* info) {
     struct equipementBox equipement = {
         .x = (GetScreenWidth() - size) >> 1,
         .y = ((GetScreenHeight() - size) >> 1) + 50,
+        .activeItem = -1,
+        .activeItemType = -1,
         .width = size,
         .height = size,
         .itemBoxSize = 40,
