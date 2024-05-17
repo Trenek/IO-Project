@@ -227,6 +227,6 @@ void newGame(enum state *state, struct menuInfo *info) {
 
         UpdateInputBox(&inputGameSaveName);
         UpdateInputBox(&inputCharacterName);
-        UpdateSelectionBox(&setDifficultyLevel);
+        UpdateSlideBox(&setDifficultyLevel);
     }
 }

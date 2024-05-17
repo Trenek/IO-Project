@@ -221,7 +221,7 @@ void settings(enum state *state, struct menuInfo *info) {
             else if (isMouseOver(restart)) *state = RELOAD;
         }
 
-        UpdateSelectionBox(&setWindowDimensions);
-        UpdateSelectionBox(&setTextureResolution);
+        UpdateSlideBox(&setWindowDimensions);
+        UpdateSlideBox(&setTextureResolution);
     }
 }
