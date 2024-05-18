@@ -5,12 +5,13 @@
 #include <raylib.h>
 #include <raymath.h>
 
+#include "playState.h"
 #include "player.h"
 
 #define GRAVITY -9.81f
 #define M_PIF ((float)M_PI)
 
-void movePlayer(struct player* player, Camera* cam) {
+void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
     Vector3 * const position = &player->character.object.position;
 
     Vector2 ve = {
@@ -35,6 +36,11 @@ void movePlayer(struct player* player, Camera* cam) {
         position->z += ve.y;
         cam->position.x += ve.x;
         cam->position.z += ve.y;
+        if (player->character.direction != BACK) {
+            player->character.direction = BACK;
+
+            assemblePlayerTexture(info, &player->character);
+        }
         //player->object->state = 1;
     }
     else if (IsKeyDown(KEY_S)) {
@@ -43,6 +49,11 @@ void movePlayer(struct player* player, Camera* cam) {
         position->z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
+        if (player->character.direction != FRONT) {
+            player->character.direction = FRONT;
+
+            assemblePlayerTexture(info, &player->character);
+        }
         //player->object->state = 3;
     }
     else if (IsKeyDown(KEY_D)) {
@@ -51,6 +62,11 @@ void movePlayer(struct player* player, Camera* cam) {
         position->z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
+        if (player->character.direction != RIGHT) {
+            player->character.direction = RIGHT;
+
+            assemblePlayerTexture(info, &player->character);
+        }
         //player->object->state = 2;
     }
     else if (IsKeyDown(KEY_A)) {
@@ -59,6 +75,11 @@ void movePlayer(struct player* player, Camera* cam) {
         position->z += veH.y;
         cam->position.x += veH.x;
         cam->position.z += veH.y;
+        if (player->character.direction != LEFT) {
+            player->character.direction = LEFT;
+
+            assemblePlayerTexture(info, &player->character);
+        }
         //player->object->state = 4;
     }
     else {

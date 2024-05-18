@@ -25,8 +25,14 @@ enum playState {
 };
 
 struct TexturePosition {
-    Texture2D front;
-    Texture2D back;
+    Texture2D position[4];
+};
+
+enum position {
+    FRONT,
+    RIGHT,
+    BACK,
+    LEFT
 };
 
 enum BodyPartTexture {
@@ -61,6 +67,10 @@ struct playInfo {
     struct character enemy;
 
     struct TexturePosition *texturePosition[10];
+
+    int height;
+    int width;
+    int bodyPosition[4][10][2];
 };
 
 struct playInfo initializePlayInfo(struct menuInfo *info);

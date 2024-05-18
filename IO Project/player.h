@@ -9,6 +9,6 @@ struct player {
 };
 
 void gravity(struct player* player);
-void movePlayer(struct player* player, Camera* cam);
+void movePlayer(struct playInfo *info, struct player *player, Camera *cam);
 
 #endif

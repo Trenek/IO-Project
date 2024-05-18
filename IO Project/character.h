@@ -5,14 +5,19 @@
 
 #include "object2D.h"
 
+struct playInfo;
+
 struct character {
-	char* name;
+	char name[130];
 	int health;
 	int attack;
 	int exhaustion;
 	struct Object2D object;
-	//Texture2D *head;
-	//Texture2D *body;
+
+	int direction;
+	int bodyPart[10];
 };
+
+void assemblePlayerTexture(struct playInfo *info, struct character *character);
 
 #endif

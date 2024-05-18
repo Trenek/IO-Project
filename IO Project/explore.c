@@ -123,7 +123,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
         UpdateMusicStream(info->music[0]);
-        movePlayer(&info->player, &info->camera);
+        movePlayer(info, &info->player, &info->camera);
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
             if (IsCursorHidden())

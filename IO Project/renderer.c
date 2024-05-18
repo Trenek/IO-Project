@@ -127,7 +127,6 @@ void RenderTextures(struct Object2D *render[], int n, Camera3D camera) {
     Mod_InsertionSort(render, n, camera);
     while (i < n) {
         Draw3DBillboard(camera, *render[i]->texture, render[i]->position, render[i]->sizeV, WHITE);
-        render[i]->animFrame = 0;
 
         i += 1;
     }

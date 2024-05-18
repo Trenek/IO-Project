@@ -65,10 +65,7 @@ struct Object2D createObject(int x, int z, Texture2D *texture) {
             .x = texture->width / (0.5f * texture->height),
             .y = texture->height / (0.5f * texture->height)
         },
-        .texture = texture,
-        .Animation = NULL,
-        .animFrame = 0,
-        .state = 0
+        .texture = texture
     };
 }
 
@@ -111,15 +108,21 @@ static void destroyNPCs(struct playInfo *info) {
 }
 
 static void loadBodyPart(int num, struct playInfo *info) {
-    const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
+    const char * const directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
+    char buffor[128];
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
+    unsigned int j = 0;
 
     info->texturePosition[num] = malloc(sizeof(struct TexturePosition) * files.capacity);
     
     while (i < files.capacity) {
-        info->texturePosition[num][i].front = LoadTexture(TextFormat("%s\\%i\\Front.png", directory, i));
-        info->texturePosition[num][i].back = LoadTexture(TextFormat("%s\\%i\\Back.png", directory, i));
+        j = 0;
+        while (j < 4) {
+            sprintf(buffor, "%s\\%i\\%i\\0.png", directory, i, j);
+            info->texturePosition[num][i].position[j] = LoadTexture(buffor);
+            j += 1;
+        }
 
         i += 1;
     }
@@ -129,10 +132,15 @@ static void unloadBodyPart(int num, struct playInfo *info) {
     const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
+    unsigned int j = 0;
 
     while (i < files.capacity) {
-        UnloadTexture(info->texturePosition[num][i].front);
-        UnloadTexture(info->texturePosition[num][i].back);
+        j = 0;
+        while (j < 4) {
+            UnloadTexture(info->texturePosition[num][i].position[j]);
+
+            j += 1;
+        }
 
         i += 1;
     }
@@ -161,6 +169,59 @@ static void unloadBodyParts(struct playInfo *info) {
     }
 }
 
+static void setBodyPosition(struct playInfo *info) {
+    FILE *bodyType = fopen("dane\\bodyType.txt", "r");
+    int i = 0;
+    int j = 0;
+
+    fscanf(bodyType, "%i %i", &info->width, &info->height);
+
+    while (i < 4) {
+        j = 0;
+        while (j < 10) {
+            fscanf(bodyType, "%i %i", &info->bodyPosition[i][j][0], &info->bodyPosition[i][j][1]);
+
+            j += 1;
+        }
+
+        i += 1;
+    }
+
+    fclose(bodyType);
+}
+
+static void loadPlayer(struct playInfo *info, const char* saveName) {
+    FILE *player = fopen(TextFormat("saves\\%s\\postaæ.txt", saveName), "r");
+    struct character *character = &info->player.character;
+    struct Object2D *object = &character->object;
+    int i = 0;
+
+    float x = 0;
+    float y = 0;
+
+    character->direction = 0;
+
+    fscanf(player, "%s", character->name);
+    fscanf(player, "%f %f", &x, &y);
+
+    object->sizeV.x = x;
+    object->sizeV.y = y;
+
+    i = 0;
+    while (i < 10) {
+        fscanf(player, "%i", &character->bodyPart[i]);
+           
+        i += 1;
+    }
+
+    info->player.character.object.texture = malloc(sizeof(Texture2D));
+    assemblePlayerTexture(info, &info->player.character);
+
+    info->player.speedY = 0;
+
+    fclose(player);
+}
+
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
         .fonts = info->fonts,
@@ -182,17 +243,16 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
-    
+  
+    setBodyPosition(&result);
+
     loadTextures(&result);
     loadBodyParts(&result);
 
     createObjects(&result);
     createNPCs(&result);
-    result.player = (struct player){
-        .character.object = *result.objects,
-        .speedY = 0
-    };
 
+    loadPlayer(&result, info->saveName);
 
     return result;
 }
