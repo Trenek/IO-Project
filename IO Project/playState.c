@@ -114,13 +114,13 @@ static void loadBodyPart(int num, struct playInfo *info) {
     unsigned int i = 0;
     unsigned int j = 0;
 
-    info->texturePosition[num] = malloc(sizeof(struct TexturePosition) * files.capacity);
+    info->texturePosition[num] = malloc(sizeof(Texture2D [4]) * files.capacity);
     
     while (i < files.capacity) {
         j = 0;
         while (j < 4) {
             sprintf(buffor, "%s\\%i\\%i\\0.png", directory, i, j);
-            info->texturePosition[num][i].position[j] = LoadTexture(buffor);
+            info->texturePosition[num][i][j] = LoadTexture(buffor);
             j += 1;
         }
 
@@ -137,7 +137,7 @@ static void unloadBodyPart(int num, struct playInfo *info) {
     while (i < files.capacity) {
         j = 0;
         while (j < 4) {
-            UnloadTexture(info->texturePosition[num][i].position[j]);
+            UnloadTexture(info->texturePosition[num][i][j]);
 
             j += 1;
         }

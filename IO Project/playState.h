@@ -24,10 +24,6 @@ enum playState {
     DESKTOP
 };
 
-struct TexturePosition {
-    Texture2D position[4];
-};
-
 enum position {
     FRONT,
     RIGHT,
@@ -66,7 +62,7 @@ struct playInfo {
     struct character *npc;
     struct character enemy;
 
-    struct TexturePosition *texturePosition[10];
+    Texture2D (*texturePosition[10])[4];
 
     int height;
     int width;

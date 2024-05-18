@@ -13,7 +13,7 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
 
     while (i < 10) {
         DrawTexture(
-            info->texturePosition[i][character->bodyPart[i]].position[character->direction],
+            info->texturePosition[i][character->bodyPart[i]][character->direction],
             info->bodyPosition[character->direction][i][0],
             info->bodyPosition[character->direction][i][1],
             WHITE);
