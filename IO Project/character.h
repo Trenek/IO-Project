@@ -18,6 +18,8 @@ struct character {
 	int bodyPart[10];
 };
 
+void loadCharacter(struct character *character, const char *characterSave, float x, float z);
+void unloadCharacter(struct character *character);
 void assemblePlayerTexture(struct playInfo *info, struct character *character);
 
 #endif

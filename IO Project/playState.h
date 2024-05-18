@@ -45,24 +45,26 @@ enum BodyPartTexture {
 };
 
 struct playInfo {
-    Font *fonts;
-    int fontsQuantity;
     RenderTexture *screenCamera;
     Rectangle *screenRect;
+    Camera camera;
+
+    Font *fonts;
+    int fontsQuantity;
+
     Music *music;
     int musicQuantity;
-    Camera camera;
-    struct Object2D *objects;
-    int objectsQuantity;
-    Texture2D *textures;
-    int texturesQuantity;
-    struct player player;
+
     enum playState resumeState;
 
+    struct player player;
+
     struct character *npc;
+    int npcQuantity;
+
     struct character enemy;
 
-    Texture2D (*texturePosition[10])[4];
+    Texture2D (*bodyParts[10])[4];
 
     int height;
     int width;

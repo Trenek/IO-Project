@@ -41,6 +41,9 @@ void fight(enum playState *playState, struct playInfo *info) {
     struct character player = info->player.character;
     struct character enemy = info->enemy;
 
+    player.direction = FRONT;
+    assemblePlayerTexture(info, &player);
+
     struct Object2D *render[] = {
         &player.object,
         &enemy.object
