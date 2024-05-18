@@ -6,39 +6,40 @@ void CalculateSlideBoxPosition(struct slideBox *element) {
     Vector2 size = MeasureTextEx(*(element->font), element->options[element->currentOption], (float)element->fontSize, (float)element->spaceing);
     struct slideBoxPositionParameters init = element->init;
 
-    element->boxRectangle = (Rectangle){
+    element->rect[SB_MIDDLE] = (Rectangle){
         .x = init.x - init.width / 2.0f,
         .y = init.y - init.posY * size.y / 2.0f - init.incY,
         .width = (float)init.width + (init.incX << 1),
         .height = size.y + (init.incY << 1)
     };
-    element->boxLeftRectangle = (Rectangle){
-        .x = element->boxRectangle.x - 40,
-        .y = element->boxRectangle.y,
+    element->rect[SB_LEFT] = (Rectangle){
+        .x = element->rect[SB_MIDDLE].x - 40,
+        .y = element->rect[SB_MIDDLE].y,
         .width = 40,
-        .height = element->boxRectangle.height
+        .height = element->rect[SB_MIDDLE].height
     };
-    element->boxRightRectangle = (Rectangle){
-        .x = element->boxRectangle.x + element->boxRectangle.width,
-        .y = element->boxRectangle.y,
+    element->rect[SB_RIGHT] = (Rectangle){
+        .x = element->rect[SB_MIDDLE].x + element->rect[SB_MIDDLE].width,
+        .y = element->rect[SB_MIDDLE].y,
         .width = 40,
-        .height = element->boxRectangle.height
+        .height = element->rect[SB_MIDDLE].height
     };
 
     element->textPosition = (Vector2){
-        .x = element->boxRectangle.x + element->boxRectangle.width / 2 - size.x / 2,
-        .y = element->boxRectangle.y
+        .x = element->rect[SB_MIDDLE].x + element->rect[SB_MIDDLE].width / 2 - size.x / 2,
+        .y = element->rect[SB_MIDDLE].y
     };
 }
 
 void DrawSlideBox(struct slideBox *element) {
-    DrawRectangleRec(element->boxRectangle, element->color);
-    DrawRectangleRec(element->boxLeftRectangle, element->color);
-    DrawRectangleRec(element->boxRightRectangle, element->color);
+    int i = 0;
 
-    DrawRectangleLinesEx(element->boxRectangle, 1, element->isActive ? element->borderActiveColor : element->borderColor);
-    DrawRectangleLinesEx(element->boxLeftRectangle, 1, element->isActive ? element->borderActiveColor : element->borderColor);
-    DrawRectangleLinesEx(element->boxRightRectangle, 1, element->isActive ? element->borderActiveColor : element->borderColor);
+    while (i < 3) {
+        DrawRectangleRec(element->rect[i], element->color);
+        DrawRectangleLinesEx(element->rect[i], 1, element->isActive ? element->borderActiveColor : element->borderColor);
+
+        i += 1;
+    }
 
     DrawTextEx(*(element->font), element->options[element->currentOption], element->textPosition, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }

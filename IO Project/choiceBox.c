@@ -11,21 +11,21 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
     };
 
     for (int i = 0; i < 6; i++) {
-        element->mainBoxRectangle[i] = (Rectangle){
+        element->rowRectangle[MAIN][i] = (Rectangle){
             .x = element->LeftCorner.x,
             .y = element->LeftCorner.y + 50.0f * i,
             .width = 650.0f,
             .height = 50.0f
         };
 
-        element->numBoxRectangle[i] = (Rectangle){
+        element->rowRectangle[NUM][i] = (Rectangle){
             .x = element->LeftCorner.x + 5,
             .y = element->LeftCorner.y + 50.0f * i + 5,
             .width = 40.0f,
             .height = 40.0f
         };
 
-        element->nameBoxRectangle[i] = (Rectangle){
+        element->rowRectangle[NAME][i] = (Rectangle){
             .x = element->LeftCorner.x + 50,
             .y = element->LeftCorner.y + 50.0f * i + 5,
             .width = 450.0f,
@@ -33,7 +33,7 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
            
         };
 
-        element->dateBoxRectangle[i] = (Rectangle){
+        element->rowRectangle[DATE][i] = (Rectangle){
             .x = element->LeftCorner.x + 505,
             .y = element->LeftCorner.y + 50.0f * i + 5,
             .width = 140,
@@ -44,23 +44,23 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
 }
 
 void DrawChoiceBox(struct choiceBox element) {
-    
-    for (int i = 0; i < 6; i++) {
-        DrawRectangleRec(element.mainBoxRectangle[i], CheckCollisionPointRec(GetMousePosition(), element.mainBoxRectangle[i]) ? element.hoverColor : element.color);
-        DrawRectangleLinesEx(element.mainBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
+    int i = 0;
+    int j = 0;
+
+    while (i < 6) {
+        DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
+        DrawRectangleLinesEx(element.rowRectangle[MAIN][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
         DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 
-        DrawRectangleRec(element.numBoxRectangle[i], element.color );
-        DrawRectangleLinesEx(element.numBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
-        DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+        j = 1;
+        while (j < 4) {
+            DrawRectangleRec(element.rowRectangle[j][i], element.color);
+            DrawRectangleLinesEx(element.rowRectangle[j][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
+            DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+            j += 1;
+        }
 
-        DrawRectangleRec(element.nameBoxRectangle[i], element.color);
-        DrawRectangleLinesEx(element.nameBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
-        DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
-
-        DrawRectangleRec(element.dateBoxRectangle[i], element.color);
-        DrawRectangleLinesEx(element.dateBoxRectangle[i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
-        DrawTextEx(*(element.font), element.text, element.LeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+        i += 1;
     };
 }
 

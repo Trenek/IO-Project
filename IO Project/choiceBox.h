@@ -12,6 +12,13 @@ struct choiceBoxPositionParameters {
     int posY;
 };
 
+enum choiceBoxColumn {
+    MAIN,
+    NUM,
+    NAME,
+    DATE
+};
+
 struct choiceBox {
     char text[128];
     int currentLength;
@@ -21,10 +28,7 @@ struct choiceBox {
         struct choiceBoxPositionParameters init;
         struct {
             Vector2 LeftCorner;
-            Rectangle mainBoxRectangle[6];
-            Rectangle numBoxRectangle[6];
-            Rectangle nameBoxRectangle[6];
-            Rectangle dateBoxRectangle[6];
+            Rectangle rowRectangle[4][6];
         };
     };
 

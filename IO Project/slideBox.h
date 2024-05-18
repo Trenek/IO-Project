@@ -13,6 +13,12 @@ struct slideBoxPositionParameters {
     int width;
 };
 
+enum slideBoxRect {
+    SB_LEFT,
+    SB_MIDDLE,
+    SB_RIGHT
+};
+
 struct slideBox {
     int numberOfOptions;
     bool isActive;
@@ -21,9 +27,7 @@ struct slideBox {
     union {
         struct slideBoxPositionParameters init;
         struct {
-            Rectangle boxRectangle;
-            Rectangle boxLeftRectangle;
-            Rectangle boxRightRectangle;
+            Rectangle rect[3];
             Vector2 textPosition;
         };
     };
@@ -44,18 +48,15 @@ void InternalUpdateSlideBox(struct slideBox *element);
 
 inline void UpdateSlideBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        element->isActive = CheckCollisionPointRec(GetMousePosition(), element->boxRectangle);
-        if (CheckCollisionPointRec(GetMousePosition(), element->boxLeftRectangle)) {
+        element->isActive = CheckCollisionPointRec(GetMousePosition(), element->rect[SB_MIDDLE]);
+        if (CheckCollisionPointRec(GetMousePosition(), element->rect[SB_LEFT])) {
             element->isActive = true;
-            if (element->currentOption == 0) {
-                element->currentOption = element->numberOfOptions - 1;
-            }
-            else {
-                element->currentOption -= 1;
-            }
+
+            element->currentOption = (element->currentOption == 0 ? element->numberOfOptions : element->currentOption) - 1;
         }
-        else if (CheckCollisionPointRec(GetMousePosition(), element->boxRightRectangle)) {
+        else if (CheckCollisionPointRec(GetMousePosition(), element->rect[SB_RIGHT])) {
             element->isActive = true;
+
             element->currentOption += 1;
             element->currentOption %= element->numberOfOptions;
         }
