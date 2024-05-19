@@ -80,9 +80,9 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
     }
     else {
         if (player->character.direction != FRONT) {
-            player->character.direction = FRONT;
+           // player->character.direction = FRONT;
 
-            assemblePlayerTexture(info, &player->character);
+            //assemblePlayerTexture(info, &player->character);
         }
     }
 
