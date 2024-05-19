@@ -6,8 +6,6 @@
 struct itemBoxPositionParameters {
     int x;
     int y;
-    int incX;
-    int incY;
     int width;
     int height;
 };
@@ -24,7 +22,6 @@ struct itemBox {
     Color color;
     Color activeColor;
     Color borderColor;
-    int spaceing;
 };
 
 void CalculateItemBoxPosition(struct itemBox* element);

@@ -58,17 +58,17 @@
     <Filter Include="Pliki źródłowe\menu\slideBox">
       <UniqueIdentifier>{ba62d7d0-76c3-45e2-abfc-e5fbd1c92982}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\menu\itemBox">
-      <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\menu\itemBox\equipementBox">
-      <UniqueIdentifier>{9d06fa99-3430-4661-acd5-512e1bc5d9da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\state">
       <UniqueIdentifier>{dc908ce2-b141-4292-b36d-49f5f506bdca}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\state\play">
       <UniqueIdentifier>{d9a7c3d5-f111-42c9-a4b2-541cd4cb925e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\equipementBox">
+      <UniqueIdentifier>{9d06fa99-3430-4661-acd5-512e1bc5d9da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\equipementBox\itemBox">
+      <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -166,10 +166,10 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="itemBox.c">
-      <Filter>Pliki źródłowe\menu\itemBox</Filter>
+      <Filter>Pliki źródłowe\menu\equipementBox\itemBox</Filter>
     </ClCompile>
     <ClCompile Include="equipementsBox.c">
-      <Filter>Pliki źródłowe\menu\itemBox\equipementBox</Filter>
+      <Filter>Pliki źródłowe\menu\equipementBox</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -222,10 +222,10 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="itemBox.h">
-      <Filter>Pliki źródłowe\menu\itemBox</Filter>
+      <Filter>Pliki źródłowe\menu\equipementBox\itemBox</Filter>
     </ClInclude>
     <ClInclude Include="equipementBox.h">
-      <Filter>Pliki źródłowe\menu\itemBox\equipementBox</Filter>
+      <Filter>Pliki źródłowe\menu\equipementBox</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
