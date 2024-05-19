@@ -56,7 +56,7 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     BeginTextureMode(render);
     ClearBackground(BLANK);
 
-    if (character->direction == 2) {
+    if (character->direction == BACK) {
         DrawBodyPart(info, character, LEFT_ARM);
         DrawBodyPart(info, character, RIGHT_ARM);
         DrawBodyPart(info, character, LEFT_HAND);
