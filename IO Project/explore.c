@@ -15,6 +15,8 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
+
+void hitbox(struct playInfo *info);
 void explore(enum playState *playState, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
@@ -168,6 +170,8 @@ void explore(enum playState *playState, struct playInfo *info) {
             EnableCursor();
             *playState = PAUSE;
         }
+
+        hitbox(info);
     }
 
     free(render);

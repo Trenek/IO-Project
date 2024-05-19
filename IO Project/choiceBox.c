@@ -6,10 +6,7 @@
 
 void CalculateChoiceBoxPosition(struct choiceBox* element) {
     struct choiceBoxPositionParameters init = element->init;
-    for (unsigned int i = 0; i < 128; i++) {
-        _itoa(i+1, element->nums[i], 10);
-        //printf("%s\n", element.saveNames[i]);
-    }
+
     element->LeftCorner[MAIN] = (Vector2){
          .x = init.x - 322.5f,
          .y = init.y  + 70.0f
@@ -65,7 +62,6 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
 
 void DrawChoiceBox(struct choiceBox element) {
     FilePathList pathList = LoadDirectoryFiles("../IO Project/saves");       // Load directory filepaths
-    for (int j = 0; j < 128; ++j) element.nums[j] = "0";
     for (unsigned int i = 0; i < pathList.count; i++) {
         if (pathList.paths[i] == NULL) {
             break;
@@ -76,10 +72,10 @@ void DrawChoiceBox(struct choiceBox element) {
     unsigned int i = 0;
     int j = 0;
 
-
     while (i < 6) {
         DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
         DrawRectangleLinesEx(element.rowRectangle[MAIN][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
+
 
         j = 1;
         while (j < 4) {
@@ -90,6 +86,8 @@ void DrawChoiceBox(struct choiceBox element) {
         if (i < pathList.count) DrawTextEx(*(element.font), element.saveNames[i], element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
         else DrawTextEx(*(element.font), element.text, element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
         element.LeftCorner[NAME].y += 50;
+
+        DrawTextEx(*element.font, TextFormat("%i.", i + 1), (Vector2) { .x = element.rowRectangle[NUM][i].x + 5, .y = element.rowRectangle[NUM][i].y }, (float)element.fontSize, (float)element.spaceing, BLACK);
 
         i += 1;
     };

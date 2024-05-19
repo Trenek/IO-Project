@@ -42,6 +42,8 @@ static void loadBodyPart(int num, struct playInfo *info) {
 
         i += 1;
     }
+
+    UnloadDirectoryFiles(files);
 }
 
 static void unloadBodyPart(int num, struct playInfo *info) {
@@ -61,6 +63,7 @@ static void unloadBodyPart(int num, struct playInfo *info) {
         i += 1;
     }
 
+    UnloadDirectoryFiles(files);
     free(info->bodyParts[num]);
 }
 

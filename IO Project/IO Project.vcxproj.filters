@@ -70,6 +70,9 @@
     <Filter Include="Pliki źródłowe\menu\choiceBox">
       <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\objects\npc">
+      <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -170,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="equipementsBox.c">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
+    </ClCompile>
+    <ClCompile Include="npc.c">
+      <Filter>Pliki źródłowe\objects\npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

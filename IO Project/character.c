@@ -54,28 +54,28 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     int i = 0;
 
     BeginTextureMode(render);
-    ClearBackground(BLANK);
+        ClearBackground(BLANK);
 
-    if (character->direction == BACK) {
-        DrawBodyPart(info, character, LEFT_ARM);
-        DrawBodyPart(info, character, RIGHT_ARM);
-        DrawBodyPart(info, character, LEFT_HAND);
-        DrawBodyPart(info, character, RIGHT_HAND);
-        while (i < 10) {
-            if (i != LEFT_ARM && i != RIGHT_ARM && i != LEFT_HAND && i != RIGHT_HAND)
-                DrawBodyPart(info, character, i);
+        if (character->direction == BACK) {
+            DrawBodyPart(info, character, LEFT_ARM);
+            DrawBodyPart(info, character, RIGHT_ARM);
+            DrawBodyPart(info, character, LEFT_HAND);
+            DrawBodyPart(info, character, RIGHT_HAND);
+            while (i < 10) {
+                if (i != LEFT_ARM && i != RIGHT_ARM && i != LEFT_HAND && i != RIGHT_HAND)
+                    DrawBodyPart(info, character, i);
+                i += 1;
+            }
+        }
+        else while (i < 10) {
+            DrawBodyPart(info, character, i);
             i += 1;
         }
-    }
-    else while (i < 10) {
-        DrawBodyPart(info, character, i);
-        i += 1;
-    }
     EndTextureMode();
 
     BeginTextureMode(render2);
-    ClearBackground(BLANK);
-    DrawTexture(render.texture, 0, 0, WHITE);
+        ClearBackground(BLANK);
+        DrawTexture(render.texture, 0, 0, WHITE);
     EndTextureMode();
 
     UnloadTexture(*character->object.texture);

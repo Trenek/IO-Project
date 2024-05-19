@@ -157,6 +157,7 @@
     <ClCompile Include="fight.c" />
     <ClCompile Include="inputBox.c" />
     <ClCompile Include="itemBox.c" />
+    <ClCompile Include="npc.c" />
     <ClCompile Include="slideBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />

@@ -22,7 +22,6 @@ enum choiceBoxColumn {
 struct choiceBox {
     char text[128];
     char* saveNames[128];
-    char* nums[128];
     int currentLength;
     bool isActive;
 
