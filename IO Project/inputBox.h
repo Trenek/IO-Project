@@ -15,8 +15,14 @@ struct inputBoxPositionParameters {
 
 struct inputBox {
     char text[128];
+    int length[128];
+
     int currentLength;
+    int lengthArrayLength;
+
     bool isActive;
+
+    int textOffset;
 
     union {
         struct inputBoxPositionParameters init;
