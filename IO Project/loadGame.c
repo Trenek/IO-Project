@@ -79,7 +79,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
             .posY = 1
         },
         .font = &info->fonts[0],
-        .fontSize = 100,
+        .fontSize = 45,
         .fontColor = BLUE,
         .color = GREEN,
         .borderColor = RED,

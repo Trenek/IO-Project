@@ -21,13 +21,15 @@ enum choiceBoxColumn {
 
 struct choiceBox {
     char text[128];
+    char* saveNames[128];
+    char* nums[128];
     int currentLength;
     bool isActive;
 
     union {
         struct choiceBoxPositionParameters init;
         struct {
-            Vector2 LeftCorner;
+            Vector2 LeftCorner[4];
             Rectangle rowRectangle[4][6];
         };
     };
