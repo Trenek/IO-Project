@@ -21,7 +21,8 @@ struct slideBox {
     union {
         struct slideBoxPositionParameters init;
         struct {
-            Rectangle rect;
+            Rectangle rect[3];
+            float incY;
         };
     };
 
@@ -32,7 +33,7 @@ struct slideBox {
     Color borderActiveColor;
     Color borderColor;
     int spaceing;
-    char * const options[];
+    const char *options[];
 };
 
 void CalculateSlideBoxPosition(struct slideBox *element);
@@ -41,7 +42,7 @@ void InternalUpdateSlideBox(struct slideBox *element);
 
 inline void UpdateSlideBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-        element->isActive = CheckCollisionPointRec(GetMousePosition(), element->rect);
+        element->isActive = CheckCollisionPointRec(GetMousePosition(), element->rect[0]);
     }
 
     if (element->isActive) InternalUpdateSlideBox(element);

@@ -20,7 +20,7 @@ int main(void) {
     do {
         state = MENU;
 
-        loadSettings();
+        loadSettings(&info);
         initializeState(&info);
 
         while (!WindowShouldClose() && (state != EXIT) && (state != RELOAD)) {

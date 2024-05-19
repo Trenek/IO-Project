@@ -100,8 +100,29 @@ void explore(enum playState *playState, struct playInfo *info) {
     CalculateButtonPosition(&map);
     CalculateButtonPosition(&pause);
 
+    int i = 0;
+
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
+        i += 1;
+
+        if ((i / 10) % 4 == 0) {
+            info->player.character.direction = 0;
+            assemblePlayerTexture(info, &info->player.character);
+        }
+        else if ((i / 10) % 4 == 1) {
+            info->player.character.direction = 1;
+            assemblePlayerTexture(info, &info->player.character);
+        }
+        else if ((i / 10) % 4 == 2) {
+            info->player.character.direction = 2;
+            assemblePlayerTexture(info, &info->player.character);
+        }
+        else if ((i / 10) % 4 == 3) {
+            info->player.character.direction = 3;
+            assemblePlayerTexture(info, &info->player.character);
+        }
+
         UpdateMusicStream(info->music[0]);
         movePlayer(info, &info->player, &info->camera);
 

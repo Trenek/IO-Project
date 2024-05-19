@@ -1,1 +1,1 @@
-void loadSettings(void);
+void loadSettings(struct menuInfo *info);

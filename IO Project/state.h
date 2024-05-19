@@ -17,9 +17,17 @@ enum state {
 struct menuInfo {
     Font *fonts;
     int fontsQuantity;
+
     Music *music;
     int musicQuantity;
+
     char saveName[125];
+
+    int framesPerSecond;
+    int textureQuality;
+    int windowWidth;
+    int windowHeight;
+    int fullScreenMode;
 };
 
 void initializeState(struct menuInfo *info);
