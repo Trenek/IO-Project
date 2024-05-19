@@ -56,6 +56,28 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     BeginTextureMode(render);
         ClearBackground(BLANK);
 
+        DrawBodyPart(info, character, LEFT_FOOT);
+        DrawBodyPart(info, character, RIGHT_FOOT);
+        DrawBodyPart(info, character, LEFT_LEG);
+        DrawBodyPart(info, character, RIGHT_LEG);
+
+        if (character->direction == BACK) {
+            DrawBodyPart(info, character, LEFT_HAND);
+            DrawBodyPart(info, character, RIGHT_HAND);
+            DrawBodyPart(info, character, LEFT_ARM);
+            DrawBodyPart(info, character, RIGHT_ARM);
+            DrawBodyPart(info, character, HEAD);
+            DrawBodyPart(info, character, TORSO);
+        }
+        else {
+            DrawBodyPart(info, character, TORSO);
+            DrawBodyPart(info, character, LEFT_ARM);
+            DrawBodyPart(info, character, RIGHT_ARM);
+            DrawBodyPart(info, character, LEFT_HAND);
+            DrawBodyPart(info, character, RIGHT_HAND);
+            DrawBodyPart(info, character, HEAD);
+        }
+
         while (i < 10) {
             DrawBodyPart(info, character, i);
             i += 1;

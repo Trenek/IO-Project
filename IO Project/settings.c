@@ -39,16 +39,16 @@ void settings(enum state *state, struct menuInfo *info) {
         .init = {
             .x = 150,
             .y = height,
-            .incX = 0,
-            .incY = 0,
+            .incX = INC_X,
+            .incY = INC_Y,
             .posX = 1,
             .posY = 1
         },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
-        .color = BLANK,
-        .hoverColor = BLANK,
+        .color = color2,
+        .hoverColor = color2,
         .spaceing = 0
     };
     struct button windowDimensions = {
@@ -56,16 +56,16 @@ void settings(enum state *state, struct menuInfo *info) {
         .init = {
             .x = 150,
             .y = height + spaceY,
-            .incX = 0,
-            .incY = 0,
+            .incX = INC_X,
+            .incY = INC_Y,
             .posX = 1,
             .posY = 1
         },
         .font = &info->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
-        .color = BLANK,
-        .hoverColor = BLANK,
+        .color = color2,
+        .hoverColor = color2,
         .spaceing = 0
     };
     struct button fullScreen = {
@@ -149,8 +149,8 @@ void settings(enum state *state, struct menuInfo *info) {
         .init = {
             .x = (GetScreenWidth() >> 1),
             .y = height,
-            .incX = 0,
-            .incY = 0,
+            .incX = INC_X,
+            .incY = INC_Y,
             .posX = 1,
             .posY = 1,
             .width = 150
@@ -175,8 +175,8 @@ void settings(enum state *state, struct menuInfo *info) {
         .init = {
             .x = (GetScreenWidth() >> 1),
             .y = height + spaceY,
-            .incX = 0,
-            .incY = 0,
+            .incX = INC_X,
+            .incY = INC_Y,
             .posX = 1,
             .posY = 1,
             .width = 150

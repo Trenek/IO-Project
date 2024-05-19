@@ -15,8 +15,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-
-void hitbox(struct playInfo *info);
+void detectFight(struct playInfo *info, enum playState *playState);
 void explore(enum playState *playState, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
@@ -93,23 +92,6 @@ void explore(enum playState *playState, struct playInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct button fight = {
-        .text = "Walcz",
-        .init = {
-            .x = GetScreenWidth() - (GetScreenWidth() >> 4),
-            .y = height + 1 * spaceY,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 2,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .hoverColor = color3,
-        .spaceing = 0
-    };
 
     struct Object2D **render = createRenderer(info);
 
@@ -117,7 +99,6 @@ void explore(enum playState *playState, struct playInfo *info) {
     CalculateButtonPosition(&equipment);
     CalculateButtonPosition(&map);
     CalculateButtonPosition(&pause);
-    CalculateButtonPosition(&fight);
 
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
@@ -149,7 +130,6 @@ void explore(enum playState *playState, struct playInfo *info) {
             DrawButton(equipment);
             DrawButton(map);
             DrawButton(pause);
-            DrawButton(fight);
         EndTextureMode();
 
         BeginDrawing();
@@ -161,17 +141,14 @@ void explore(enum playState *playState, struct playInfo *info) {
             else if (isMouseOver(map)) *playState = MAP;
             else if (isMouseOver(equipment)) *playState = EQUIPEMENT;
             else if (isMouseOver(pause)) *playState = PAUSE;
-            else if (isMouseOver(fight)) {
-                *playState = FIGHT;
-                info->enemy = info->npc[0];
-            }
+
         }
         else if (IsKeyPressed(KEY_P)) {
             EnableCursor();
             *playState = PAUSE;
         }
 
-        //hitbox(info);
+        detectFight(info, playState);
     }
 
     free(render);

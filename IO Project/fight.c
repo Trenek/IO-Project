@@ -44,6 +44,8 @@ void fight(enum playState *playState, struct playInfo *info) {
     player.direction = FRONT;
     assemblePlayerTexture(info, &player);
 
+    ShowCursor();
+
     struct Object2D *render[] = {
         &player.object,
         &enemy.object
@@ -91,4 +93,6 @@ void fight(enum playState *playState, struct playInfo *info) {
             *playState = PAUSE;
         }
     }
+
+    unloadCharacter(&enemy);
 }
