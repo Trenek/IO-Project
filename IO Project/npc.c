@@ -20,7 +20,7 @@ void hitbox(struct playInfo *info) {
 
 		distance = powf(playerPosition->x - npcPosition->x, 2.0) + powf(playerPosition->y - npcPosition->y, 2.0);
 
-		if (distance < powf(size, 2.0)) {
+		if (sqrtf(distance) < size) {
 			playerPosition->x = npcPosition->x + (size / sqrtf(distance)) * (playerPosition->x - npcPosition->x);
 			playerPosition->z = npcPosition->z + (size / sqrtf(distance)) * (playerPosition->z - npcPosition->z);
 		}

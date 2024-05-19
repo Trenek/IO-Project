@@ -171,7 +171,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             *playState = PAUSE;
         }
 
-        hitbox(info);
+        //hitbox(info);
     }
 
     free(render);
