@@ -5,30 +5,16 @@
 
 void CalculateChoiceBoxPosition(struct choiceBox* element) {
     struct choiceBoxPositionParameters init = element->init;
+    char *saveName;
 
     FilePathList pathList = LoadDirectoryFiles("../IO Project/saves");       // Load directory filepaths
-    int j = -1;
     for (int i = 0; i < 1; i++) {
         if (pathList.paths[i] == NULL) {
             break;
         }
 
-        char* saveName = strtok(pathList.paths[i], "/");
-        saveName = strtok(NULL, "/");
-        saveName = strtok(NULL, "\\");
-        saveName = strtok(NULL, "\\");
-        for (int k = 0; saveName[k] != 'm'; k++) {
-            ++j;
-            //printf("a");
-
-            printf(" %c", saveName[k]);
-
-            //element->saveNames[j] = saveName[k];
-            //if (saveName[k + 1] == '\b') {
-            //    ++j;
-            //    element->saveNames[j] = '\b';
-            //}
-        }
+        saveName = strstr(pathList.paths[i], "\\") + 1;
+        printf("%s\n", saveName);
     }
 
     element->LeftCorner = (Vector2){
