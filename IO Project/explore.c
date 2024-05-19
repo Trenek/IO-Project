@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include <raylib.h>
 #include <raymath.h>
 #include "ModUpdateCamera.h"
@@ -107,12 +109,7 @@ void explore(enum playState *playState, struct playInfo *info) {
         .spaceing = 0
     };
 
-    struct Object2D *render[] = {
-        &info->player.character.object,
-        &info->npc[0].object,
-        &info->npc[1].object,
-        &info->npc[2].object
-    };
+    struct Object2D **render = createRenderer(info);
 
     CalculateButtonPosition(&save);
     CalculateButtonPosition(&equipment);
@@ -143,7 +140,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             BeginMode3D(info->camera);
                 DrawGrid(100, 1);
 
-                RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), info->camera);
+                RenderTextures(render, info->npcQuantity + 1, info->camera);
             EndMode3D();
 
             DrawButton(save);
@@ -172,4 +169,6 @@ void explore(enum playState *playState, struct playInfo *info) {
             *playState = PAUSE;
         }
     }
+
+    free(render);
 }

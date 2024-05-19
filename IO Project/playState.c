@@ -10,7 +10,7 @@
 #include "object2D.h"
 #include "player.h"
 
-static const char *bodyPartsNames[] = {
+static const char * const bodyPartsNames[] = {
     [HEAD] = "head",
     [TORSO] = "torso",
     [LEFT_ARM] = "left arm",
@@ -117,17 +117,19 @@ static void unloadPlayer(struct playInfo *info) {
     unloadCharacter(&info->player.character);
 }
 
-static void createNPCs(struct playInfo *info) {
+static void createNPCs(FILE* file, struct playInfo *info) {
     int i = 0;
+    int id = 0;
+    float x = 0.0f;
+    float y = 0.0f;
 
-    info->npcQuantity = 3;
+    fscanf(file, "%i", &info->npcQuantity);
     info->npc = malloc(sizeof(struct character) * info->npcQuantity);
 
-    loadCharacter(&info->npc[0], "dane\\postacie\\0.txt", -4.0f, 0.0f);
-    loadCharacter(&info->npc[1], "dane\\postacie\\0.txt", 0.0f, 4.0f);
-    loadCharacter(&info->npc[2], "dane\\postacie\\0.txt", 0.0f, -4.0f);
-
     while (i < info->npcQuantity) {
+        fscanf(file, "%i %f %f", &id, &x, &y);
+
+        loadCharacter(&info->npc[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
         assemblePlayerTexture(info, &info->npc[i]);
 
         i += 1;
@@ -164,6 +166,7 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
             .fovy = 45
         }
     };
+    FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", info->saveName), "r");
 
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
@@ -172,8 +175,10 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 
     loadBodyParts(&result);
 
-    createNPCs(&result);
+    createNPCs(mapFile, &result);
     loadPlayer(&result, info->saveName);
+
+    fclose(mapFile);
 
     return result;
 }

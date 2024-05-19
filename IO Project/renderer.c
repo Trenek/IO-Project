@@ -2,47 +2,63 @@
 #include <raymath.h>
 #include <rlgl.h>
 
+#include <stdlib.h>
+
 #include "object2D.h"
 #include "renderer.h"
+#include "playState.h"
+
+struct Object2D **createRenderer(struct playInfo *info) {
+    struct Object2D **result = malloc(sizeof(struct Object2D *) * (info->npcQuantity + 1));
+    int i = 0;
+
+    result[0] = &info->player.character.object;
+
+    while (i < info->npcQuantity) {
+        result[i + 1] = &info->npc[i].object;
+
+        i += 1;
+    }
+
+    return result;
+}
 
 static void Draw3DBillboard(Camera camera, Texture2D texture, Vector3 position, Vector2 size, Color tint) {
-    float width = size.x / 2;
-    float height = size.y / 2;
-
-    rlPushMatrix();
+    const float width = size.x / 2;
+    const float height = size.y / 2;
 
     // get the camera view matrix
     camera.position.y = height + position.y;
     camera.target.y = height + position.y;
     Matrix mat = MatrixLookAt(camera.position, camera.target, camera.up);
 
-    // apply just the rotation
-    rlMultMatrixf(MatrixToFloat(MatrixInvert(mat)));
+    rlPushMatrix();
+        rlMultMatrixf(MatrixToFloat(MatrixInvert(mat)));
 
-    // translate backwards in the inverse rotated matrix to put the item where it goes in world space
-    position = Vector3Transform(position, mat);
-    rlTranslatef(position.x, position.y, position.z);
+        // translate backwards in the inverse rotated matrix to put the item where it goes in world space
+        position = Vector3Transform(position, mat);
+        rlTranslatef(position.x, position.y, position.z);
 
-    rlCheckRenderBatchLimit(6);
-    rlSetTexture(texture.id);
-    rlBegin(RL_QUADS);
-    rlColor4ub(tint.r, tint.g, tint.b, tint.a);
-    // Front Face
-    rlNormal3f(0.0f, 0.0f, 1.0f); // Normal Pointing Towards Viewer
+        rlCheckRenderBatchLimit(6);
+        rlSetTexture(texture.id);
+            rlBegin(RL_QUADS);
+                rlColor4ub(tint.r, tint.g, tint.b, tint.a);
+                // Front Face
+                rlNormal3f(0.0f, 0.0f, 1.0f); // Normal Pointing Towards Viewer
 
-    rlTexCoord2f(0.0f, 1.0f); // Bottom Left Of The Texture and Quad
-    rlVertex3f(-width, 0, 0);
+                rlTexCoord2f(0.0f, 1.0f); // Bottom Left Of The Texture and Quad
+                rlVertex3f(-width, 0, 0);
 
-    rlTexCoord2f(1.0f, 1.0f); // Bottom Right Of The Texture and Quad
-    rlVertex3f(+width, 0, 0);
+                rlTexCoord2f(1.0f, 1.0f); // Bottom Right Of The Texture and Quad
+                rlVertex3f(+width, 0, 0);
 
-    rlTexCoord2f(1.0f, 0.0f); // Top Right Of The Texture and Quad
-    rlVertex3f(+width, 2 * height, 0);
+                rlTexCoord2f(1.0f, 0.0f); // Top Right Of The Texture and Quad
+                rlVertex3f(+width, 2 * height, 0);
 
-    rlTexCoord2f(0.0f, 0.0f); // Top Left Of The Texture and Quad
-    rlVertex3f(-width, 2 * height, 0);
-    rlEnd();
-    rlSetTexture(0);
+                rlTexCoord2f(0.0f, 0.0f); // Top Left Of The Texture and Quad
+                rlVertex3f(-width, 2 * height, 0);
+            rlEnd();
+        rlSetTexture(0);
     rlPopMatrix();
 }
 

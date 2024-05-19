@@ -188,7 +188,7 @@ mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
         [liczba obiektów nieprzenikliwych]:
             [id_tekstury] [szerokość] [wysokość] [coordynatX] [coordynatY]
         [liczba przeciwników] 
-            [id_przeciwnika] [szerokość] [wysokość] [coordynatX] [coordynatY]
+            [id_przeciwnika] [wysokość] [coordynatX] [coordynatY]
         [liczba obiektów interaktywnych]
             [id_tekstury] [typ interakcji] [szerokość] [wysokość] [coordynatX] [coordynatY] [* dodatkowa informacja]
 

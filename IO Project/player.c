@@ -41,7 +41,6 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
 
             assemblePlayerTexture(info, &player->character);
         }
-        //player->object->state = 1;
     }
     else if (IsKeyDown(KEY_S)) {
         veH = Vector2Rotate(ve, M_PIF);
@@ -54,7 +53,6 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
 
             assemblePlayerTexture(info, &player->character);
         }
-        //player->object->state = 3;
     }
     else if (IsKeyDown(KEY_D)) {
         veH = Vector2Rotate(ve, M_PIF / 2);
@@ -67,7 +65,6 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
 
             assemblePlayerTexture(info, &player->character);
         }
-        //player->object->state = 2;
     }
     else if (IsKeyDown(KEY_A)) {
         veH = Vector2Rotate(ve, (3 * M_PIF) / 2);
@@ -80,10 +77,13 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
 
             assemblePlayerTexture(info, &player->character);
         }
-        //player->object->state = 4;
     }
     else {
-        //player->object->state = 0;
+        if (player->character.direction != FRONT) {
+            player->character.direction = FRONT;
+
+            assemblePlayerTexture(info, &player->character);
+        }
     }
 
     if (position->y == 0.0f)
