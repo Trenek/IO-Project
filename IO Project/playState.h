@@ -36,10 +36,10 @@ enum BodyPartTexture {
     TORSO,
     LEFT_ARM,
     RIGHT_ARM,
-    LEFT_HAND,
-    RIGHT_HAND,
     LEFT_LEG,
     RIGHT_LEG,
+    LEFT_HAND,
+    RIGHT_HAND,
     LEFT_FOOT,
     RIGHT_FOOT
 };

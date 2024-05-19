@@ -34,9 +34,6 @@
     <Filter Include="Pliki źródłowe\menu\inputBox">
       <UniqueIdentifier>{fe5dfbd7-6480-429e-8bc8-879c743cf454}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\menu\choiceBox">
-      <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\objects">
       <UniqueIdentifier>{ff3bef83-ecae-413f-9085-c7c960712b50}</UniqueIdentifier>
     </Filter>
@@ -69,6 +66,9 @@
     </Filter>
     <Filter Include="Pliki źródłowe\menu\equipementBox\itemBox">
       <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\choiceBox">
+      <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

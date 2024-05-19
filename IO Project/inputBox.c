@@ -1,10 +1,14 @@
 #include <string.h>
+#include <math.h>
+#include <stdio.h>
 
 #include "inputBox.h"
 
 #define MAX_INPUT_CHARS 120
 #define BLINK_INTERVAL 25
 #define BACKSPACE 20
+
+#define INIT(y, x) (y) = 0; if ((y) == 0) (y) = (x)
 
 void CalculateInputBoxPosition(struct inputBox *element) {
     Vector2 size = MeasureTextEx(*(element->font), element->text, (float)element->fontSize, (float)element->spaceing);
@@ -33,6 +37,7 @@ void CalculateInputBoxPosition(struct inputBox *element) {
 
 void DrawInputBox(struct inputBox *element) {
     static int framesCounter = 0;
+    static int INIT(blinkInterval, (int)floorf(BLINK_INTERVAL / (60.0f * GetFrameTime())));
 
     float width = 0;
 
@@ -41,7 +46,8 @@ void DrawInputBox(struct inputBox *element) {
     DrawTextEx(*(element->font), element->text + element->textOffset, element->textLeftCorner, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 
     if (element->isActive) {
-        if (((framesCounter / BLINK_INTERVAL) % 2) == 0) {
+        printf("%f\n", 1 / GetFrameTime());
+        if (((framesCounter / blinkInterval) % 2) == 0) {
             width = MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x;
 
             DrawTextEx(*element->font, "_", (Vector2) { element->textLeftCorner.x + width, element->textLeftCorner.y }, (float)element->fontSize, (float)element->spaceing, element->fontColor);
@@ -85,13 +91,13 @@ void InternalUpdateInputBox(struct inputBox *element) {
                 element->currentLength -= element->length[element->lengthArrayLength - 1];
                 element->lengthArrayLength -= 1;
             }
-        }
 
-        element->text[element->currentLength] = '\0';
+            element->text[element->currentLength] = '\0';
 
-        element->textOffset = 0;
-        while (MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x + 2 * incX > element->boxRectangle.width) {
-            element->textOffset += 1;
+            element->textOffset = 0;
+            while (MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x + 2 * incX > element->boxRectangle.width) {
+                element->textOffset += 1;
+            }
         }
     }
 
