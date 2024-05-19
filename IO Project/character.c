@@ -40,6 +40,14 @@ void unloadCharacter(struct character *character) {
     free(character->object.texture);
 }
 
+inline void DrawBodyPart(struct playInfo *info, struct character *character, int i) {
+    DrawTexture(
+        info->bodyParts[i][character->bodyPart[i]][character->direction],
+        info->bodyPosition[character->direction][i][0],
+        info->bodyPosition[character->direction][i][1],
+        WHITE);
+}
+
 void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     RenderTexture2D render = LoadRenderTexture(info->width, info->height);
     RenderTexture2D render2 = LoadRenderTexture(info->width, info->height);
@@ -48,12 +56,19 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     BeginTextureMode(render);
     ClearBackground(BLANK);
 
-    while (i < 10) {
-        DrawTexture(
-            info->bodyParts[i][character->bodyPart[i]][character->direction],
-            info->bodyPosition[character->direction][i][0],
-            info->bodyPosition[character->direction][i][1],
-            WHITE);
+    if (character->direction == 2) {
+        DrawBodyPart(info, character, LEFT_ARM);
+        DrawBodyPart(info, character, RIGHT_ARM);
+        DrawBodyPart(info, character, LEFT_HAND);
+        DrawBodyPart(info, character, RIGHT_HAND);
+        while (i < 10) {
+            if (i != LEFT_ARM && i != RIGHT_ARM && i != LEFT_HAND && i != RIGHT_HAND)
+                DrawBodyPart(info, character, i);
+            i += 1;
+        }
+    }
+    else while (i < 10) {
+        DrawBodyPart(info, character, i);
         i += 1;
     }
     EndTextureMode();
