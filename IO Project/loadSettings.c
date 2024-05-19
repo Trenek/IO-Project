@@ -4,6 +4,7 @@
 //#define FULLSCREEN
 
 void loadSettings(void) {
+    //SetTraceLogLevel(LOG_ERROR); // For final version
     SetConfigFlags(
 //      FLAG_WINDOW_UNDECORATED |
         FLAG_MSAA_4X_HINT | 

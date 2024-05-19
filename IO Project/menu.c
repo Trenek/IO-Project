@@ -4,8 +4,6 @@
 
 #include "menuElements.h"
 
-
-
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
