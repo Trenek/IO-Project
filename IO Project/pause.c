@@ -49,11 +49,28 @@ void pause(enum playState *state, struct playInfo *info) {
         .hoverColor = color2,
         .spaceing = 0
     };
+    struct button achivements = {
+        .text = "Osiągnięcia",
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = height + space,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = BLANK,
+        .hoverColor = color2,
+        .spaceing = 0
+    };
     struct button menu = {
         .text = "Wyjdź do Menu",
         .init = {
             .x = GetScreenWidth() >> 1,
-            .y = height + space,
+            .y = height + 2 * space,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -70,7 +87,7 @@ void pause(enum playState *state, struct playInfo *info) {
         .text = "Wyjdź do Pulpitu",
         .init = {
             .x = GetScreenWidth() >> 1,
-            .y = height + 2 * space,
+            .y = height + 3 * space,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -86,6 +103,7 @@ void pause(enum playState *state, struct playInfo *info) {
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&resume);
+    CalculateButtonPosition(&achivements);
     CalculateButtonPosition(&menu);
     CalculateButtonPosition(&exit);
 
@@ -99,6 +117,7 @@ void pause(enum playState *state, struct playInfo *info) {
 
             DrawButton(title);
             DrawButton(resume);
+            DrawButton(achivements);
             DrawButton(menu);
             DrawButton(exit);
         EndDrawing();
@@ -107,6 +126,7 @@ void pause(enum playState *state, struct playInfo *info) {
             if (isMouseOver(resume)) *state = info->resumeState;
             else if (isMouseOver(menu)) *state = RETURN;
             else if (isMouseOver(exit)) *state = DESKTOP;
+            else if (isMouseOver(achivements)) *state = ACHIEVEMENTS;
         }
         else if (IsKeyPressed(KEY_P)) {
             *state = info->resumeState;

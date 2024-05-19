@@ -99,9 +99,6 @@
     <ClCompile Include="settings.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="achievements.c">
-      <Filter>Pliki źródłowe\state</Filter>
-    </ClCompile>
     <ClCompile Include="equipement.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
@@ -176,6 +173,9 @@
     </ClCompile>
     <ClCompile Include="npc.c">
       <Filter>Pliki źródłowe\objects\npc</Filter>
+    </ClCompile>
+    <ClCompile Include="achievements.c">
+      <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
