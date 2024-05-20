@@ -141,6 +141,11 @@ void explore(enum playState *playState, struct playInfo *info) {
 
     int i = 0;
 
+    if (info->shouldDestroy == 1) {
+        unloadCharacter(&info->chosen);
+        info->shouldDestroy = 0;
+    }
+
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
         i += 1;

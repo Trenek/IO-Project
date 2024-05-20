@@ -16,7 +16,7 @@ void shop(enum playState* state, struct playInfo* info) {
     Color color2 = { .r = 0, .g = 0, .b = 0, .a = 60 };
 
     struct button title = {
-        .text = "Ekwipunek",
+        .text = "Sklep",
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 50,
@@ -116,7 +116,7 @@ void shop(enum playState* state, struct playInfo* info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(goBack)) *state = info->resumeState;
+            if (isMouseOver(goBack)) *state = DIALOG;
             else if (isMouseOver(equip)) {
                 Equip(&equipement);
             }

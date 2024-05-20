@@ -87,12 +87,10 @@ void fight(enum playState *playState, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(back)) *playState = EXPLORE;
+            if (isMouseOver(back)) *playState = DIALOG;
         }
         else if (IsKeyPressed(KEY_P)) {
             *playState = PAUSE;
         }
     }
-
-    unloadCharacter(&chosen);
 }

@@ -67,6 +67,7 @@ struct playInfo {
     int shopsQuantity;
 
     struct character chosen;
+    int shouldDestroy;
 
     int dialog;
 

@@ -22,15 +22,17 @@ void detectFight(struct playInfo *info, enum playState *state) {
 
 		if (sqrtf(distance) < size) {
 			info->chosen = info->enemies[i];
+			info->dialog = info->enemies[i].dialog;
 
 			info->enemyQuantity -= 1;
 			while (i < info->enemyQuantity) {
 				info->enemies[i] = info->enemies[i + 1];
+				info->shouldDestroy = 1;
 
 				i += 1;
 			}
 
-			*state = FIGHT;
+			*state = DIALOG;
 		}
 
 		i += 1;

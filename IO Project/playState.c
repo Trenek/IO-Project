@@ -204,7 +204,7 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
-  
+
     setBodyPosition(&result);
 
     loadBodyParts(&result);

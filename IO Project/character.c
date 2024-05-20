@@ -35,9 +35,11 @@ void loadCharacter(struct character *character, const char *characterSave, float
 }
 
 void unloadCharacter(struct character *character) {
-    UnloadTexture(*character->object.texture);
+    if (character->object.texture != NULL) {
+        UnloadTexture(*character->object.texture);
 
-    free(character->object.texture);
+        free(character->object.texture);
+    }
 }
 
 inline void DrawBodyPart(struct playInfo *info, struct character *character, int i) {
