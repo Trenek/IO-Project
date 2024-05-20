@@ -44,6 +44,6 @@ struct choiceBox {
 };
 
 void CalculateChoiceBoxPosition(struct choiceBox* element);
-void DrawChoiceBox(struct choiceBox element);
+unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked);
 
 #endif

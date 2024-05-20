@@ -60,7 +60,7 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
 
 }
 
-void DrawChoiceBox(struct choiceBox element) {
+unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked) {
     FilePathList pathList = LoadDirectoryFiles("../IO Project/saves");       // Load directory filepaths
     for (unsigned int i = 0; i < pathList.count; i++) {
         if (pathList.paths[i] == NULL) {
@@ -73,7 +73,12 @@ void DrawChoiceBox(struct choiceBox element) {
     int j = 0;
 
     while (i < 6) {
-        DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
+        if ((CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) || clicked == i) {
+            DrawRectangleRec(element.rowRectangle[MAIN][i], RED);
+            clicked = i;
+        }
+        else DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
+
         DrawRectangleLinesEx(element.rowRectangle[MAIN][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
 
 
@@ -83,14 +88,20 @@ void DrawChoiceBox(struct choiceBox element) {
             DrawRectangleLinesEx(element.rowRectangle[j][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
             j += 1;
         }
-        if (i < pathList.count) DrawTextEx(*(element.font), element.saveNames[i], element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
+        if (i < pathList.count) {
+            DrawTextEx(*(element.font), element.saveNames[i], element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
+            DrawTextEx(*element.font, TextFormat("%i.", i + 1), (Vector2) { .x = element.rowRectangle[NUM][i].x + 5, .y = element.rowRectangle[NUM][i].y }, (float)element.fontSize, (float)element.spaceing, BLACK);
+        }
+
         else DrawTextEx(*(element.font), element.text, element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
         element.LeftCorner[NAME].y += 50;
 
-        DrawTextEx(*element.font, TextFormat("%i.", i + 1), (Vector2) { .x = element.rowRectangle[NUM][i].x + 5, .y = element.rowRectangle[NUM][i].y }, (float)element.fontSize, (float)element.spaceing, BLACK);
 
         i += 1;
     };
+
+    return clicked;
+
 }
 
 
