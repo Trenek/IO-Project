@@ -37,7 +37,6 @@ void tutorial(enum state* state, struct menuInfo* info) {
     };
 
     struct tutorialSlide slide = {
-    .text = "Test",
     .init = {
         .x = GetScreenWidth() >> 1,
         .y = height + 4 * spaceY,
@@ -64,7 +63,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
         ClearBackground(color);
 
         DrawButton(goBack);
-        DrawSlide(slide);
+        DrawSlide(slide, 0, "Title", "Description");
 
         EndDrawing();
 
