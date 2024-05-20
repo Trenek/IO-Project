@@ -10,12 +10,12 @@
 
 #include "renderer.h"
 #include "player.h"
+#include "npc.h"
 
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void detectFight(struct playInfo *info, enum playState *playState);
 void explore(enum playState *playState, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
@@ -92,13 +92,52 @@ void explore(enum playState *playState, struct playInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+    struct button missions = {
+        .text = "Misje",
+        .init = {
+            .x = GetScreenWidth() - (GetScreenWidth() >> 4),
+            .y = height + spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 2,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+    struct button shop = {
+        .text = "Kliknij aby przejść do sklepu",
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = GetScreenHeight() - (GetScreenHeight() >> 3),
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color2,
+        .spaceing = 0
+    };
+
 
     struct Object2D **render = createRenderer(info);
+
+    int shopInteraction = 0;
 
     CalculateButtonPosition(&save);
     CalculateButtonPosition(&equipment);
     CalculateButtonPosition(&map);
     CalculateButtonPosition(&pause);
+    CalculateButtonPosition(&missions);
+    CalculateButtonPosition(&shop);
 
     int i = 0;
 
@@ -144,13 +183,15 @@ void explore(enum playState *playState, struct playInfo *info) {
             BeginMode3D(info->camera);
                 DrawGrid(100, 1);
 
-                RenderTextures(render, info->npcQuantity + 1, info->camera);
+                RenderTextures(render, info->enemyQuantity + info->shopsQuantity + 1, info->camera);
             EndMode3D();
 
             DrawButton(save);
             DrawButton(equipment);
             DrawButton(map);
             DrawButton(pause);
+            DrawButton(missions);
+            if (shopInteraction) DrawButton(shop);
         EndTextureMode();
 
         BeginDrawing();
@@ -162,6 +203,12 @@ void explore(enum playState *playState, struct playInfo *info) {
             else if (isMouseOver(map)) *playState = MAP;
             else if (isMouseOver(equipment)) *playState = EQUIPEMENT;
             else if (isMouseOver(pause)) *playState = PAUSE;
+            else if (isMouseOver(missions)) *playState = MISSIONS;
+            else if (shopInteraction) if (isMouseOver(shop)) {
+                *playState = DIALOG;
+                info->resumeState = SHOP;
+                findShop(info);
+            }
 
         }
         else if (IsKeyPressed(KEY_P)) {
@@ -170,6 +217,8 @@ void explore(enum playState *playState, struct playInfo *info) {
         }
 
         detectFight(info, playState);
+        //hitbox(info);
+        hitboxShop(info, &shopInteraction);
     }
 
     free(render);

@@ -10,7 +10,9 @@ void play(enum state *state, struct menuInfo *info) {
         [EXPLORE] = explore,
         [EQUIPEMENT] = equipement,
         [PAUSE] = pause,
-        [FIGHT] = fight
+        [FIGHT] = fight,
+        [SHOP] = shop,
+        [DIALOG] = dialog
     };
 
     while (!WindowShouldClose() && (playState != RETURN) && (playState != DESKTOP)) {

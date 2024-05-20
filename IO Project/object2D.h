@@ -5,7 +5,7 @@
 
 struct Object2D {
     Vector3 position;
-    Texture2D* texture;
+    Texture2D *texture;
     Vector2 sizeV;
 };
 

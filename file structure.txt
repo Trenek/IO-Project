@@ -161,7 +161,16 @@ umiejętności.txt - plik zawierający informacje o umiejętnościach
 
 dialog.txt - plik zawierający pewien dialog
     Struktura pliku:
-        [id adresanta] [wypowiedź]
+        [id adresanta] [liczba odpowiedzi] [wypowiedź]
+            [następstwo odpowiedzi] [dodatkowe informacje] [wypowiedź]
+
+    [następstwo odpowiedzi]:
+        [0] - przejście do innego panelu
+        [1] - przejście do innego dialogu
+
+    [dodatkowe informacje]:
+        dla [0] - [id panelu] [id kolejnego dialogu]
+        dla [1] - [id kolejnej wypowiedzi]
 
 sklep.txt - plik opisujący przedmioty znajdujące się w sklepie
     Struktura pliku:

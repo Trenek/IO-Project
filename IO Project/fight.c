@@ -39,7 +39,7 @@ void fight(enum playState *playState, struct playInfo *info) {
     };
 
     struct character player = info->player.character;
-    struct character enemy = info->enemy;
+    struct character chosen = info->chosen;
 
     player.direction = FRONT;
     assemblePlayerTexture(info, &player);
@@ -48,7 +48,7 @@ void fight(enum playState *playState, struct playInfo *info) {
 
     struct Object2D *render[] = {
         &player.object,
-        &enemy.object
+        &chosen.object
     };
 
     Camera3D fightCamera = {
@@ -62,7 +62,7 @@ void fight(enum playState *playState, struct playInfo *info) {
     };
 
     player.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
-    enemy.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
+    chosen.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
 
     CalculateButtonPosition(&back);
     
@@ -94,5 +94,5 @@ void fight(enum playState *playState, struct playInfo *info) {
         }
     }
 
-    unloadCharacter(&enemy);
+    unloadCharacter(&chosen);
 }

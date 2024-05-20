@@ -22,7 +22,7 @@ void loadCharacter(struct character *character, const char *characterSave, float
 
     character->direction = 0;
 
-    fscanf(playerFile, "%s", character->name);
+    fscanf(playerFile, "%[^\n]", character->name);
     fscanf(playerFile, "%f %f", &object->sizeV.x, &object->sizeV.y);
 
     while (i < 10) {

@@ -233,5 +233,8 @@
     <ClInclude Include="equipementBox.h">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
     </ClInclude>
+    <ClInclude Include="npc.h">
+      <Filter>Pliki źródłowe\objects\npc</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

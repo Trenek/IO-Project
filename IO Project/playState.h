@@ -19,6 +19,7 @@ enum playState {
     DIALOG,
     SHOP,
     TRAINING,
+    MISSIONS,
 
     RETURN,
     DESKTOP
@@ -59,13 +60,17 @@ struct playInfo {
 
     struct player player;
 
-    struct character *npc;
-    int npcQuantity;
+    struct character *enemies;
+    int enemyQuantity;
 
-    struct character enemy;
+    struct character *shops;
+    int shopsQuantity;
+
+    struct character chosen;
+
+    int dialog;
 
     Texture2D (*bodyParts[10])[4];
-
     int height;
     int width;
     int bodyPosition[4][10][2];
@@ -78,5 +83,7 @@ void explore(enum playState *playState, struct playInfo *info);
 void equipement(enum playState* playState, struct playInfo* info);
 void pause(enum playState *state, struct playInfo *info);
 void fight(enum playState *playState, struct playInfo *info);
+void shop(enum playState *state, struct playInfo *info);
+void dialog(enum playState *playState, struct playInfo *info);
 
 #endif

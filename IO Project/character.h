@@ -14,6 +14,7 @@ struct character {
 	int exhaustion;
 	struct Object2D object;
 
+	int dialog;
 	int direction;
 	int bodyPart[10];
 };

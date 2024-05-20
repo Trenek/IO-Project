@@ -120,35 +120,66 @@ static void unloadPlayer(struct playInfo *info) {
     unloadCharacter(&info->player.character);
 }
 
-static void createNPCs(FILE* file, struct playInfo *info) {
+static void createEnemies(FILE* file, struct playInfo *info) {
     int i = 0;
     int id = 0;
     float x = 0.0f;
     float y = 0.0f;
 
-    fscanf(file, "%i", &info->npcQuantity);
-    info->npc = malloc(sizeof(struct character) * info->npcQuantity);
+    fscanf(file, "%i", &info->enemyQuantity);
+    info->enemies = malloc(sizeof(struct character) * info->enemyQuantity);
 
-    while (i < info->npcQuantity) {
-        fscanf(file, "%i %f %f", &id, &x, &y);
+    while (i < info->enemyQuantity) {
+        fscanf(file, "%i %i %f %f", &id, &info->enemies[i].dialog, &x, &y);
 
-        loadCharacter(&info->npc[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
-        assemblePlayerTexture(info, &info->npc[i]);
+        loadCharacter(&info->enemies[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
+        assemblePlayerTexture(info, &info->enemies[i]);
 
         i += 1;
     }
 }
 
-static void destroyNPCs(struct playInfo *info) {
+static void destroyEnemies(struct playInfo *info) {
     int i = 0;
 
-    while (i < info->npcQuantity) {
-        unloadCharacter(&info->npc[i]);
+    while (i < info->enemyQuantity) {
+        unloadCharacter(&info->enemies[i]);
 
         i += 1;
     }
 
-    free(info->npc);
+    free(info->enemies);
+}
+
+static void loadShops(FILE *file, struct playInfo *info) {
+    int i = 0;
+    int id = 0;
+    float x = 0.0f;
+    float y = 0.0f;
+
+    fscanf(file, "%i", &info->shopsQuantity);
+    info->shops = malloc(sizeof(struct character) * info->shopsQuantity);
+
+    while (i < info->shopsQuantity) {
+        fscanf(file, "%i %i %f %f", &id, &info->shops[i].dialog, &x, &y);
+
+        loadCharacter(&info->shops[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
+        assemblePlayerTexture(info, &info->shops[i]);
+
+        i += 1;
+    }
+}
+
+static void unloadShops(struct playInfo *info) {
+    int i = 0;
+
+    while (i < info->shopsQuantity) {
+        unloadCharacter(&info->shops[i]);
+
+        i += 1;
+    }
+
+    free(info->shops);
 }
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
@@ -178,7 +209,9 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 
     loadBodyParts(&result);
 
-    createNPCs(mapFile, &result);
+    createEnemies(mapFile, &result);
+    loadShops(mapFile, &result);
+
     loadPlayer(&result, info->saveName);
 
     fclose(mapFile);
@@ -190,7 +223,9 @@ void freePlayInfo(struct playInfo *info) {
     UnloadRenderTexture(*info->screenCamera);
 
     unloadPlayer(info);
-    destroyNPCs(info);
+
+    destroyEnemies(info);
+    unloadShops(info);
 
     unloadBodyParts(info);
 

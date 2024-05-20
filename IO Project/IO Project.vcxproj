@@ -191,6 +191,7 @@
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="ModUpdateCamera.h" />
+    <ClInclude Include="npc.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playState.h" />
     <ClInclude Include="object2D.h" />

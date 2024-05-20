@@ -9,15 +9,26 @@
 #include "playState.h"
 
 struct Object2D **createRenderer(struct playInfo *info) {
-    struct Object2D **result = malloc(sizeof(struct Object2D *) * (info->npcQuantity + 1));
+    struct Object2D **result = malloc(sizeof(struct Object2D *) * (info->enemyQuantity + info->shopsQuantity + 1));
     int i = 0;
+    int j = 1;
 
     result[0] = &info->player.character.object;
 
-    while (i < info->npcQuantity) {
-        result[i + 1] = &info->npc[i].object;
+    i = 0;
+    while (i < info->enemyQuantity) {
+        result[j] = &info->enemies[i].object;
 
         i += 1;
+        j += 1;
+    }
+
+    i = 0;
+    while (i < info->shopsQuantity) {
+        result[j] = &info->shops[i].object;
+
+        i += 1;
+        j += 1;
     }
 
     return result;
