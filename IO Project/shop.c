@@ -67,7 +67,7 @@ void shop(enum playState* state, struct playInfo* info) {
         .spaceing = 0
     };
     struct button goBack = {
-        .text = "Powrót",
+        .text = "PowrÃ³t",
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height + 2 * space,
@@ -91,6 +91,9 @@ void shop(enum playState* state, struct playInfo* info) {
         .width = size,
         .height = size,
         .itemBoxSize = 40,
+        .itemsID = info->player.equipment,
+        .armorPart = &info->player.character.armorPart,
+        .weapon = &info->player.character.weapon
     };
 
     CalculateButtonPosition(&title);
@@ -107,7 +110,7 @@ void shop(enum playState* state, struct playInfo* info) {
         }
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
-        DrawEquipementBox(equipement);
+        DrawEquipementBox(equipement, info);
         DrawButton(title);
         DrawButton(equip);
         DrawButton(destroy);

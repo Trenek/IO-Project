@@ -91,6 +91,9 @@ void equipement(enum playState* state, struct playInfo* info) {
         .width = size,
         .height = size,
         .itemBoxSize = 40,
+        .itemsID = info->player.equipment,
+        .armorPart = &info->player.character.armorPart,
+        .weapon = &info->player.character.weapon
     };
 
     CalculateButtonPosition(&title);
@@ -107,7 +110,7 @@ void equipement(enum playState* state, struct playInfo* info) {
         }
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
-        DrawEquipementBox(equipement);
+        DrawEquipementBox(equipement, info);
         DrawButton(title);
         DrawButton(equip);
         DrawButton(destroy);
@@ -119,6 +122,7 @@ void equipement(enum playState* state, struct playInfo* info) {
             if (isMouseOver(goBack)) *state = info->resumeState;
             else if (isMouseOver(equip)) {
                 Equip(&equipement);
+                assemblePlayerTexture(info, &info->player.character);
             }
             else if (isMouseOver(destroy)) {
                 Delete(&equipement);

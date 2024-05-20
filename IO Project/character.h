@@ -17,6 +17,8 @@ struct character {
 	int dialog;
 	int direction;
 	int bodyPart[10];
+	int armorPart[9];
+	int weapon;
 };
 
 void loadCharacter(struct character *character, const char *characterSave, float x, float z);

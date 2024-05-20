@@ -6,10 +6,29 @@
 
 #include "playState.h"
 
+static void loadBody(FILE *playerFile, struct character *character) {
+    int i = 0;
+
+    while (i < 10) {
+        fscanf(playerFile, "%i", &character->bodyPart[i]);
+
+        i += 1;
+    }
+}
+
+static void loadArmor(FILE *playerFile, struct character *character) {
+    int i = 0;
+
+    while (i < 9) {
+        fscanf(playerFile, "%i", &character->armorPart[i]);
+
+        i += 1;
+    }
+}
+
 void loadCharacter(struct character *character, const char *characterSave, float x, float z) {
     FILE *playerFile = fopen(characterSave, "r");
     struct Object2D *object = &character->object;
-    int i = 0;
 
     *object = (struct Object2D){
         .position = (Vector3) {
@@ -25,11 +44,10 @@ void loadCharacter(struct character *character, const char *characterSave, float
     fscanf(playerFile, "%[^\n]", character->name);
     fscanf(playerFile, "%f %f", &object->sizeV.x, &object->sizeV.y);
 
-    while (i < 10) {
-        fscanf(playerFile, "%i", &character->bodyPart[i]);
+    loadBody(playerFile, character);
+    loadArmor(playerFile, character);
 
-        i += 1;
-    }
+    fscanf(playerFile, "%i", &character->weapon);
 
     fclose(playerFile);
 }
@@ -50,40 +68,58 @@ inline void DrawBodyPart(struct playInfo *info, struct character *character, int
         WHITE);
 }
 
+void DrawBody(struct playInfo *info, struct character *character) {
+    DrawBodyPart(info, character, LEFT_FOOT);
+    DrawBodyPart(info, character, RIGHT_FOOT);
+    DrawBodyPart(info, character, LEFT_LEG);
+    DrawBodyPart(info, character, RIGHT_LEG);
+
+    if (character->direction == BACK) {
+        DrawBodyPart(info, character, LEFT_HAND);
+        DrawBodyPart(info, character, RIGHT_HAND);
+        DrawBodyPart(info, character, LEFT_ARM);
+        DrawBodyPart(info, character, RIGHT_ARM);
+        DrawBodyPart(info, character, HEAD);
+        DrawBodyPart(info, character, TORSO);
+    }
+    else {
+        DrawBodyPart(info, character, TORSO);
+        DrawBodyPart(info, character, LEFT_ARM);
+        DrawBodyPart(info, character, RIGHT_ARM);
+        DrawBodyPart(info, character, LEFT_HAND);
+        DrawBodyPart(info, character, RIGHT_HAND);
+        DrawBodyPart(info, character, HEAD);
+    }
+}
+
+inline void DrawArmorPart(struct playInfo *info, struct character *character, int i) {
+    if (character->armorPart[i] != -1)
+    DrawTexture(
+        info->armorPart[i][character->armorPart[i]][character->direction],
+        info->armorPosition[character->direction][i][0],
+        info->armorPosition[character->direction][i][1],
+        WHITE);
+}
+
+void DrawArmor(struct playInfo *info, struct character *character) {
+    int i = 0;
+
+    while (i < 9) {
+        DrawArmorPart(info, character, i);
+
+        i += 1;
+    }
+}
+
 void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     RenderTexture2D render = LoadRenderTexture(info->width, info->height);
     RenderTexture2D render2 = LoadRenderTexture(info->width, info->height);
-    int i = 0;
 
     BeginTextureMode(render);
         ClearBackground(BLANK);
 
-        DrawBodyPart(info, character, LEFT_FOOT);
-        DrawBodyPart(info, character, RIGHT_FOOT);
-        DrawBodyPart(info, character, LEFT_LEG);
-        DrawBodyPart(info, character, RIGHT_LEG);
-
-        if (character->direction == BACK) {
-            DrawBodyPart(info, character, LEFT_HAND);
-            DrawBodyPart(info, character, RIGHT_HAND);
-            DrawBodyPart(info, character, LEFT_ARM);
-            DrawBodyPart(info, character, RIGHT_ARM);
-            DrawBodyPart(info, character, HEAD);
-            DrawBodyPart(info, character, TORSO);
-        }
-        else {
-            DrawBodyPart(info, character, TORSO);
-            DrawBodyPart(info, character, LEFT_ARM);
-            DrawBodyPart(info, character, RIGHT_ARM);
-            DrawBodyPart(info, character, LEFT_HAND);
-            DrawBodyPart(info, character, RIGHT_HAND);
-            DrawBodyPart(info, character, HEAD);
-        }
-
-        while (i < 10) {
-            DrawBodyPart(info, character, i);
-            i += 1;
-        }
+        DrawBody(info, character);
+        DrawArmor(info, character);
     EndTextureMode();
 
     BeginTextureMode(render2);

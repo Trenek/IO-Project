@@ -8,4 +8,3 @@ Lewy But	70		590
 Prawy But	170		590
 Lewa Rękawica	20		410
 Prawa Rękawica	240		410
-Spodnie		70		490

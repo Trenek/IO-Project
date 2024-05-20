@@ -133,6 +133,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
 
     int i = 0;
 
+    EnableCursor();
     CalculateButtonPosition(&title);
 
     loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &data, &options, info, &screenCamera);

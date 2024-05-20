@@ -10,95 +10,19 @@
 #include "object2D.h"
 #include "player.h"
 
-static const char * const bodyPartsNames[] = {
-    [HEAD] = "head",
-    [TORSO] = "torso",
-    [LEFT_ARM] = "left arm",
-    [RIGHT_ARM] = "right arm",
-    [LEFT_HAND] = "left hand",
-    [RIGHT_HAND] = "right hand",
-    [LEFT_LEG] = "left leg",
-    [RIGHT_LEG] = "right leg",
-    [LEFT_FOOT] = "left foot",
-    [RIGHT_FOOT] = "right foot"
-};
+#include "load.h"
 
-static void loadBodyPart(int num, struct playInfo *info) {
-    const char * const directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
-    char buffor[128];
-    FilePathList files = LoadDirectoryFiles(directory);
-    unsigned int i = 0;
-    unsigned int j = 0;
-
-    info->bodyParts[num] = malloc(sizeof(Texture2D [4]) * files.capacity);
-    
-    while (i < files.capacity) {
-        j = 0;
-        while (j < 4) {
-            sprintf(buffor, "%s\\%i\\%i\\0.png", directory, i, j);
-            info->bodyParts[num][i][j] = LoadTexture(buffor);
-            j += 1;
-        }
-
-        i += 1;
-    }
-
-    UnloadDirectoryFiles(files);
-}
-
-static void unloadBodyPart(int num, struct playInfo *info) {
-    const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
-    FilePathList files = LoadDirectoryFiles(directory);
-    unsigned int i = 0;
-    unsigned int j = 0;
-
-    while (i < files.capacity) {
-        j = 0;
-        while (j < 4) {
-            UnloadTexture(info->bodyParts[num][i][j]);
-
-            j += 1;
-        }
-
-        i += 1;
-    }
-
-    UnloadDirectoryFiles(files);
-    free(info->bodyParts[num]);
-}
-
-
-static void loadBodyParts(struct playInfo *info) {
-    int i = 0;
-
-    while (i <= RIGHT_FOOT) {
-        loadBodyPart(i, info);
-
-        i += 1;
-    }
-}
-
-static void unloadBodyParts(struct playInfo *info) {
-    int i = 0;
-
-    while (i <= RIGHT_FOOT) {
-        unloadBodyPart(i, info);
-
-        i += 1;
-    }
-}
-
-static void setBodyPosition(struct playInfo *info) {
-    FILE *bodyType = fopen("dane\\bodyType.txt", "r");
+static void loadBodyPosition(struct playInfo *info) {
+    FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
     int i = 0;
     int j = 0;
 
-    fscanf(bodyType, "%i %i", &info->width, &info->height);
+    fscanf(bodyMeasurements, "%i %i", &info->width, &info->height);
 
     while (i < 4) {
         j = 0;
         while (j < 10) {
-            fscanf(bodyType, "%i %i", &info->bodyPosition[i][j][0], &info->bodyPosition[i][j][1]);
+            fscanf(bodyMeasurements, "%i %i", &info->bodyPosition[i][j][0], &info->bodyPosition[i][j][1]);
 
             j += 1;
         }
@@ -106,18 +30,26 @@ static void setBodyPosition(struct playInfo *info) {
         i += 1;
     }
 
-    fclose(bodyType);
+    fclose(bodyMeasurements);
 }
 
-static void loadPlayer(struct playInfo *info, const char* saveName) {
-    loadCharacter(&info->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName), 4.0f, 0.0f);
-    assemblePlayerTexture(info, &info->player.character);
+static void loadArmorPosition(struct playInfo *info) {
+    FILE *armorMeasurements = fopen("dane\\armorMeasurements.txt", "r");
+    int i = 0;
+    int j = 0;
 
-    info->player.speedY = 0;
-}
+    while (i < 4) {
+        j = 0;
+        while (j < 9) {
+            fscanf(armorMeasurements, "%i %i", &info->armorPosition[i][j][0], &info->armorPosition[i][j][1]);
 
-static void unloadPlayer(struct playInfo *info) {
-    unloadCharacter(&info->player.character);
+            j += 1;
+        }
+
+        i += 1;
+    }
+
+    fclose(armorMeasurements);
 }
 
 static void createEnemies(FILE* file, struct playInfo *info) {
@@ -182,6 +114,34 @@ static void unloadShops(struct playInfo *info) {
     free(info->shops);
 }
 
+static void loadItems(struct playInfo *info) {
+    FilePathList files = LoadDirectoryFiles("resources\\textures\\przedmioty");
+    int i = 0;
+
+    info->itemsQuantity = files.capacity;
+
+    info->items = malloc(sizeof(Texture2D) * info->itemsQuantity);
+    while (i < info->itemsQuantity) {
+        info->items[i] = LoadTexture(TextFormat("resources\\textures\\przedmioty\\%i.png", i));
+
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(files);
+}
+
+static void unloadItems(struct playInfo *info) {
+    int i = 0;
+
+    while (i < info->itemsQuantity) {
+        UnloadTexture(info->items[i]);
+
+        i += 1;
+    }
+
+    free(info->items);
+}
+
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
         .fonts = info->fonts,
@@ -205,12 +165,16 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
 
-    setBodyPosition(&result);
+    loadBodyPosition(&result);
+    loadArmorPosition(&result);
 
     loadBodyParts(&result);
+    loadArmor(&result);
 
     createEnemies(mapFile, &result);
     loadShops(mapFile, &result);
+
+    loadItems(&result);
 
     loadPlayer(&result, info->saveName);
 
@@ -224,9 +188,12 @@ void freePlayInfo(struct playInfo *info) {
 
     unloadPlayer(info);
 
+    unloadItems(info);
+
     destroyEnemies(info);
     unloadShops(info);
 
+    unloadArmor(info);
     unloadBodyParts(info);
 
     free(info->screenCamera);

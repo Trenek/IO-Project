@@ -138,7 +138,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
-        .hoverColor = color3,
+        .hoverColor = color2,
         .spaceing = 0
     };
     struct button resetSettings = { //ewentualnie domyślne ustawienia
@@ -173,7 +173,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
-        .hoverColor = color2,
+        .hoverColor = color3,
         .spaceing = 0
     };
 
@@ -384,7 +384,7 @@ void settings(enum state *state, struct menuInfo *info) {
             else if (isMouseOver(resetSettings)) {
                 loadActualSettings(info, &framesPerSecondSlide, &windowResolution, &textureQuality, &fullScreenState, &fullScreen);
             }
-            else if (isMouseOver(fullScreenButton)) {
+            else if (isMouseOver(fullScreenState)) {
                 if (fullScreen == 0) {
                     fullScreenState.text = "Włączony";
                     fullScreen = 1;
