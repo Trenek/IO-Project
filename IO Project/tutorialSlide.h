@@ -15,17 +15,22 @@ struct slidePositionParameters {
 };
 
 struct tutorialSlide {
-    const char* text;
+
+
     union {
         struct slidePositionParameters init;
         struct {
             Vector2 BackgroundLeftCorner;
             Vector2 TitleTextBoxLeftCorner;
             Vector2 DescriptionTextBoxLeftCorner;
+            Vector2 ImageLeftCorner;
+
 
             Rectangle backgroundBoxRectangle;
             Rectangle titleBoxRectangle;
             Rectangle descriptionBoxRectangle;
+
+            FilePathList imgsList;
 
         };
     };
@@ -39,7 +44,7 @@ struct tutorialSlide {
 };
 
 void CalculateSlidePosition(struct tutorialSlide* element);
-void DrawSlide(struct tutorialSlide element);
+void DrawSlide(struct tutorialSlide element, int slideNum, const char* title, const char* description);
 
 
 

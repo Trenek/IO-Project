@@ -7,16 +7,6 @@ void CalculateSlidePosition(struct tutorialSlide* element) {
         .y = 50
     };
 
-    element->TitleTextBoxLeftCorner = (Vector2){
-        .x = element->BackgroundLeftCorner.x + 5,
-        .y = element->BackgroundLeftCorner.y + 5
-    };
-
-    element->TitleTextBoxLeftCorner = (Vector2){
-        .x = 125,
-        .y = 50
-    };
-
     element->backgroundBoxRectangle = (Rectangle){
         .x = element->BackgroundLeftCorner.x,
         .y = element->BackgroundLeftCorner.y,
@@ -24,24 +14,47 @@ void CalculateSlidePosition(struct tutorialSlide* element) {
         .height = 500
     };
 
+    element->ImageLeftCorner = (Vector2){
+        .x = element->BackgroundLeftCorner.x,
+        .y = element->BackgroundLeftCorner.y + 75
+    };
+
     element->titleBoxRectangle = (Rectangle){
-        .x = element->TitleTextBoxLeftCorner.x + 24,
-        .y = element->TitleTextBoxLeftCorner.y + 20,
-        .width = 500,
+        .x = element->backgroundBoxRectangle.x,
+        .y = element->backgroundBoxRectangle.y,
+        .width = 492,
         .height = 100
     };
 
     element->descriptionBoxRectangle = (Rectangle){
-        .x = element->TitleTextBoxLeftCorner.x + 24,
-        .y = element->TitleTextBoxLeftCorner.y + 200,
-        .width = 500,
-        .height = 100
+        .x = element->backgroundBoxRectangle.x,
+        .y = element->backgroundBoxRectangle.y + 380,
+        .width = 492,
+        .height = 130
+    };
+
+    element->TitleTextBoxLeftCorner = (Vector2){
+        .x = element->titleBoxRectangle.x + 5,
+        .y = element->titleBoxRectangle.y + 5
+    };
+
+    element->DescriptionTextBoxLeftCorner = (Vector2){
+        .x = element->descriptionBoxRectangle.x + 5,
+        .y = element->descriptionBoxRectangle.y + 5
     };
 }
 
-void DrawSlide(struct tutorialSlide element) {
-    DrawRectangleRec(element.backgroundBoxRectangle, element.backgroundColor);
+void DrawSlide(struct tutorialSlide element, int slideNum, const char* title, const char* description) {
+    element.imgsList = LoadDirectoryFiles("../IO Project/dane/tutorialImgs");       // Load directory filepaths
+
+    Image tutorialImage = LoadImage(element.imgsList.paths[slideNum]);
+    Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);
+
     DrawRectangleRec(element.titleBoxRectangle, element.titleDescriptionColor);
     DrawRectangleRec(element.descriptionBoxRectangle, element.titleDescriptionColor);
-    DrawTextEx(*element.font, element.text, element.BackgroundLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+    DrawTextEx(*element.font, title, element.TitleTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+    DrawTextEx(*element.font, description, element.DescriptionTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+
+    DrawTexture(imageAsTexture, (int) element.ImageLeftCorner.x, (int) element.ImageLeftCorner.y, WHITE);
+
 }
