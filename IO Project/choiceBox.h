@@ -25,6 +25,8 @@ struct choiceBox {
     int currentLength;
     bool isActive;
 
+    unsigned int clicked;
+
     union {
         struct choiceBoxPositionParameters init;
         struct {
@@ -44,6 +46,6 @@ struct choiceBox {
 };
 
 void CalculateChoiceBoxPosition(struct choiceBox* element);
-unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked);
+void DrawChoiceBox(struct choiceBox element, unsigned int *clicked);
 
 #endif

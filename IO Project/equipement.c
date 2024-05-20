@@ -33,7 +33,7 @@ void equipement(enum playState* state, struct playInfo* info) {
         .spaceing = 0
     };
     struct button equip = {
-        .text = "Wyposaz",
+        .text = "Wyposaż",
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height - space,

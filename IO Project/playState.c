@@ -114,6 +114,34 @@ static void unloadShops(struct playInfo *info) {
     free(info->shops);
 }
 
+static void loadWeapons(struct playInfo *info) {
+    FilePathList files = LoadDirectoryFiles("resources\\textures\\weapon");
+    int i = 0;
+
+    info->weaponsQuantity = files.capacity;
+
+    info->weapons = malloc(sizeof(Texture2D) * info->weaponsQuantity);
+    while (i < info->weaponsQuantity) {
+        info->weapons[i] = LoadTexture(TextFormat("resources\\textures\\weapon\\%i.png", i));
+
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(files);
+}
+
+static void unloadWeapons(struct playInfo *info) {
+    int i = 0;
+
+    while (i < info->weaponsQuantity) {
+        UnloadTexture(info->weapons[i]);
+
+        i += 1;
+    }
+
+    free(info->weapons);
+}
+
 static void loadItems(struct playInfo *info) {
     FilePathList files = LoadDirectoryFiles("resources\\textures\\przedmioty");
     int i = 0;
@@ -175,6 +203,7 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     loadShops(mapFile, &result);
 
     loadItems(&result);
+    loadWeapons(&result);
 
     loadPlayer(&result, info->saveName);
 
@@ -189,6 +218,7 @@ void freePlayInfo(struct playInfo *info) {
     unloadPlayer(info);
 
     unloadItems(info);
+    unloadWeapons(info);
 
     destroyEnemies(info);
     unloadShops(info);

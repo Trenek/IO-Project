@@ -1,7 +1,6 @@
 #include <raylib.h>
 #include <stdio.h>
 
-
 #include "state.h"
 
 #include "menuElements.h"
@@ -68,7 +67,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .fontColor = BLACK,
         .color = color2,
         .hoverColor = color3,
-        .spaceing = 0,
+        .spaceing = 0
     };
     struct choiceBox loadSave = {
         .text = "",
@@ -86,32 +85,30 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .color = GREEN,
         .borderColor = RED,
         .spaceing = 0,
-  };
-
+    };
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&loadGame);
     CalculateButtonPosition(&goBack);
+
     CalculateChoiceBoxPosition(&loadSave);
 
     unsigned int clicked = 7;
 
     while (!WindowShouldClose() && *state == LOAD_GAME) {
         BeginDrawing();
-        ClearBackground(color);
-        clicked = DrawChoiceBox(loadSave, clicked);
-        DrawButton(title);
-        DrawButton(loadGame);
-        DrawButton(goBack);
-        EndDrawing();
+            ClearBackground(color);
 
+            DrawButton(title);
+            DrawButton(loadGame);
+            DrawButton(goBack);
+
+            DrawChoiceBox(loadSave, &clicked);
+        EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(loadGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
         }
-
-
-
     }
 }

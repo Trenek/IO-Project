@@ -21,20 +21,36 @@ void InitializeEquipementBox(struct equipementBox *element) {
         }
     }
 
-    for (int i = 0; i < 7; i++) {
-        element->itemTypes[i] = (struct itemBox){
+    for (int i = 0; i < 6; i++) {
+        element->equipedItems[i] = (struct itemBox){
             .isActive = false,
             .init = {
-                .x = element->x + 30 + (10 + 42) * i,
-                .y = element->y + 60,
-                .width = 42,
-                .height = 30
+                .x = element->x + 30 + (10 + element->itemBoxSize) * i,
+                .y = element->y + 30,
+                .width = element->itemBoxSize,
+                .height = element->itemBoxSize
             },
             .color = GRAY,
             .activeColor = DARKGRAY,
             .borderColor = BLACK
         };
-        CalculateItemBoxPosition(&(element->itemTypes[i]));
+        CalculateItemBoxPosition(&(element->equipedItems[i]));
+    }
+
+    for (int i = 0; i < 4; i++) {
+        element->equipedItems[i + 6] = (struct itemBox){
+            .isActive = false,
+            .init = {
+                .x = element->x + 30 + (10 + element->itemBoxSize) * i,
+                .y = element->y + 30 + element->itemBoxSize + 10,
+                .width = element->itemBoxSize,
+                .height = element->itemBoxSize
+            },
+            .color = GRAY,
+            .activeColor = DARKGRAY,
+            .borderColor = BLACK
+        };
+        CalculateItemBoxPosition(&(element->equipedItems[i + 6]));
     }
 }
 
@@ -47,7 +63,7 @@ void DrawEquipementBox(struct equipementBox element, struct playInfo *info) {
             .x = element.items[i].boxRectangle.x,
             .y = element.items[i].boxRectangle.y
         };
-        element.items[i].isActive = i == element.activeItem;
+        element.items[i].isActive = element.activeItemType == 0 && i == element.activeItem;
         DrawItemBox(element.items[i]);
 
         switch (element.itemsID[i][0]) {
@@ -65,8 +81,30 @@ void DrawEquipementBox(struct equipementBox element, struct playInfo *info) {
                 break;
         }
     }
-    for (int i = 0; i < 7; i++) {
-        element.itemTypes[i].isActive = i == element.activeItemType;
-        DrawItemBox(element.itemTypes[i]);
+    for (int i = 0; i < 9; i++) {
+        texturePosition = (Vector2){
+            .x = element.equipedItems[i].boxRectangle.x,
+            .y = element.equipedItems[i].boxRectangle.y
+        };
+        float min1 = element.equipedItems[i].boxRectangle.width / info->armorPart[i][(*element.armorPart)[i]][0].width;
+        float min2 = element.equipedItems[i].boxRectangle.height / info->armorPart[i][(*element.armorPart)[i]][0].height;
+        element.equipedItems[i].isActive = element.activeItemType == 1 && i == element.activeItem;
+        DrawItemBox(element.equipedItems[i]);
+        if ((*element.armorPart)[i] != -1)
+            DrawTextureEx(info->armorPart[i][(*element.armorPart)[i]][0], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
+    }
+
+    int i = 9;
+    texturePosition = (Vector2){
+        .x = element.equipedItems[i].boxRectangle.x,
+        .y = element.equipedItems[i].boxRectangle.y
+    };
+    element.equipedItems[i].isActive = element.activeItemType == 1 && i == element.activeItem;
+    DrawItemBox(element.equipedItems[i]);
+    if (*element.weapon != -1) {
+        float min1 = element.equipedItems[i].boxRectangle.width / info->weapons[*element.weapon].width;
+        float min2 = element.equipedItems[i].boxRectangle.height / info->weapons[*element.weapon].height;
+
+        DrawTextureEx(info->weapons[*element.weapon], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
     }
 }

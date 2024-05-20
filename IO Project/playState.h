@@ -91,8 +91,10 @@ struct playInfo {
     Texture2D(*armorPart[9])[4];
     int armorPosition[4][9][2];
 
-    Texture2D *items;
+    Texture2D *weapons;
+    int weaponsQuantity;
 
+    Texture2D *items;
     int itemsQuantity;
 };
 

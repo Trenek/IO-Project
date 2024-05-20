@@ -7,6 +7,8 @@
 void CalculateChoiceBoxPosition(struct choiceBox* element) {
     struct choiceBoxPositionParameters init = element->init;
 
+    element->clicked = 7;
+
     element->LeftCorner[MAIN] = (Vector2){
          .x = init.x - 322.5f,
          .y = init.y  + 70.0f
@@ -60,7 +62,7 @@ void CalculateChoiceBoxPosition(struct choiceBox* element) {
 
 }
 
-unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked) {
+void DrawChoiceBox(struct choiceBox element, unsigned int *clicked) {
     FilePathList pathList = LoadDirectoryFiles("../IO Project/saves");       // Load directory filepaths
     for (unsigned int i = 0; i < pathList.count; i++) {
         if (pathList.paths[i] == NULL) {
@@ -73,9 +75,9 @@ unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked) {
     int j = 0;
 
     while (i < 6) {
-        if ((CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) || clicked == i) {
+        if ((CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) || *clicked == i) {
             DrawRectangleRec(element.rowRectangle[MAIN][i], RED);
-            clicked = i;
+            *clicked = i;
         }
         else DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
 
@@ -99,9 +101,6 @@ unsigned int DrawChoiceBox(struct choiceBox element, unsigned int clicked) {
 
         i += 1;
     };
-
-    return clicked;
-
 }
 
 
