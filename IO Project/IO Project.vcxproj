@@ -157,6 +157,8 @@
     <ClCompile Include="fight.c" />
     <ClCompile Include="inputBox.c" />
     <ClCompile Include="itemBox.c" />
+    <ClCompile Include="loadArmor.c" />
+    <ClCompile Include="loadBodyParts.c" />
     <ClCompile Include="npc.c" />
     <ClCompile Include="slideBox.c" />
     <ClCompile Include="IO Project.c" />
@@ -188,6 +190,7 @@
     <ClInclude Include="equipementBox.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="itemBox.h" />
+    <ClInclude Include="load.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="ModUpdateCamera.h" />

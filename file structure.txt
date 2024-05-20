@@ -65,7 +65,8 @@ config.cfg - plik zawierający zapisane ustawienia
 
 ekwipunek.txt - plik zawierający informacje o ekwipunku id_postaci
     Struktura pliku:
-        32x [typ przedmiotu] [ID przedmiotu]
+	[liczba przedmiotów]
+            [typ przedmiotu] [ID przedmiotu]
 
     [typ przedmiotu]:
         [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
@@ -102,7 +103,9 @@ pancerz.txt - plik zawierający informacje o wszystkich pancerzach
 przedmioty.txt - plik zawierający informacje o wszystkich przedmiotach
     Struktura pliku:
         [liczba]
-        [ID] [nazwa] [opis]
+            [ID] 
+            [nazwa] 
+            [opis]
         ...
 
 postać.txt - plik zawierający informacje o postaciach
@@ -181,12 +184,15 @@ sklep.txt - plik opisujący przedmioty znajdujące się w sklepie
         [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
         [1] - broń
         [2] - pancerz:
-            [0] - head
-            [1] - torso
-            [2] - arms
-            [3] - hands
-            [4] - legs
-            [5] - feet
+            [0] - helmet
+            [1] - breastplate
+            [2] - pants
+            [3] - left boot
+            [4] - right boot
+            [5] - left glove
+            [6] - right glove
+            [7] - left sleeve
+            [8] - right sleeve
         [3] - inne
 
 mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy

@@ -18,7 +18,6 @@ struct itemBox {
         Rectangle boxRectangle;
     };
 
-    Texture2D item;
     Color color;
     Color activeColor;
     Color borderColor;

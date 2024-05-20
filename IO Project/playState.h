@@ -45,6 +45,18 @@ enum BodyPartTexture {
     RIGHT_FOOT
 };
 
+enum ArmorPartTexture {
+    HELMET,
+    BREASTPLATE,
+    PANTS,
+    LEFT_BOOT,
+    RIGHT_BOOT,
+    LEFT_GLOVE,
+    RIGHT_GLOVE,
+    LEFT_SLEEVE,
+    RIGHT_SLEEVE
+};
+
 struct playInfo {
     RenderTexture *screenCamera;
     Rectangle *screenRect;
@@ -75,6 +87,13 @@ struct playInfo {
     int height;
     int width;
     int bodyPosition[4][10][2];
+
+    Texture2D(*armorPart[9])[4];
+    int armorPosition[4][9][2];
+
+    Texture2D *items;
+
+    int itemsQuantity;
 };
 
 struct playInfo initializePlayInfo(struct menuInfo *info);

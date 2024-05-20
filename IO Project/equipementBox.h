@@ -1,4 +1,3 @@
-#pragma once
 #ifndef EQUIPEMENTBOX_H
 #define EQUIPEMENTBOX_H
 
@@ -14,8 +13,11 @@ struct equipementBox {
     int activeItem;
     int itemBoxSize;
     
+    int (*itemsID)[3];
     struct itemBox items[25];
     struct itemBox itemTypes[7];
+    int (*armorPart)[9];
+    int *weapon;
 };
 
 void InitializeEquipementBox(struct equipementBox *element);
@@ -40,15 +42,27 @@ inline void UpdateEquipementBox(struct equipementBox* element) {
 }
 
 inline void Equip(struct equipementBox* element) {
-    //TODO: Equip element->items[element->activeItem]
+    int * const info = element->itemsID[element->activeItem];
 
-    if (element == element); //uzycie element zeby sie skompilowalo xD
+    if (info[0] == 2) {
+        if ((*element->armorPart)[info[1]] == -1) {
+            (*element->armorPart)[info[1]] = info[2];
+            info[0] = 0;
+        }
+        else {
+            int temp = info[2];
+            info[2] = (*element->armorPart)[info[1]];
+            (*element->armorPart)[info[1]] = temp;
+        }
+    }
+    else if (info[0] == 3) {
+
+    }
 }
 
 inline void Delete(struct equipementBox* element) {
-    //TODO: Delete element->items[element->activeItem]
-    if (element == element);
+    element->itemsID[element->activeItem][0] = 0;
 }
 
-void DrawEquipementBox(struct equipementBox element);
+void DrawEquipementBox(struct equipementBox element, struct playInfo *info);
 #endif

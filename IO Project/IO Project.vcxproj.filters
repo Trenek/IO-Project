@@ -73,6 +73,12 @@
     <Filter Include="Pliki źródłowe\objects\npc">
       <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\load">
+      <UniqueIdentifier>{fba7362b-44d7-46e2-a0e4-70e180e57577}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\load\bodyParts">
+      <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -177,6 +183,12 @@
     <ClCompile Include="achievements.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
+    <ClCompile Include="loadBodyParts.c">
+      <Filter>Pliki źródłowe\load\bodyParts</Filter>
+    </ClCompile>
+    <ClCompile Include="loadArmor.c">
+      <Filter>Pliki źródłowe\load\bodyParts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -235,6 +247,9 @@
     </ClInclude>
     <ClInclude Include="npc.h">
       <Filter>Pliki źródłowe\objects\npc</Filter>
+    </ClInclude>
+    <ClInclude Include="load.h">
+      <Filter>Pliki źródłowe\load</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

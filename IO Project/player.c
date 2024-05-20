@@ -1,6 +1,7 @@
 #define _USE_MATH_DEFINES
 
 #include <math.h>
+#include <stdio.h>
 
 #include <raylib.h>
 #include <raymath.h>
@@ -10,6 +11,39 @@
 
 #define GRAVITY -9.81f
 #define M_PIF ((float)M_PI)
+
+static void loadEquipment(struct player *player, const char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    int i = 0;
+
+    while (i < 25) {
+        fscanf(file, "%i", &player->equipment[i][0]);
+
+        if (player->equipment[i][0] != 0) {
+            fscanf(file, "%i", &player->equipment[i][1]);
+
+            if (player->equipment[i][1] == 2) {
+                fscanf(file, "%i", &player->equipment[i][2]);
+            }
+        }
+
+        i += 1;
+    }
+
+    fclose(file);
+}
+
+void loadPlayer(struct playInfo *info, const char *saveName) {
+    loadCharacter(&info->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName), 4.0f, 0.0f);
+    assemblePlayerTexture(info, &info->player.character);
+    loadEquipment(&info->player, TextFormat("saves\\%s\\ekwipunek.txt", saveName));
+
+    info->player.speedY = 0;
+}
+
+void unloadPlayer(struct playInfo *info) {
+    unloadCharacter(&info->player.character);
+}
 
 void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
     Vector3 * const position = &player->character.object.position;

@@ -127,7 +127,6 @@ void explore(enum playState *playState, struct playInfo *info) {
         .spaceing = 0
     };
 
-
     struct Object2D **render = createRenderer(info);
 
     int shopInteraction = 0;
