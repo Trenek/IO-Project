@@ -22,7 +22,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .text = "Wczytywanie gry",
         .init = {
             .x = GetScreenWidth() >> 1,
-            .y = 100,
+            .y = 50,
             .incX = 0,
             .incY = 0,
             .posX = 1,
@@ -69,31 +69,33 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct choiceBox loadSave = {
-        .text = "",
-        .init = {
+    struct choiceBox saves = {
+        .rowQuantity = 5,
+        .wideness = 5,
+        .init =  {
             .x = GetScreenWidth() >> 1,
-            .y = 100,
-            .incX = 0,
-            .incY = 0,
+            .y = GetScreenHeight() >> 1,
+            .width = GetScreenWidth() >> 1,
+            .incX = 15,
+            .incY = 15,
             .posX = 1,
             .posY = 1
         },
         .font = &info->fonts[0],
-        .fontSize = 45,
-        .fontColor = BLUE,
-        .color = GREEN,
-        .borderColor = RED,
+        .fontColor = BLACK,
+        .fontSize = 40,
         .spaceing = 0,
+        .color = GREEN,
+        .activeBorderColor = RED,
+        .inactiveBorderColor = BLACK,
+        .hoverColor = PINK
     };
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&loadGame);
     CalculateButtonPosition(&goBack);
 
-    CalculateChoiceBoxPosition(&loadSave);
-
-    unsigned int clicked = 7;
+    initializeChoiceBox(&saves);
 
     while (!WindowShouldClose() && *state == LOAD_GAME) {
         BeginDrawing();
@@ -103,12 +105,18 @@ void loadGame(enum state *state, struct menuInfo *info) {
             DrawButton(loadGame);
             DrawButton(goBack);
 
-            DrawChoiceBox(loadSave, &clicked);
+            if (saves.chosenRow == -1) DrawRectangleRec(loadGame.boxRectangle, (Color) { 100, 100, 100, 100 });
+
+            DrawChoiceBox(&saves);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(loadGame)) *state = PLAY;
+            if (isMouseOver(loadGame)) if (saves.chosenRow != -1) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
+
+            UpdateChoiceBox(&saves, info);
         }
     }
+
+    freeChoiceBox(&saves);
 }

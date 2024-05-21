@@ -11,6 +11,8 @@
 #include "renderer.h"
 #include "player.h"
 
+#include "fscanfWithAllocation.h"
+
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
@@ -28,44 +30,27 @@ struct DialogData {
     int statementID;
 };
 
-void fscanfUnlimited(FILE *file, char **buffor, char terminate) {
-    char c = 0;
-    int size = 128;
-    int currentSize = 0;
-
-    *buffor = malloc(sizeof(char) * size);
-    while ((c = (char)fgetc(file)) != terminate) {
-        (*buffor)[currentSize] = c;
-        currentSize += 1;
-        if (currentSize == size) {
-            size *= 2;
-            realloc(*buffor, size);
-        }
-    }
-    (*buffor)[currentSize] = '\0';
-}
-
-static void loadFile(const char* fileName, struct DialogData *data, struct button **options, struct playInfo *info, RenderTexture *screenCamera) {
-    FILE *file = fopen(TextFormat("%s\\%i.txt", fileName, data->statementID), "r");
+static void loadFile(const char* fileName, struct DialogData *saveData, struct button **options, struct playInfo *info, RenderTexture *screenCamera) {
+    FILE *file = fopen(TextFormat("%s\\%i.txt", fileName, saveData->statementID), "r");
     int i = 0;
 
-    fscanf(file, "%i %i ", &data->id, &data->numberOfPossibleResponses);
-    fscanfUnlimited(file, &data->statement, '\n');
+    fscanf(file, "%i %i ", &saveData->id, &saveData->numberOfPossibleResponses);
+    fscanfUnlimited(file, &saveData->statement, '\n');
     
-    data->responses = malloc(sizeof(struct a) * data->numberOfPossibleResponses);
-    *options = malloc(sizeof(struct button) * data->numberOfPossibleResponses);
-    while (i < data->numberOfPossibleResponses) {
-        fscanf(file, "%i ", &data->responses[i].consequence);
-        if (data->responses[i].consequence == 0) {
-            fscanf(file, "%i ", &data->responses[i].state);
+    saveData->responses = malloc(sizeof(struct a) * saveData->numberOfPossibleResponses);
+    *options = malloc(sizeof(struct button) * saveData->numberOfPossibleResponses);
+    while (i < saveData->numberOfPossibleResponses) {
+        fscanf(file, "%i ", &saveData->responses[i].consequence);
+        if (saveData->responses[i].consequence == 0) {
+            fscanf(file, "%i ", &saveData->responses[i].state);
         }
-        fscanf(file, "%i ", &data->responses[i].next);
+        fscanf(file, "%i ", &saveData->responses[i].next);
 
-        fscanfUnlimited(file, &data->responses[i].statement, '\n');
+        fscanfUnlimited(file, &saveData->responses[i].statement, '\n');
         (*options)[i] = (struct button) {
-            .text = data->responses[i].statement,
+            .text = saveData->responses[i].statement,
             .init = {
-                .x = (int)(screenCamera->texture.width / 5.0f + i * 0.8f * screenCamera->texture.width / (data->numberOfPossibleResponses)),
+                .x = (int)(screenCamera->texture.width / 5.0f + i * 0.8f * screenCamera->texture.width / (saveData->numberOfPossibleResponses)),
                 .y = (GetScreenHeight() - (GetScreenHeight() >> 2)) + screenCamera->texture.height - 40,
                 .incX = 10,
                 .incY = 10,
@@ -88,18 +73,18 @@ static void loadFile(const char* fileName, struct DialogData *data, struct butto
     fclose(file);
 }
 
-static void unloadFile(struct DialogData *data) {
+static void unloadFile(struct DialogData *saveData) {
     int i = 0;
 
-    free(data->statement);
+    free(saveData->statement);
 
-    while (i < data->numberOfPossibleResponses) {
-        free(data->responses[i].statement);
+    while (i < saveData->numberOfPossibleResponses) {
+        free(saveData->responses[i].statement);
 
         i += 1;
     }
 
-    free(data->responses);
+    free(saveData->responses);
 }
 
 void dialog(enum playState *playState, struct playInfo *info) {
@@ -127,7 +112,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
     };
     struct button *options;
 
-    struct DialogData data = {
+    struct DialogData saveData = {
         .statementID = 0
     };
 
@@ -136,7 +121,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
     EnableCursor();
     CalculateButtonPosition(&title);
 
-    loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &data, &options, info, &screenCamera);
+    loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &saveData, &options, info, &screenCamera);
 
     while (*playState == DIALOG && !WindowShouldClose()) {
         BeginTextureMode(screenCamera);
@@ -144,7 +129,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
 
             DrawTextureEx(*info->chosen.object.texture, (Vector2) { 0.0f, 0.0f }, 0.0f, 2.5f * (float)screenCamera.texture.height / info->chosen.object.texture->height, WHITE);
             DrawTextEx(info->fonts[0], info->chosen.name, (Vector2) { screenCamera.texture.width / 5.0f, 0.0f}, 40.0f, 0.0f, BLACK);
-            DrawTextEx(info->fonts[0], data.statement, (Vector2) { screenCamera.texture.width / 5.0f, 40.0f }, 30.0f, 0.0f, BLACK);
+            DrawTextEx(info->fonts[0], saveData.statement, (Vector2) { screenCamera.texture.width / 5.0f, 40.0f }, 30.0f, 0.0f, BLACK);
         EndTextureMode();
 
         BeginDrawing();
@@ -156,7 +141,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
             DrawTextureRec(screenCamera.texture, screenRect, (Vector2) { 0, (float)((GetScreenHeight() >> 1) + (GetScreenHeight() >> 2))}, WHITE);
 
             i = 0;
-            while (i < data.numberOfPossibleResponses) {
+            while (i < saveData.numberOfPossibleResponses) {
                 DrawButton(options[i]);
 
                 i += 1;
@@ -167,17 +152,17 @@ void dialog(enum playState *playState, struct playInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             i = 0;
-            while (i < data.numberOfPossibleResponses) {
+            while (i < saveData.numberOfPossibleResponses) {
                 if (isMouseOver(options[i])) {
-                    if (data.responses[i].consequence == 0) {
-                        *playState = data.responses[i].state;
-                        info->dialog = data.responses[i].next;
+                    if (saveData.responses[i].consequence == 0) {
+                        *playState = saveData.responses[i].state;
+                        info->dialog = saveData.responses[i].next;
                     }
                     else {
-                        data.statementID = data.responses[i].next;
+                        saveData.statementID = saveData.responses[i].next;
 
-                        unloadFile(&data);
-                        loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &data, &options, info, &screenCamera);
+                        unloadFile(&saveData);
+                        loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &saveData, &options, info, &screenCamera);
                     }
                 }
 
@@ -186,6 +171,6 @@ void dialog(enum playState *playState, struct playInfo *info) {
         }
     }
 
-    unloadFile(&data);
+    unloadFile(&saveData);
     UnloadRenderTexture(screenCamera);
 }

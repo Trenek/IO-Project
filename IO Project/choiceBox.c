@@ -1,106 +1,176 @@
 #include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
+
+#include "state.h"
 
 #include "choiceBox.h"
+#include "saveData.h"
 
-void CalculateChoiceBoxPosition(struct choiceBox* element) {
-    struct choiceBoxPositionParameters init = element->init;
+static void loadSaves(struct choiceBox *const this) {
+    FilePathList file = LoadDirectoryFiles("saves");
+    int i = 0;
 
-    element->clicked = 7;
+    this->dataQuantity = file.capacity;
+    this->saveData = malloc(sizeof(struct saveData) * this->dataQuantity);
 
-    element->LeftCorner[MAIN] = (Vector2){
-         .x = init.x - 322.5f,
-         .y = init.y  + 70.0f
-    };
-
-    element->LeftCorner[NUM] = (Vector2){
-         .x = init.x - 322.5f,
-         .y = init.y + 70.0f
-    };
-
-    element->LeftCorner[NAME] = (Vector2){
-         .x = init.x - 265.0f,
-         .y = init.y + 70.0f
-    };
-
-    element->LeftCorner[DATE] = (Vector2){
-         .x = init.x - 322.5f,
-         .y = init.y + 70.0f
-    };
-
-    for (int i = 0; i < 6; i++) {
-        element->rowRectangle[MAIN][i] = (Rectangle){
-            .x = element->LeftCorner[MAIN].x,
-            .y = element->LeftCorner[MAIN].y + 50.0f * i,
-            .width = 650.0f,
-            .height = 50.0f
-        };
-
-        element->rowRectangle[NUM][i] = (Rectangle){
-            .x = element->LeftCorner[MAIN].x + 5,
-            .y = element->LeftCorner[MAIN].y + 50.0f * i + 5,
-            .width = 40.0f,
-            .height = 40.0f
-        };
-
-        element->rowRectangle[NAME][i] = (Rectangle){
-            .x = element->LeftCorner[MAIN].x + 50,
-            .y = element->LeftCorner[MAIN].y + 50.0f * i + 5,
-            .width = 450.0f,
-            .height = 40.0f
-           
-        };
-
-        element->rowRectangle[DATE][i] = (Rectangle){
-            .x = element->LeftCorner[MAIN].x + 505,
-            .y = element->LeftCorner[MAIN].y + 50.0f * i + 5,
-            .width = 140,
-            .height = 40
-        };
-    }
-
-}
-
-void DrawChoiceBox(struct choiceBox element, unsigned int *clicked) {
-    FilePathList pathList = LoadDirectoryFiles("../IO Project/saves");       // Load directory filepaths
-    for (unsigned int i = 0; i < pathList.count; i++) {
-        if (pathList.paths[i] == NULL) {
-            break;
-        }
-        element.saveNames[i] = strstr(pathList.paths[i], "\\") + 1;
-    }
-
-    unsigned int i = 0;
-    int j = 0;
-
-    while (i < 6) {
-        if ((CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) || *clicked == i) {
-            DrawRectangleRec(element.rowRectangle[MAIN][i], RED);
-            *clicked = i;
-        }
-        else DrawRectangleRec(element.rowRectangle[MAIN][i], CheckCollisionPointRec(GetMousePosition(), element.rowRectangle[MAIN][i]) ? element.hoverColor : element.color);
-
-        DrawRectangleLinesEx(element.rowRectangle[MAIN][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
-
-
-        j = 1;
-        while (j < 4) {
-            DrawRectangleRec(element.rowRectangle[j][i], element.color);
-            DrawRectangleLinesEx(element.rowRectangle[j][i], 1, element.isActive ? element.borderActiveColor : element.borderColor);
-            j += 1;
-        }
-        if (i < pathList.count) {
-            DrawTextEx(*(element.font), element.saveNames[i], element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
-            DrawTextEx(*element.font, TextFormat("%i.", i + 1), (Vector2) { .x = element.rowRectangle[NUM][i].x + 5, .y = element.rowRectangle[NUM][i].y }, (float)element.fontSize, (float)element.spaceing, BLACK);
-        }
-
-        else DrawTextEx(*(element.font), element.text, element.LeftCorner[NAME], (float)element.fontSize, (float)element.spaceing, element.fontColor);
-        element.LeftCorner[NAME].y += 50;
-
+    while (i < this->dataQuantity) {
+        initializeSaveData(&this->saveData[i], file.paths[i]);
 
         i += 1;
+    }
+
+    qsort(this->saveData, this->dataQuantity, sizeof(struct saveData), cmpSaveData);
+
+    UnloadDirectoryFiles(file);
+}
+
+static void initializeRows(struct choiceBox *const this) {
+    struct choiceBoxPositionParameters init = this->init;
+
+    char buffor[9] = { 0 };
+
+    float size[4] = {
+        [NUM] = MeasureTextEx(*this->font, _itoa(this->dataQuantity, buffor, 10), (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
+        [NAME] = (float)init.width + (init.incX << 1),
+        [DATE] = MeasureTextEx(*this->font, "99:99 99/99/9999", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1)
+    };
+
+    const float height = this->fontSize + 2.0f * init.incY;
+    const float top = init.y - (this->rowQuantity * height * init.posY) / 2;
+
+    int i = 0;
+
+    size[MAIN] = size[NUM] + size[NAME] + size[DATE];
+
+    this->row = malloc(sizeof(struct cell[4]) * this->rowQuantity);
+
+    while (i < this->rowQuantity) {
+        this->row[i][MAIN] = (struct cell){
+            .rec = {
+                .x = init.x - init.posX * size[MAIN] / 2.0f,
+                .y = top + i * height,
+                .width = size[MAIN],
+                .height = height
+            },
+            .textLeftCorner = (Vector2) {
+                .x = init.x - init.posX * size[MAIN] / 2.0f + init.incX,
+                .y = top + i * height + init.incY
+            }
+        };
+
+        this->row[i][NUM] = (struct cell){
+            .rec = {
+                .x = this->row[i][MAIN].rec.x,
+                .y = top + i * height,
+                .width = size[NUM],
+                .height = height
+            },
+            .textLeftCorner = (Vector2) {
+                .x = this->row[i][MAIN].rec.x + init.incX,
+                .y = top + i * height + init.incY
+            }
+        };
+
+        this->row[i][NAME] = (struct cell){
+            .rec = {
+                .x = this->row[i][NUM].rec.x + size[NUM],
+                .y = top + i * height,
+                .width = size[NAME],
+                .height = height
+            },
+            .textLeftCorner = (Vector2) {
+                .x = this->row[i][NUM].rec.x + size[NUM] + init.incX,
+                .y = top + i * height + init.incY
+            }
+        };
+
+        this->row[i][DATE] = (struct cell){
+            .rec = {
+                .x = this->row[i][NAME].rec.x + size[NAME],
+                .y = top + i * height,
+                .width = size[DATE],
+                .height = height
+            },
+            .textLeftCorner = (Vector2) {
+                .x = this->row[i][NAME].rec.x + size[NAME] + init.incX,
+                .y = top + i * height + init.incY
+            }
+        };
+
+        i += 1;
+    }
+
+    this->prevRec = (Rectangle){
+        .x = 0
     };
 }
 
+void initializeChoiceBox(struct choiceBox *const this) {
+    initializeRows(this);
+    loadSaves(this);
 
+    this->chosenRow = -1;
+    this->page = 0;
+}
+
+static void unloadSaves(struct choiceBox *const this) {
+    int i = 0;
+
+    while (i < this->dataQuantity) {
+        freeSaveData(&this->saveData[i]);
+
+        i += 1;
+    }
+
+    free(this->saveData);
+}
+
+static void freeRows(struct choiceBox *const this) {
+    free(this->row);
+}
+
+void freeChoiceBox(struct choiceBox *const this) {
+    unloadSaves(this);
+    freeRows(this);
+}
+
+void DrawChoiceBox(struct choiceBox *const this) {
+    int i = 0;
+    int j = 0;
+
+    while (i < this->rowQuantity) {
+        DrawRectangleRec(this->row[i][MAIN].rec, this->color);
+
+        j = 0;
+        while (j < 3) {
+            DrawRectangleLinesEx(this->row[i][j].rec, (float)this->wideness, this->inactiveBorderColor);
+            j += 1;
+        }
+
+        DrawRectangleLinesEx(this->row[i][MAIN].rec, (float)this->wideness,
+            this->chosenRow == i ? this->activeBorderColor :
+            CheckCollisionPointRec(GetMousePosition(), this->row[i][MAIN].rec) ? this->hoverColor :
+            this->inactiveBorderColor
+        );
+
+        DrawTextEx(*this->font, TextFormat("%i", i + 1 + this->page * this->rowQuantity), this->row[i][NUM].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+        DrawTextEx(*this->font, this->saveData[i + this->page * this->rowQuantity].text, this->row[i][NAME].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+        DrawTextEx(*this->font, assembleDate(&this->saveData[i + this->page * this->rowQuantity]), this->row[i][DATE].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+
+        i += 1;
+    }
+}
+
+void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
+    int i = 0;
+
+    this->chosenRow = -1;
+    while (i < this->rowQuantity) {
+        if (CheckCollisionPointRec(GetMousePosition(), this->row[i][MAIN].rec)) {
+            strcpy(info->saveName, this->saveData[i + this->dataQuantity * this->page].text);
+            this->chosenRow = i;
+        }
+
+        i += 1;
+    }
+
+}

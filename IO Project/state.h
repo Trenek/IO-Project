@@ -1,6 +1,8 @@
 #ifndef STATE_H
 #define STATE_H
 
+#include <raylib.h>
+
 enum state {
     MENU,
     NEW_GAME,

@@ -3,49 +3,70 @@
 
 #include <raylib.h>
 
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+struct saveData;
+struct menuInfo;
+
 struct choiceBoxPositionParameters {
     int x;
     int y;
+    int width;
     int incX;
     int incY;
     int posX;
     int posY;
 };
 
+struct cell {
+    Rectangle rec;
+    Vector2 textLeftCorner;
+};
+
 enum choiceBoxColumn {
-    MAIN,
     NUM,
     NAME,
-    DATE
+    DATE,
+    MAIN
 };
 
 struct choiceBox {
-    char text[128];
-    char* saveNames[128];
-    int currentLength;
-    bool isActive;
-
-    unsigned int clicked;
+    int rowQuantity;
+    int wideness;
 
     union {
         struct choiceBoxPositionParameters init;
         struct {
-            Vector2 LeftCorner[4];
-            Rectangle rowRectangle[4][6];
+            struct saveData *saveData;
+            int dataQuantity;
+
+            int chosenRow;
+            int page;
+
+            struct cell (*row)[4];
+
+            Rectangle prevRec;
+            Rectangle nextRec;
         };
     };
 
     Font* font;
-    int fontSize;
     Color fontColor;
-    Color color;
-    Color borderActiveColor;
-    Color borderColor;
+    int fontSize;
     int spaceing;
+
+    Color color;
+    Color activeBorderColor;
+    Color inactiveBorderColor;
     Color hoverColor;
 };
 
-void CalculateChoiceBoxPosition(struct choiceBox* element);
-void DrawChoiceBox(struct choiceBox element, unsigned int *clicked);
+void initializeChoiceBox(struct choiceBox *const this);
+void freeChoiceBox(struct choiceBox *const this);
+
+void DrawChoiceBox(struct choiceBox *const this);
+void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info);
 
 #endif

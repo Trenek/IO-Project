@@ -79,6 +79,12 @@
     <Filter Include="Pliki źródłowe\load\bodyParts">
       <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\fscanfWithAllocation">
+      <UniqueIdentifier>{30d0d079-6aae-4f81-97c1-ac8b89b6e9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
+      <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -189,6 +195,12 @@
     <ClCompile Include="loadArmor.c">
       <Filter>Pliki źródłowe\load\bodyParts</Filter>
     </ClCompile>
+    <ClCompile Include="fscanfWithAllocation.c">
+      <Filter>Pliki źródłowe\fscanfWithAllocation</Filter>
+    </ClCompile>
+    <ClCompile Include="saveData.c">
+      <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -250,6 +262,12 @@
     </ClInclude>
     <ClInclude Include="load.h">
       <Filter>Pliki źródłowe\load</Filter>
+    </ClInclude>
+    <ClInclude Include="fscanfWithAllocation.h">
+      <Filter>Pliki źródłowe\fscanfWithAllocation</Filter>
+    </ClInclude>
+    <ClInclude Include="saveData.h">
+      <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
