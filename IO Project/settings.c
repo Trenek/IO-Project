@@ -25,7 +25,7 @@ static void saveToFile(struct slideBox *framesPerSecondSlide, struct slideBox *w
     fclose(file);
 }
 
-static void loadActualSettings(struct menuInfo *info, struct slideBox *framesPerSecondSlide, struct slideBox *windowResolution, struct slideBox *textureQuality, struct button *fullScreenState, int *fullScreen) {
+static void loadActualSettings(struct menuInfo *info, struct slideBox *framesPerSecondSlide, struct slideBox *windowResolution, struct slideBox *textureQuality, struct slideBox *fullScreenState) {
     windowResolution->currentOption = 0;
     while (windowResolution->currentOption < windowResolution->numberOfOptions && strcmp(windowResolution->options[windowResolution->numberOfOptions], windowResolution->options[windowResolution->currentOption]) != 0) {
         windowResolution->currentOption += 1;
@@ -37,14 +37,7 @@ static void loadActualSettings(struct menuInfo *info, struct slideBox *framesPer
     }
 
     textureQuality->currentOption = info->textureQuality;
-    *fullScreen = info->fullScreenMode;
-
-    if (*fullScreen == 1) {
-        fullScreenState->text = "Włączony";
-    }
-    else {
-        fullScreenState->text = "Wyłączony";
-    }
+    fullScreenState->currentOption = info->fullScreenMode;
 }
 
 void settings(enum state *state, struct menuInfo *info) {
@@ -146,24 +139,6 @@ void settings(enum state *state, struct menuInfo *info) {
         .init = {
             .x = (GetScreenWidth() >> 1),
             .y = height + 3 * spaceY,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .hoverColor = color3,
-        .spaceing = 0
-    };
-
-    struct button fullScreenState = {
-        .text = info->fullScreenMode ? "Włączony" : "Wyłączony",
-        .init = {
-            .x = (GetScreenWidth() >> 1) + (GetScreenWidth() >> 3),
-            .y = height + 2 * spaceY,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -332,10 +307,33 @@ void settings(enum state *state, struct menuInfo *info) {
         .borderColor = BLACK,
         .spaceing = 0
     };
-    
-    int fullScreen = 0;
+    struct slideBox fullScreenState = {
+        .numberOfOptions = 2,
+        .isActive = false,
+        .currentOption = 0,
+        .options = {
+            "Wyłączony",
+            "Włączony"
+        },
+        .init = {
+            .x = (GetScreenWidth() >> 1) + (GetScreenWidth() >> 3),
+            .y = height + 2 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1,
+            .width = 300
+        },
+        .font = &info->fonts[1],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .borderActiveColor = RED,
+        .borderColor = BLACK,
+        .spaceing = 0
+    };
 
-    loadActualSettings(info, &framesPerSecondSlide, &windowResolution, &textureQuality, &fullScreenState, &fullScreen);
+    loadActualSettings(info, &framesPerSecondSlide, &windowResolution, &textureQuality, &fullScreenState);
     
     CalculateButtonPosition(&title);
 
@@ -345,8 +343,6 @@ void settings(enum state *state, struct menuInfo *info) {
     CalculateButtonPosition(&fullScreenButton);
     CalculateButtonPosition(&resetSettings);
 
-    CalculateButtonPosition(&fullScreenState);
-
     CalculateButtonPosition(&accept);
     CalculateButtonPosition(&restart);
     CalculateButtonPosition(&goBack);
@@ -354,6 +350,7 @@ void settings(enum state *state, struct menuInfo *info) {
     CalculateSlideBoxPosition(&framesPerSecondSlide);
     CalculateSlideBoxPosition(&textureQuality);
     CalculateSlideBoxPosition(&windowResolution);
+    CalculateSlideBoxPosition(&fullScreenState);
 
     while (!WindowShouldClose() && *state == SETTINGS) {
         BeginDrawing();
@@ -367,8 +364,6 @@ void settings(enum state *state, struct menuInfo *info) {
             DrawButton(fullScreenButton);
             DrawButton(resetSettings);
 
-            DrawButton(fullScreenState);
-
             DrawButton(accept);
             DrawButton(restart);
             DrawButton(goBack);
@@ -376,31 +371,23 @@ void settings(enum state *state, struct menuInfo *info) {
             DrawSlideBox(&framesPerSecondSlide);
             DrawSlideBox(&textureQuality);
             DrawSlideBox(&windowResolution);
+            DrawSlideBox(&fullScreenState);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) *state = MENU;
             else if (isMouseOver(restart)) *state = RELOAD;
             else if (isMouseOver(resetSettings)) {
-                loadActualSettings(info, &framesPerSecondSlide, &windowResolution, &textureQuality, &fullScreenState, &fullScreen);
-            }
-            else if (isMouseOver(fullScreenState)) {
-                if (fullScreen == 0) {
-                    fullScreenState.text = "Włączony";
-                    fullScreen = 1;
-                }
-                else {
-                    fullScreenState.text = "Wyłączony";
-                    fullScreen = 0;
-                }
+                loadActualSettings(info, &framesPerSecondSlide, &windowResolution, &textureQuality, &fullScreenState);
             }
             else if (isMouseOver(accept)) {
-                saveToFile(&framesPerSecondSlide, &windowResolution, &textureQuality, fullScreen);
+                saveToFile(&framesPerSecondSlide, &windowResolution, &textureQuality, fullScreenState.currentOption);
             }
         }
 
         UpdateSlideBox(&framesPerSecondSlide);
         UpdateSlideBox(&textureQuality);
         UpdateSlideBox(&windowResolution);
+        UpdateSlideBox(&fullScreenState);
     }
 }
