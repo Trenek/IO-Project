@@ -111,8 +111,13 @@ void loadGame(enum state *state, struct menuInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(loadGame)) if (saves.chosenRow != -1) *state = PLAY;
-            else if (isMouseOver(goBack)) *state = MENU;
+            if (isMouseOver(loadGame)) {
+                if (saves.chosenRow != -1) {
+                    *state = PLAY;
+                }
+            }
+            else if (isMouseOver(goBack)) 
+                *state = MENU;
 
             UpdateChoiceBox(&saves, info);
         }

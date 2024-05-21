@@ -102,8 +102,6 @@ static void initializeRows(struct choiceBox *const this) {
     this->prevRec = (Rectangle){
         .x = 0
     };
-    UnloadDirectoryFiles(pathList);
-
 }
 
 void initializeChoiceBox(struct choiceBox *const this) {
