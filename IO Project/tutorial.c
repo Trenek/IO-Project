@@ -57,13 +57,17 @@ void tutorial(enum state* state, struct menuInfo* info) {
     CalculateButtonPosition(&goBack);
     CalculateSlidePosition(&slide);
 
+    FilePathList imgsList = LoadDirectoryFiles("../IO Project/dane/tutorialImgs");       // Load directory filepaths
+
+    Image tutorialImage = LoadImage(imgsList.paths[0]);
+    Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);
 
     while (!WindowShouldClose() && *state == TUTORIAL) {
         BeginDrawing();
         ClearBackground(color);
 
         DrawButton(goBack);
-        DrawSlide(slide, 0, "Title", "Description");
+        DrawSlide(slide, "Title", "Description", imageAsTexture);
 
         EndDrawing();
 
@@ -71,4 +75,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
             if (isMouseOver(goBack)) *state = MENU;
         }
     }
+    UnloadTexture(imageAsTexture);
+    UnloadImage(tutorialImage);
+    UnloadDirectoryFiles(imgsList);
 }

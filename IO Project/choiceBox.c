@@ -101,6 +101,8 @@ void DrawChoiceBox(struct choiceBox element, unsigned int *clicked) {
 
         i += 1;
     };
+    UnloadDirectoryFiles(pathList);
+
 }
 
 
