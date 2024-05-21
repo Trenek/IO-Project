@@ -18,7 +18,7 @@ void CalculateInputBoxPosition(struct inputBox *element) {
     element->currentLength = 0;
 
     element->textLeftCorner = (Vector2){
-         .x = init.x - init.posX * size.x / 2.0f,
+         .x = init.x - init.posX * init.width / 2.0f + init.incX,
          .y = init.y - init.posY * size.y / 2.0f
     };
 
