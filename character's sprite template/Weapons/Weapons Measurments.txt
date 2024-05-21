@@ -1,0 +1,4 @@
+Prawdopodobnie wymagane będzie przystosowanie wszystkich poprzednich tekstur, ale natenczas wystarczy
+
+		x		y
+Sword0		0		170
