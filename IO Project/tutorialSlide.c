@@ -44,11 +44,7 @@ void CalculateSlidePosition(struct tutorialSlide* element) {
     };
 }
 
-void DrawSlide(struct tutorialSlide element, int slideNum, const char* title, const char* description) {
-    element.imgsList = LoadDirectoryFiles("../IO Project/dane/tutorialImgs");       // Load directory filepaths
-
-    Image tutorialImage = LoadImage(element.imgsList.paths[slideNum]);
-    Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);
+void DrawSlide(struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture) {
 
     DrawRectangleRec(element.titleBoxRectangle, element.titleDescriptionColor);
     DrawRectangleRec(element.descriptionBoxRectangle, element.titleDescriptionColor);
@@ -56,5 +52,6 @@ void DrawSlide(struct tutorialSlide element, int slideNum, const char* title, co
     DrawTextEx(*element.font, description, element.DescriptionTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 
     DrawTexture(imageAsTexture, (int) element.ImageLeftCorner.x, (int) element.ImageLeftCorner.y, WHITE);
+
 
 }
