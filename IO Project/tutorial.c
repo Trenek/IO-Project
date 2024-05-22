@@ -57,7 +57,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
     CalculateButtonPosition(&goBack);
     CalculateSlidePosition(&slide);
 
-    FilePathList imgsList = LoadDirectoryFiles("../IO Project/dane/tutorialImgs");       // Load directory filepaths
+    FilePathList imgsList = LoadDirectoryFiles("dane/tutorialImgs");
 
     Image tutorialImage = LoadImage(imgsList.paths[0]);
     Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);

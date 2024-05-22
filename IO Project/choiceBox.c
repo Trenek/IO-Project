@@ -221,7 +221,7 @@ void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
     this->chosenRow = -1;
     while (i < this->rowQuantity) {
         if (CheckCollisionPointRec(GetMousePosition(), this->row[i][MAIN].rec)) {
-            strcpy(info->saveName, this->saveData[i + this->dataQuantity * this->page].text);
+            strcpy(info->saveName, this->saveData[i + this->rowQuantity * this->page].text);
             this->chosenRow = i;
         }
 
