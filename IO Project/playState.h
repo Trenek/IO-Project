@@ -58,6 +58,8 @@ enum ArmorPartTexture {
 };
 
 struct playInfo {
+    char *const saveName;
+
     RenderTexture *screenCamera;
     Rectangle *screenRect;
     Camera camera;
@@ -107,5 +109,6 @@ void pause(enum playState *state, struct playInfo *info);
 void fight(enum playState *playState, struct playInfo *info);
 void shop(enum playState *state, struct playInfo *info);
 void dialog(enum playState *playState, struct playInfo *info);
+void save(enum playState *state, struct playInfo *info);
 
 #endif

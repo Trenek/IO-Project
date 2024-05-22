@@ -85,6 +85,9 @@
     <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
       <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\savefileOperations">
+      <UniqueIdentifier>{cca953df-2a6e-4afd-9150-24cc81d23763}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -201,6 +204,18 @@
     <ClCompile Include="saveData.c">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
     </ClCompile>
+    <ClCompile Include="createSaveFile.c">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
+    <ClCompile Include="loadSaveFile.c">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
+    <ClCompile Include="saveSaveFile.c">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
+    <ClCompile Include="unloadSaveFile.c">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -268,6 +283,9 @@
     </ClInclude>
     <ClInclude Include="saveData.h">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
+    </ClInclude>
+    <ClInclude Include="savefile.h">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

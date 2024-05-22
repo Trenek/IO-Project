@@ -11,6 +11,7 @@
 #include "player.h"
 
 #include "load.h"
+#include "savefile.h"
 
 static void loadBodyPosition(struct playInfo *info) {
     FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
@@ -50,68 +51,6 @@ static void loadArmorPosition(struct playInfo *info) {
     }
 
     fclose(armorMeasurements);
-}
-
-static void createEnemies(FILE* file, struct playInfo *info) {
-    int i = 0;
-    int id = 0;
-    float x = 0.0f;
-    float y = 0.0f;
-
-    fscanf(file, "%i", &info->enemyQuantity);
-    info->enemies = malloc(sizeof(struct character) * info->enemyQuantity);
-
-    while (i < info->enemyQuantity) {
-        fscanf(file, "%i %i %f %f", &id, &info->enemies[i].dialog, &x, &y);
-
-        loadCharacter(&info->enemies[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
-        assemblePlayerTexture(info, &info->enemies[i]);
-
-        i += 1;
-    }
-}
-
-static void destroyEnemies(struct playInfo *info) {
-    int i = 0;
-
-    while (i < info->enemyQuantity) {
-        unloadCharacter(&info->enemies[i]);
-
-        i += 1;
-    }
-
-    free(info->enemies);
-}
-
-static void loadShops(FILE *file, struct playInfo *info) {
-    int i = 0;
-    int id = 0;
-    float x = 0.0f;
-    float y = 0.0f;
-
-    fscanf(file, "%i", &info->shopsQuantity);
-    info->shops = malloc(sizeof(struct character) * info->shopsQuantity);
-
-    while (i < info->shopsQuantity) {
-        fscanf(file, "%i %i %f %f", &id, &info->shops[i].dialog, &x, &y);
-
-        loadCharacter(&info->shops[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
-        assemblePlayerTexture(info, &info->shops[i]);
-
-        i += 1;
-    }
-}
-
-static void unloadShops(struct playInfo *info) {
-    int i = 0;
-
-    while (i < info->shopsQuantity) {
-        unloadCharacter(&info->shops[i]);
-
-        i += 1;
-    }
-
-    free(info->shops);
 }
 
 static void loadWeapons(struct playInfo *info) {
@@ -172,6 +111,7 @@ static void unloadItems(struct playInfo *info) {
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
+        .saveName = info->saveName,
         .fonts = info->fonts,
         .fontsQuantity = info->fontsQuantity,
         .music = info->music,
@@ -188,7 +128,6 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
             .fovy = 45
         }
     };
-    FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", info->saveName), "r");
 
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
@@ -199,15 +138,10 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     loadBodyParts(&result);
     loadArmor(&result);
 
-    createEnemies(mapFile, &result);
-    loadShops(mapFile, &result);
+    loadSaveFile(&result, info->saveName);
 
     loadItems(&result);
     loadWeapons(&result);
-
-    loadPlayer(&result, info->saveName);
-
-    fclose(mapFile);
 
     return result;
 }
@@ -215,13 +149,10 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 void freePlayInfo(struct playInfo *info) {
     UnloadRenderTexture(*info->screenCamera);
 
-    unloadPlayer(info);
-
     unloadItems(info);
     unloadWeapons(info);
 
-    destroyEnemies(info);
-    unloadShops(info);
+    unloadSaveFile(info);
 
     unloadArmor(info);
     unloadBodyParts(info);

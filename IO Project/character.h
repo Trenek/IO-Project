@@ -14,6 +14,8 @@ struct character {
 	int exhaustion;
 	struct Object2D object;
 
+	int ID;
+
 	int dialog;
 	int direction;
 	int bodyPart[10];
@@ -21,7 +23,6 @@ struct character {
 	int weapon;
 };
 
-void loadCharacter(struct character *character, const char *characterSave, float x, float z);
 void unloadCharacter(struct character *character);
 void assemblePlayerTexture(struct playInfo *info, struct character *character);
 

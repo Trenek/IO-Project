@@ -36,6 +36,10 @@ struct choiceBox {
     int rowQuantity;
     int wideness;
 
+
+    struct button prev;
+    struct button next;
+
     union {
         struct choiceBoxPositionParameters init;
         struct {

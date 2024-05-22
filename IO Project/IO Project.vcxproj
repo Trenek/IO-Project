@@ -150,6 +150,7 @@
     <ClCompile Include="achievements.c" />
     <ClCompile Include="character.c" />
     <ClCompile Include="choiceBox.c" />
+    <ClCompile Include="createSaveFile.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
     <ClCompile Include="equipementsBox.c" />
@@ -160,8 +161,10 @@
     <ClCompile Include="itemBox.c" />
     <ClCompile Include="loadArmor.c" />
     <ClCompile Include="loadBodyParts.c" />
+    <ClCompile Include="loadSaveFile.c" />
     <ClCompile Include="npc.c" />
     <ClCompile Include="saveData.c" />
+    <ClCompile Include="saveSaveFile.c" />
     <ClCompile Include="slideBox.c" />
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="ModUpdateCamera.c" />
@@ -184,6 +187,7 @@
     <ClCompile Include="training.c" />
     <ClCompile Include="tutorial.c" />
     <ClCompile Include="tutorialSlide.c" />
+    <ClCompile Include="unloadSaveFile.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
@@ -203,6 +207,7 @@
     <ClInclude Include="object2D.h" />
     <ClInclude Include="renderer.h" />
     <ClInclude Include="saveData.h" />
+    <ClInclude Include="savefile.h" />
     <ClInclude Include="slideBox.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="tutorialSlide.h" />

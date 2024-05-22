@@ -4,9 +4,16 @@ void CalculateButtonPosition(struct button *element) {
     Vector2 size = MeasureTextEx(*element->font, element->text, (float)element->fontSize, (float)element->spaceing);
     struct buttonPositionParameters initial = element->init;
 
+    element->boxRectangle = (Rectangle){
+        .x = initial.x - initial.posX * (initial.incX + size.x / 2.0f),
+        .y = initial.y - initial.posY * (initial.incY + size.y / 2.0f),
+        .width = size.x + 2 * initial.incX,
+        .height = size.y + 2 * initial.incY
+    };
+
     element->textLeftCorner = (Vector2){
-        .x = initial.x - initial.posX * size.x / 2,
-        .y = initial.y - initial.posY * size.y / 2
+        .x = element->boxRectangle.x + initial.incX,
+        .y = element->boxRectangle.y + initial.incY
     };
 
     element->boxRectangle = (Rectangle){

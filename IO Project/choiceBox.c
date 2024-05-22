@@ -1,6 +1,7 @@
 #include <string.h>
 
 #include "state.h"
+#include "button.h"
 
 #include "choiceBox.h"
 #include "saveData.h"
@@ -104,8 +105,50 @@ static void initializeRows(struct choiceBox *const this) {
     };
 }
 
+static void initializeButtons(struct choiceBox *const this) {
+    this->prev = (struct button){
+        .text = "Poprzednie",
+        .init = {
+            .x = (int)this->row[0][MAIN].rec.x,
+            .y = (int)(this->row[this->rowQuantity - 1][MAIN].rec.y + this->row[this->rowQuantity - 1][MAIN].rec.height),
+            .incX = 10,
+            .incY = 10,
+            .posX = 0,
+            .posY = 0
+        },
+        .font = this->font,
+        .fontSize = this->fontSize,
+        .fontColor = this->fontColor,
+        .color = this->color,
+        .hoverColor = this->hoverColor,
+        .spaceing = this->spaceing
+    };
+
+    this->next = (struct button){
+        .text = "Następne",
+        .init = {
+            .x = (int)(this->row[0][MAIN].rec.x + this->row[0][MAIN].rec.width),
+            .y = (int)(this->row[this->rowQuantity - 1][MAIN].rec.y + this->row[this->rowQuantity - 1][MAIN].rec.height),
+            .incX = 10,
+            .incY = 10,
+            .posX = 2,
+            .posY = 0
+        },
+        .font = this->font,
+        .fontSize = this->fontSize,
+        .fontColor = this->fontColor,
+        .color = this->color,
+        .hoverColor = this->hoverColor,
+        .spaceing = this->spaceing
+    };
+
+    CalculateButtonPosition(&this->prev);
+    CalculateButtonPosition(&this->next);
+}
+
 void initializeChoiceBox(struct choiceBox *const this) {
     initializeRows(this);
+    initializeButtons(this);
     loadSaves(this);
 
     this->chosenRow = -1;
@@ -152,11 +195,23 @@ void DrawChoiceBox(struct choiceBox *const this) {
             this->inactiveBorderColor
         );
 
-        DrawTextEx(*this->font, TextFormat("%i", i + 1 + this->page * this->rowQuantity), this->row[i][NUM].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
-        DrawTextEx(*this->font, this->saveData[i + this->page * this->rowQuantity].text, this->row[i][NAME].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
-        DrawTextEx(*this->font, assembleDate(&this->saveData[i + this->page * this->rowQuantity]), this->row[i][DATE].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+        if (i + this->page * this->rowQuantity < this->dataQuantity) {
+            DrawTextEx(*this->font, TextFormat("%i", i + 1 + this->page * this->rowQuantity), this->row[i][NUM].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+            DrawTextEx(*this->font, this->saveData[i + this->page * this->rowQuantity].text, this->row[i][NAME].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+            DrawTextEx(*this->font, assembleDate(&this->saveData[i + this->page * this->rowQuantity]), this->row[i][DATE].textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+        }
 
         i += 1;
+    }
+
+    DrawButton(this->next);
+    DrawButton(this->prev);
+
+    if (this->page == 0) {
+        DrawRectangleRec(this->prev.boxRectangle, (Color) {100, 100, 100, 100});
+    }
+    if ((this->page + 1) * this->rowQuantity >= this->dataQuantity) {
+        DrawRectangleRec(this->next.boxRectangle, (Color) {100, 100, 100, 100});
     }
 }
 
@@ -173,4 +228,15 @@ void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
         i += 1;
     }
 
+    if (isMouseOver(this->prev)) {
+        if (this->page > 0) {
+            this->page -= 1;
+        }
+    }
+
+    if (isMouseOver(this->next)) {
+        if ((this->page + 1) * this->rowQuantity < this->dataQuantity) {
+            this->page += 1;
+        }
+    }
 }

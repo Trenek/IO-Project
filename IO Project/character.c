@@ -6,60 +6,6 @@
 
 #include "playState.h"
 
-static void loadBody(FILE *playerFile, struct character *character) {
-    int i = 0;
-
-    while (i < 10) {
-        fscanf(playerFile, "%i", &character->bodyPart[i]);
-
-        i += 1;
-    }
-}
-
-static void loadArmor(FILE *playerFile, struct character *character) {
-    int i = 0;
-
-    while (i < 9) {
-        fscanf(playerFile, "%i", &character->armorPart[i]);
-
-        i += 1;
-    }
-}
-
-void loadCharacter(struct character *character, const char *characterSave, float x, float z) {
-    FILE *playerFile = fopen(characterSave, "r");
-    struct Object2D *object = &character->object;
-
-    *object = (struct Object2D){
-        .position = (Vector3) {
-            .x = x,
-            .y = 0.0f,
-            .z = z
-        },
-        .texture = malloc(sizeof(Texture2D))
-    };
-
-    character->direction = 0;
-
-    fscanf(playerFile, "%[^\n]", character->name);
-    fscanf(playerFile, "%f %f", &object->sizeV.x, &object->sizeV.y);
-
-    loadBody(playerFile, character);
-    loadArmor(playerFile, character);
-
-    fscanf(playerFile, "%i", &character->weapon);
-
-    fclose(playerFile);
-}
-
-void unloadCharacter(struct character *character) {
-    if (character->object.texture != NULL) {
-        UnloadTexture(*character->object.texture);
-
-        free(character->object.texture);
-    }
-}
-
 inline void DrawBodyPart(struct playInfo *info, struct character *character, int i) {
     DrawTexture(
         info->bodyParts[i][character->bodyPart[i]][character->direction],
