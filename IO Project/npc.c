@@ -39,6 +39,29 @@ void detectFight(struct playInfo *info, enum playState *state) {
 	}
 }
 
+void followPlayer(struct playInfo *info) {
+	Vector3 *npcPosition = NULL;
+	Vector3 *playerPosition = NULL;
+
+	float newDistance = 0;
+	float distance = 0;
+
+	int i = 0;
+
+	while (i < info->enemyQuantity) {
+		playerPosition = &info->player.character.object.position;
+		npcPosition = &info->enemies[i].object.position;
+		newDistance = info->enemies[i].object.sizeV.x;
+
+		distance = powf(playerPosition->x - npcPosition->x, 2.0) + powf(playerPosition->z - npcPosition->z, 2.0);
+
+		npcPosition->x = playerPosition->x + ((sqrtf(distance) - .1f) / sqrtf(distance)) * (npcPosition->x - playerPosition->x);
+		npcPosition->z = playerPosition->z + ((sqrtf(distance) - .1f) / sqrtf(distance)) * (npcPosition->z - playerPosition->z);
+
+		i += 1;
+	}
+}
+
 void hitbox(struct playInfo *info) {
 	Vector3 *npcPosition = NULL;
 	Vector3 *playerPosition = NULL;
