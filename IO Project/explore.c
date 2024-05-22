@@ -222,7 +222,7 @@ void explore(enum playState *playState, struct playInfo *info) {
 
         detectFight(info, playState);
         //hitbox(info);
-        followPlayer(info);
+        //followPlayer(info);
         hitboxShop(info, &shopInteraction);
     }
 
