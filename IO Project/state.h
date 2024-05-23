@@ -8,7 +8,6 @@ enum state {
     NEW_GAME,
     LOAD_GAME,
     SETTINGS,
-    ACHIEVEMENTS,
     PLAY,
     TUTORIAL,
 

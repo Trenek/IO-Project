@@ -20,6 +20,7 @@ enum playState {
     SHOP,
     TRAINING,
     MISSIONS,
+    ACHIEVEMENTS,
 
     RETURN,
     DESKTOP
