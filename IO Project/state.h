@@ -38,7 +38,6 @@ void menu(enum state *state, struct menuInfo *info);
 void newGame(enum state *state, struct menuInfo *info);
 void loadGame(enum state *state, struct menuInfo *info);
 void settings(enum state *state, struct menuInfo *info);
-void achievements(enum state *state, struct menuInfo *info);
 void play(enum state *state, struct menuInfo *info);
 void tutorial(enum state* state, struct menuInfo* info);
 
