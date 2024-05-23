@@ -26,6 +26,7 @@ void explore(enum playState *playState, struct playInfo *info) {
 
     struct button save = {
         .text = "Zapisz",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 4,
             .y = height + 0 * spaceY,
@@ -43,6 +44,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button equipment = {
         .text = "Ekwipunek",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 4,
             .y = height + 1 * spaceY,
@@ -60,6 +62,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button map = {
         .text = "Mapa",
+        .isActive = 0,
         .init = {
             .x = GetScreenWidth() >> 4,
             .y = height + 2 * spaceY,
@@ -77,6 +80,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button pause = {
         .text = "Pauza",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - (GetScreenWidth() >> 4),
             .y = height,
@@ -94,6 +98,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button missions = {
         .text = "Misje",
+        .isActive = 0,
         .init = {
             .x = GetScreenWidth() - (GetScreenWidth() >> 4),
             .y = height + spaceY,
@@ -111,6 +116,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     };
     struct button shop = {
         .text = "Kliknij aby przejść do sklepu",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = GetScreenHeight() - (GetScreenHeight() >> 3),
@@ -222,7 +228,7 @@ void explore(enum playState *playState, struct playInfo *info) {
 
         detectFight(info, playState);
         //hitbox(info);
-        //followPlayer(info);
+        followPlayer(info);
         hitboxShop(info, &shopInteraction);
     }
 

@@ -20,6 +20,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Wczytywanie gry",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 50,
@@ -37,6 +38,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
     };
     struct button loadGame = {
         .text = "Wczytaj",
+        .isActive = 0,
         .init = {
             .x = (GetScreenWidth() >> 1) - spaceX,
             .y = height + 4 * spaceY,
@@ -54,6 +56,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) + spaceX,
             .y = height + 4 * spaceY,
@@ -105,21 +108,16 @@ void loadGame(enum state *state, struct menuInfo *info) {
             DrawButton(loadGame);
             DrawButton(goBack);
 
-            if (saves.chosenRow == -1) DrawRectangleRec(loadGame.boxRectangle, (Color) { 100, 100, 100, 100 });
-
             DrawChoiceBox(&saves);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(loadGame)) {
-                if (saves.chosenRow != -1) {
-                    *state = PLAY;
-                }
-            }
-            else if (isMouseOver(goBack)) 
-                *state = MENU;
+            if (isMouseOver(loadGame)) *state = PLAY;
+            else if (isMouseOver(goBack)) *state = MENU;
 
             UpdateChoiceBox(&saves, info);
+
+            loadGame.isActive = saves.chosenRow == -1 ? 0 : 1;
         }
     }
 

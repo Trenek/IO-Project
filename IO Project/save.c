@@ -22,6 +22,7 @@ void save(enum playState *state, struct playInfo *info) {
 
     struct button title = {
         .text = "Zapisz Rozgrywkę",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = GetScreenHeight() >> 2,
@@ -40,6 +41,7 @@ void save(enum playState *state, struct playInfo *info) {
 
     struct button saveNameInfo = {
         .text = "Nazwa Zapisu",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height,
@@ -56,9 +58,9 @@ void save(enum playState *state, struct playInfo *info) {
         .spaceing = 0
     };
 
-
     struct button overwrite = {
         .text = "Nadpisz",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 2 * space,
@@ -76,6 +78,7 @@ void save(enum playState *state, struct playInfo *info) {
     };
     struct button create = {
         .text = "Stwórz",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 2 * space,
@@ -116,6 +119,7 @@ void save(enum playState *state, struct playInfo *info) {
 
     struct button resume = {
         .text = "Wróć",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 3 * space,

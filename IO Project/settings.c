@@ -50,6 +50,7 @@ void settings(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Ustawienia",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 100,
@@ -68,6 +69,7 @@ void settings(enum state *state, struct menuInfo *info) {
 
     struct button framesPerSecond = {
         .text = "Klatki na sekundę",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height - spaceY,
@@ -85,6 +87,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button textureResolution = {
         .text = "Rozdzielczość tekstur",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height,
@@ -102,6 +105,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button windowDimensions = {
         .text = "Wymiary okna",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height + spaceY,
@@ -119,6 +123,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button fullScreenButton = {
         .text = "Tryb Pełnoekranowy",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height + 2 * spaceY,
@@ -134,8 +139,9 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = color2,
         .spaceing = 0
     };
-    struct button resetSettings = { //ewentualnie domyślne ustawienia
+    struct button resetSettings = {
         .text = "Zresetuj ustawienia",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1),
             .y = height + 3 * spaceY,
@@ -152,8 +158,9 @@ void settings(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
-    struct button accept = {  //tutaj nie do końca wiem na czym stanęlśmy z restar/reload/akceptuj/zapisz
+    struct button accept = {
         .text = "Accept",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) - (GetScreenWidth() >> 3),
             .y = height + 4 * spaceY,
@@ -171,6 +178,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button restart = {  //tutaj nie do końca wiem na czym stanęlśmy z restar/reload/akceptuj/zapisz
         .text = "Restart",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1),
             .y = height + 4 * spaceY,
@@ -188,6 +196,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) + (GetScreenWidth() >> 3),
             .y = height + 4 * spaceY,

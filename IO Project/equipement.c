@@ -17,6 +17,7 @@ void equipement(enum playState* state, struct playInfo* info) {
 
     struct button title = {
         .text = "Ekwipunek",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 50,
@@ -34,6 +35,7 @@ void equipement(enum playState* state, struct playInfo* info) {
     };
     struct button equip = {
         .text = "Wyposaż",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height - space,
@@ -51,6 +53,7 @@ void equipement(enum playState* state, struct playInfo* info) {
     };
     struct button destroy = {
         .text = "Zniszcz",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height,
@@ -68,6 +71,7 @@ void equipement(enum playState* state, struct playInfo* info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height + 2 * space,

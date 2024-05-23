@@ -18,6 +18,7 @@ void achievements(enum state *state, struct menuInfo *info) {
 
     struct button menuTitle = {
         .text = "Osiągnięcia",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 100,
@@ -35,6 +36,7 @@ void achievements(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 4 * spaceY,

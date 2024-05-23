@@ -55,8 +55,8 @@ void followPlayer(struct playInfo *info) {
 
 		distance = powf(playerPosition->x - npcPosition->x, 2.0) + powf(playerPosition->z - npcPosition->z, 2.0);
 
-		npcPosition->x = playerPosition->x + ((sqrtf(distance) - .1f) / sqrtf(distance)) * (npcPosition->x - playerPosition->x);
-		npcPosition->z = playerPosition->z + ((sqrtf(distance) - .1f) / sqrtf(distance)) * (npcPosition->z - playerPosition->z);
+		npcPosition->x = playerPosition->x + ((sqrtf(distance) - GetFrameTime()) / sqrtf(distance)) * (npcPosition->x - playerPosition->x);
+		npcPosition->z = playerPosition->z + ((sqrtf(distance) - GetFrameTime()) / sqrtf(distance)) * (npcPosition->z - playerPosition->z);
 
 		i += 1;
 	}

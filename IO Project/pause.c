@@ -17,6 +17,7 @@ void pause(enum playState *state, struct playInfo *info) {
 
     struct button title = {
         .text = "Pauza",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = GetScreenHeight() >> 2,
@@ -34,6 +35,7 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button resume = {
         .text = "Wznów",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height,
@@ -51,6 +53,7 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button achivements = {
         .text = "Osiągnięcia",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + space,
@@ -68,6 +71,7 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button menu = {
         .text = "Wyjdź do Menu",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 2 * space,
@@ -85,6 +89,7 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button exit = {
         .text = "Wyjdź do Pulpitu",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 3 * space,

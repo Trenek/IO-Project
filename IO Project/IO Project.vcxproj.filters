@@ -28,9 +28,6 @@
     <Filter Include="Pliki nagłówkowe\playState">
       <UniqueIdentifier>{77db7327-ca52-4001-ad93-e464a64bf249}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\Key">
-      <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\inputBox">
       <UniqueIdentifier>{fe5dfbd7-6480-429e-8bc8-879c743cf454}</UniqueIdentifier>
     </Filter>
@@ -79,14 +76,20 @@
     <Filter Include="Pliki źródłowe\load\bodyParts">
       <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\fscanfWithAllocation">
-      <UniqueIdentifier>{30d0d079-6aae-4f81-97c1-ac8b89b6e9cc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
       <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\savefileOperations">
       <UniqueIdentifier>{cca953df-2a6e-4afd-9150-24cc81d23763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\additions">
+      <UniqueIdentifier>{c819062c-a4a4-4e98-b51b-f69887357099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\additions\fscanfWithAllocation">
+      <UniqueIdentifier>{30d0d079-6aae-4f81-97c1-ac8b89b6e9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\additions\Key">
+      <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -154,7 +157,7 @@
       <Filter>Pliki nagłówkowe\playState</Filter>
     </ClCompile>
     <ClCompile Include="ModUpdateCamera.c">
-      <Filter>Pliki źródłowe\Key</Filter>
+      <Filter>Pliki źródłowe\additions\Key</Filter>
     </ClCompile>
     <ClCompile Include="inputBox.c">
       <Filter>Pliki źródłowe\menu\inputBox</Filter>
@@ -199,7 +202,7 @@
       <Filter>Pliki źródłowe\load\bodyParts</Filter>
     </ClCompile>
     <ClCompile Include="fscanfWithAllocation.c">
-      <Filter>Pliki źródłowe\fscanfWithAllocation</Filter>
+      <Filter>Pliki źródłowe\additions\fscanfWithAllocation</Filter>
     </ClCompile>
     <ClCompile Include="saveData.c">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
@@ -234,7 +237,7 @@
       <Filter>Pliki nagłówkowe\playState</Filter>
     </ClInclude>
     <ClInclude Include="ModUpdateCamera.h">
-      <Filter>Pliki źródłowe\Key</Filter>
+      <Filter>Pliki źródłowe\additions\Key</Filter>
     </ClInclude>
     <ClInclude Include="inputBox.h">
       <Filter>Pliki źródłowe\menu\inputBox</Filter>
@@ -279,7 +282,7 @@
       <Filter>Pliki źródłowe\load</Filter>
     </ClInclude>
     <ClInclude Include="fscanfWithAllocation.h">
-      <Filter>Pliki źródłowe\fscanfWithAllocation</Filter>
+      <Filter>Pliki źródłowe\additions\fscanfWithAllocation</Filter>
     </ClInclude>
     <ClInclude Include="saveData.h">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>

@@ -22,6 +22,7 @@ void fight(enum playState *playState, struct playInfo *info) {
 
     struct button back = {
         .text = "Wróć",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 4,
             .y = height + 0 * spaceY,

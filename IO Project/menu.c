@@ -18,6 +18,7 @@ void menu(enum state* state, struct menuInfo* info) {
 
     struct button menuTitle = {
         .text = "Menu Startowe",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 100,
@@ -35,6 +36,7 @@ void menu(enum state* state, struct menuInfo* info) {
     };
     struct button newGame = {
         .text = "Nowa Gra",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height,
@@ -52,6 +54,7 @@ void menu(enum state* state, struct menuInfo* info) {
     };
     struct button loadGame = {
         .text = "Wczytaj Grę",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + space,
@@ -69,6 +72,7 @@ void menu(enum state* state, struct menuInfo* info) {
     };
     struct button settings = {
         .text = "Ustawienia",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 2 * space,
@@ -86,6 +90,7 @@ void menu(enum state* state, struct menuInfo* info) {
     };
     struct button achievements = {
         .text = "Samouczek",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 3 * space,
@@ -103,6 +108,7 @@ void menu(enum state* state, struct menuInfo* info) {
     };
     struct button exit = {
         .text = "Wyjdź do Pulpitu",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + 4 * space,

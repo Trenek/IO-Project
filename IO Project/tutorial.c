@@ -20,6 +20,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
 
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = 50,
             .y = 50,

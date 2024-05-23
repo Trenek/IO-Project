@@ -23,6 +23,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button title = {
         .text = "Nowa gra",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 100,
@@ -41,6 +42,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button gameSaveName = {
         .text = "Nazwa zapisu",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height - spaceY,
@@ -58,6 +60,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button characterName = {
         .text = "Nazwa postaci",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height,
@@ -75,6 +78,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button difficultyLevel = {
         .text = "Poziom trudności",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height + spaceY,
@@ -93,6 +97,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button startGame = {
         .text = "Rozpocznij grę",
+        .isActive = 0,
         .init = {
             .x = (GetScreenWidth() >> 1) - spaceX,
             .y = height + 4 * spaceY,
@@ -110,6 +115,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) + spaceX,
             .y = height + 4 * spaceY,
@@ -128,6 +134,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button errorButton = {
         .text = "Zapis o takiej nazwie już istnieje!",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + (int)(2.5 * spaceY),
@@ -244,20 +251,14 @@ void newGame(enum state *state, struct menuInfo *info) {
             DrawInputBox(&inputGameSaveName);
             DrawInputBox(&inputCharacterName);
             DrawSlideBox(&setDifficultyLevel);
-
-            if (inputGameSaveName.currentLength < 1 || inputCharacterName.currentLength < 1) {
-                DrawRectangleRec(startGame.boxRectangle, (Color) { 100, 100, 100, 100 });
-            }
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) {
-                if (inputGameSaveName.currentLength > 0 && inputCharacterName.currentLength > 0) {
-                    error = createNewSave(inputGameSaveName.text, inputCharacterName.text);
-                    if (error == 0) {
-                        *state = PLAY;
-                        strcpy(info->saveName, inputGameSaveName.text);
-                    }
+                error = createNewSave(inputGameSaveName.text, inputCharacterName.text);
+                if (error == 0) {
+                    *state = PLAY;
+                    strcpy(info->saveName, inputGameSaveName.text);
                 }
             }
             else if (isMouseOver(goBack)) *state = MENU;
@@ -266,5 +267,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         UpdateInputBox(&inputGameSaveName);
         UpdateInputBox(&inputCharacterName);
         UpdateSlideBox(&setDifficultyLevel);
+
+        startGame.isActive = (inputGameSaveName.currentLength < 1 || inputCharacterName.currentLength < 1) ? 0 : 1;
     }
 }

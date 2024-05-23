@@ -16,6 +16,9 @@ struct buttonPositionParameters {
 
 struct button {
     const char *text;
+
+    bool isActive;
+
     union {
         struct buttonPositionParameters init;
         struct {
@@ -23,19 +26,21 @@ struct button {
             Rectangle boxRectangle;
         };
     };
+
     Font *font;
     int fontSize;
     Color fontColor;
+    int spaceing;
+
     Color color;
     Color hoverColor;
-    int spaceing;
 };
 
 void CalculateButtonPosition(struct button *element);
 void DrawButton(struct button element);
 
 inline bool isMouseOver(struct button element) {
-    return CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);
+    return element.isActive && CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);
 }
 
 #endif

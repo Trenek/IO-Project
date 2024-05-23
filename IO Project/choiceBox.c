@@ -108,6 +108,7 @@ static void initializeRows(struct choiceBox *const this) {
 static void initializeButtons(struct choiceBox *const this) {
     this->prev = (struct button){
         .text = "Poprzednie",
+        .isActive = 1,
         .init = {
             .x = (int)this->row[0][MAIN].rec.x,
             .y = (int)(this->row[this->rowQuantity - 1][MAIN].rec.y + this->row[this->rowQuantity - 1][MAIN].rec.height),
@@ -126,6 +127,7 @@ static void initializeButtons(struct choiceBox *const this) {
 
     this->next = (struct button){
         .text = "Następne",
+        .isActive = 1,
         .init = {
             .x = (int)(this->row[0][MAIN].rec.x + this->row[0][MAIN].rec.width),
             .y = (int)(this->row[this->rowQuantity - 1][MAIN].rec.y + this->row[this->rowQuantity - 1][MAIN].rec.height),
@@ -153,6 +155,9 @@ void initializeChoiceBox(struct choiceBox *const this) {
 
     this->chosenRow = -1;
     this->page = 0;
+
+    this->prev.isActive = (this->page == 0) ? 0 : 1;
+    this->next.isActive = ((this->page + 1) * this->rowQuantity >= this->dataQuantity) ? 0 : 1;
 }
 
 static void unloadSaves(struct choiceBox *const this) {
@@ -206,13 +211,6 @@ void DrawChoiceBox(struct choiceBox *const this) {
 
     DrawButton(this->next);
     DrawButton(this->prev);
-
-    if (this->page == 0) {
-        DrawRectangleRec(this->prev.boxRectangle, (Color) {100, 100, 100, 100});
-    }
-    if ((this->page + 1) * this->rowQuantity >= this->dataQuantity) {
-        DrawRectangleRec(this->next.boxRectangle, (Color) {100, 100, 100, 100});
-    }
 }
 
 void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
@@ -228,15 +226,9 @@ void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
         i += 1;
     }
 
-    if (isMouseOver(this->prev)) {
-        if (this->page > 0) {
-            this->page -= 1;
-        }
-    }
+    if (isMouseOver(this->prev)) this->page -= 1;
+    else if (isMouseOver(this->next)) this->page += 1;
 
-    if (isMouseOver(this->next)) {
-        if ((this->page + 1) * this->rowQuantity < this->dataQuantity) {
-            this->page += 1;
-        }
-    }
+    this->prev.isActive = (this->page == 0) ? 0 : 1;
+    this->next.isActive = ((this->page + 1) * this->rowQuantity >= this->dataQuantity) ? 0 : 1;
 }

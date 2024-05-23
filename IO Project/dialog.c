@@ -49,6 +49,7 @@ static void loadFile(const char* fileName, struct DialogData *saveData, struct b
         fscanfUnlimited(file, &saveData->responses[i].statement, '\n');
         (*options)[i] = (struct button) {
             .text = saveData->responses[i].statement,
+            .isActive = 1,
             .init = {
                 .x = (int)(screenCamera->texture.width / 5.0f + i * 0.8f * screenCamera->texture.width / (saveData->numberOfPossibleResponses)),
                 .y = (GetScreenHeight() - (GetScreenHeight() >> 2)) + screenCamera->texture.height - 40,
@@ -95,6 +96,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
 
     struct button title = {
         .text = "Dialog",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 50,

@@ -17,6 +17,7 @@ void shop(enum playState* state, struct playInfo* info) {
 
     struct button title = {
         .text = "Sklep",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = 50,
@@ -33,7 +34,8 @@ void shop(enum playState* state, struct playInfo* info) {
         .spaceing = 0
     };
     struct button equip = {
-        .text = "Wyposaz",
+        .text = "Wyposaż",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height - space,
@@ -51,6 +53,7 @@ void shop(enum playState* state, struct playInfo* info) {
     };
     struct button destroy = {
         .text = "Zniszcz",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height,
@@ -68,6 +71,7 @@ void shop(enum playState* state, struct playInfo* info) {
     };
     struct button goBack = {
         .text = "Powrót",
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() - size / 2 - 70,
             .y = height + 2 * space,

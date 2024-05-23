@@ -25,6 +25,10 @@ void CalculateButtonPosition(struct button *element) {
 }
 
 void DrawButton(struct button element) {
-    DrawRectangleRec(element.boxRectangle, CheckCollisionPointRec(GetMousePosition(), element.boxRectangle) ? element.hoverColor : element.color);
+    DrawRectangleRec(element.boxRectangle, !element.isActive || !CheckCollisionPointRec(GetMousePosition(), element.boxRectangle) ? element.color : element.hoverColor);
     DrawTextEx(*element.font, element.text, element.textLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+
+    if (!element.isActive) {
+        DrawRectangleRec(element.boxRectangle, (Color) { .r = 100, .g = 100, .b = 100, .a = 100 });
+    }
 }
