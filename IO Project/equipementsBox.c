@@ -17,6 +17,11 @@ void InitializeEquipementBox(struct equipementBox *const element) {
         .height = height
     };
 
+    element->playerPosition = (Vector2){
+        .x = element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize),
+        .y = element->rec.y + init.itemBoxSize,
+    };
+
     for (int i = 0; i < 10; i++) {
         element->equipedItems[i] = (struct itemBox){
             .init = {
@@ -57,7 +62,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
         .isActive = 1,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
-            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 1 * (init.gapSize + init.itemBoxSize)),
+            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 2 * (init.gapSize + init.itemBoxSize)),
             .incX = init.buttonIncX,
             .incY = init.buttonIncY,
             .posX = 0,
@@ -76,7 +81,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
         .isActive = 1,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
-            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 1 * (init.gapSize + init.itemBoxSize)),
+            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 2 * (init.gapSize + init.itemBoxSize)),
             .incX = init.buttonIncX,
             .incY = init.buttonIncY,
             .posX = 0,
@@ -95,7 +100,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
         .isActive = 1,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
-            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 2 * (init.gapSize + init.itemBoxSize)),
+            .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 3 * (init.gapSize + init.itemBoxSize)),
             .incX = init.buttonIncX,
             .incY = init.buttonIncY,
             .posX = 0,
@@ -188,6 +193,8 @@ void DrawEquipementBox(struct equipementBox *const element, struct playInfo *inf
     DrawButton(element->activeItemType == 1 ? element->unequip : element->equip);
     DrawButton(element->destroy);
     DrawButton(element->goBack);
+
+    DrawTextureEx(*info->player.character.object.texture, element->playerPosition, 0, element->equip.boxRectangle.width / info->player.character.object.texture->width, WHITE);
 }
 
 static void Equip(struct equipementBox *element) {

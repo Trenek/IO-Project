@@ -25,6 +25,7 @@ struct equipementBox {
         struct equipementBoxPositionParameters init;
         struct {
             Rectangle rec;
+            Vector2 playerPosition;
 
             int activeItemType;
             int activeItem;

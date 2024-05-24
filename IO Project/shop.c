@@ -8,12 +8,7 @@
 #define FONT_SIZE (25)
 
 void shop(enum playState* state, struct playInfo* info) {
-    const int height = (GetScreenHeight() >> 1) + 80;
-    const int space = FONT_SIZE + INC_Y * 2 + 10;
-    const int size = 400;
-
     Color color1 = { .r = 100, .g = 100, .b = 100, .a = 200 };
-    Color color2 = { .r = 0, .g = 0, .b = 0, .a = 60 };
 
     struct button title = {
         .text = "Sklep",
@@ -33,67 +28,17 @@ void shop(enum playState* state, struct playInfo* info) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-    struct button equip = {
-        .text = "Wyposaż",
-        .isActive = 1,
-        .init = {
-            .x = GetScreenWidth() - size / 2 - 70,
-            .y = height - space,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = DARKGRAY,
-        .hoverColor = color2,
-        .spaceing = 0
-    };
-    struct button destroy = {
-        .text = "Zniszcz",
-        .isActive = 1,
-        .init = {
-            .x = GetScreenWidth() - size / 2 - 70,
-            .y = height,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = DARKGRAY,
-        .hoverColor = color2,
-        .spaceing = 0
-    };
-    struct button goBack = {
-        .text = "Powrót",
-        .isActive = 1,
-        .init = {
-            .x = GetScreenWidth() - size / 2 - 70,
-            .y = height + 2 * space,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = DARKGRAY,
-        .hoverColor = color2,
-        .spaceing = 0
-    };
     struct equipementBox equipement = {
         .init = {
-            .x = (GetScreenWidth() - size) >> 1,
-            .y = ((GetScreenHeight() - size) >> 1) + 50,
-            .posX = 1,
+            .x = (GetScreenWidth() >> 1),
+            .y = GetScreenHeight() >> 1,
+            .posX = 0,
             .posY = 1,
-            .itemBoxSize = 40
+            .itemBoxSize = 40,
+            .gapSize = 10,
+            .buttonFont = &info->fonts[0],
+            .buttonIncX = 5,
+            .buttonIncY = 5
         },
         .itemsID = info->player.equipment,
         .armorPart = &info->player.character.armorPart,
@@ -101,9 +46,6 @@ void shop(enum playState* state, struct playInfo* info) {
     };
 
     CalculateButtonPosition(&title);
-    CalculateButtonPosition(&equip);
-    CalculateButtonPosition(&destroy);
-    CalculateButtonPosition(&goBack);
     InitializeEquipementBox(&equipement);
 
     while (*state == SHOP && !WindowShouldClose()) {
@@ -116,16 +58,11 @@ void shop(enum playState* state, struct playInfo* info) {
 
         DrawEquipementBox(&equipement, info);
         DrawButton(title);
-        DrawButton(equip);
-        DrawButton(destroy);
-        DrawButton(goBack);
 
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(goBack)) *state = DIALOG;
-
-            UpdateEquipementBox(&equipement, info);
+            if (UpdateEquipementBox(&equipement, info)) *state = DIALOG;
         }
     }
 }
