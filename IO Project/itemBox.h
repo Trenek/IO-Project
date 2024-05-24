@@ -6,6 +6,8 @@
 struct itemBoxPositionParameters {
     int x;
     int y;
+    int posX;
+    int posY;
     int width;
     int height;
 };
