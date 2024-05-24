@@ -93,9 +93,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="IO Project.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="object2D.c">
       <Filter>Pliki źródłowe\objects\object</Filter>
     </ClCompile>
@@ -218,6 +215,9 @@
     </ClCompile>
     <ClCompile Include="unloadSaveFile.c">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
+    <ClCompile Include="IO Project.c">
+      <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

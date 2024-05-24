@@ -88,13 +88,13 @@ void shop(enum playState* state, struct playInfo* info) {
         .spaceing = 0
     };
     struct equipementBox equipement = {
-        .x = (GetScreenWidth() - size) >> 1,
-        .y = ((GetScreenHeight() - size) >> 1) + 50,
-        .activeItem = -1,
-        .activeItemType = -1,
-        .width = size,
-        .height = size,
-        .itemBoxSize = 40,
+        .init = {
+            .x = (GetScreenWidth() - size) >> 1,
+            .y = ((GetScreenHeight() - size) >> 1) + 50,
+            .posX = 1,
+            .posY = 1,
+            .itemBoxSize = 40
+        },
         .itemsID = info->player.equipment,
         .armorPart = &info->player.character.armorPart,
         .weapon = &info->player.character.weapon
@@ -114,7 +114,7 @@ void shop(enum playState* state, struct playInfo* info) {
         }
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
-        DrawEquipementBox(equipement, info);
+        DrawEquipementBox(&equipement, info);
         DrawButton(title);
         DrawButton(equip);
         DrawButton(destroy);
@@ -124,13 +124,8 @@ void shop(enum playState* state, struct playInfo* info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) *state = DIALOG;
-            else if (isMouseOver(equip)) {
-                Equip(&equipement);
-            }
-            else if (isMouseOver(destroy)) {
-                Delete(&equipement);
-            }
+
+            UpdateEquipementBox(&equipement, info);
         }
-        UpdateEquipementBox(&equipement);
     }
 }
