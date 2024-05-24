@@ -95,6 +95,24 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
+    struct button createCharacter = {
+        .text = "Kreator postaci",
+        .isActive = 1,
+        .init = {
+            .x = (GetScreenWidth() >> 3),
+            .y = height + 2 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = buttonBackgroundColor,
+        .hoverColor = buttonBackgroundHoverColor,
+        .spaceing = 0
+    };
     struct button startGame = {
         .text = "Rozpocznij grę",
         .isActive = 0,
@@ -221,9 +239,14 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
+    struct characterCreator characterCreator = {
+        .isActive = 0,
+    };
+
     int error = 0;
 
     CalculateButtonPosition(&title);
+    CalculateButtonPosition(&createCharacter);
     CalculateButtonPosition(&startGame);
     CalculateButtonPosition(&goBack);
     CalculateButtonPosition(&gameSaveName);
@@ -234,15 +257,21 @@ void newGame(enum state *state, struct menuInfo *info) {
     CalculateInputBoxPosition(&inputGameSaveName);
     CalculateInputBoxPosition(&inputCharacterName);
     CalculateSlideBoxPosition(&setDifficultyLevel);
+    InitializeCharacterCreator(&characterCreator, info);
 
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();
-            ClearBackground(backgroundColor);
+        ClearBackground(backgroundColor);
 
+        if (characterCreator.isActive) {
+            DrawCharacterCreator(&characterCreator, info);
+        }
+        else {
             DrawButton(gameSaveName);
             DrawButton(characterName);
             DrawButton(difficultyLevel);
             DrawButton(title);
+            DrawButton(createCharacter);
             DrawButton(startGame);
             DrawButton(goBack);
 
@@ -251,15 +280,23 @@ void newGame(enum state *state, struct menuInfo *info) {
             DrawInputBox(&inputGameSaveName);
             DrawInputBox(&inputCharacterName);
             DrawSlideBox(&setDifficultyLevel);
+        }
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) {
-                error = createNewSave(inputGameSaveName.text, inputCharacterName.text);
+                int bodyParts[10];
+                int armorParts[9];
+                getChoosenBodyParts(characterCreator, bodyParts);
+                getChoosenArmorParts(characterCreator, armorParts);
+                error = createNewSave(inputGameSaveName.text, inputCharacterName.text, bodyParts, armorParts);
                 if (error == 0) {
                     *state = PLAY;
                     strcpy(info->saveName, inputGameSaveName.text);
                 }
+            }
+            else if (isMouseOver(createCharacter)) {
+                characterCreator.isActive = 1;
             }
             else if (isMouseOver(goBack)) *state = MENU;
         }

@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="achievements.c" />
     <ClCompile Include="character.c" />
+    <ClCompile Include="characterCreator.c" />
     <ClCompile Include="choiceBox.c" />
     <ClCompile Include="createSaveFile.c" />
     <ClCompile Include="dialog.c" />
@@ -192,6 +193,7 @@
   <ItemGroup>
     <ClInclude Include="button.h" />
     <ClInclude Include="character.h" />
+    <ClInclude Include="characterCreator.h" />
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="equipementBox.h" />
     <ClInclude Include="fscanfWithAllocation.h" />

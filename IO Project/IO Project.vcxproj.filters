@@ -91,6 +91,9 @@
     <Filter Include="Pliki źródłowe\additions\Key">
       <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\characterCreator">
+      <UniqueIdentifier>{22d67df0-ce5b-46b6-96e1-cb1181924320}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO Project.c">
@@ -219,6 +222,9 @@
     <ClCompile Include="unloadSaveFile.c">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
     </ClCompile>
+    <ClCompile Include="characterCreator.c">
+      <Filter>Pliki źródłowe\menu\characterCreator</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -289,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="savefile.h">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClInclude>
+    <ClInclude Include="characterCreator.h">
+      <Filter>Pliki źródłowe\menu\characterCreator</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
