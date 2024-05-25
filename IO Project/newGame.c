@@ -275,7 +275,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) {
-                error = createNewSave(inputGameSaveName.text, inputCharacterName.text, info->body, info->armor);
+                error = createNewSave(inputGameSaveName.text, inputCharacterName.text, info->body);
                 if (error == 0) {
                     *state = PLAY;
                     strcpy(info->saveName, inputGameSaveName.text);
