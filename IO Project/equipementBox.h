@@ -47,7 +47,7 @@ struct equipementBox {
 };
 
 void InitializeEquipementBox(struct equipementBox *const element);
-void DrawEquipementBox(struct equipementBox *const element, struct playInfo *info);
+void DrawEquipementBox(const struct equipementBox *const element, struct playInfo *info);
 bool UpdateEquipementBox(struct equipementBox *const element, struct playInfo *info);
 
 #endif

@@ -26,7 +26,7 @@ struct itemBox {
 };
 
 void CalculateItemBoxPosition(struct itemBox* element);
-void DrawItemBox(struct itemBox element);
+void DrawItemBox(const struct itemBox element);
 
 inline bool isMouseOverItemBox(struct itemBox element) {
     return CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);

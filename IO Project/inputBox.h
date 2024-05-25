@@ -42,7 +42,7 @@ struct inputBox {
 };
 
 void CalculateInputBoxPosition(struct inputBox *element);
-void DrawInputBox(struct inputBox *element);
+void DrawInputBox(const struct inputBox *element);
 void InternalUpdateInputBox(struct inputBox *element);
 
 inline void UpdateInputBox(struct inputBox *input) {

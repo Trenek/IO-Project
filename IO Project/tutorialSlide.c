@@ -44,7 +44,7 @@ void CalculateSlidePosition(struct tutorialSlide* element) {
     };
 }
 
-void DrawSlide(struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture) {
+void DrawSlide(const struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture) {
 
     DrawRectangleRec(element.titleBoxRectangle, element.titleDescriptionColor);
     DrawRectangleRec(element.descriptionBoxRectangle, element.titleDescriptionColor);
@@ -52,6 +52,4 @@ void DrawSlide(struct tutorialSlide element, const char* title, const char* desc
     DrawTextEx(*element.font, description, element.DescriptionTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 
     DrawTexture(imageAsTexture, (int) element.ImageLeftCorner.x, (int) element.ImageLeftCorner.y, WHITE);
-
-
 }

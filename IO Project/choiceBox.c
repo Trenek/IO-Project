@@ -181,7 +181,7 @@ void freeChoiceBox(struct choiceBox *const this) {
     freeRows(this);
 }
 
-void DrawChoiceBox(struct choiceBox *const this) {
+void DrawChoiceBox(const struct choiceBox *const this) {
     int i = 0;
     int j = 0;
 

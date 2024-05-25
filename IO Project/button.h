@@ -37,7 +37,7 @@ struct button {
 };
 
 void CalculateButtonPosition(struct button *element);
-void DrawButton(struct button element);
+void DrawButton(const struct button element);
 
 inline bool isMouseOver(struct button element) {
     return element.isActive && CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);

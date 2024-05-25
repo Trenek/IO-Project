@@ -13,7 +13,7 @@ void CalculateItemBoxPosition(struct itemBox *const element) {
     };
 }
 
-void DrawItemBox(struct itemBox element) {
+void DrawItemBox(const struct itemBox element) {
     DrawRectangleRec(element.boxRectangle, element.isActive ? element.activeColor : element.color);
     DrawRectangleLinesEx(element.boxRectangle, 1, element.borderColor);
 }

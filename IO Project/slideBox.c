@@ -29,7 +29,7 @@ void CalculateSlideBoxPosition(struct slideBox *element) {
     element->incY = (float)init.incY;
 }
 
-void DrawSlideBox(struct slideBox *element) {
+void DrawSlideBox(const struct slideBox *element) {
     const float textWidth = MeasureTextEx(*element->font, element->options[element->currentOption], (float)element->fontSize, (float)element->spaceing).x;
     const Vector2 vec = {
         .x = element->rect[0].x + (element->rect[0].width - textWidth) / 2,

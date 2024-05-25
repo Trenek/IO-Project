@@ -37,7 +37,7 @@ struct slideBox {
 };
 
 void CalculateSlideBoxPosition(struct slideBox *element);
-void DrawSlideBox(struct slideBox *element);
+void DrawSlideBox(const struct slideBox *element);
 void InternalUpdateSlideBox(struct slideBox *element);
 
 inline void UpdateSlideBox(struct slideBox *element) {

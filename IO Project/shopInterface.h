@@ -41,7 +41,7 @@ struct shopInterface {
 };
 
 void InitializeShopInterface(struct shopInterface *const element);
-void DrawShopInterface(struct shopInterface *const element, struct playInfo *info);
+void DrawShopInterface(const struct shopInterface *const element, struct playInfo *info);
 bool UpdateShopInterface(struct shopInterface *const element, struct playInfo *info);
 
 #endif

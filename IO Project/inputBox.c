@@ -1,6 +1,5 @@
 #include <string.h>
 #include <math.h>
-#include <stdio.h>
 
 #include "inputBox.h"
 
@@ -35,7 +34,7 @@ void CalculateInputBoxPosition(struct inputBox *element) {
     }
 }
 
-void DrawInputBox(struct inputBox *element) {
+void DrawInputBox(const struct inputBox *element) {
     static int framesCounter = 0;
     static int INIT(blinkInterval, (int)floorf(BLINK_INTERVAL / (60.0f * GetFrameTime())));
 
@@ -46,7 +45,6 @@ void DrawInputBox(struct inputBox *element) {
     DrawTextEx(*(element->font), element->text + element->textOffset, element->textLeftCorner, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 
     if (element->isActive) {
-        printf("%f\n", 1 / GetFrameTime());
         if (((framesCounter / blinkInterval) % 2) == 0) {
             width = MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x;
 

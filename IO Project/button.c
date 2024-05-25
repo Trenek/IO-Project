@@ -25,7 +25,7 @@ void CalculateButtonPosition(struct button *element) {
     };
 }
 
-void DrawButton(struct button element) {
+void DrawButton(const struct button element) {
     DrawRectangleRec(element.boxRectangle, !element.isActive || !CheckCollisionPointRec(GetMousePosition(), element.boxRectangle) ? element.color : element.hoverColor);
     DrawTextEx(*element.font, element.text, element.textLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
 

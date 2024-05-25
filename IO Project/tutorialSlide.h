@@ -44,7 +44,7 @@ struct tutorialSlide {
 };
 
 void CalculateSlidePosition(struct tutorialSlide* element);
-void DrawSlide(struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture);
+void DrawSlide(const struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture);
 
 
 

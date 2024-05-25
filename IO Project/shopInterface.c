@@ -66,7 +66,7 @@ static void DrawItem(int b, int a, int c, Rectangle itemBox, struct playInfo *in
     }
 }
 /**/
-void DrawShopInterface(struct shopInterface *const element, struct playInfo *info) {
+void DrawShopInterface(const struct shopInterface *const element, struct playInfo *info) {
     int i = 0;
 
     DrawRectangleRec(element->rec, GRAY);

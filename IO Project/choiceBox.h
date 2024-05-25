@@ -70,7 +70,7 @@ struct choiceBox {
 void initializeChoiceBox(struct choiceBox *const this);
 void freeChoiceBox(struct choiceBox *const this);
 
-void DrawChoiceBox(struct choiceBox *const this);
+void DrawChoiceBox(const struct choiceBox *const this);
 void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info);
 
 #endif
