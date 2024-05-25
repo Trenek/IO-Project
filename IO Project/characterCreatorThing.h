@@ -6,12 +6,13 @@
 #include "slideBox.h"
 #include <raylib.h>
 
+/**
 struct characterCreator {
-    bool isActive;
-    struct playInfo playInfo;
+ //   bool isActive;
+ //   struct playInfo playInfo;
     struct character character;
-    struct slideBox bodyPartSlideBoxes[10];
-    struct slideBox armorSlideBoxes[9];
+ //   struct slideBox bodyPartSlideBoxes[10];
+ //   struct slideBox armorSlideBoxes[9];
 };
 
 void InitializeCharacterCreator(struct characterCreator* element, struct menuInfo* info);
@@ -29,4 +30,5 @@ inline void getChoosenArmorParts(struct characterCreator element, int* armorPart
         armorParts[i] = element.armorSlideBoxes[i].currentOption;
     }
 }
+/**/
 #endif

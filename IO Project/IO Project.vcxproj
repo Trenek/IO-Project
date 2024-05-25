@@ -109,8 +109,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200</DisableSpecificWarnings>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200;4201</DisableSpecificWarnings>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
@@ -133,8 +132,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200</DisableSpecificWarnings>
-      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200;4201</DisableSpecificWarnings>
       <CompileAs>CompileAsC</CompileAs>
     </ClCompile>
     <Link>
@@ -150,6 +148,7 @@
     <ClCompile Include="achievements.c" />
     <ClCompile Include="character.c" />
     <ClCompile Include="characterCreator.c" />
+    <ClCompile Include="characterCreatorThing.c" />
     <ClCompile Include="choiceBox.c" />
     <ClCompile Include="createSaveFile.c" />
     <ClCompile Include="dialog.c" />
@@ -194,7 +193,7 @@
   <ItemGroup>
     <ClInclude Include="button.h" />
     <ClInclude Include="character.h" />
-    <ClInclude Include="characterCreator.h" />
+    <ClInclude Include="characterCreatorThing.h" />
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="equipementBox.h" />
     <ClInclude Include="fscanfWithAllocation.h" />

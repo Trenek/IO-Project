@@ -97,7 +97,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button createCharacter = {
         .text = "Kreator postaci",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height + 2 * spaceY,
@@ -275,7 +275,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) {
-                error = createNewSave(inputGameSaveName.text, inputCharacterName.text);
+                error = createNewSave(inputGameSaveName.text, inputCharacterName.text, info->body, info->armor);
                 if (error == 0) {
                     *state = PLAY;
                     strcpy(info->saveName, inputGameSaveName.text);

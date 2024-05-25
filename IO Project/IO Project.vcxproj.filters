@@ -222,11 +222,17 @@
     <ClCompile Include="unloadSaveFile.c">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
     </ClCompile>
-    <ClCompile Include="characterCreator.c">
+    <ClCompile Include="characterCreatorThing.c">
       <Filter>Pliki źródłowe\menu\characterCreator</Filter>
     </ClCompile>
     <ClCompile Include="shopInterface.c">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="IO Project.c">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="characterCreator.c">
+      <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -302,7 +308,7 @@
     <ClInclude Include="shopInterface.h">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClInclude>
-    <ClInclude Include="characterCreator.h">
+    <ClInclude Include="characterCreatorThing.h">
       <Filter>Pliki źródłowe\menu\characterCreator</Filter>
     </ClInclude>
   </ItemGroup>

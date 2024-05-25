@@ -25,6 +25,9 @@ struct menuInfo {
 
     char saveName[125];
 
+    int body[10];
+    int armor[9];
+
     int framesPerSecond;
     int textureQuality;
     int windowWidth;
