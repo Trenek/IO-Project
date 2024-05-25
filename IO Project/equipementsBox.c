@@ -199,29 +199,20 @@ void DrawEquipementBox(struct equipementBox *const element, struct playInfo *inf
 
 static void Equip(struct equipementBox *element) {
     int *const info = element->itemsID[element->activeItem];
+    int *const toChange =
+        info[0] == 2 ? &(*element->armorPart)[info[1]] :
+        info[0] == 1 ? element->weapon : 
+        NULL;
 
-    if (element->activeItemType == 0) {
-        if (info[0] == 2) {
-            if ((*element->armorPart)[info[1]] == -1) {
-                (*element->armorPart)[info[1]] = info[2];
-                info[0] = 0;
-            }
-            else {
-                int temp = info[2];
-                info[2] = (*element->armorPart)[info[1]];
-                (*element->armorPart)[info[1]] = temp;
-            }
+    if (element->activeItemType == 0 && toChange != NULL) {
+        if (*toChange == -1) {
+            *toChange = info[2];
+            info[0] = 0;
         }
-        else if (info[0] == 1) {
-            if (*element->weapon == -1) {
-                *element->weapon = info[2];
-                info[0] = 0;
-            }
-            else {
-                int temp = info[2];
-                info[2] = *element->weapon;
-                *element->weapon = temp;
-            }
+        else {
+            int temp = *toChange;
+            *toChange = info[2];
+            info[2] = temp;
         }
     }
 }
@@ -241,7 +232,6 @@ int getFirstEmptyEquipmentSquare(struct equipementBox *element) {
     return result;
 }
 
-
 static void Unequip(struct equipementBox *element) {
     int firstEmpty = getFirstEmptyEquipmentSquare(element);
 
@@ -257,7 +247,7 @@ static void Unequip(struct equipementBox *element) {
         element->itemsID[firstEmpty][0] = 1;
         element->itemsID[firstEmpty][1] = *element->weapon;
 
-        (*element->armorPart)[element->activeItem] = -1;
+        *element->weapon = -1;
     }
 }
 
@@ -279,12 +269,7 @@ bool UpdateEquipementBox(struct equipementBox *const element, struct playInfo *i
     bool result = false;
 
     if (isMouseOver(element->activeItemType == 1 ? element->unequip : element->equip)) {
-        if (element->activeItemType == 1) {
-            Unequip(element);
-        }
-        else {
-            Equip(element);
-        }
+        (element->activeItemType == 1 ? Unequip : Equip)(element);
         assemblePlayerTexture(info, &info->player.character);
     }
     else if (isMouseOver(element->destroy)) {

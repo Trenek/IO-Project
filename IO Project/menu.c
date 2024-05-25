@@ -124,13 +124,14 @@ void menu(enum state* state, struct menuInfo* info) {
         .hoverColor = color3,
         .spaceing = 0
     };
+    CalculateButtonPosition(&exit);
+
 
     CalculateButtonPosition(&menuTitle);
     CalculateButtonPosition(&newGame);
     CalculateButtonPosition(&loadGame);
     CalculateButtonPosition(&settings);
     CalculateButtonPosition(&achievements);
-    CalculateButtonPosition(&exit);
 
     while (!WindowShouldClose() && *state == MENU) {
         BeginDrawing();

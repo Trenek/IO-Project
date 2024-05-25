@@ -61,9 +61,6 @@
     <Filter Include="Pliki źródłowe\menu\equipementBox">
       <UniqueIdentifier>{9d06fa99-3430-4661-acd5-512e1bc5d9da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\menu\equipementBox\itemBox">
-      <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\choiceBox">
       <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
@@ -90,6 +87,12 @@
     </Filter>
     <Filter Include="Pliki źródłowe\additions\Key">
       <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\shopInterface">
+      <UniqueIdentifier>{b1f5fe5e-316b-4712-b15b-0e6158618223}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\itemBox">
+      <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -181,7 +184,7 @@
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="itemBox.c">
-      <Filter>Pliki źródłowe\menu\equipementBox\itemBox</Filter>
+      <Filter>Pliki źródłowe\menu\itemBox</Filter>
     </ClCompile>
     <ClCompile Include="equipementsBox.c">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
@@ -218,6 +221,9 @@
     </ClCompile>
     <ClCompile Include="IO Project.c">
       <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
+    <ClCompile Include="shopInterface.c">
+      <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -270,7 +276,7 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="itemBox.h">
-      <Filter>Pliki źródłowe\menu\equipementBox\itemBox</Filter>
+      <Filter>Pliki źródłowe\menu\itemBox</Filter>
     </ClInclude>
     <ClInclude Include="equipementBox.h">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
@@ -289,6 +295,9 @@
     </ClInclude>
     <ClInclude Include="savefile.h">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClInclude>
+    <ClInclude Include="shopInterface.h">
+      <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

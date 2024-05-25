@@ -2,6 +2,7 @@
 #include "playState.h"
 #include "button.h"
 #include "equipementBox.h"
+#include "shopInterface.h"
 
 #define INC_Y (10)
 #define INC_X (10)
@@ -45,8 +46,25 @@ void shop(enum playState* state, struct playInfo* info) {
         .weapon = &info->player.character.weapon
     };
 
+    struct shopInterface shopInterface = {
+        .init = {
+            .x = (GetScreenWidth() >> 1),
+            .y = GetScreenHeight() >> 1,
+            .posX = 2,
+            .posY = 1,
+            .itemBoxSize = 40,
+            .gapSize = 10,
+            .buttonFont = &info->fonts[0],
+            .buttonIncX = 5,
+            .buttonIncY = 5
+        },
+        .seller = NULL,
+        .itemsID = info->player.equipment
+    };
+
     CalculateButtonPosition(&title);
     InitializeEquipementBox(&equipement);
+    InitializeShopInterface(&shopInterface);
 
     while (*state == SHOP && !WindowShouldClose()) {
         BeginDrawing();
@@ -57,6 +75,7 @@ void shop(enum playState* state, struct playInfo* info) {
         DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
         DrawEquipementBox(&equipement, info);
+        DrawShopInterface(&shopInterface, info);
         DrawButton(title);
 
         EndDrawing();
