@@ -1,6 +1,8 @@
 #ifndef SLIDEBOX_H
 #define SLIDEBOX_H
 
+#define MAX_OPTIONS 100 // most likly to remove
+
 #include <raylib.h>
 
 struct slideBoxPositionParameters {
@@ -33,7 +35,7 @@ struct slideBox {
     Color borderActiveColor;
     Color borderColor;
     int spaceing;
-    const char *options[];
+    const char *options[MAX_OPTIONS];
 };
 
 void CalculateSlideBoxPosition(struct slideBox *element);

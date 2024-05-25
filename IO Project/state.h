@@ -10,6 +10,7 @@ enum state {
     SETTINGS,
     PLAY,
     TUTORIAL,
+    CHARACTER_CREATOR,
 
     RELOAD,
     EXIT

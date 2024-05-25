@@ -95,6 +95,24 @@ void newGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
 
+    struct button createCharacter = {
+        .text = "Kreator postaci",
+        .isActive = 1,
+        .init = {
+            .x = (GetScreenWidth() >> 3),
+            .y = height + 2 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 0,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = buttonBackgroundColor,
+        .hoverColor = buttonBackgroundHoverColor,
+        .spaceing = 0
+    };
     struct button startGame = {
         .text = "Rozpocznij grę",
         .isActive = 0,
@@ -224,6 +242,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     int error = 0;
 
     CalculateButtonPosition(&title);
+    CalculateButtonPosition(&createCharacter);
     CalculateButtonPosition(&startGame);
     CalculateButtonPosition(&goBack);
     CalculateButtonPosition(&gameSaveName);
@@ -237,12 +256,13 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     while (!WindowShouldClose() && *state == NEW_GAME) {
         BeginDrawing();
-            ClearBackground(backgroundColor);
+        ClearBackground(backgroundColor);
 
             DrawButton(gameSaveName);
             DrawButton(characterName);
             DrawButton(difficultyLevel);
             DrawButton(title);
+            DrawButton(createCharacter);
             DrawButton(startGame);
             DrawButton(goBack);
 
@@ -261,6 +281,7 @@ void newGame(enum state *state, struct menuInfo *info) {
                     strcpy(info->saveName, inputGameSaveName.text);
                 }
             }
+            else if (isMouseOver(createCharacter)) *state = CHARACTER_CREATOR;
             else if (isMouseOver(goBack)) *state = MENU;
         }
 

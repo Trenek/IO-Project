@@ -23,7 +23,7 @@ static void createDate(const char *const saveName) {
     fclose(file);
 }
 
-static void createCharacter(const char *const saveName, const char *const characterName) {
+static void createCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10], const int armorParts[9]) {
     FILE *file = fopen(saveName, "w");
     int i = 0;
 
@@ -31,15 +31,15 @@ static void createCharacter(const char *const saveName, const char *const charac
     fprintf(file, "%f %f\n\n", 0.91666, 2.0);
 
     while (i < 10) {
-        fprintf(file, "%i\n", 0);
+        fprintf(file, "%i\n", bodyParts[i]);
         i += 1;
     }
 
     fprintf(file, "\n");
 
     i = 0;
-    while (i < 10) {
-        fprintf(file, "%i\n", 0);
+    while (i < 9) {
+        fprintf(file, "%i\n", armorParts[i]);
         i += 1;
     }
 
@@ -83,7 +83,7 @@ static void copyMaps(const char *const saveName) {
     UnloadDirectoryFiles(list);
 }
 
-bool createNewSave(const char *const saveName, const char *const characterName) {
+bool createNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10], const int armorParts[9]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
     bool result = 1;
@@ -93,7 +93,7 @@ bool createNewSave(const char *const saveName, const char *const characterName) 
 
         _mkdir(saveDirectory);
 
-        createCharacter(TextFormat("saves\\%s\\posta\u0107.txt", saveName), characterName);
+        createCharacter(TextFormat("saves\\%s\\posta\u0107.txt", saveName), characterName, bodyParts, armorParts);
         createEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
         createDate(TextFormat("saves\\%s\\date.txt", saveName));
 

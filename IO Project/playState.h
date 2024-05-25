@@ -103,6 +103,8 @@ struct playInfo {
 
 struct playInfo initializePlayInfo(struct menuInfo *info);
 void freePlayInfo(struct playInfo *info);
+void loadArmorPosition(struct playInfo* info);
+void loadBodyPosition(struct playInfo* info);
 
 void explore(enum playState *playState, struct playInfo *info);
 void equipement(enum playState* playState, struct playInfo* info);

@@ -13,7 +13,7 @@
 #include "load.h"
 #include "savefile.h"
 
-static void loadBodyPosition(struct playInfo *info) {
+void loadBodyPosition(struct playInfo *info) {
     FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
     int i = 0;
     int j = 0;
@@ -34,7 +34,7 @@ static void loadBodyPosition(struct playInfo *info) {
     fclose(bodyMeasurements);
 }
 
-static void loadArmorPosition(struct playInfo *info) {
+void loadArmorPosition(struct playInfo *info) {
     FILE *armorMeasurements = fopen("dane\\armorMeasurements.txt", "r");
     int i = 0;
     int j = 0;
