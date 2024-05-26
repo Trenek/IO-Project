@@ -49,7 +49,7 @@ void InitializeShopInterface(struct shopInterface *const element) {
 
     element->buy = (struct button){
         .text = "Kup",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (int)element->leftCorner.x + 1 * init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize),
             .y = (int)element->leftCorner.y + height - 2 * (init.gapSize + init.itemBoxSize),
@@ -67,7 +67,7 @@ void InitializeShopInterface(struct shopInterface *const element) {
     };
     element->sell = (struct button){
         .text = "Sprzedaj",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (int)element->leftCorner.x + 1 * init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize),
             .y = (int)element->leftCorner.y + height - (init.gapSize + init.itemBoxSize),
@@ -126,6 +126,13 @@ void DrawShopInterface(const struct shopInterface *const element, const struct p
 }
 
 void UpdateShopInterface(struct shopInterface *const element) {
+    if (isMouseOver(element->buy)) {
+
+    }
+    else if (isMouseOver(element->sell)) {
+
+    }
+
     element->activeItem = -1;
 
     for (int i = 0; i < 10; i++) {

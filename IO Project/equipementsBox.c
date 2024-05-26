@@ -59,7 +59,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
 
     element->equip = (struct button) {
         .text = "Wyposaż",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
             .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 2 * (init.gapSize + init.itemBoxSize)),
@@ -78,7 +78,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
 
     element->unequip = (struct button){
         .text = "Zdejmij",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
             .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 2 * (init.gapSize + init.itemBoxSize)),
@@ -97,7 +97,7 @@ void InitializeEquipementBox(struct equipementBox *const element) {
 
     element->destroy = (struct button){
         .text = "Zniszcz",
-        .isActive = 1,
+        .isActive = 0,
         .init = {
             .x = (int)(element->rec.x + init.itemBoxSize + 5 * (init.gapSize + init.itemBoxSize)),
             .y = (int)(element->rec.y + 4 * init.itemBoxSize + 2 * init.gapSize + 3 * (init.gapSize + init.itemBoxSize)),
