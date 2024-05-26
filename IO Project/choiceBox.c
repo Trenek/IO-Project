@@ -103,6 +103,8 @@ static void initializeRows(struct choiceBox *const this) {
     this->prevRec = (Rectangle){
         .x = 0
     };
+
+    *this->loadActive = 0;
 }
 
 static void initializeButtons(struct choiceBox *const this) {
@@ -219,8 +221,7 @@ void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
     this->chosenRow = -1;
     while (i < this->rowQuantity) {
         if (CheckCollisionPointRec(GetMousePosition(), this->row[i][MAIN].rec)) {
-            strcpy(info->saveName, this->saveData[i + this->rowQuantity * this->page].text);
-            this->chosenRow = i;
+             this->chosenRow = i;
         }
 
         i += 1;
@@ -231,4 +232,11 @@ void UpdateChoiceBox(struct choiceBox *const this, struct menuInfo *info) {
 
     this->prev.isActive = (this->page == 0) ? 0 : 1;
     this->next.isActive = ((this->page + 1) * this->rowQuantity >= this->dataQuantity) ? 0 : 1;
+    *this->loadActive = 
+        this->chosenRow == -1 ? 0 : 
+        (this->chosenRow + this->page * this->rowQuantity < this->dataQuantity) ? 1 : 0;
+
+    if (*this->loadActive) {
+        strcpy(info->saveName, this->saveData[this->chosenRow + this->rowQuantity * this->page].text);
+    }
 }

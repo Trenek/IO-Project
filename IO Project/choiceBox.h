@@ -36,6 +36,7 @@ struct choiceBox {
     int rowQuantity;
     int wideness;
 
+    bool *loadActive;
 
     struct button prev;
     struct button next;

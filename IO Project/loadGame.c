@@ -74,6 +74,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
     struct choiceBox saves = {
         .rowQuantity = 5,
         .wideness = 5,
+        .loadActive = &loadGame.isActive,
         .init =  {
             .x = GetScreenWidth() >> 1,
             .y = GetScreenHeight() >> 1,
@@ -115,8 +116,6 @@ void loadGame(enum state *state, struct menuInfo *info) {
             else if (isMouseOver(goBack)) *state = MENU;
 
             UpdateChoiceBox(&saves, info);
-
-            loadGame.isActive = saves.chosenRow == -1 ? 0 : 1;
         }
     }
 
