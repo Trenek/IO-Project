@@ -106,7 +106,44 @@ void InitializeShopInterface(struct shopInterface *const element) {
         CalculateItemBoxPosition(&(element->items[i]));
     }
 
+    element->price = (struct itemBox){
+        .init = {
+            .x = (int)element->leftCorner.x + 3 * init.itemBoxSize + 4 * (init.itemBoxSize + init.gapSize),
+            .y = (int)element->leftCorner.y + 3 * (init.gapSize + init.itemBoxSize),
+            .posX = 0,
+            .posY = 0,
+            .width = init.itemBoxSize,
+            .height = init.itemBoxSize
+        },
+        .color = BLUE,
+        .activeColor = DARKGRAY,
+        .borderColor = BLACK
+    };
+    CalculateItemBoxPosition(&element->price);
+
+    element->priceItem = NULL;
+
     DrawToRenderTexture(element);
+}
+
+int (*getPrice(int (*item)[3], const struct playInfo *info))[3] {
+    int (*result)[3] = NULL;
+
+    switch ((*item)[0]) {
+        case 0:
+            break;
+        case 1:
+            result = &info->weaponPrice[(*item)[1]];
+            break;
+        case 2:
+            result = &info->armorPrice[(*item)[1]][(*item)[2]];
+            break;
+        case 3:
+            result = &info->itemsPrice[(*item)[1]];
+            break;
+    }
+
+    return result;
 }
 
 void DrawShopInterface(const struct shopInterface *const element, const struct playInfo *info) {
@@ -120,29 +157,85 @@ void DrawShopInterface(const struct shopInterface *const element, const struct p
 
         i += 1;
     }
+    DrawItemBox(element->price);
+    
+    if (element->priceItem != NULL) {
+        DrawItem((*element->priceItem)[0], (*element->priceItem)[1], (*element->priceItem)[2], element->price.boxRectangle, info);
+    }
 
     DrawButton(element->buy);
     DrawButton(element->sell);
 }
 
-void UpdateShopInterface(struct shopInterface *const element) {
-    if (isMouseOver(element->buy)) {
+int findElement(int (*playerEquipment)[3], int(*wantedItem)[3]) {
+    int result = -1;
+    int i = 0;
 
+    while (i < 25 && result == -1) {
+        if (playerEquipment[i][0] == (*wantedItem)[0])
+        switch ((*wantedItem)[0]) {
+            case 0:
+                result = i;
+                break;
+            case 1:
+            case 3:
+                if (playerEquipment[i][1] == (*wantedItem)[1]) {
+                    result = i;
+                }
+                break;
+            case 2:
+                if (playerEquipment[i][1] == (*wantedItem)[1]) 
+                if (playerEquipment[i][2] == (*wantedItem)[2]) {
+                    result = i;
+                }
+                break;
+        }
+
+        i += 1;
+    }
+
+    return result;
+}
+
+void UpdateShopInterface(struct shopInterface *const element, const struct playInfo *info) {
+    int i = 0;
+
+    if (isMouseOver(element->buy)) {
+        i = findElement(element->playerItemsID, element->priceItem);
+        element->playerItemsID[i][0] = element->sellerItemsID[element->activeItem][0];
+        element->playerItemsID[i][1] = element->sellerItemsID[element->activeItem][1];
+        element->playerItemsID[i][2] = element->sellerItemsID[element->activeItem][2];
+
+        element->priceItem = NULL;
+        element->sellerItemsID[element->activeItem][0] = 0;
     }
     else if (isMouseOver(element->sell)) {
+        element->playerItemsID[*element->equipmentActiveItem][0] = (*element->priceItem)[0];
+        element->playerItemsID[*element->equipmentActiveItem][1] = (*element->priceItem)[1];
+        element->playerItemsID[*element->equipmentActiveItem][2] = (*element->priceItem)[2];
 
+        element->priceItem = NULL;
     }
 
     element->activeItem = -1;
-
-    for (int i = 0; i < 10; i++) {
+    i = 0;
+    while (i < 10) {
         element->items[i].isActive = isMouseOverItemBox(element->items[i]);
         if (element->items[i].isActive) {
             element->activeItem = i;
         }
+
+        i += 1;
     }
 
-    element->sell.isActive = (*element->equipmentActiveType == -1) ? 0 : 1;
+    if (element->activeItem != -1) {
+        element->priceItem = getPrice(&element->sellerItemsID[element->activeItem], info);
+    }
+    else if (*element->equipmentActiveType == 0) {
+        element->priceItem = getPrice(&element->playerItemsID[*element->equipmentActiveItem], info);
+    }
+
+    element->sell.isActive = (*element->equipmentActiveType != 0) ? 0 : 1;
     element->buy.isActive = (element->activeItem == -1) ? 0 : 1;
 }
 

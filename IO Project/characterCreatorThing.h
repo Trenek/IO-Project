@@ -12,7 +12,9 @@ struct characterCreator {
  //   struct playInfo playInfo;
     struct character character;
  //   struct slideBox bodyPartSlideBoxes[10];
- //   struct slideBox armorSlideBoxes[9];
+ //   struct slideBox 
+ 
+ SlideBoxes[9];
 };
 
 void InitializeCharacterCreator(struct characterCreator* element, struct menuInfo* info);

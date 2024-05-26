@@ -86,7 +86,7 @@ void shop(enum playState* state, struct playInfo* info) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (UpdateEquipementBox(&equipement, info)) *state = DIALOG;
 
-            UpdateShopInterface(&shopInterface);
+            UpdateShopInterface(&shopInterface, info);
         }
     }
 

@@ -16,7 +16,7 @@ static const char *const armorNames[] = {
 };
 
 static void loadArmorPart(int num, struct playInfo *info) {
-    const char *const directory = TextFormat("resources\\textures\\armor\\%s", armorNames[num]);
+    const char *const directory = TextFormat("resources\\textures\\przedmioty\\armor\\%s", armorNames[num]);
     char buffor[128];
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
@@ -39,7 +39,7 @@ static void loadArmorPart(int num, struct playInfo *info) {
 }
 
 static void unloadArmorPart(int num, struct playInfo *info) {
-    const char *directory = TextFormat("resources\\textures\\armor\\%s", armorNames[num]);
+    const char *directory = TextFormat("resources\\textures\\przedmioty\\armor\\%s", armorNames[num]);
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
     unsigned int j = 0;

@@ -43,6 +43,9 @@ struct shopInterface {
 
             struct itemBox items[10];
 
+            int (*priceItem)[3];
+            struct itemBox price;
+
             struct button buy;
             struct button sell;
         };
@@ -51,7 +54,7 @@ struct shopInterface {
 
 void InitializeShopInterface(struct shopInterface *const element);
 void DrawShopInterface(const struct shopInterface *const element, const struct playInfo *info);
-void UpdateShopInterface(struct shopInterface *const element);
+void UpdateShopInterface(struct shopInterface *const element, const struct playInfo *info);
 void UnloadShopInterface(struct shopInterface *const element);
 
 #endif
