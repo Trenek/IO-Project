@@ -85,8 +85,8 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = color2,
         .spaceing = 0
     };
-    struct button textureResolution = {
-        .text = "Rozdzielczość tekstur",
+    struct button windowDimensions = {
+        .text = "Wymiary okna",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
@@ -103,8 +103,8 @@ void settings(enum state *state, struct menuInfo *info) {
         .hoverColor = color2,
         .spaceing = 0
     };
-    struct button windowDimensions = {
-        .text = "Wymiary okna",
+    struct button textureResolution = {
+        .text = "Rozdzielczość tekstur",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),

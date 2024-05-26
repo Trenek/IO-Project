@@ -3,6 +3,7 @@
 
 #include <raylib.h>
 
+struct playInfo;
 struct itemBoxPositionParameters {
     int x;
     int y;
@@ -27,6 +28,7 @@ struct itemBox {
 
 void CalculateItemBoxPosition(struct itemBox* element);
 void DrawItemBox(const struct itemBox element);
+void DrawItem(int b, int a, int c, Rectangle itemBox, const struct playInfo *info);
 
 inline bool isMouseOverItemBox(struct itemBox element) {
     return CheckCollisionPointRec(GetMousePosition(), element.boxRectangle);

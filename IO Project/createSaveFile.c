@@ -83,6 +83,29 @@ static void copyMaps(const char *const saveName) {
     UnloadDirectoryFiles(list);
 }
 
+static void copyShops(const char *const saveName) {
+    FilePathList list = LoadDirectoryFiles("dane\\sklepy");
+    FILE *from = NULL;
+    FILE *to = NULL;
+    unsigned int i = 0;
+    int c = 0;
+
+    while (i < list.capacity) {
+        from = fopen(TextFormat("dane\\sklepy\\%i.txt", i), "r");
+        to = fopen(TextFormat("saves\\%s\\sklepy\\%i.txt", saveName, i), "w");
+
+        while ((c = fgetc(from)) != EOF) {
+            fputc(c, to);
+        }
+
+        fclose(from);
+        fclose(to);
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(list);
+}
+
 bool createNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
@@ -98,7 +121,10 @@ bool createNewSave(const char *const saveName, const char *const characterName, 
         createDate(TextFormat("saves\\%s\\date.txt", saveName));
 
         _mkdir(TextFormat("saves\\%s\\mapy", saveName));
+        _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
+
         copyMaps(saveName);
+        copyShops(saveName);
     }
 
     return result;

@@ -22,13 +22,22 @@ struct shopInterfacePositionParameters {
 
 struct shopInterface {
     Texture2D *seller;
-    int(*itemsID)[3];
+    int (*playerItemsID)[3];
+    int (*sellerItemsID)[3];
+
+    int *equipmentActiveType;
+    int *equipmentActiveItem;
 
     union {
         struct shopInterfacePositionParameters init;
         struct {
-            Rectangle rec;
+            int width;
+
+            RenderTexture2D toDraw;
+            Vector2 leftCorner;
             Vector2 leftShopperCoordinate;
+
+            Rectangle rec;
 
             int activeItem;
 
@@ -41,7 +50,8 @@ struct shopInterface {
 };
 
 void InitializeShopInterface(struct shopInterface *const element);
-void DrawShopInterface(const struct shopInterface *const element, struct playInfo *info);
-bool UpdateShopInterface(struct shopInterface *const element, struct playInfo *info);
+void DrawShopInterface(const struct shopInterface *const element, const struct playInfo *info);
+void UpdateShopInterface(struct shopInterface *const element);
+void UnloadShopInterface(struct shopInterface *const element);
 
 #endif

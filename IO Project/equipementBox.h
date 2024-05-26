@@ -41,7 +41,7 @@ struct equipementBox {
         };
     };
     
-    int (*itemsID)[3];
+    int (*playerItemsID)[3];
     int (*armorPart)[9];
     int *weapon;
 };

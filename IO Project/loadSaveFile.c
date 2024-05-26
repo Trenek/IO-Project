@@ -88,24 +88,66 @@ static void createEnemies(FILE *file, struct playInfo *info) {
     }
 }
 
-static void loadShops(FILE *file, struct playInfo *info) {
+static void loadSellers(FILE *file, struct playInfo *info) {
     int i = 0;
-    int id = 0;
     float x = 0.0f;
-    float y = 0.0f;
+    float z = 0.0f;
 
-    fscanf(file, "%i", &info->shopsQuantity);
-    info->shops = malloc(sizeof(struct character) * info->shopsQuantity);
+    fscanf(file, "%i", &info->sellersQuantity);
+    info->shops = malloc(sizeof(struct seller) * info->sellersQuantity);
 
-    while (i < info->shopsQuantity) {
-        fscanf(file, "%i %i %f %f", &id, &info->shops[i].dialog, &x, &y);
+    while (i < info->sellersQuantity) {
 
-        info->shops[i].ID = id;
-        loadCharacter(&info->shops[i], TextFormat("dane\\postacie\\%i.txt", id), x, y);
-        assemblePlayerTexture(info, &info->shops[i]);
+        fscanf(file, "%i %i %i %f %f", 
+            &info->shops[i].character.ID, 
+            &info->shops[i].shopID, 
+            &info->shops[i].character.dialog, 
+            &x,
+            &z);
+
+        loadCharacter(&info->shops[i].character, TextFormat("dane\\postacie\\%i.txt", info->shops[i].character.ID), x, z);
+        assemblePlayerTexture(info, &info->shops[i].character);
 
         i += 1;
     }
+}
+
+static void loadShop(int shopEquipment[10][3], const char *path) {
+    FILE *file = fopen(path, "r");
+    int i = 0;
+
+    while (i < 10) {
+        fscanf(file, "%i", &shopEquipment[i][0]);
+
+        if (shopEquipment[i][0] != 0) {
+            fscanf(file, "%i", &shopEquipment[i][1]);
+
+            if (shopEquipment[i][0] == 2) {
+                fscanf(file, "%i", &shopEquipment[i][2]);
+            }
+        }
+
+        i += 1;
+    }
+
+    fclose(file);
+}
+
+static void loadShops(struct playInfo *this) {
+    FilePathList f = LoadDirectoryFiles(TextFormat("saves\\%s\\sklepy", this->saveName));
+    int i = 0;
+
+    this->shopQuantity = f.capacity;
+
+    this->shopEquipment = malloc(sizeof(int[10][3]) * this->shopQuantity);
+
+    while (i < this->shopQuantity) {
+        loadShop(this->shopEquipment[i], TextFormat("saves\\%s\\sklepy\\%i.txt", this->saveName, i));
+
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(f);
 }
 
 static void loadEquipment(struct player *player, const char *fileName) {
@@ -118,7 +160,7 @@ static void loadEquipment(struct player *player, const char *fileName) {
         if (player->equipment[i][0] != 0) {
             fscanf(file, "%i", &player->equipment[i][1]);
 
-            if (player->equipment[i][1] == 2) {
+            if (player->equipment[i][0] == 2) {
                 fscanf(file, "%i", &player->equipment[i][2]);
             }
         }
@@ -141,8 +183,10 @@ static void loadPlayer(struct playInfo *info, const char *saveName) {
 void loadSaveFile(struct playInfo *this, const char *saveName) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", saveName), "r");
 
+    loadShops(this);
+
     createEnemies(mapFile, this);
-    loadShops(mapFile, this);
+    loadSellers(mapFile, this);
 
     loadPlayer(this, saveName);
 

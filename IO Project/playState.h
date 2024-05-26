@@ -4,6 +4,7 @@
 #define PLAYSTATE_H
 
 #include "player.h"
+#include "seller.h"
 
 struct menuInfo;
 struct Object2D;
@@ -78,10 +79,14 @@ struct playInfo {
     struct character *enemies;
     int enemyQuantity;
 
-    struct character *shops;
-    int shopsQuantity;
+    int (*shopEquipment)[10][3];
+    int shopQuantity;
+
+    struct seller *shops;
+    int sellersQuantity;
 
     struct character chosen;
+    int chosenShop;
     int shouldDestroy;
 
     int dialog;

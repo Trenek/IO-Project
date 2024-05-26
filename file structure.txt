@@ -204,12 +204,13 @@ mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
             [id_tekstury] [szerokość] [wysokość] [coordynatX] [coordynatY]
         [liczba przeciwników] 
             [id_przeciwnika] [wysokość] [coordynatX] [coordynatY]
+        [liczba sklepów]
+            [id tekstury] [id sklepu] [id dialogu] [coordynatX] [coordynatY]
         [liczba obiektów interaktywnych]
             [id_tekstury] [typ interakcji] [szerokość] [wysokość] [coordynatX] [coordynatY] [* dodatkowa informacja]
 
     [typ interakcji]:
         [0] - dialog [id_dialogu]
-        [1] - sklep [id_sklepu]
         [2] - trening
         [3] - dialog rozpoczynający walkę z bossem [id_dialogu] [id_postaci]
         [4] - dialog rozczynający misję [id_dialogu] [id_misji]

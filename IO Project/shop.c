@@ -41,7 +41,7 @@ void shop(enum playState* state, struct playInfo* info) {
             .buttonIncX = 5,
             .buttonIncY = 5
         },
-        .itemsID = info->player.equipment,
+        .playerItemsID = info->player.equipment,
         .armorPart = &info->player.character.armorPart,
         .weapon = &info->player.character.weapon
     };
@@ -58,8 +58,11 @@ void shop(enum playState* state, struct playInfo* info) {
             .buttonIncX = 5,
             .buttonIncY = 5
         },
-        .seller = NULL,
-        .itemsID = info->player.equipment
+        .equipmentActiveItem = &equipement.activeItem,
+        .equipmentActiveType = &equipement.activeItemType,
+        .seller = info->chosen.object.texture,
+        .playerItemsID = info->player.equipment,
+        .sellerItemsID = info->shopEquipment[info->chosenShop]
     };
 
     CalculateButtonPosition(&title);
@@ -68,20 +71,24 @@ void shop(enum playState* state, struct playInfo* info) {
 
     while (*state == SHOP && !WindowShouldClose()) {
         BeginDrawing();
-        ClearBackground(color1);
-        if (info->screenCamera != NULL) {
-            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
-        }
-        DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
+            ClearBackground(color1);
 
-        DrawEquipementBox(&equipement, info);
-        DrawShopInterface(&shopInterface, info);
-        DrawButton(title);
+            if (info->screenCamera != NULL) {
+                DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+            }
+            DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight() + 100, color1);
 
+            DrawEquipementBox(&equipement, info);
+            DrawShopInterface(&shopInterface, info);
+            DrawButton(title);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (UpdateEquipementBox(&equipement, info)) *state = DIALOG;
+
+            UpdateShopInterface(&shopInterface);
         }
     }
+
+    UnloadShopInterface(&shopInterface);
 }

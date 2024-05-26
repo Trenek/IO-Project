@@ -91,7 +91,7 @@ void hitbox(struct playInfo *info) {
 		j = 0;
 		while (j < info->enemyQuantity) {
 			if (i == j) {
-				detectHitbox(&info->enemies[i].object, info->shops[j].object.position);
+				detectHitbox(&info->enemies[i].object, info->shops[j].character.object.position);
 			}
 
 			j += 1;
@@ -110,15 +110,16 @@ void findShop(struct playInfo *info) {
 
 	int i = 0;
 
-	while (i < info->shopsQuantity) {
+	while (i < info->sellersQuantity) {
 		playerPosition = &info->player.character.object.position;
-		npcPosition = &info->shops[i].object.position;
-		newDistance = info->shops[i].object.sizeV.x;
+		npcPosition = &info->shops[i].character.object.position;
+		newDistance = info->shops[i].character.object.sizeV.x;
 
 		playerDistance = powf(playerPosition->x - npcPosition->x, 2.0) + powf(playerPosition->z - npcPosition->z, 2.0);
 
 		if (sqrtf(playerDistance) < newDistance * 4) {
-			info->chosen = info->shops[i];
+			info->chosen = info->shops[i].character;
+			info->chosenShop = info->shops[i].shopID;
 		}
 
 		i += 1;
@@ -134,10 +135,10 @@ void hitboxShop(struct playInfo *info, int *shop) {
 
 	int i = 0;
 
-	while (i < info->shopsQuantity) {
+	while (i < info->sellersQuantity) {
 		playerPosition = &info->player.character.object.position;
-		npcPosition = &info->shops[i].object.position;
-		newDistance = info->shops[i].object.sizeV.x;
+		npcPosition = &info->shops[i].character.object.position;
+		newDistance = info->shops[i].character.object.sizeV.x;
 
 		playerDistance = powf(playerPosition->x - npcPosition->x, 2.0) + powf(playerPosition->z - npcPosition->z, 2.0);
 

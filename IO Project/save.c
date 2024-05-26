@@ -176,6 +176,7 @@ void save(enum playState *state, struct playInfo *info) {
                     if (isMouseOver(create)) {
                         _mkdir(TextFormat("saves\\%s", saveName.text));
                         _mkdir(TextFormat("saves\\%s\\mapy", saveName.text));
+                        _mkdir(TextFormat("saves\\%s\\sklepy", saveName.text));
                         strcpy(info->saveName, saveName.text);
                         saveSaveFile(info, saveName.text);
                     }

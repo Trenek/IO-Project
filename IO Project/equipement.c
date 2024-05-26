@@ -40,7 +40,7 @@ void equipement(enum playState* state, struct playInfo* info) {
             .buttonIncX = 5,
             .buttonIncY = 5
         },
-        .itemsID = info->player.equipment,
+        .playerItemsID = info->player.equipment,
         .armorPart = &info->player.character.armorPart,
         .weapon = &info->player.character.weapon
     };

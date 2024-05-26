@@ -18,11 +18,11 @@ static void destroyEnemies(struct playInfo *info) {
     free(info->enemies);
 }
 
-static void unloadShops(struct playInfo *info) {
+static void unloadSellers(struct playInfo *info) {
     int i = 0;
 
-    while (i < info->shopsQuantity) {
-        unloadCharacter(&info->shops[i]);
+    while (i < info->sellersQuantity) {
+        unloadCharacter(&info->shops[i].character);
 
         i += 1;
     }
@@ -42,8 +42,13 @@ static void unloadPlayer(struct playInfo *info) {
     unloadCharacter(&info->player.character);
 }
 
+static void unloadShops(struct playInfo *this) {
+    free(this->shopEquipment);
+}
+
 void unloadSaveFile(struct playInfo *this) {
     destroyEnemies(this);
+    unloadSellers(this);
     unloadShops(this);
 
     unloadPlayer(this);

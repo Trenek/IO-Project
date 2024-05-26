@@ -33,12 +33,12 @@ static void saveEnemies(FILE *file, struct playInfo *info) {
     }
 }
 
-static void saveShops(FILE *file, struct playInfo *info) {
+static void saveSellers(FILE *file, struct playInfo *info) {
     int i = 0;
 
-    fprintf(file, "%i", info->shopsQuantity);
-    while (i < info->shopsQuantity) {
-        fprintf(file, "% 4s%i %i %f %f\n", "", info->shops[i].ID, info->shops[i].dialog, info->shops[i].object.position.x, info->shops[i].object.position.z);
+    fprintf(file, "%i", info->sellersQuantity);
+    while (i < info->sellersQuantity) {
+        fprintf(file, "% 4s%i %i %i %f %f\n", "", info->shops[i].character.ID, info->shops[i].shopID, info->shops[i].character.dialog, info->shops[i].character.object.position.x, info->shops[i].character.object.position.z);
 
         i += 1;
     }
@@ -48,7 +48,7 @@ static void saveMap(struct playInfo *info, const char *saveName) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", saveName), "w");
 
     saveEnemies(mapFile, info);
-    saveShops(mapFile, info);
+    saveSellers(mapFile, info);
 
     fclose(mapFile);
 }
@@ -100,7 +100,7 @@ static void saveEquipment(struct player *player, const char *fileName) {
         if (player->equipment[i][0] != 0) {
             fprintf(file, "%i ", player->equipment[i][1]);
 
-            if (player->equipment[i][1] == 2) {
+            if (player->equipment[i][0] == 2) {
                 fprintf(file, "%i ", player->equipment[i][2]);
             }
         }
@@ -113,7 +113,41 @@ static void saveEquipment(struct player *player, const char *fileName) {
     fclose(file);
 }
 
+static void saveShop(int shopEQ[10][3], const char *fileName) {
+    FILE *file = fopen(fileName, "w");
+    int i = 0;
+
+    while (i < 10) {
+        fprintf(file, "% 4s%i ", "", shopEQ[i][0]);
+
+        if (shopEQ[i][0] != 0) {
+            fprintf(file, "%i ", shopEQ[i][1]);
+
+            if (shopEQ[i][0] == 2) {
+                fprintf(file, "%i ", shopEQ[i][2]);
+            }
+        }
+
+        fprintf(file, "\n");
+
+        i += 1;
+    }
+
+    fclose(file);
+}
+
+static void saveShops(struct playInfo *this, const char *saveName) {
+    int i = 0;
+
+    while (i < this->shopQuantity) {
+        saveShop(this->shopEquipment[i], TextFormat("saves\\%s\\sklepy\\%i.txt", saveName, i));
+
+        i += 1;
+    }
+}
+
 void saveSaveFile(struct playInfo *this, const char *saveName) {
+    saveShops(this, saveName);
     saveMap(this, saveName);
     saveCharacter(&this->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName));
     saveEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", saveName));

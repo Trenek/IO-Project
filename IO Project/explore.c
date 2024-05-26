@@ -193,7 +193,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             BeginMode3D(info->camera);
                 DrawGrid(100, 1);
 
-                RenderTextures(render, info->enemyQuantity + info->shopsQuantity + 1, info->camera);
+                RenderTextures(render, info->enemyQuantity + info->sellersQuantity + 1, info->camera);
             EndMode3D();
 
             DrawButton(save);
