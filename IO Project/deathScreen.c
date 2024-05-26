@@ -1,6 +1,6 @@
 #include <raylib.h>
 
-#include "state.h"
+#include "playState.h"
 
 #include "menuElements.h"
 
@@ -8,7 +8,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void menu(enum state* state, struct menuInfo* info) {
+void deathScreen(enum playState *state, struct playInfo *info) {
     const int height = GetScreenHeight() >> 1;
     const int space = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -16,8 +16,8 @@ void menu(enum state* state, struct menuInfo* info) {
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
 
-    struct button menuTitle = {
-        .text = "Menu Startowe",
+    struct button title = {
+        .text = "Umarłeś",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -34,8 +34,26 @@ void menu(enum state* state, struct menuInfo* info) {
         .hoverColor = BLANK,
         .spaceing = 0
     };
-    struct button newGame = {
-        .text = "Nowa Gra",
+    struct button tryAgain = {
+        .text = "Spróbuj ponownie",
+        .isActive = 1,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = height - space,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+    struct button reloadLastSave = {
+        .text = "Wczytaj ostatni zapis gry",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -52,48 +70,12 @@ void menu(enum state* state, struct menuInfo* info) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct button loadGame = {
-        .text = "Wczytaj Grę",
+    struct button exitToMenu = {
+        .text = "Wyjdź do Menu",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + space,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .hoverColor = color3,
-        .spaceing = 0
-    };
-    struct button settings = {
-        .text = "Ustawienia",
-        .isActive = 1,
-        .init = {
-            .x = GetScreenWidth() >> 1,
-            .y = height + 2 * space,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 1,
-            .posY = 1
-        },
-        .font = &info->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .hoverColor = color3,
-        .spaceing = 0
-    };
-    struct button achievements = {
-        .text = "Samouczek",
-        .isActive = 1,
-        .init = {
-            .x = GetScreenWidth() >> 1,
-            .y = height + 3 * space,
             .incX = INC_X,
             .incY = INC_Y,
             .posX = 1,
@@ -125,31 +107,28 @@ void menu(enum state* state, struct menuInfo* info) {
         .spaceing = 0
     };
 
-    CalculateButtonPosition(&menuTitle);
-    CalculateButtonPosition(&newGame);
-    CalculateButtonPosition(&loadGame);
-    CalculateButtonPosition(&settings);
-    CalculateButtonPosition(&achievements);
+    CalculateButtonPosition(&title);
+    CalculateButtonPosition(&tryAgain);
+    CalculateButtonPosition(&reloadLastSave);
+    CalculateButtonPosition(&exitToMenu);
     CalculateButtonPosition(&exit);
 
-    while (!WindowShouldClose() && *state == MENU) {
+    while (!WindowShouldClose() && *state == DEATH_SCREEN) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(menuTitle);
-        DrawButton(newGame);
-        DrawButton(loadGame);
-        DrawButton(settings);
-        DrawButton(achievements);
-        DrawButton(exit);
+            DrawButton(title);
+            DrawButton(tryAgain);
+            DrawButton(reloadLastSave);
+            DrawButton(exitToMenu);
+            DrawButton(exit);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(newGame)) *state = NEW_GAME;
-            else if (isMouseOver(loadGame)) *state = LOAD_GAME;
-            else if (isMouseOver(settings)) *state = SETTINGS;
-            else if (isMouseOver(achievements)) *state = TUTORIAL;
-            else if (isMouseOver(exit)) *state = EXIT;
+            if (isMouseOver(tryAgain)) *state = FIGHT;
+            if (isMouseOver(reloadLastSave)) *state = RELOAD_SAVE;
+            else if (isMouseOver(exitToMenu)) *state = RETURN;
+            else if (isMouseOver(exit)) *state = DESKTOP;
         }
     }
 }

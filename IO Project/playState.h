@@ -22,7 +22,9 @@ enum playState {
     TRAINING,
     MISSIONS,
     ACHIEVEMENTS,
+    DEATH_SCREEN,
 
+    RELOAD_SAVE,
     RETURN,
     DESKTOP
 };
@@ -121,5 +123,6 @@ void fight(enum playState *playState, struct playInfo *info);
 void shop(enum playState *state, struct playInfo *info);
 void dialog(enum playState *playState, struct playInfo *info);
 void save(enum playState *state, struct playInfo *info);
+void deathScreen(enum playState *state, struct playInfo *info);
 
 #endif

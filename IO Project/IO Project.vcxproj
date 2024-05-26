@@ -153,6 +153,7 @@
     <ClCompile Include="characterCreatorThing.c" />
     <ClCompile Include="choiceBox.c" />
     <ClCompile Include="createSaveFile.c" />
+    <ClCompile Include="deathScreen.c" />
     <ClCompile Include="dialog.c" />
     <ClCompile Include="equipement.c" />
     <ClCompile Include="equipementsBox.c" />

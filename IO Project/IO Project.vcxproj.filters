@@ -240,6 +240,9 @@
     <ClCompile Include="character.c">
       <Filter>Pliki źródłowe\objects\characters\character</Filter>
     </ClCompile>
+    <ClCompile Include="deathScreen.c">
+      <Filter>Pliki źródłowe\state\play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
