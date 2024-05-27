@@ -14,7 +14,7 @@ void loadSettings(struct menuInfo *info) {
     (void)fscanf(file, "%i %i", &info->windowWidth, &info->windowHeight);
     (void)fscanf(file, "%i", &info->fullScreenMode);
 
-    SetTraceLogLevel(LOG_ERROR); // For final version
+ //   SetTraceLogLevel(LOG_ERROR); // For final version
     SetConfigFlags(
 //      FLAG_WINDOW_UNDECORATED |
         FLAG_MSAA_4X_HINT | 

@@ -17,9 +17,9 @@ void play(enum state *state, struct menuInfo *info) {
     };
 
     do {
-        playState = EXPLORE;
         struct playInfo playInfo = initializePlayInfo(info);
 
+        playState = EXPLORE;
         while (!WindowShouldClose() && (playState != RETURN) && (playState != DESKTOP) && (playState != RELOAD_SAVE)) {
             function[playState](&playState, &playInfo);
         }
@@ -27,5 +27,5 @@ void play(enum state *state, struct menuInfo *info) {
         freePlayInfo(&playInfo);
     } while (playState == RELOAD_SAVE);
 
-    *state = (playState == RETURN) ? MENU : EXIT;
+    *state = (playState == RETURN) ? MENU : (playState == RELOAD_SAVE) ? PLAY : EXIT;
 }

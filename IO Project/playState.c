@@ -54,24 +54,24 @@ void loadArmorPosition(struct playInfo *info) {
 }
 
 void loadArmorPrice(struct playInfo *info) {
-    FILE *armorPrice = fopen("dane\\przedmioty\\armor.txt", "r");
+    FILE *file = fopen("dane\\przedmioty\\armor.txt", "r");
     int i = 0;
     int j = 0;
     int quantity = 0;
 
     while (i < 9) {
-        fscanf(armorPrice, "%i", &quantity);
+        fscanf(file, "%i", &quantity);
         info->armorPrice[i] = malloc(sizeof(int[3]) * quantity);
 
         j = 0;
         while (j < quantity) {
-            fscanf(armorPrice, "%i", &info->armorPrice[i][j][0]);
+            fscanf(file, "%i", &info->armorPrice[i][j][0]);
 
             if (info->armorPrice[i][j][0] != 0) {
-                fscanf(armorPrice, "%i", &info->armorPrice[i][j][1]);
+                fscanf(file, "%i", &info->armorPrice[i][j][1]);
 
                 if (info->armorPrice[i][j][0] == 2) {
-                    fscanf(armorPrice, "%i", &info->armorPrice[i][j][2]);
+                    fscanf(file, "%i", &info->armorPrice[i][j][2]);
                 }
             }
 
@@ -81,43 +81,42 @@ void loadArmorPrice(struct playInfo *info) {
         i += 1;
     }
 
-    fclose(armorPrice);
+    fclose(file);
 }
 
 void unloadArmorPrice(struct playInfo *info) {
     int i = 0;
 
-    while (i < 9) {
+    for (i = 0; i < 9; i += 1) {
         free(info->armorPrice[i]);
-
-        i += 1;
+        info->armorPrice[i] = NULL;
     }
 }
 
 void loadWeaponPrice(struct playInfo *info) {
-    FILE *armorPrice = fopen("dane\\przedmioty\\weapon.txt", "r");
+    FILE *file = fopen("dane\\przedmioty\\weapon.txt", "r");
     int j = 0;
     int quantity = 0;
 
-    fscanf(armorPrice, "%i", &quantity);
+    fscanf(file, "%i", &quantity);
     info->weaponPrice = malloc(sizeof(int[3]) * quantity);
 
     j = 0;
     while (j < quantity) {
-        fscanf(armorPrice, "%i", &info->weaponPrice[j][0]);
+        fscanf(file, "%i", &info->weaponPrice[j][0]);
 
         if (info->weaponPrice[j][0] != 0) {
-            fscanf(armorPrice, "%i", &info->weaponPrice[j][1]);
+            fscanf(file, "%i", &info->weaponPrice[j][1]);
 
             if (info->weaponPrice[j][0] == 2) {
-                fscanf(armorPrice, "%i", &info->weaponPrice[j][2]);
+                fscanf(file, "%i", &info->weaponPrice[j][2]);
             }
         }
 
         j += 1;
     }
 
-    fclose(armorPrice);
+    fclose(file);
 }
 
 void unloadWeaponPrice(struct playInfo *info) {
@@ -125,29 +124,29 @@ void unloadWeaponPrice(struct playInfo *info) {
 }
 
 void loadItemPrice(struct playInfo *info) {
-    FILE *armorPrice = fopen("dane\\przedmioty\\inne.txt", "r");
+    FILE *file = fopen("dane\\przedmioty\\inne.txt", "r");
     int j = 0;
     int quantity = 0;
 
-    fscanf(armorPrice, "%i", &quantity);
+    fscanf(file, "%i", &quantity);
     info->itemsPrice = malloc(sizeof(int[3]) * quantity);
 
     j = 0;
     while (j < quantity) {
-        fscanf(armorPrice, "%i", &info->itemsPrice[j][0]);
+        fscanf(file, "%i", &info->itemsPrice[j][0]);
 
         if (info->itemsPrice[j][0] != 0) {
-            fscanf(armorPrice, "%i", &info->itemsPrice[j][1]);
+            fscanf(file, "%i", &info->itemsPrice[j][1]);
 
             if (info->itemsPrice[j][0] == 2) {
-                fscanf(armorPrice, "%i", &info->itemsPrice[j][2]);
+                fscanf(file, "%i", &info->itemsPrice[j][2]);
             }
         }
 
         j += 1;
     }
 
-    fclose(armorPrice);
+    fclose(file);
 }
 
 void unloadItemPrice(struct playInfo *info) {
@@ -252,19 +251,19 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
 }
 
 void freePlayInfo(struct playInfo *info) {
-    UnloadRenderTexture(*info->screenCamera);
-
-    unloadArmorPrice(info);
-    unloadWeaponPrice(info);
-    unloadItemPrice(info);
-
-    unloadItems(info);
     unloadWeapons(info);
+    unloadItems(info);
 
     unloadSaveFile(info);
 
     unloadArmor(info);
     unloadBodyParts(info);
+
+    unloadItemPrice(info);
+    unloadWeaponPrice(info);
+    unloadArmorPrice(info);
+
+    UnloadRenderTexture(*info->screenCamera);
 
     free(info->screenCamera);
     free(info->screenRect);

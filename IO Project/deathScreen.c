@@ -131,4 +131,9 @@ void deathScreen(enum playState *state, struct playInfo *info) {
             else if (isMouseOver(exit)) *state = DESKTOP;
         }
     }
+
+    if (*state != FIGHT && info->shouldDestroy == 1) {
+        unloadCharacter(&info->chosen);
+        info->shouldDestroy = 0;
+    }
 }
