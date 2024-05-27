@@ -236,7 +236,7 @@ void UpdateShopInterface(struct shopInterface *const element, const struct playI
     }
 
     element->sell.isActive = (*element->equipmentActiveType != 0) ? 0 : 1;
-    element->buy.isActive = (element->activeItem == -1) ? 0 : findElement(element->playerItemsID, element->priceItem) == -1 ? 0 : 1;
+    element->buy.isActive = (element->activeItem == -1 || element->priceItem == NULL) ? 0 : findElement(element->playerItemsID, element->priceItem) == -1 ? 0 : 1;
 }
 
 void UnloadShopInterface(struct shopInterface *const element) {
