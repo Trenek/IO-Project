@@ -4,4 +4,3 @@
 #include "slideBox.h"
 #include "choiceBox.h"
 #include "tutorialSlide.h"
-#include "characterCreatorThing.h"

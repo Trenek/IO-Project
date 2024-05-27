@@ -13,6 +13,7 @@ int main(void) {
         [LOAD_GAME] = loadGame,
         [SETTINGS] = settings,
         [TUTORIAL] = tutorial,
+        [CHARACTER_CREATOR] = characterCreator,
         [PLAY] = play
     };
 

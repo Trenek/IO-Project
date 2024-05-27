@@ -13,17 +13,17 @@
 #include "load.h"
 #include "savefile.h"
 
-void loadBodyPosition(struct playInfo *info) {
+void loadBodyPosition(int *width, int *height, int bodyPosition[4][10][2]) {
     FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
     int i = 0;
     int j = 0;
 
-    fscanf(bodyMeasurements, "%i %i", &info->width, &info->height);
+    fscanf(bodyMeasurements, "%i %i", width, height);
 
     while (i < 4) {
         j = 0;
         while (j < 10) {
-            fscanf(bodyMeasurements, "%i %i", &info->bodyPosition[i][j][0], &info->bodyPosition[i][j][1]);
+            fscanf(bodyMeasurements, "%i %i", &bodyPosition[i][j][0], &bodyPosition[i][j][1]);
 
             j += 1;
         }
@@ -232,14 +232,14 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
 
-    loadBodyPosition(&result);
+    loadBodyPosition(&result.width, &result.height, result.bodyPosition);
     loadArmorPosition(&result);
 
     loadArmorPrice(&result);
     loadWeaponPrice(&result);
     loadItemPrice(&result);
 
-    loadBodyParts(&result);
+    loadBodyParts(result.bodyParts);
     loadArmor(&result);
 
     loadSaveFile(&result, info->saveName);
@@ -257,7 +257,7 @@ void freePlayInfo(struct playInfo *info) {
     unloadSaveFile(info);
 
     unloadArmor(info);
-    unloadBodyParts(info);
+    unloadBodyParts(info->bodyParts);
 
     unloadItemPrice(info);
     unloadWeaponPrice(info);

@@ -97,7 +97,7 @@ void newGame(enum state *state, struct menuInfo *info) {
 
     struct button createCharacter = {
         .text = "Kreator postaci",
-        .isActive = 0,
+        .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 3),
             .y = height + 2 * spaceY,

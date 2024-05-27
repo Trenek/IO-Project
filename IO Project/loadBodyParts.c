@@ -16,20 +16,20 @@ static const char *const bodyPartsNames[] = {
     [RIGHT_FOOT] = "right foot"
 };
 
-static void loadBodyPart(int num, struct playInfo *info) {
+static void loadBodyPart(int num, Texture2D(*bodyParts[10])[4]) {
     const char *const directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
     char buffor[128];
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
     unsigned int j = 0;
 
-    info->bodyParts[num] = malloc(sizeof(Texture2D[4]) * files.capacity);
+    bodyParts[num] = malloc(sizeof(Texture2D[4]) * files.capacity);
 
     while (i < files.capacity) {
         j = 0;
         while (j < 4) {
             sprintf(buffor, "%s\\%i\\%i\\0.png", directory, i, j);
-            info->bodyParts[num][i][j] = LoadTexture(buffor);
+            bodyParts[num][i][j] = LoadTexture(buffor);
             j += 1;
         }
 
@@ -39,7 +39,7 @@ static void loadBodyPart(int num, struct playInfo *info) {
     UnloadDirectoryFiles(files);
 }
 
-static void unloadBodyPart(int num, struct playInfo *info) {
+static void unloadBodyPart(int num, Texture2D(*bodyParts[10])[4]) {
     const char *directory = TextFormat("resources\\textures\\body\\%s", bodyPartsNames[num]);
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
@@ -48,7 +48,7 @@ static void unloadBodyPart(int num, struct playInfo *info) {
     while (i < files.capacity) {
         j = 0;
         while (j < 4) {
-            UnloadTexture(info->bodyParts[num][i][j]);
+            UnloadTexture(bodyParts[num][i][j]);
 
             j += 1;
         }
@@ -57,25 +57,25 @@ static void unloadBodyPart(int num, struct playInfo *info) {
     }
 
     UnloadDirectoryFiles(files);
-    free(info->bodyParts[num]);
+    free(bodyParts[num]);
 }
 
 
-void loadBodyParts(struct playInfo *info) {
+void loadBodyParts(Texture2D(*bodyParts[10])[4]) {
     int i = 0;
 
     while (i < 10) {
-        loadBodyPart(i, info);
+        loadBodyPart(i, bodyParts);
 
         i += 1;
     }
 }
 
-void unloadBodyParts(struct playInfo *info) {
+void unloadBodyParts(Texture2D(*bodyParts[10])[4]) {
     int i = 0;
 
     while (i < 10) {
-        unloadBodyPart(i, info);
+        unloadBodyPart(i, bodyParts);
 
         i += 1;
     }

@@ -88,9 +88,6 @@
     <Filter Include="Pliki źródłowe\menu\itemBox">
       <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\menu\characterCreator">
-      <UniqueIdentifier>{22d67df0-ce5b-46b6-96e1-cb1181924320}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\objects\characters">
       <UniqueIdentifier>{5888ec3f-4de9-4b56-9bd5-cd2a092b601f}</UniqueIdentifier>
     </Filter>
@@ -225,9 +222,6 @@
     <ClCompile Include="unloadSaveFile.c">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
     </ClCompile>
-    <ClCompile Include="characterCreatorThing.c">
-      <Filter>Pliki źródłowe\menu\characterCreator</Filter>
-    </ClCompile>
     <ClCompile Include="shopInterface.c">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClCompile>
@@ -313,9 +307,6 @@
     </ClInclude>
     <ClInclude Include="shopInterface.h">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
-    </ClInclude>
-    <ClInclude Include="characterCreatorThing.h">
-      <Filter>Pliki źródłowe\menu\characterCreator</Filter>
     </ClInclude>
     <ClInclude Include="character.h">
       <Filter>Pliki źródłowe\objects\characters\character</Filter>
