@@ -67,13 +67,13 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         .init = {
             .x = (GetScreenWidth() >> 1) - spaceX,
             .y = (GetScreenHeight() >> 2) + 11 * spaceY,
-            .incX = 10,
-            .incY = 10,
+            .incX = INC_X,
+            .incY = INC_Y,
             .posX = 1,
             .posY = 1
         },
         .font = &info->fonts[0],
-        .fontSize = 20,
+        .fontSize = 25,
         .fontColor = BLACK,
         .color = color2,
         .hoverColor = color3,
