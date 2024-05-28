@@ -1,11 +1,14 @@
+#ifndef NUMBER_SLIDEBOX_H
+#define NUMBER_SLIDEBOX_H
+
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "numberSlideBox.h"
 
-void nCalculateSlideBoxPosition(struct slideBox *element) {
-    struct slideBoxPositionParameters init = element->init;
+void nCalculateSlideBoxPosition(struct nSlideBox *element) {
+    struct nSlideBoxPositionParameters init = element->init;
 
     element->rect[0] = (Rectangle){
         .x = init.x - init.posX * init.width / 2.0f,
@@ -31,7 +34,7 @@ void nCalculateSlideBoxPosition(struct slideBox *element) {
     element->incY = (float)init.incY;
 }
 
-void nDrawSlideBox(const struct slideBox *element) {
+void nDrawSlideBox(const struct nSlideBox *element) {
     char buffer[8];
     const float textWidth = MeasureTextEx(*element->font, itoa(element->currentOption + 1, buffer, 10), (float)element->fontSize, (float)element->spaceing).x;
     const Vector2 vec = {
@@ -48,7 +51,7 @@ void nDrawSlideBox(const struct slideBox *element) {
     DrawTextEx(*(element->font), buffer, vec, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void nInternalUpdateSlideBox(struct slideBox *element) {
+void nInternalUpdateSlideBox(struct nSlideBox *element) {
     if (IsKeyPressed(KEY_LEFT) || (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), element->rect[1]))) {
         if (element->currentOption == 0) {
             element->currentOption = element->numberOfOptions - 1;
@@ -68,3 +71,5 @@ void nInternalUpdateSlideBox(struct slideBox *element) {
         }
     }
 }
+
+#endif

@@ -1,3 +1,5 @@
+#define SLIDEBOX_H
+
 #include <raylib.h>
 
 struct slideBoxPositionParameters {
@@ -33,19 +35,9 @@ struct slideBox {
     const char *options[];
 };
 
-void sCalculateSlideBoxPosition(struct slideBox *element);
-void sDrawSlideBox(const struct slideBox *element);
-void sInternalUpdateSlideBox(struct slideBox *element);
-
-inline void CalculateSlideBoxPosition(struct slideBox *element) {
-    sCalculateSlideBoxPosition(element);
-}
-inline void DrawSlideBox(const struct slideBox *element) {
-    sDrawSlideBox(element);
-}
-inline void InternalUpdateSlideBox(struct slideBox *element) {
-    sInternalUpdateSlideBox(element);
-}
+void CalculateSlideBoxPosition(struct slideBox *element);
+void DrawSlideBox(const struct slideBox *element);
+void InternalUpdateSlideBox(struct slideBox *element);
 
 inline void UpdateSlideBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

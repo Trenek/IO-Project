@@ -1,6 +1,7 @@
 #include "button.h"
 #include "choiceBox.h"
 #include "inputBox.h"
-#include "slideBox.h"
+#include "stringSlideBox.h"
+#include "numberSlideBox.h"
 #include "choiceBox.h"
 #include "tutorialSlide.h"

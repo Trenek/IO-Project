@@ -189,9 +189,6 @@
     <ClCompile Include="tutorial.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="slideBox.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="itemBox.c">
       <Filter>Pliki źródłowe\menu\itemBox</Filter>
     </ClCompile>
@@ -288,9 +285,6 @@
       <Filter>Pliki źródłowe\menu</Filter>
     </ClInclude>
     <ClInclude Include="menuElements.h">
-      <Filter>Pliki nagłówkowe</Filter>
-    </ClInclude>
-    <ClInclude Include="slideBox.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="itemBox.h">

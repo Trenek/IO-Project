@@ -217,7 +217,6 @@
     <ClInclude Include="savefile.h" />
     <ClInclude Include="seller.h" />
     <ClInclude Include="shopInterface.h" />
-    <ClInclude Include="slideBox.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="stringSlideBox.h" />
     <ClInclude Include="tutorialSlide.h" />

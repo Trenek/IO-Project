@@ -1,6 +1,8 @@
+#define SLIDEBOX_H
+
 #include <raylib.h>
 
-struct slideBoxPositionParameters {
+struct nSlideBoxPositionParameters {
     int x;
     int y;
     int incX;
@@ -10,13 +12,13 @@ struct slideBoxPositionParameters {
     int width;
 };
 
-struct slideBox {
+struct nSlideBox {
     int numberOfOptions;
     bool isActive;
     int currentOption;
 
     union {
-        struct slideBoxPositionParameters init;
+        struct nSlideBoxPositionParameters init;
         struct {
             Rectangle rect[3];
             float incY;
@@ -32,24 +34,14 @@ struct slideBox {
     int spaceing;
 };
 
-void nCalculateSlideBoxPosition(struct slideBox *element);
-void nDrawSlideBox(const struct slideBox *element);
-void nInternalUpdateSlideBox(struct slideBox *element);
+void nCalculateSlideBoxPosition(struct nSlideBox *element);
+void nDrawSlideBox(const struct nSlideBox *element);
+void nInternalUpdateSlideBox(struct nSlideBox *element);
 
-inline void CalculateSlideBoxPosition(struct slideBox *element) {
-    nCalculateSlideBoxPosition(element);
-}
-inline void DrawSlideBox(const struct slideBox *element) {
-    nDrawSlideBox(element);
-}
-inline void InternalUpdateSlideBox(struct slideBox *element) {
-    nInternalUpdateSlideBox(element);
-}
-
-inline void UpdateSlideBox(struct slideBox *element) {
+inline void nUpdateSlideBox(struct nSlideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         element->isActive = CheckCollisionPointRec(GetMousePosition(), element->rect[0]);
     }
 
-    if (element->isActive) InternalUpdateSlideBox(element);
+    if (element->isActive) nInternalUpdateSlideBox(element);
 }

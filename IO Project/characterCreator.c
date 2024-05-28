@@ -1,5 +1,3 @@
-#define NUM_SLIDEBOX
-
 #include <raylib.h>
 
 #include "state.h"
@@ -101,7 +99,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
     };
 
     struct button labels[10];
-    struct slideBox bodyPartSlideBoxes[10];
+    struct nSlideBox bodyPartSlideBoxes[10];
     
     if (info->isLoaded == 0) {
         loadBodyPosition(info);
@@ -130,7 +128,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .spaceing = 0
         };
 
-        bodyPartSlideBoxes[i] = (struct slideBox){
+        bodyPartSlideBoxes[i] = (struct nSlideBox){
             .numberOfOptions = info->bodyPartsQuantity[i],
             .isActive = false,
             .currentOption = info->body[i],
@@ -152,7 +150,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .spaceing = 0
         };
 
-        CalculateSlideBoxPosition(&bodyPartSlideBoxes[i]);
+        nCalculateSlideBoxPosition(&bodyPartSlideBoxes[i]);
         CalculateButtonPosition(&labels[i]);
     }
 
@@ -172,7 +170,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
 
             for (int i = 0; i < 10; i++) {
                 DrawButton(labels[i]);
-                DrawSlideBox(&bodyPartSlideBoxes[i]);
+                nDrawSlideBox(&bodyPartSlideBoxes[i]);
 
                 int bodyPartIndex = bodyPartSlideBoxes[i].currentOption;
                 DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
@@ -192,7 +190,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         }
 
         for (int i = 0; i < 10; i++) {
-            UpdateSlideBox(&bodyPartSlideBoxes[i]);
+            nUpdateSlideBox(&bodyPartSlideBoxes[i]);
         }
     }
 }
