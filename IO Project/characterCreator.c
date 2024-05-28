@@ -1,8 +1,11 @@
+#define NUM_SLIDEBOX
+
 #include <raylib.h>
 
 #include "state.h"
 #include "playState.h"
 #include "load.h"
+#include "character.h"
 
 #include "menuElements.h"
 
@@ -19,7 +22,7 @@ static void CalculateTexturesPosition(int bodyPosition[4][10][2], Vector2 textur
     }
 }
 
-void characterCreator(enum state* state, struct menuInfo* info) {   
+void characterCreator(enum state* state, struct menuInfo* info) {  
     const char *const bodyPartsNamesInPolish[10] = {
         [HEAD] = "Głowa",
         [LEFT_ARM] = "Lewe ramię",
@@ -98,7 +101,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
     };
 
     struct button labels[10];
-    struct slideBox **bodyPartSlideBoxes = malloc(10 * sizeof(struct slideBox *));
+    struct slideBox bodyPartSlideBoxes[10];
     
     if (info->isLoaded == 0) {
         loadBodyPosition(info);
@@ -127,8 +130,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .spaceing = 0
         };
 
-        bodyPartSlideBoxes[i] = malloc(sizeof(struct slideBox) + info->bodyPartsQuantity[i] * sizeof(char *));
-        *bodyPartSlideBoxes[i] = (struct slideBox){
+        bodyPartSlideBoxes[i] = (struct slideBox){
             .numberOfOptions = info->bodyPartsQuantity[i],
             .isActive = false,
             .currentOption = info->body[i],
@@ -150,8 +152,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .spaceing = 0
         };
 
-        FillSlideBoxWithNumbers(bodyPartSlideBoxes[i]);
-        CalculateSlideBoxPosition(bodyPartSlideBoxes[i]);
+        CalculateSlideBoxPosition(&bodyPartSlideBoxes[i]);
         CalculateButtonPosition(&labels[i]);
     }
 
@@ -171,9 +172,9 @@ void characterCreator(enum state* state, struct menuInfo* info) {
 
             for (int i = 0; i < 10; i++) {
                 DrawButton(labels[i]);
-                DrawSlideBox(bodyPartSlideBoxes[i]);
+                DrawSlideBox(&bodyPartSlideBoxes[i]);
 
-                int bodyPartIndex = bodyPartSlideBoxes[i]->currentOption;
+                int bodyPartIndex = bodyPartSlideBoxes[i].currentOption;
                 DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
             }
         EndDrawing();
@@ -184,19 +185,14 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             }
             else if (isMouseOver(confirm)) {
                 for (int i = 0; i < 10; i++) {
-                    info->body[i] = bodyPartSlideBoxes[i]->currentOption;
+                    info->body[i] = bodyPartSlideBoxes[i].currentOption;
                 }
                 *state = NEW_GAME;
             }
         }
 
         for (int i = 0; i < 10; i++) {
-            UpdateSlideBox(bodyPartSlideBoxes[i]);
+            UpdateSlideBox(&bodyPartSlideBoxes[i]);
         }
     }
-    for (int i = 0; i < 10; ++i) {
-        EmptyNumbersFromSlideBox(bodyPartSlideBoxes[i]);
-        free(bodyPartSlideBoxes[i]);
-    }
-    free(bodyPartSlideBoxes);
 }

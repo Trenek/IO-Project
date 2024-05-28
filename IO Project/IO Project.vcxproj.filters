@@ -103,6 +103,12 @@
     <Filter Include="Pliki źródłowe\load\bodyParts">
       <UniqueIdentifier>{57bf5347-d5d3-4ad2-9508-0d630b7f34ce}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\slideBox\string">
+      <UniqueIdentifier>{ee0091ae-ed8f-47d2-a15c-4816a138413c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\slideBox\numbers">
+      <UniqueIdentifier>{6a4c376f-ba2f-425f-b13e-2258acaad0b3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object2D.c">
@@ -180,9 +186,6 @@
     <ClCompile Include="tutorialSlide.c">
       <Filter>Pliki źródłowe\menu\tutorialSlide</Filter>
     </ClCompile>
-    <ClCompile Include="slideBox.c">
-      <Filter>Pliki źródłowe\menu\slideBox</Filter>
-    </ClCompile>
     <ClCompile Include="tutorial.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
@@ -240,6 +243,12 @@
     <ClCompile Include="loadBodyParts.c">
       <Filter>Pliki źródłowe\load\bodyParts</Filter>
     </ClCompile>
+    <ClCompile Include="numberSlideBox.c">
+      <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
+    </ClCompile>
+    <ClCompile Include="stringSlideBox.c">
+      <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -277,9 +286,6 @@
     </ClInclude>
     <ClInclude Include="menuElements.h">
       <Filter>Pliki źródłowe\menu</Filter>
-    </ClInclude>
-    <ClInclude Include="slideBox.h">
-      <Filter>Pliki źródłowe\menu\slideBox</Filter>
     </ClInclude>
     <ClInclude Include="menuElements.h">
       <Filter>Pliki nagłówkowe</Filter>
@@ -322,6 +328,15 @@
     </ClInclude>
     <ClInclude Include="armor.h">
       <Filter>Pliki źródłowe\load\armor</Filter>
+    </ClInclude>
+    <ClInclude Include="slideBox.h">
+      <Filter>Pliki źródłowe\menu\slideBox</Filter>
+    </ClInclude>
+    <ClInclude Include="numberSlideBox.h">
+      <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
+    </ClInclude>
+    <ClInclude Include="stringSlideBox.h">
+      <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

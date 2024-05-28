@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "slideBox.h"
+#include "numberSlideBox.h"
 
-void CalculateSlideBoxPosition(struct slideBox *element) {
+void nCalculateSlideBoxPosition(struct slideBox *element) {
     struct slideBoxPositionParameters init = element->init;
 
     element->rect[0] = (Rectangle){
@@ -31,29 +31,9 @@ void CalculateSlideBoxPosition(struct slideBox *element) {
     element->incY = (float)init.incY;
 }
 
-void FillSlideBoxWithNumbers(struct slideBox *element) {
-    int i = 0;
-
-    while (i < element->numberOfOptions) {
-        element->options[i] = malloc(3 * sizeof(char));
-        snprintf((char *)element->options[i], 3 * sizeof(char), "%d", i + 1);
-
-        i += 1;
-    }
-}
-
-void EmptyNumbersFromSlideBox(struct slideBox *element) {
-    int i = 0;
-
-    while (i < element->numberOfOptions) {
-        free((char *)element->options[i]);
-
-        i += 1;
-    }
-}
-
-void DrawSlideBox(const struct slideBox *element) {
-    const float textWidth = MeasureTextEx(*element->font, element->options[element->currentOption], (float)element->fontSize, (float)element->spaceing).x;
+void nDrawSlideBox(const struct slideBox *element) {
+    char buffer[8];
+    const float textWidth = MeasureTextEx(*element->font, itoa(element->currentOption + 1, buffer, 10), (float)element->fontSize, (float)element->spaceing).x;
     const Vector2 vec = {
         .x = element->rect[0].x + (element->rect[0].width - textWidth) / 2,
         .y = element->rect[0].y + element->incY
@@ -65,14 +45,14 @@ void DrawSlideBox(const struct slideBox *element) {
     DrawRectangleLinesEx(element->rect[1], 1, element->isActive ? element->borderActiveColor : element->borderColor);
     DrawRectangleLinesEx(element->rect[2], 1, element->isActive ? element->borderActiveColor : element->borderColor);
 
-    DrawTextEx(*(element->font), element->options[element->currentOption], vec, (float)element->fontSize, (float)element->spaceing, element->fontColor);
+    DrawTextEx(*(element->font), buffer, vec, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void InternalUpdateSlideBox(struct slideBox *element) {
+void nInternalUpdateSlideBox(struct slideBox *element) {
     if (IsKeyPressed(KEY_LEFT) || (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), element->rect[1]))) {
         if (element->currentOption == 0) {
             element->currentOption = element->numberOfOptions - 1;
-        } 
+        }
         else {
             element->currentOption -= 1;
         }
