@@ -5,6 +5,7 @@
 
 void play(enum state *state, struct menuInfo *info) {
     enum playState playState = EXPLORE;
+    struct playInfo playInfo = initializePlayInfo(info);
     void (*function[])(enum playState *state, struct playInfo *info) = {
         [EXPLORE] = explore,
         [EQUIPEMENT] = equipement,
@@ -16,16 +17,11 @@ void play(enum state *state, struct menuInfo *info) {
         [DEATH_SCREEN] = deathScreen
     };
 
-    do {
-        struct playInfo playInfo = initializePlayInfo(info);
+    while (!WindowShouldClose() && (playState != RETURN) && (playState != DESKTOP) && (playState != RELOAD_SAVE)) {
+        function[playState](&playState, &playInfo);
+    }
 
-        playState = EXPLORE;
-        while (!WindowShouldClose() && (playState != RETURN) && (playState != DESKTOP) && (playState != RELOAD_SAVE)) {
-            function[playState](&playState, &playInfo);
-        }
-
-        freePlayInfo(&playInfo);
-    } while (playState == RELOAD_SAVE);
+    freePlayInfo(&playInfo);
 
     *state = (playState == RETURN) ? MENU : (playState == RELOAD_SAVE) ? PLAY : EXIT;
 }
