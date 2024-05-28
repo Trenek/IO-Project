@@ -6,6 +6,7 @@
 #include "object2D.h"
 
 struct playInfo;
+struct menuInfo;
 
 struct character {
 	char name[130];
@@ -24,6 +25,7 @@ struct character {
 };
 
 void unloadCharacter(struct character *character);
-void assemblePlayerTexture(struct playInfo *info, struct character *character);
+void assemblePlayerTexture(struct playInfo *info, struct character *character); 
+void mainAssemblePlayerTexture(struct menuInfo *info, struct character *character);
 
 #endif

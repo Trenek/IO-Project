@@ -36,12 +36,12 @@ struct nSlideBox {
 
 void nCalculateSlideBoxPosition(struct nSlideBox *element);
 void nDrawSlideBox(const struct nSlideBox *element);
-void nInternalUpdateSlideBox(struct nSlideBox *element);
+bool nInternalUpdateSlideBox(struct nSlideBox *element);
 
-inline void nUpdateSlideBox(struct nSlideBox *element) {
+inline bool nUpdateSlideBox(struct nSlideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
         element->isActive = CheckCollisionPointRec(GetMousePosition(), element->rect[0]);
     }
 
-    if (element->isActive) nInternalUpdateSlideBox(element);
+    return element->isActive == true ? nInternalUpdateSlideBox(element) : false;
 }

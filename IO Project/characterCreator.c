@@ -11,15 +11,6 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-static void CalculateTexturesPosition(int bodyPosition[4][10][2], Vector2 texturePosition[10]) {
-    for (int i = 0; i < 10; i++) {
-        texturePosition[i] = (Vector2){
-            .x = (float)bodyPosition[0][i][0] / 2 + 50,
-            .y = (float)bodyPosition[0][i][1] / 2 + 150,
-        };
-    }
-}
-
 void characterCreator(enum state* state, struct menuInfo* info) {  
     const char *const bodyPartsNamesInPolish[10] = {
         [HEAD] = "Głowa",
@@ -34,14 +25,23 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         [TORSO] = "Tors"
     };
 
-    Vector2 texturePosition[10];
-
     const int spaceY = INC_Y + INC_Y + FONT_SIZE;
     const int spaceX = 90;
 
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
     Color color3 = { .r = 78, .g = 215, .b = 50, .a = 105 };
+
+    Texture2D texture = { 0 };
+    struct character bob = {
+        .bodyPart = { 0 },
+        .object.texture = &texture,
+        .direction = 0
+    };
+    Vector2 bobPosition = {
+        .x = GetScreenWidth() / 16.0f,
+        .y = (GetScreenHeight() / 2.0f) - (texture.height / 4.0f)
+    };
 
     struct button title = {
         .text = "Kreator postaci",
@@ -154,7 +154,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         CalculateButtonPosition(&labels[i]);
     }
 
-    CalculateTexturesPosition(info->bodyPosition, texturePosition);
+    mainAssemblePlayerTexture(info, &bob);
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&confirm);
@@ -171,10 +171,8 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             for (int i = 0; i < 10; i++) {
                 DrawButton(labels[i]);
                 nDrawSlideBox(&bodyPartSlideBoxes[i]);
-
-                int bodyPartIndex = bodyPartSlideBoxes[i].currentOption;
-                DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
             }
+            DrawTextureEx(texture, bobPosition, 0.0f, 0.5f, WHITE);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -182,15 +180,18 @@ void characterCreator(enum state* state, struct menuInfo* info) {
                 *state = NEW_GAME;
             }
             else if (isMouseOver(confirm)) {
-                for (int i = 0; i < 10; i++) {
-                    info->body[i] = bodyPartSlideBoxes[i].currentOption;
-                }
+                memcpy(info->body, bob.bodyPart, sizeof(int) * 10);
                 *state = NEW_GAME;
             }
         }
 
         for (int i = 0; i < 10; i++) {
-            nUpdateSlideBox(&bodyPartSlideBoxes[i]);
+            if (nUpdateSlideBox(&bodyPartSlideBoxes[i])) {
+                bob.bodyPart[i] = bodyPartSlideBoxes[i].currentOption;
+                mainAssemblePlayerTexture(info, &bob);
+            }
         }
     }
+
+    UnloadTexture(texture);
 }

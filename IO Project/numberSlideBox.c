@@ -51,7 +51,9 @@ void nDrawSlideBox(const struct nSlideBox *element) {
     DrawTextEx(*(element->font), buffer, vec, (float)element->fontSize, (float)element->spaceing, element->fontColor);
 }
 
-void nInternalUpdateSlideBox(struct nSlideBox *element) {
+bool nInternalUpdateSlideBox(struct nSlideBox *element) {
+    bool result = false;
+
     if (IsKeyPressed(KEY_LEFT) || (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), element->rect[1]))) {
         if (element->currentOption == 0) {
             element->currentOption = element->numberOfOptions - 1;
@@ -59,6 +61,8 @@ void nInternalUpdateSlideBox(struct nSlideBox *element) {
         else {
             element->currentOption -= 1;
         }
+
+        result = true;
     }
 
     if (IsKeyPressed(KEY_RIGHT) || (IsMouseButtonPressed(MOUSE_BUTTON_LEFT) && CheckCollisionPointRec(GetMousePosition(), element->rect[2]))) {
@@ -69,7 +73,11 @@ void nInternalUpdateSlideBox(struct nSlideBox *element) {
             element->currentOption += 1;
             element->currentOption %= element->numberOfOptions;
         }
+
+        result = true;
     }
+
+    return result;
 }
 
 #endif
