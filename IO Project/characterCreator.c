@@ -38,10 +38,6 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         .object.texture = &texture,
         .direction = 0
     };
-    Vector2 bobPosition = {
-        .x = GetScreenWidth() / 16.0f,
-        .y = (GetScreenHeight() / 2.0f) - (texture.height / 4.0f)
-    };
 
     struct button title = {
         .text = "Kreator postaci",
@@ -156,6 +152,11 @@ void characterCreator(enum state* state, struct menuInfo* info) {
 
     mainAssemblePlayerTexture(info, &bob);
 
+    Vector2 bobPosition = (Vector2){
+       .x = GetScreenWidth() / 16.0f,
+       .y = (GetScreenHeight() / 2.0f) - (texture.height / 4.0f)
+    };
+
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&confirm);
     CalculateButtonPosition(&goBack);
@@ -174,7 +175,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             }
             DrawTextureEx(texture, bobPosition, 0.0f, 0.5f, WHITE);
         EndDrawing();
-
+       
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) {
                 *state = NEW_GAME;
