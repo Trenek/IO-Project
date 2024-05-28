@@ -39,6 +39,8 @@ struct slideBox {
 void CalculateSlideBoxPosition(struct slideBox *element);
 void DrawSlideBox(const struct slideBox *element);
 void InternalUpdateSlideBox(struct slideBox *element);
+void FillSlideBoxWithNumbers(struct slideBox *element);
+void EmptyNumbersFromSlideBox(struct slideBox *element);
 
 inline void UpdateSlideBox(struct slideBox *element) {
     if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

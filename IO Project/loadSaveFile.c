@@ -22,7 +22,7 @@ static void createDate(const char *const saveName) {
     fclose(file);
 }
 
-static void loadBody(FILE *playerFile, struct character *character) {
+static void loadCharacterBody(FILE *playerFile, struct character *character) {
     int i = 0;
 
     while (i < 10) {
@@ -32,7 +32,7 @@ static void loadBody(FILE *playerFile, struct character *character) {
     }
 }
 
-static void loadArmor(FILE *playerFile, struct character *character) {
+static void loadCharacterArmor(FILE *playerFile, struct character *character) {
     int i = 0;
 
     while (i < 9) {
@@ -60,8 +60,8 @@ static void loadCharacter(struct character *character, const char *characterSave
     fscanf(playerFile, "%[^\n]", character->name);
     fscanf(playerFile, "%f %f", &object->sizeV.x, &object->sizeV.y);
 
-    loadBody(playerFile, character);
-    loadArmor(playerFile, character);
+    loadCharacterBody(playerFile, character);
+    loadCharacterArmor(playerFile, character);
 
     fscanf(playerFile, "%i", &character->weapon);
 

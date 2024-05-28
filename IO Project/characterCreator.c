@@ -19,37 +19,21 @@ static void CalculateTexturesPosition(int bodyPosition[4][10][2], Vector2 textur
     }
 }
 
-void characterCreator(enum state* state, struct menuInfo* info) {
-    const char* bodyPartsNamesInPolish[10] = {
-        [HEAD] = "G³owa",
-        [LEFT_ARM] = "Lewe ramiê",
-        [RIGHT_ARM] = "Prawie ramiê",
+void characterCreator(enum state* state, struct menuInfo* info) {   
+    static const char *bodyPartsNamesInPolish[10] = {
+        [HEAD] = "GÅ‚owa",
+        [LEFT_ARM] = "Lewe ramiÄ™",
+        [RIGHT_ARM] = "Prawie ramiÄ™",
         [LEFT_FOOT] = "Lewa stopa",
         [RIGHT_FOOT] = "Prawa stopa",
-        [LEFT_HAND] = "Lewa d³oñ",
-        [RIGHT_HAND] = "Prawa d³oñ",
+        [LEFT_HAND] = "Lewa dÅ‚oÅ„",
+        [RIGHT_HAND] = "Prawa dÅ‚oÅ„",
         [LEFT_LEG] = "Lewa noga",
-        [RIGHT_LEG] = "Prawa d³oñ",
+        [RIGHT_LEG] = "Prawa dÅ‚oÅ„",
         [TORSO] = "Tors"
     };
-    
-    const int numberOfOptions[10] = {
-        [HEAD] = 4,
-        [LEFT_ARM] = 1,
-        [RIGHT_ARM] = 1,
-        [LEFT_FOOT] = 1,
-        [RIGHT_FOOT] = 1,
-        [LEFT_HAND] = 1,
-        [RIGHT_HAND] = 1,
-        [LEFT_LEG] = 1,
-        [RIGHT_LEG] = 1,
-        [TORSO] = 1
-    };
 
-    int bodyPosition[4][10][2];
-    int width, height;
     Vector2 texturePosition[10];
-    Texture2D(*bodyPartsTextures[10])[4];
 
     const int spaceY = INC_Y + INC_Y + FONT_SIZE;
     const int spaceX = 90;
@@ -77,7 +61,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         .spaceing = 0,
     };
     struct button confirm = {
-        .text = "ZatwierdŸ",
+        .text = "ZatwierdÅº",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) - spaceX,
@@ -95,7 +79,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         .spaceing = 0
     };
     struct button goBack = {
-        .text = "Powrót",
+        .text = "PowrÃ³t",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) + spaceX,
@@ -114,6 +98,15 @@ void characterCreator(enum state* state, struct menuInfo* info) {
     };
 
     struct button labels[10];
+    struct slideBox **bodyPartSlideBoxes = malloc(10 * sizeof(struct slideBox *));
+    
+    if (info->isLoaded == 0) {
+        loadBodyPosition(info);
+        loadBodyParts(info);
+
+        info->isLoaded = 1;
+    }
+
     for (int i = 0; i < 10; i++) {
         labels[i] = (struct button){
             .text = bodyPartsNamesInPolish[i],
@@ -133,13 +126,10 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .hoverColor = BLANK,
             .spaceing = 0
         };
-    }
-    
-    struct slideBox **bodyPartSlideBoxes = malloc(10 * sizeof(struct slideBox*));
-    for (int i = 0; i < 10; i++) {
-        bodyPartSlideBoxes[i] = malloc(sizeof(struct slideBox) + numberOfOptions[i] * sizeof(char *));
+
+        bodyPartSlideBoxes[i] = malloc(sizeof(struct slideBox) + info->bodyPartsQuantity[i] * sizeof(char *));
         *bodyPartSlideBoxes[i] = (struct slideBox){
-            .numberOfOptions = numberOfOptions[i],
+            .numberOfOptions = info->bodyPartsQuantity[i],
             .isActive = false,
             .currentOption = info->body[i],
             .init = {
@@ -159,26 +149,17 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .borderColor = BLACK,
             .spaceing = 0
         };
-        for (int j = 0; j < numberOfOptions[i]; j++) {
-            bodyPartSlideBoxes[i]->options[j] = malloc(3 * sizeof(char));
-            snprintf((char*)bodyPartSlideBoxes[i]->options[j], 3, "%d", j + 1);
-        }
+
+        FillSlideBoxWithNumbers(bodyPartSlideBoxes[i]);
+        CalculateSlideBoxPosition(bodyPartSlideBoxes[i]);
+        CalculateButtonPosition(&labels[i]);
     }
 
-    loadBodyPosition(&width, &height, bodyPosition);
-    CalculateTexturesPosition(bodyPosition, texturePosition);
-
-    loadBodyParts(bodyPartsTextures);
+    CalculateTexturesPosition(info->bodyPosition, texturePosition);
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&confirm);
     CalculateButtonPosition(&goBack);
-
-    for (int i = 0; i < 10; i++) {
-        CalculateButtonPosition(&labels[i]);
-        CalculateSlideBoxPosition(bodyPartSlideBoxes[i]);
-    }
-
 
     while (!WindowShouldClose() && *state == CHARACTER_CREATOR) {
         BeginDrawing();
@@ -193,7 +174,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             DrawSlideBox(bodyPartSlideBoxes[i]);
 
             int bodyPartIndex = bodyPartSlideBoxes[i]->currentOption;
-            DrawTextureEx(*bodyPartsTextures[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
+            DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
         }
         
         EndDrawing();
@@ -215,8 +196,8 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         }
     }
     for (int i = 0; i < 10; ++i) {
+        EmptyNumbersFromSlideBox(bodyPartSlideBoxes[i]);
         free(bodyPartSlideBoxes[i]);
     }
     free(bodyPartSlideBoxes);
-    unloadBodyParts(bodyPartsTextures);
 }

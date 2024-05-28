@@ -5,6 +5,7 @@
 
 #include "player.h"
 #include "seller.h"
+#include "load.h"
 
 struct menuInfo;
 struct Object2D;
@@ -34,31 +35,6 @@ enum position {
     RIGHT,
     BACK,
     LEFT
-};
-
-enum BodyPartTexture {
-    HEAD,
-    TORSO,
-    LEFT_ARM,
-    RIGHT_ARM,
-    LEFT_LEG,
-    RIGHT_LEG,
-    LEFT_HAND,
-    RIGHT_HAND,
-    LEFT_FOOT,
-    RIGHT_FOOT
-};
-
-enum ArmorPartTexture {
-    HELMET,
-    BREASTPLATE,
-    PANTS,
-    LEFT_BOOT,
-    RIGHT_BOOT,
-    LEFT_GLOVE,
-    RIGHT_GLOVE,
-    LEFT_SLEEVE,
-    RIGHT_SLEEVE
 };
 
 struct playInfo {
@@ -93,10 +69,10 @@ struct playInfo {
 
     int dialog;
 
-    Texture2D (*bodyParts[10])[4];
+    Texture2D (*(*bodyParts)[10])[4];
     int height;
     int width;
-    int bodyPosition[4][10][2];
+    int (*bodyPosition)[4][10][2];
 
     Texture2D(*armorPart[9])[4];
     int (*armorPrice[9])[3];
@@ -113,8 +89,6 @@ struct playInfo {
 
 struct playInfo initializePlayInfo(struct menuInfo *info);
 void freePlayInfo(struct playInfo *info);
-void loadArmorPosition(struct playInfo* info);
-void loadBodyPosition(int* width, int* height, int bodyPosition[4][10][2]);
 
 void explore(enum playState *playState, struct playInfo *info);
 void equipement(enum playState* playState, struct playInfo* info);

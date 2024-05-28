@@ -1,4 +1,6 @@
 #include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "slideBox.h"
 
@@ -27,6 +29,27 @@ void CalculateSlideBoxPosition(struct slideBox *element) {
     };
 
     element->incY = (float)init.incY;
+}
+
+void FillSlideBoxWithNumbers(struct slideBox *element) {
+    int i = 0;
+
+    while (i < element->numberOfOptions) {
+        element->options[i] = malloc(3 * sizeof(char));
+        snprintf((char *)element->options[i], 3 * sizeof(char), "%d", i + 1);
+
+        i += 1;
+    }
+}
+
+void EmptyNumbersFromSlideBox(struct slideBox *element) {
+    int i = 0;
+
+    while (i < element->numberOfOptions) {
+        free((char *)element->options[i]);
+
+        i += 1;
+    }
 }
 
 void DrawSlideBox(const struct slideBox *element) {

@@ -3,6 +3,8 @@
 
 #include <raylib.h>
 
+#include "bodyParts.h"
+
 enum state {
     MENU,
     NEW_GAME,
@@ -22,6 +24,13 @@ struct menuInfo {
 
     Music *music;
     int musicQuantity;
+
+    int isLoaded;
+    int bodyPartsQuantity[10];
+    Texture2D(*bodyParts[10])[4];
+    int width;
+    int height;
+    int bodyPosition[4][10][2];
 
     char saveName[125];
 

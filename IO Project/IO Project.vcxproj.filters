@@ -64,9 +64,6 @@
     <Filter Include="Pliki źródłowe\load">
       <UniqueIdentifier>{fba7362b-44d7-46e2-a0e4-70e180e57577}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\load\bodyParts">
-      <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
       <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
     </Filter>
@@ -99,6 +96,12 @@
     </Filter>
     <Filter Include="Pliki źródłowe\objects\characters\seller">
       <UniqueIdentifier>{50fbd292-d303-4b8c-aa9c-05d82c31231a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\load\armor">
+      <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\load\bodyParts">
+      <UniqueIdentifier>{57bf5347-d5d3-4ad2-9508-0d630b7f34ce}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -198,11 +201,8 @@
     <ClCompile Include="achievements.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
-    <ClCompile Include="loadBodyParts.c">
-      <Filter>Pliki źródłowe\load\bodyParts</Filter>
-    </ClCompile>
     <ClCompile Include="loadArmor.c">
-      <Filter>Pliki źródłowe\load\bodyParts</Filter>
+      <Filter>Pliki źródłowe\load\armor</Filter>
     </ClCompile>
     <ClCompile Include="fscanfWithAllocation.c">
       <Filter>Pliki źródłowe\additions\fscanfWithAllocation</Filter>
@@ -236,6 +236,9 @@
     </ClCompile>
     <ClCompile Include="deathScreen.c">
       <Filter>Pliki źródłowe\state\play</Filter>
+    </ClCompile>
+    <ClCompile Include="loadBodyParts.c">
+      <Filter>Pliki źródłowe\load\bodyParts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -313,6 +316,12 @@
     </ClInclude>
     <ClInclude Include="seller.h">
       <Filter>Pliki źródłowe\objects\characters\seller</Filter>
+    </ClInclude>
+    <ClInclude Include="bodyParts.h">
+      <Filter>Pliki źródłowe\load\bodyParts</Filter>
+    </ClInclude>
+    <ClInclude Include="armor.h">
+      <Filter>Pliki źródłowe\load\armor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

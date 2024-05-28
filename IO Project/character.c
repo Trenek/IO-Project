@@ -8,9 +8,9 @@
 
 inline void DrawBodyPart(struct playInfo *info, struct character *character, int i) {
     DrawTexture(
-        info->bodyParts[i][character->bodyPart[i]][character->direction],
-        info->bodyPosition[character->direction][i][0],
-        info->bodyPosition[character->direction][i][1],
+        (*info->bodyParts)[i][character->bodyPart[i]][character->direction],
+        (*info->bodyPosition)[character->direction][i][0],
+        (*info->bodyPosition)[character->direction][i][1],
         WHITE);
 }
 

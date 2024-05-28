@@ -193,6 +193,8 @@
     <ClCompile Include="unloadSaveFile.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="armor.h" />
+    <ClInclude Include="bodyParts.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />

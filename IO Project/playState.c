@@ -13,28 +13,7 @@
 #include "load.h"
 #include "savefile.h"
 
-void loadBodyPosition(int *width, int *height, int bodyPosition[4][10][2]) {
-    FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
-    int i = 0;
-    int j = 0;
-
-    fscanf(bodyMeasurements, "%i %i", width, height);
-
-    while (i < 4) {
-        j = 0;
-        while (j < 10) {
-            fscanf(bodyMeasurements, "%i %i", &bodyPosition[i][j][0], &bodyPosition[i][j][1]);
-
-            j += 1;
-        }
-
-        i += 1;
-    }
-
-    fclose(bodyMeasurements);
-}
-
-void loadArmorPosition(struct playInfo *info) {
+static void loadArmorPosition(struct playInfo *info) {
     FILE *armorMeasurements = fopen("dane\\armorMeasurements.txt", "r");
     int i = 0;
     int j = 0;
@@ -210,12 +189,27 @@ static void unloadItems(struct playInfo *info) {
 }
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
+    if (info->isLoaded == 0) {
+        loadBodyPosition(info);
+        loadBodyParts(info);
+
+        info->isLoaded = 1;
+    }
+
     struct playInfo result = {
         .saveName = info->saveName,
+
         .fonts = info->fonts,
         .fontsQuantity = info->fontsQuantity,
+
         .music = info->music,
         .musicQuantity = info->musicQuantity,
+
+        .bodyParts = &info->bodyParts,
+        .width = info->width,
+        .height = info->height,
+        .bodyPosition = &info->bodyPosition,
+
         .screenCamera = malloc(sizeof(RenderTexture)),
         .screenRect = malloc(sizeof(Rectangle)),
         .camera = {
@@ -232,14 +226,12 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
 
-    loadBodyPosition(&result.width, &result.height, result.bodyPosition);
     loadArmorPosition(&result);
 
     loadArmorPrice(&result);
     loadWeaponPrice(&result);
     loadItemPrice(&result);
 
-    loadBodyParts(result.bodyParts);
     loadArmor(&result);
 
     loadSaveFile(&result, info->saveName);
@@ -257,7 +249,6 @@ void freePlayInfo(struct playInfo *info) {
     unloadSaveFile(info);
 
     unloadArmor(info);
-    unloadBodyParts(info->bodyParts);
 
     unloadItemPrice(info);
     unloadWeaponPrice(info);
