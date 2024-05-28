@@ -116,7 +116,7 @@ bool createNewSave(const char *const saveName, const char *const characterName, 
 
         _mkdir(saveDirectory);
 
-        createCharacter(TextFormat("saves\\%s\\posta\u0107.txt", saveName), characterName, bodyParts);
+        createCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts);
         createEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
         createDate(TextFormat("saves\\%s\\date.txt", saveName));
 
