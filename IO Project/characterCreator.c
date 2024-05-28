@@ -20,7 +20,7 @@ static void CalculateTexturesPosition(int bodyPosition[4][10][2], Vector2 textur
 }
 
 void characterCreator(enum state* state, struct menuInfo* info) {   
-    static const char *bodyPartsNamesInPolish[10] = {
+    const char *const bodyPartsNamesInPolish[10] = {
         [HEAD] = "Głowa",
         [LEFT_ARM] = "Lewe ramię",
         [RIGHT_ARM] = "Prawie ramię",
@@ -163,20 +163,19 @@ void characterCreator(enum state* state, struct menuInfo* info) {
 
     while (!WindowShouldClose() && *state == CHARACTER_CREATOR) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(title);
-        DrawButton(confirm);
-        DrawButton(goBack);
+            DrawButton(title);
+            DrawButton(confirm);
+            DrawButton(goBack);
 
-        for (int i = 0; i < 10; i++) {
-            DrawButton(labels[i]);
-            DrawSlideBox(bodyPartSlideBoxes[i]);
+            for (int i = 0; i < 10; i++) {
+                DrawButton(labels[i]);
+                DrawSlideBox(bodyPartSlideBoxes[i]);
 
-            int bodyPartIndex = bodyPartSlideBoxes[i]->currentOption;
-            DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
-        }
-        
+                int bodyPartIndex = bodyPartSlideBoxes[i]->currentOption;
+                DrawTextureEx(*info->bodyParts[i][bodyPartIndex], texturePosition[i], 0, 0.5, WHITE);
+            }
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
