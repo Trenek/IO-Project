@@ -68,6 +68,32 @@ static void loadCharacter(struct character *character, const char *characterSave
     fclose(playerFile);
 }
 
+static void loadFloors(FILE *file, struct playInfo *info) {
+    int i = 0;
+
+    fscanf(file, "%i", &info->floorsQuantity);
+    info->floors = malloc(sizeof(struct character) * info->floorsQuantity);
+
+    while (i < info->floorsQuantity) {
+        fscanf(file, "%i %f %f %f %f %f %f", 
+            &info->floors[i].ID,
+            &info->floors[i].object.sizeV.x,
+            &info->floors[i].object.sizeV.y,
+            &info->floors[i].object.position.x,
+            &info->floors[i].object.position.z,
+            &info->floors[i].actualSize.x,
+            &info->floors[i].actualSize.y
+        );
+
+        info->floors[i].object.position.y = 0.0f;
+
+        info->floors[i].object.texture = malloc(sizeof(Texture2D));
+        *info->floors[i].object.texture = LoadTexture(TextFormat("resources\\textures\\floor\\%i.png", info->floors[i].ID));
+
+        i += 1;
+    }
+}
+
 static void createEnemies(FILE *file, struct playInfo *info) {
     int i = 0;
     int id = 0;
@@ -185,6 +211,7 @@ void loadSaveFile(struct playInfo *this, const char *saveName) {
 
     loadShops(this);
 
+    loadFloors(mapFile, this);
     createEnemies(mapFile, this);
     loadSellers(mapFile, this);
 

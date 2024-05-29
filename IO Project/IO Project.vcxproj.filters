@@ -109,6 +109,9 @@
     <Filter Include="Pliki źródłowe\menu\slideBox\numbers">
       <UniqueIdentifier>{6a4c376f-ba2f-425f-b13e-2258acaad0b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\objects\floor">
+      <UniqueIdentifier>{ba551b34-9688-4d80-9ac2-3a5f23e20d6e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object2D.c">
@@ -246,6 +249,9 @@
     <ClCompile Include="stringSlideBox.c">
       <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
     </ClCompile>
+    <ClCompile Include="floor.c">
+      <Filter>Pliki źródłowe\objects\floor</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -323,14 +329,14 @@
     <ClInclude Include="armor.h">
       <Filter>Pliki źródłowe\load\armor</Filter>
     </ClInclude>
-    <ClInclude Include="slideBox.h">
-      <Filter>Pliki źródłowe\menu\slideBox</Filter>
-    </ClInclude>
     <ClInclude Include="numberSlideBox.h">
       <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
     </ClInclude>
     <ClInclude Include="stringSlideBox.h">
       <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
+    </ClInclude>
+    <ClInclude Include="floor.h">
+      <Filter>Pliki źródłowe\objects\floor</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

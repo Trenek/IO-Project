@@ -135,6 +135,8 @@ void explore(enum playState *playState, struct playInfo *info) {
 
     struct Object2D **render = createRenderer(info);
 
+    Texture2D floor = LoadTexture("resources\\textures\\floor\\1.png");
+
     int shopInteraction = 0;
 
     CalculateButtonPosition(&save);
@@ -191,7 +193,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             ClearBackground(color);
 
             BeginMode3D(info->camera);
-                DrawGrid(100, 1);
+                DrawFloors(info);
 
                 RenderTextures(render, info->enemyQuantity + info->sellersQuantity + 1, info->camera);
             EndMode3D();
@@ -231,5 +233,6 @@ void explore(enum playState *playState, struct playInfo *info) {
         hitboxShop(info, &shopInteraction);
     }
 
+    UnloadTexture(floor);
     free(render);
 }

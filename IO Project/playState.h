@@ -6,6 +6,7 @@
 #include "player.h"
 #include "seller.h"
 #include "load.h"
+#include "floor.h"
 
 struct menuInfo;
 struct Object2D;
@@ -56,6 +57,9 @@ struct playInfo {
 
     struct character *enemies;
     int enemyQuantity;
+
+    struct floor *floors;
+    int floorsQuantity;
 
     int (*shopEquipment)[10][3];
     int shopQuantity;

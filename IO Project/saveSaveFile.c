@@ -22,6 +22,25 @@ static void createDate(const char *const saveName) {
     fclose(file);
 }
 
+static void saveFloors(FILE *file, struct playInfo *info) {
+    int i = 0;
+
+    fprintf(file, "%i\n", info->floorsQuantity);
+    while (i < info->floorsQuantity) {
+        fprintf(file, "% 4s%i %f %f %f %f %f %f\n", "", 
+            info->floors[i].ID, 
+            info->floors[i].object.sizeV.x,
+            info->floors[i].object.sizeV.y,
+            info->floors[i].object.position.x,
+            info->floors[i].object.position.z,
+            info->floors[i].actualSize.x,
+            info->floors[i].actualSize.y
+        );
+
+        i += 1;
+    }
+}
+
 static void saveEnemies(FILE *file, struct playInfo *info) {
     int i = 0;
 
@@ -47,6 +66,7 @@ static void saveSellers(FILE *file, struct playInfo *info) {
 static void saveMap(struct playInfo *info, const char *saveName) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", saveName), "w");
 
+    saveFloors(mapFile, info);
     saveEnemies(mapFile, info);
     saveSellers(mapFile, info);
 
