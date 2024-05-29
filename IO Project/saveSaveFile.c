@@ -41,6 +41,27 @@ static void saveFloors(FILE *file, struct playInfo *info) {
     }
 }
 
+static void saveWalls(FILE *file, struct playInfo *info) {
+    int i = 0;
+
+    fprintf(file, "%i\n", info->wallQuantity);
+    while (i < info->wallQuantity) {
+        fprintf(file, "% 4s%i %f %f %f %f %f %f %f %f\n", "",
+            info->walls[i].ID,
+            info->walls[i].object.sizeV.x,
+            info->walls[i].object.sizeV.y,
+            info->walls[i].object.position.x,
+            info->walls[i].object.position.y,
+            info->walls[i].object.position.z,
+            info->walls[i].endPosition.x,
+            info->walls[i].endPosition.y,
+            info->walls[i].endPosition.z
+        );
+
+        i += 1;
+    }
+}
+
 static void saveEnemies(FILE *file, struct playInfo *info) {
     int i = 0;
 
@@ -67,6 +88,7 @@ static void saveMap(struct playInfo *info, const char *saveName) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", saveName), "w");
 
     saveFloors(mapFile, info);
+    saveWalls(mapFile, info);
     saveEnemies(mapFile, info);
     saveSellers(mapFile, info);
 

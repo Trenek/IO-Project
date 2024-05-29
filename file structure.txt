@@ -199,11 +199,13 @@ mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
     Struktura pliku:
         [długość mapy] [szerokość mapy]
         [liczba podłóg]
-            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY]
+            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY] [długość całości] [szerokość całości]
+        [liczba ścian]
+            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY] [coordynatZ] [końcowy coordynatX] [końcowy coordynatY] [końcowy coordynatZ]
         [liczba obiektów nieprzenikliwych]:
             [id_tekstury] [szerokość] [wysokość] [coordynatX] [coordynatY]
         [liczba przeciwników] 
-            [id_przeciwnika] [wysokość] [coordynatX] [coordynatY]
+            [id_przeciwnika] [id dialogu] [wysokość] [coordynatX] [coordynatY]
         [liczba sklepów]
             [id tekstury] [id sklepu] [id dialogu] [coordynatX] [coordynatY]
         [liczba obiektów interaktywnych]

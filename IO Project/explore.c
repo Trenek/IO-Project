@@ -194,6 +194,7 @@ void explore(enum playState *playState, struct playInfo *info) {
 
             BeginMode3D(info->camera);
                 DrawFloors(info);
+                DrawWalls(info);
 
                 RenderTextures(render, info->enemyQuantity + info->sellersQuantity + 1, info->camera);
             EndMode3D();

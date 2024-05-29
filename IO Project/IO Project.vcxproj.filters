@@ -112,6 +112,9 @@
     <Filter Include="Pliki źródłowe\objects\floor">
       <UniqueIdentifier>{ba551b34-9688-4d80-9ac2-3a5f23e20d6e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\objects\wall">
+      <UniqueIdentifier>{4d56b004-0547-444d-b493-923b066aa5da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="object2D.c">
@@ -252,6 +255,9 @@
     <ClCompile Include="floor.c">
       <Filter>Pliki źródłowe\objects\floor</Filter>
     </ClCompile>
+    <ClCompile Include="wall.c">
+      <Filter>Pliki źródłowe\objects\wall</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -337,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="floor.h">
       <Filter>Pliki źródłowe\objects\floor</Filter>
+    </ClInclude>
+    <ClInclude Include="wall.h">
+      <Filter>Pliki źródłowe\objects\wall</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

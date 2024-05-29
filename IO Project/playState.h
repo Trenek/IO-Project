@@ -7,6 +7,7 @@
 #include "seller.h"
 #include "load.h"
 #include "floor.h"
+#include "wall.h"
 
 struct menuInfo;
 struct Object2D;
@@ -60,6 +61,9 @@ struct playInfo {
 
     struct floor *floors;
     int floorsQuantity;
+
+    struct wall *walls;
+    int wallQuantity;
 
     int (*shopEquipment)[10][3];
     int shopQuantity;

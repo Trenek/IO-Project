@@ -193,6 +193,7 @@
     <ClCompile Include="tutorial.c" />
     <ClCompile Include="tutorialSlide.c" />
     <ClCompile Include="unloadSaveFile.c" />
+    <ClCompile Include="wall.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="armor.h" />
@@ -222,6 +223,7 @@
     <ClInclude Include="state.h" />
     <ClInclude Include="stringSlideBox.h" />
     <ClInclude Include="tutorialSlide.h" />
+    <ClInclude Include="wall.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
