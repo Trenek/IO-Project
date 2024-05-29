@@ -165,7 +165,7 @@
     <ClCompile Include="loadArmor.c" />
     <ClCompile Include="loadBodyParts.c" />
     <ClCompile Include="loadSaveFile.c" />
-    <ClCompile Include="npc.c" />
+    <ClCompile Include="hitbox.c" />
     <ClCompile Include="numberSlideBox.c" />
     <ClCompile Include="saveData.c" />
     <ClCompile Include="saveSaveFile.c" />
@@ -210,7 +210,7 @@
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="ModUpdateCamera.h" />
-    <ClInclude Include="npc.h" />
+    <ClInclude Include="hitbox.h" />
     <ClInclude Include="numberSlideBox.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="playState.h" />

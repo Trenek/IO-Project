@@ -72,30 +72,58 @@ void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	}
 }
 
-void hitbox(struct playInfo *info) {
+void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
+	Vector3 *A = &obsticle->endPosition;
+	Vector3 *B = &obsticle->object.position;
+	Vector3 *C = &object->position;
+
+	if (A->x == B->x) {
+		if (fabsf(C->x - A->x) < object->sizeV.x) {
+			C->x = (C->x - A->x >= 0) ? 
+				A->x + object->sizeV.x : 
+				A->x - object->sizeV.x;
+		}
+	}
+	else if (A->z == B->z) {
+		if (fabsf(C->z - A->z) < object->sizeV.x) {
+			C->z = (C->z - A->z >= 0) ? 
+				A->z + object->sizeV.x : 
+				A->z - object->sizeV.x;
+		}
+	}
+}
+
+void checkHitbox(struct Object2D *object, struct playInfo *info) {
 	int i = 0;
-	int j = 0;
 
 	while (i < info->enemyQuantity) {
-		detectHitbox(&info->player.character.object, info->enemies[i].object.position);
+		if (object != &info->enemies[i].object) 
+			detectHitbox(object, info->enemies[i].object.position);
 
-		j = 0;
-		while (j < info->enemyQuantity) {
-			if (i != j) {
-				detectHitbox(&info->enemies[i].object, info->enemies[j].object.position);
-			}
+		i += 1;
+	}
 
-			j += 1;
-		}
+	i = 0;
+	while (i < info->sellersQuantity) {
+		detectHitbox(object, info->shops[i].character.object.position);
 
-		j = 0;
-		while (j < info->enemyQuantity) {
-			if (i == j) {
-				detectHitbox(&info->enemies[i].object, info->shops[j].character.object.position);
-			}
+		i += 1;
+	}
 
-			j += 1;
-		}
+	i = 0;
+	while (i < info->wallQuantity) {
+		detectWallHitbox(object, &info->walls[i]);
+
+		i += 1;
+	}
+}
+
+void hitbox(struct playInfo *info) {
+	int i = 0;
+
+	checkHitbox(&info->player.character.object, info);
+	while (i < info->enemyQuantity) {
+		checkHitbox(&info->enemies[i].object, info);
 
 		i += 1;
 	}

@@ -10,7 +10,7 @@
 
 #include "renderer.h"
 #include "player.h"
-#include "npc.h"
+#include "hitbox.h"
 
 #define INC_Y (10)
 #define INC_X (10)

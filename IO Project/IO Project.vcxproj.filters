@@ -58,9 +58,6 @@
     <Filter Include="Pliki źródłowe\menu\choiceBox">
       <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\objects\npc">
-      <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\load">
       <UniqueIdentifier>{fba7362b-44d7-46e2-a0e4-70e180e57577}</UniqueIdentifier>
     </Filter>
@@ -114,6 +111,9 @@
     </Filter>
     <Filter Include="Pliki źródłowe\objects\wall">
       <UniqueIdentifier>{4d56b004-0547-444d-b493-923b066aa5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\hitbox">
+      <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -201,8 +201,8 @@
     <ClCompile Include="equipementsBox.c">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
     </ClCompile>
-    <ClCompile Include="npc.c">
-      <Filter>Pliki źródłowe\objects\npc</Filter>
+    <ClCompile Include="hitbox.c">
+      <Filter>Pliki źródłowe\objects\hitbox</Filter>
     </ClCompile>
     <ClCompile Include="achievements.c">
       <Filter>Pliki źródłowe\state\play</Filter>
@@ -305,8 +305,8 @@
     <ClInclude Include="equipementBox.h">
       <Filter>Pliki źródłowe\menu\equipementBox</Filter>
     </ClInclude>
-    <ClInclude Include="npc.h">
-      <Filter>Pliki źródłowe\objects\npc</Filter>
+    <ClInclude Include="hitbox.h">
+      <Filter>Pliki źródłowe\objects\hitbox</Filter>
     </ClInclude>
     <ClInclude Include="load.h">
       <Filter>Pliki źródłowe\load</Filter>
