@@ -15,30 +15,6 @@ static void DrawBodyPart(struct playInfo *info, struct character *character, int
         WHITE);
 }
 
-static void DrawBody(struct playInfo *info, struct character *character) {
-    DrawBodyPart(info, character, LEFT_FOOT);
-    DrawBodyPart(info, character, RIGHT_FOOT);
-    DrawBodyPart(info, character, LEFT_LEG);
-    DrawBodyPart(info, character, RIGHT_LEG);
-
-    if (character->direction == BACK) {
-        DrawBodyPart(info, character, LEFT_HAND);
-        DrawBodyPart(info, character, RIGHT_HAND);
-        DrawBodyPart(info, character, LEFT_ARM);
-        DrawBodyPart(info, character, RIGHT_ARM);
-        DrawBodyPart(info, character, HEAD);
-        DrawBodyPart(info, character, TORSO);
-    }
-    else {
-        DrawBodyPart(info, character, TORSO);
-        DrawBodyPart(info, character, LEFT_ARM);
-        DrawBodyPart(info, character, RIGHT_ARM);
-        DrawBodyPart(info, character, LEFT_HAND);
-        DrawBodyPart(info, character, RIGHT_HAND);
-        DrawBodyPart(info, character, HEAD);
-    }
-}
-
 static void DrawArmorPart(struct playInfo *info, struct character *character, int i) {
     if (character->armorPart[i] != -1)
     DrawTexture(
@@ -48,13 +24,42 @@ static void DrawArmorPart(struct playInfo *info, struct character *character, in
         WHITE);
 }
 
-static void DrawArmor(struct playInfo *info, struct character *character) {
-    int i = 0;
+static void DrawCharacter(struct playInfo *info, struct character *character) {
+    DrawBodyPart(info, character, LEFT_FOOT);
+    DrawArmorPart(info, character, LEFT_BOOT);
+    DrawBodyPart(info, character, RIGHT_FOOT);
+    DrawArmorPart(info, character, RIGHT_BOOT);
+    DrawBodyPart(info, character, LEFT_LEG);
+    DrawBodyPart(info, character, RIGHT_LEG);
+    DrawArmorPart(info, character, PANTS);
 
-    while (i < 9) {
-        DrawArmorPart(info, character, i);
-
-        i += 1;
+    if (character->direction == BACK) {
+        DrawBodyPart(info, character, LEFT_HAND);
+        DrawArmorPart(info, character, LEFT_GLOVE);
+        DrawBodyPart(info, character, RIGHT_HAND);
+        DrawArmorPart(info, character, RIGHT_GLOVE);
+        DrawBodyPart(info, character, LEFT_ARM);
+        DrawArmorPart(info, character, LEFT_SLEEVE);
+        DrawBodyPart(info, character, RIGHT_ARM);
+        DrawArmorPart(info, character, RIGHT_SLEEVE);
+        DrawBodyPart(info, character, HEAD);
+        DrawArmorPart(info, character, HELMET);
+        DrawBodyPart(info, character, TORSO);
+        DrawArmorPart(info, character, BREASTPLATE);
+    }
+    else {
+        DrawBodyPart(info, character, TORSO);
+        DrawArmorPart(info, character, BREASTPLATE);
+        DrawBodyPart(info, character, LEFT_ARM);
+        DrawArmorPart(info, character, LEFT_SLEEVE);
+        DrawBodyPart(info, character, RIGHT_ARM);
+        DrawArmorPart(info, character, RIGHT_SLEEVE);
+        DrawBodyPart(info, character, LEFT_HAND);
+        DrawArmorPart(info, character, LEFT_GLOVE);
+        DrawBodyPart(info, character, RIGHT_HAND);
+        DrawArmorPart(info, character, RIGHT_GLOVE);
+        DrawBodyPart(info, character, HEAD);
+        DrawArmorPart(info, character, HELMET);
     }
 }
 
@@ -65,8 +70,7 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
     BeginTextureMode(render);
         ClearBackground(BLANK);
 
-        DrawBody(info, character);
-        DrawArmor(info, character);
+        DrawCharacter(info, character);
     EndTextureMode();
 
     BeginTextureMode(render2);
