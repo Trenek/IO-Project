@@ -230,6 +230,9 @@ static void loadPlayer(struct playInfo *info, const char *saveName) {
     createDate(TextFormat("saves\\%s\\date.txt", saveName));
 
     info->player.speedY = 0;
+    info->player.r = 5;
+    info->player.b = 0;
+    info->player.a = 30 * PI / 180;
 }
 
 void loadSaveFile(struct playInfo *this, const char *saveName) {

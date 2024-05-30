@@ -25,13 +25,13 @@ static void DrawArmorPart(struct playInfo *info, struct character *character, in
 }
 
 static void DrawCharacter(struct playInfo *info, struct character *character) {
+    DrawBodyPart(info, character, LEFT_LEG);
+    DrawBodyPart(info, character, RIGHT_LEG);
+    DrawArmorPart(info, character, PANTS);
     DrawBodyPart(info, character, LEFT_FOOT);
     DrawArmorPart(info, character, LEFT_BOOT);
     DrawBodyPart(info, character, RIGHT_FOOT);
     DrawArmorPart(info, character, RIGHT_BOOT);
-    DrawBodyPart(info, character, LEFT_LEG);
-    DrawBodyPart(info, character, RIGHT_LEG);
-    DrawArmorPart(info, character, PANTS);
 
     if (character->direction == BACK) {
         DrawBodyPart(info, character, LEFT_HAND);
