@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="achievements.c" />
+    <ClCompile Include="camera.c" />
     <ClCompile Include="character.c" />
     <ClCompile Include="characterCreator.c" />
     <ClCompile Include="choiceBox.c" />
@@ -171,7 +172,6 @@
     <ClCompile Include="saveSaveFile.c" />
     <ClCompile Include="shopInterface.c" />
     <ClCompile Include="IO Project.c" />
-    <ClCompile Include="ModUpdateCamera.c" />
     <ClCompile Include="loadGame.c" />
     <ClCompile Include="loadSettings.c" />
     <ClCompile Include="map.c" />
@@ -209,7 +209,6 @@
     <ClInclude Include="load.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
-    <ClInclude Include="ModUpdateCamera.h" />
     <ClInclude Include="hitbox.h" />
     <ClInclude Include="numberSlideBox.h" />
     <ClInclude Include="player.h" />

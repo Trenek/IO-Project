@@ -87,6 +87,23 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
         }
     }
 
+    if (IsCursorHidden()) {
+        player->a += GetMouseDelta().y * GetFrameTime() / 4;
+        player->b += GetMouseDelta().x * GetFrameTime() / 4;
+        player->r -= GetMouseWheelMove() / 4;
+
+        if (player->a < 1 * PI / 180) {
+            player->a = 1 * PI / 180;
+        }
+        else if (player->a > 70 * PI / 180) {
+            player->a = 70 * PI / 180;
+        }
+
+        if (player->r < player->character.object.sizeV.x) {
+            player->r = player->character.object.sizeV.x;
+        }
+    }
+
     if (position->y == 0.0f)
         if (IsKeyPressed(KEY_SPACE)) player->speedY = 5;
 

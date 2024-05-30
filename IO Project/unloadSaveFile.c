@@ -43,6 +43,19 @@ static void unloadFloors(struct playInfo *info) {
     free(info->floors);
 }
 
+static void unloadWalls(struct playInfo *info) {
+    int i = 0;
+
+    while (i < info->wallQuantity) {
+        UnloadTexture(*info->walls[i].object.texture);
+        free(info->walls[i].object.texture);
+
+        i += 1;
+    }
+
+    free(info->walls);
+}
+
 void unloadCharacter(struct character *character) {
     if (character->object.texture != NULL) {
         UnloadTexture(*character->object.texture);
@@ -64,6 +77,7 @@ void unloadSaveFile(struct playInfo *this) {
     unloadSellers(this);
     unloadShops(this);
     unloadFloors(this);
+    unloadWalls(this);
 
     unloadPlayer(this);
 }

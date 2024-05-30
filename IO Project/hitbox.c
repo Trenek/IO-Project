@@ -185,7 +185,3 @@ void hitboxShop(struct playInfo *info, int *shop) {
 		i += 1;
 	}
 }
-/*
-	(size / sqrt(distance)) (p.x - n.x) + n.x = p'.x
-
-*/

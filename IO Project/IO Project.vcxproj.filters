@@ -73,9 +73,6 @@
     <Filter Include="Pliki źródłowe\additions\fscanfWithAllocation">
       <UniqueIdentifier>{30d0d079-6aae-4f81-97c1-ac8b89b6e9cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\additions\Key">
-      <UniqueIdentifier>{ad2c08a6-e8a6-4ba1-ba68-6715db14298b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\shopInterface">
       <UniqueIdentifier>{b1f5fe5e-316b-4712-b15b-0e6158618223}</UniqueIdentifier>
     </Filter>
@@ -177,9 +174,6 @@
     <ClCompile Include="playState.c">
       <Filter>Pliki nagłówkowe\playState</Filter>
     </ClCompile>
-    <ClCompile Include="ModUpdateCamera.c">
-      <Filter>Pliki źródłowe\additions\Key</Filter>
-    </ClCompile>
     <ClCompile Include="inputBox.c">
       <Filter>Pliki źródłowe\menu\inputBox</Filter>
     </ClCompile>
@@ -258,6 +252,9 @@
     <ClCompile Include="wall.c">
       <Filter>Pliki źródłowe\objects\wall</Filter>
     </ClCompile>
+    <ClCompile Include="camera.c">
+      <Filter>Pliki źródłowe\objects\characters\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="object2D.h">
@@ -274,9 +271,6 @@
     </ClInclude>
     <ClInclude Include="playState.h">
       <Filter>Pliki nagłówkowe\playState</Filter>
-    </ClInclude>
-    <ClInclude Include="ModUpdateCamera.h">
-      <Filter>Pliki źródłowe\additions\Key</Filter>
     </ClInclude>
     <ClInclude Include="inputBox.h">
       <Filter>Pliki źródłowe\menu\inputBox</Filter>

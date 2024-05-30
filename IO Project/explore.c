@@ -2,7 +2,6 @@
 
 #include <raylib.h>
 #include <raymath.h>
-#include "ModUpdateCamera.h"
 
 #include "playState.h"
 
@@ -135,8 +134,6 @@ void explore(enum playState *playState, struct playInfo *info) {
 
     struct Object2D **render = createRenderer(info);
 
-    Texture2D floor = LoadTexture("resources\\textures\\floor\\1.png");
-
     int shopInteraction = 0;
 
     CalculateButtonPosition(&save);
@@ -152,6 +149,10 @@ void explore(enum playState *playState, struct playInfo *info) {
         unloadCharacter(&info->chosen);
         info->shouldDestroy = 0;
     }
+
+    info->player.r = 5;
+    info->player.b = 0;
+    info->player.a = 30 * PI / 180;
 
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
@@ -183,11 +184,8 @@ void explore(enum playState *playState, struct playInfo *info) {
             else
                 DisableCursor();
         }
-        if (IsCursorHidden()) {
-            ModUpdateCamera(&info->camera, CAMERA_THIRD_PERSON);
-        }
-        info->camera.target = info->player.character.object.position;
-        info->camera.target.y += info->player.character.object.sizeV.y / 2;
+
+        updateCamera(info);
 
         BeginTextureMode(*info->screenCamera);
             ClearBackground(color);
@@ -205,6 +203,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             DrawButton(pause);
             DrawButton(missions);
             if (shopInteraction) DrawButton(shop);
+            DrawText(TextFormat("%f", info->player.a), 0, 0, 40, BLUE);
         EndTextureMode();
 
         BeginDrawing();
@@ -234,6 +233,5 @@ void explore(enum playState *playState, struct playInfo *info) {
         hitboxShop(info, &shopInteraction);
     }
 
-    UnloadTexture(floor);
     free(render);
 }
