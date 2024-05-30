@@ -94,6 +94,44 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         .spaceing = 0
     };
 
+    struct button turnLeft = {
+        .text = "<",
+        .isActive = 1,
+        .init = {
+            .x = GetScreenWidth() >> 4,
+            .y = (GetScreenHeight() >> 2) + 5 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = 40,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+
+    struct button turnRight = {
+        .text = ">",
+        .isActive = 1,
+        .init = {
+            .x = (GetScreenWidth() >> 1) - spaceX,
+            .y = (GetScreenHeight() >> 2) + 5 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->fonts[0],
+        .fontSize = 40,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+
     struct button labels[10];
     struct nSlideBox bodyPartSlideBoxes[10];
     
@@ -153,13 +191,15 @@ void characterCreator(enum state* state, struct menuInfo* info) {
     mainAssemblePlayerTexture(info, &bob);
 
     Vector2 bobPosition = (Vector2){
-       .x = GetScreenWidth() / 16.0f,
+       .x = GetScreenWidth() / 8.0f,
        .y = (GetScreenHeight() / 2.0f) - (texture.height / 4.0f)
     };
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&confirm);
     CalculateButtonPosition(&goBack);
+    CalculateButtonPosition(&turnLeft);
+    CalculateButtonPosition(&turnRight);
 
     while (!WindowShouldClose() && *state == CHARACTER_CREATOR) {
         BeginDrawing();
@@ -168,6 +208,8 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             DrawButton(title);
             DrawButton(confirm);
             DrawButton(goBack);
+            DrawButton(turnLeft);
+            DrawButton(turnRight);
 
             for (int i = 0; i < 10; i++) {
                 DrawButton(labels[i]);
@@ -183,6 +225,24 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             else if (isMouseOver(confirm)) {
                 memcpy(info->body, bob.bodyPart, sizeof(int) * 10);
                 *state = NEW_GAME;
+            }
+            else if (isMouseOver(turnLeft)) {
+                if (bob.direction == 0) {
+                    bob.direction = 3;
+                }
+                else {
+                    bob.direction -= 1;
+                }
+                mainAssemblePlayerTexture(info, &bob);
+            }
+            else if (isMouseOver(turnRight)) {
+                if (bob.direction == 3) {
+                    bob.direction = 0;
+                }
+                else {
+                    bob.direction += 1;
+                }
+                mainAssemblePlayerTexture(info, &bob);
             }
         }
 
