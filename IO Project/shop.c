@@ -41,9 +41,9 @@ void shop(enum playState* state, struct playInfo* info) {
             .buttonIncX = 5,
             .buttonIncY = 5
         },
-        .playerItemsID = info->player.equipment,
-        .armorPart = &info->player.character.armorPart,
-        .weapon = &info->player.character.weapon
+        .playerItemsID = info->save.player.equipment,
+        .armorPart = &info->save.player.character.armorPart,
+        .weapon = &info->save.player.character.weapon
     };
 
     struct shopInterface shopInterface = {
@@ -61,8 +61,8 @@ void shop(enum playState* state, struct playInfo* info) {
         .equipmentActiveItem = &equipement.activeItem,
         .equipmentActiveType = &equipement.activeItemType,
         .seller = info->chosen.object.texture,
-        .playerItemsID = info->player.equipment,
-        .sellerItemsID = info->shopEquipment[info->chosenShop]
+        .playerItemsID = info->save.player.equipment,
+        .sellerItemsID = info->save.shopEquipment[info->chosenShop]
     };
 
     CalculateButtonPosition(&title);

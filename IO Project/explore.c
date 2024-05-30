@@ -146,7 +146,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     int i = 0;
 
     if (info->shouldDestroy == 1) {
-        unloadCharacter(&info->chosen);
+        UnloadCharacter(&info->chosen);
         info->shouldDestroy = 0;
     }
 
@@ -155,24 +155,24 @@ void explore(enum playState *playState, struct playInfo *info) {
         i += 1;
 
         if ((i / 10) % 4 == 0) {
-            info->player.character.direction = 0;
-            assemblePlayerTexture(info, &info->player.character);
+            info->save.player.character.direction = 0;
+            assemblePlayerTexture(info->resources, &info->save.player.character);
         }
         else if ((i / 10) % 4 == 1) {
-            info->player.character.direction = 1;
-            assemblePlayerTexture(info, &info->player.character);
+            info->save.player.character.direction = 1;
+            assemblePlayerTexture(info->resources, &info->save.player.character);
         }
         else if ((i / 10) % 4 == 2) {
-            info->player.character.direction = 2;
-            assemblePlayerTexture(info, &info->player.character);
+            info->save.player.character.direction = 2;
+            assemblePlayerTexture(info->resources, &info->save.player.character);
         }
         else if ((i / 10) % 4 == 3) {
-            info->player.character.direction = 3;
-            assemblePlayerTexture(info, &info->player.character);
+            info->save.player.character.direction = 3;
+            assemblePlayerTexture(info->resources, &info->save.player.character);
         }
 
         UpdateMusicStream(info->resources->music[0]);
-        movePlayer(info, &info->player, &info->camera);
+        movePlayer(info, &info->save.player, &info->camera);
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {
             if (IsCursorHidden())
@@ -190,7 +190,7 @@ void explore(enum playState *playState, struct playInfo *info) {
                 DrawFloors(info);
                 DrawWalls(info);
 
-                RenderTextures(render, info->enemyQuantity + info->sellersQuantity + 1, info->camera);
+                RenderTextures(render, info->save.enemyQuantity + info->save.sellersQuantity + 1, info->camera);
             EndMode3D();
 
             DrawButton(save);
@@ -199,7 +199,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             DrawButton(pause);
             DrawButton(missions);
             if (shopInteraction) DrawButton(shop);
-            DrawText(TextFormat("%f", info->player.a), 0, 0, 40, BLUE);
+            DrawText(TextFormat("%f", info->save.player.a), 0, 0, 40, BLUE);
         EndTextureMode();
 
         BeginDrawing();

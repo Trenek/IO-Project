@@ -40,7 +40,7 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
         if (player->character.direction != BACK) {
             player->character.direction = BACK;
 
-            assemblePlayerTexture(info, &player->character);
+            assemblePlayerTexture(info->resources, &player->character);
         }
     }
     else if (IsKeyDown(KEY_S)) {
@@ -52,7 +52,7 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
         if (player->character.direction != FRONT) {
             player->character.direction = FRONT;
 
-            assemblePlayerTexture(info, &player->character);
+            assemblePlayerTexture(info->resources, &player->character);
         }
     }
     else if (IsKeyDown(KEY_D)) {
@@ -64,7 +64,7 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
         if (player->character.direction != RIGHT) {
             player->character.direction = RIGHT;
 
-            assemblePlayerTexture(info, &player->character);
+            assemblePlayerTexture(info->resources, &player->character);
         }
     }
     else if (IsKeyDown(KEY_A)) {
@@ -76,14 +76,14 @@ void movePlayer(struct playInfo *info, struct player* player, Camera* cam) {
         if (player->character.direction != LEFT) {
             player->character.direction = LEFT;
 
-            assemblePlayerTexture(info, &player->character);
+            assemblePlayerTexture(info->resources, &player->character);
         }
     }
     else {
         if (player->character.direction != FRONT) {
            // player->character.direction = FRONT;
 
-            //assemblePlayerTexture(info, &player->character);
+            //assemblePlayerTexture(info->resources, &player->character);
         }
     }
 

@@ -35,8 +35,8 @@ static void DrawFloor(Texture2D texture, Vector3 position, Vector2 size, Vector2
 void DrawFloors(struct playInfo *info) {
 	int i = 0;
 
-	while (i < info->floorsQuantity) {
-		DrawFloor(*info->floors[i].object.texture, info->floors[i].object.position, info->floors[i].object.sizeV, info->floors[i].actualSize, WHITE);
+	while (i < info->save.floorsQuantity) {
+		DrawFloor(*info->save.floors[i].object.texture, info->save.floors[i].object.position, info->save.floors[i].object.sizeV, info->save.floors[i].actualSize, WHITE);
 
 		i += 1;
 	}

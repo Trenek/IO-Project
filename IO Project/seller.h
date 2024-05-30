@@ -1,3 +1,6 @@
+#ifndef SELLER_H
+#define SELLER_H
+
 #include "character.h"
 
 struct seller {
@@ -5,3 +8,5 @@ struct seller {
 
     int shopID;
 };
+
+#endif

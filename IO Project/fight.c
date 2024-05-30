@@ -95,11 +95,11 @@ void fight(enum playState *playState, struct playInfo *info) {
         .spaceing = 0
     };
 
-    struct character player = info->player.character;
+    struct character player = info->save.player.character;
     struct character chosen = info->chosen;
 
     player.direction = FRONT;
-    assemblePlayerTexture(info, &player);
+    assemblePlayerTexture(info->resources, &player);
 
     ShowCursor();
 

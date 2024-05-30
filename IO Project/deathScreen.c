@@ -133,7 +133,7 @@ void deathScreen(enum playState *state, struct playInfo *info) {
     }
 
     if (*state != FIGHT && info->shouldDestroy == 1) {
-        unloadCharacter(&info->chosen);
+        UnloadCharacter(&info->chosen);
         info->shouldDestroy = 0;
     }
 }

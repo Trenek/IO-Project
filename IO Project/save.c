@@ -145,7 +145,7 @@ void save(enum playState *state, struct playInfo *info) {
     CalculateButtonPosition(&resume);
 
     CalculateInputBoxPosition(&saveName);
-    strcpy(saveName.text, info->saveName);
+    strcpy(saveName.text, info->save.saveName);
 
     while (*state == SAVE && !WindowShouldClose()) {
         BeginDrawing();
@@ -168,8 +168,8 @@ void save(enum playState *state, struct playInfo *info) {
             else {
                 if (stat(TextFormat("saves\\%s", saveName.text), &st) == 0) {
                     if (isMouseOver(overwrite)) {
-                        strcpy(info->saveName, saveName.text);
-                        saveSaveFile(info, saveName.text);
+                        strcpy(info->save.saveName, saveName.text);
+                        SaveSaveFile(&info->save);
                     }
                 }
                 else {
@@ -177,8 +177,8 @@ void save(enum playState *state, struct playInfo *info) {
                         _mkdir(TextFormat("saves\\%s", saveName.text));
                         _mkdir(TextFormat("saves\\%s\\mapy", saveName.text));
                         _mkdir(TextFormat("saves\\%s\\sklepy", saveName.text));
-                        strcpy(info->saveName, saveName.text);
-                        saveSaveFile(info, saveName.text);
+                        strcpy(info->save.saveName, saveName.text);
+                        SaveSaveFile(&info->save);
                     }
                 }
             }

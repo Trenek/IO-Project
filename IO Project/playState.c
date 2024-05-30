@@ -14,7 +14,7 @@
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {
-        .saveName = info->saveName,
+        .save.saveName = info->saveName,
 
         .resources = &info->resources,
 
@@ -34,13 +34,13 @@ struct playInfo initializePlayInfo(struct menuInfo *info) {
     *result.screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() + 20);
     *result.screenRect = (Rectangle){ 0.0f, 0.0f, (float)result.screenCamera->texture.width, (float)-result.screenCamera->texture.height };
 
-    loadSaveFile(&result, info->saveName);
+    LoadSaveFile(&result.save, result.resources);
 
     return result;
 }
 
 void freePlayInfo(struct playInfo *info) {
-    unloadSaveFile(info);
+    UnloadSaveFile(&info->save);
 
     UnloadRenderTexture(*info->screenCamera);
 

@@ -19,7 +19,7 @@ struct Resources {
     Texture2D(*armorPart[9])[4];
     int(*armorPrice[9])[3];
     int armorPosition[4][9][2];
-    int armorPartsQuant[10];
+    int armorPartsQuantity[10];
 
     Texture2D *weapons;
     int(*weaponPrice)[3];
@@ -29,15 +29,15 @@ struct Resources {
     int(*itemsPrice)[3];
     int itemsQuantity;
 
-    Texture2D *floorTextures;
-    int floorTextureQuantity;
+    Texture2D *floors;
+    int floorQuantity;
 
-    Texture2D *wallTextures;
-    int wallTextureQuantity;
+    Texture2D *walls;
+    int wallQuantity;
 };
 
-void loadResources(struct Resources *this);
-void unloadResources(struct Resources *this);
+void LoadResources(struct Resources *this);
+void UnloadResources(struct Resources *this);
 
 enum BodyPartTexture {
     HEAD,

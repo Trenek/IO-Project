@@ -3,16 +3,10 @@
 
 #include <raylib.h>
 
-#include "player.h"
-#include "seller.h"
-#include "floor.h"
-#include "wall.h"
-
 #include "resources.h"
+#include "savefile.h"
 
 struct menuInfo;
-struct Object2D;
-struct player;
 
 enum playState {
     EXPLORE,
@@ -41,35 +35,14 @@ enum position {
 };
 
 struct playInfo {
-    char *const saveName;
-
-    int mapID;
-
     struct Resources *resources;
 
-    int(*shopEquipment)[10][3];
-    int shopQuantity;
-
-    struct Objects {
-        struct character *enemies;
-        int enemyQuantity;
-
-        struct seller *shops;
-        int sellersQuantity;
-
-        struct floor *floors;
-        int floorsQuantity;
-
-        struct wall *walls;
-        int wallQuantity;
-    };
+    struct SaveFile save;
 
     struct CommonInfo {
         RenderTexture *screenCamera;
         Rectangle *screenRect;
         Camera camera;
-
-        struct player player;
 
         enum playState resumeState;
 

@@ -4,33 +4,7 @@
 #include "savefile.h"
 #include "playState.h"
 
-#include "player.h"
-
-static void destroyEnemies(struct playInfo *info) {
-    int i = 0;
-
-    while (i < info->enemyQuantity) {
-        unloadCharacter(&info->enemies[i]);
-
-        i += 1;
-    }
-
-    free(info->enemies);
-}
-
-static void unloadSellers(struct playInfo *info) {
-    int i = 0;
-
-    while (i < info->sellersQuantity) {
-        unloadCharacter(&info->shops[i].character);
-
-        i += 1;
-    }
-
-    free(info->shops);
-}
-
-void unloadCharacter(struct character *character) {
+void UnloadCharacter(struct character *character) {
     if (character->object.texture != NULL) {
         UnloadTexture(*character->object.texture);
 
@@ -38,18 +12,57 @@ void unloadCharacter(struct character *character) {
     }
 }
 
-static void unloadPlayer(struct playInfo *info) {
-    unloadCharacter(&info->player.character);
+static void UnloadPlayer(struct SaveFile *this) {
+    UnloadCharacter(&this->player.character);
 }
 
-static void unloadShops(struct playInfo *this) {
+static void UnloadShops(struct SaveFile *this) {
     free(this->shopEquipment);
 }
 
-void unloadSaveFile(struct playInfo *this) {
-    destroyEnemies(this);
-    unloadSellers(this);
-    unloadShops(this);
+static void UnloadFloors(struct SaveFile *this) {
+    free(this->floors);
+}
 
-    unloadPlayer(this);
+static void UnloadWalls(struct SaveFile *this) {
+    free(this->walls);
+}
+
+static void UnloadEnemies(struct SaveFile *this) {
+    int i = 0;
+
+    while (i < this->enemyQuantity) {
+        UnloadCharacter(&this->enemies[i]);
+
+        i += 1;
+    }
+
+    free(this->enemies);
+}
+
+static void UnloadSellers(struct SaveFile *this) {
+    int i = 0;
+
+    while (i < this->sellersQuantity) {
+        UnloadCharacter(&this->sellers[i].character);
+
+        i += 1;
+    }
+
+    free(this->sellers);
+}
+
+static void UnloadMap(struct SaveFile *this) {
+    UnloadFloors(this);
+    UnloadWalls(this);
+    UnloadEnemies(this);
+    UnloadSellers(this);
+}
+
+void UnloadSaveFile(struct SaveFile *this) {
+    UnloadPlayer(this);
+
+    UnloadShops(this);
+
+    UnloadMap(this);
 }

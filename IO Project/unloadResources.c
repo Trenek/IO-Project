@@ -2,18 +2,6 @@
 
 #include "resources.h"
 
-static const char *const armorNames[] = {
-    [HELMET] = "helmet",
-    [BREASTPLATE] = "breastplate",
-    [PANTS] = "pants",
-    [LEFT_BOOT] = "left boot",
-    [RIGHT_BOOT] = "right boot",
-    [LEFT_GLOVE] = "left glove",
-    [RIGHT_GLOVE] = "right glove",
-    [LEFT_SLEEVE] = "left sleeve",
-    [RIGHT_SLEEVE] = "right sleeve"
-};
-
 static void UnloadFonts(struct Resources *this) {
     int i = 0;
 
@@ -25,7 +13,7 @@ static void UnloadFonts(struct Resources *this) {
     free(this->fonts);
 }
 
-static void unloadMusic(struct Resources *this) {
+static void UnloadMusic(struct Resources *this) {
     int i = 0;
 
     while (i < this->musicQuantity) {
@@ -55,7 +43,7 @@ static void unloadBodyPart(int num, struct Resources *this) {
     free(this->bodyParts[num]);
 }
 
-static void unloadBodyParts(struct Resources *this) {
+static void UnloadBodyParts(struct Resources *this) {
     int i = 0;
 
     while (i < 10) {
@@ -66,12 +54,10 @@ static void unloadBodyParts(struct Resources *this) {
 }
 
 static void unloadArmorPart(int num, struct Resources *this) {
-    const char *directory = TextFormat("resources\\textures\\przedmioty\\armor\\%s", armorNames[num]);
-    FilePathList files = LoadDirectoryFiles(directory);
-    unsigned int i = 0;
-    unsigned int j = 0;
+    int i = 0;
+    int j = 0;
 
-    while (i < files.capacity) {
+    while (i < this->armorPartsQuantity[num]) {
         j = 0;
         while (j < 4) {
             UnloadTexture(this->armorPart[num][i][j]);
@@ -82,11 +68,10 @@ static void unloadArmorPart(int num, struct Resources *this) {
         i += 1;
     }
 
-    UnloadDirectoryFiles(files);
     free(this->armorPart[num]);
 }
 
-static void unloadArmor(struct Resources *this) {
+static void UnloadArmor(struct Resources *this) {
     int i = 0;
 
     while (i < 9) {
@@ -96,7 +81,7 @@ static void unloadArmor(struct Resources *this) {
     }
 }
 
-static void unloadArmorPrice(struct Resources *this) {
+static void UnloadArmorPrice(struct Resources *this) {
     int i = 0;
 
     for (i = 0; i < 9; i += 1) {
@@ -105,7 +90,7 @@ static void unloadArmorPrice(struct Resources *this) {
     }
 }
 
-static void unloadWeapons(struct Resources *this) {
+static void UnloadWeapons(struct Resources *this) {
     int i = 0;
 
     while (i < this->weaponsQuantity) {
@@ -117,11 +102,11 @@ static void unloadWeapons(struct Resources *this) {
     free(this->weapons);
 }
 
-static void unloadWeaponPrice(struct Resources *this) {
+static void UnloadWeaponPrice(struct Resources *this) {
     free(this->weaponPrice);
 }
 
-static void unloadItems(struct Resources *this) {
+static void UnloadItems(struct Resources *this) {
     int i = 0;
 
     while (i < this->itemsQuantity) {
@@ -133,44 +118,47 @@ static void unloadItems(struct Resources *this) {
     free(this->items);
 }
 
-static void unloadItemPrice(struct Resources *this) {
+static void UnloadItemPrice(struct Resources *this) {
     free(this->itemsPrice);
 }
 
-static void unloadFloors(struct Resources *this) {
+static void UnloadFloors(struct Resources *this) {
     int i = 0;
 
-    while (i < this->floorTextureQuantity) {
-        UnloadTexture(this->floorTextures[i]);
+    while (i < this->floorQuantity) {
+        UnloadTexture(this->floors[i]);
 
         i += 1;
     }
 
-    free(this->floorTextures);
+    free(this->floors);
 }
 
-static void unloadWalls(struct Resources *this) {
+static void UnloadWalls(struct Resources *this) {
     int i = 0;
 
-    while (i < this->wallTextureQuantity) {
-        UnloadTexture(this->wallTextures[i]);
+    while (i < this->wallQuantity) {
+        UnloadTexture(this->walls[i]);
 
         i += 1;
     }
 
-    free(this->wallTextures);
+    free(this->walls);
 }
 
-void unloadResources(struct Resources *this) {
+void UnloadResources(struct Resources *this) {
     UnloadFonts(this);
-    unloadMusic(this);
-    unloadBodyParts(this);
-    unloadArmor(this);
-    unloadArmorPrice(this);
-    unloadWeapons(this);
-    unloadWeaponPrice(this);
-    unloadItems(this);
-    unloadItemPrice(this);
-    unloadFloors(this);
-    unloadWalls(this);
+    UnloadMusic(this);
+
+    UnloadBodyParts(this);
+
+    UnloadArmor(this);
+    UnloadArmorPrice(this);
+
+    UnloadWeapons(this);
+    UnloadWeaponPrice(this);
+    UnloadItems(this);
+    UnloadItemPrice(this);
+    UnloadFloors(this);
+    UnloadWalls(this);
 }

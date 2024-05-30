@@ -61,9 +61,6 @@
     <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
       <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\savefileOperations">
-      <UniqueIdentifier>{cca953df-2a6e-4afd-9150-24cc81d23763}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\additions">
       <UniqueIdentifier>{c819062c-a4a4-4e98-b51b-f69887357099}</UniqueIdentifier>
     </Filter>
@@ -105,6 +102,15 @@
     </Filter>
     <Filter Include="Pliki nagłówkowe\resources">
       <UniqueIdentifier>{ecb495d7-7510-4398-b29f-5f968a53ed19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\saveFile">
+      <UniqueIdentifier>{b8afc04a-3bbd-4131-a7a9-10be10baadeb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\resources\functions">
+      <UniqueIdentifier>{9ee4ef57-07e4-4e40-979e-f50b008b7c9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\saveFile\functions">
+      <UniqueIdentifier>{d0b2bcec-cada-48f1-b433-a7ee4a495e2b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -201,15 +207,6 @@
     <ClCompile Include="saveData.c">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
     </ClCompile>
-    <ClCompile Include="createSaveFile.c">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClCompile>
-    <ClCompile Include="saveSaveFile.c">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClCompile>
-    <ClCompile Include="unloadSaveFile.c">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClCompile>
     <ClCompile Include="shopInterface.c">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClCompile>
@@ -240,14 +237,23 @@
     <ClCompile Include="camera.c">
       <Filter>Pliki źródłowe\objects\characters\player</Filter>
     </ClCompile>
-    <ClCompile Include="loadSaveFile.c">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClCompile>
     <ClCompile Include="loadResources.c">
-      <Filter>Pliki nagłówkowe\resources</Filter>
+      <Filter>Pliki nagłówkowe\resources\functions</Filter>
     </ClCompile>
     <ClCompile Include="unloadResources.c">
-      <Filter>Pliki nagłówkowe\resources</Filter>
+      <Filter>Pliki nagłówkowe\resources\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="createSaveFile.c">
+      <Filter>Pliki nagłówkowe\saveFile\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="loadSaveFile.c">
+      <Filter>Pliki nagłówkowe\saveFile\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="saveSaveFile.c">
+      <Filter>Pliki nagłówkowe\saveFile\functions</Filter>
+    </ClCompile>
+    <ClCompile Include="unloadSaveFile.c">
+      <Filter>Pliki nagłówkowe\saveFile\functions</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +308,6 @@
     <ClInclude Include="saveData.h">
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
     </ClInclude>
-    <ClInclude Include="savefile.h">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClInclude>
     <ClInclude Include="shopInterface.h">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClInclude>
@@ -328,6 +331,9 @@
     </ClInclude>
     <ClInclude Include="resources.h">
       <Filter>Pliki nagłówkowe\resources</Filter>
+    </ClInclude>
+    <ClInclude Include="savefile.h">
+      <Filter>Pliki nagłówkowe\saveFile</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

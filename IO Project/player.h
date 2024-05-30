@@ -3,6 +3,7 @@
 
 #include "character.h"
 
+struct playInfo;
 struct player {
     struct character character;
     int equipment[25][3];

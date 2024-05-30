@@ -28,7 +28,7 @@ static const char *const armorNames[] = {
     [RIGHT_SLEEVE] = "right sleeve"
 };
 
-static void SetFonts(struct Resources *this) {
+static void LoadFonts(struct Resources *this) {
     int letters[] = U"?!,._<>:()^/*aπbcÊdeÍfghijkl≥mnÒoÛpqrsútuvwxyzüøA•BC∆DE FGHIJKL£MN—O”PQRSåTUVWXYZèØ1234567890";
     Font fonts[] = {
         LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int)),
@@ -48,7 +48,7 @@ static void SetFonts(struct Resources *this) {
     }
 }
 
-static void loadMusic(struct Resources *this) {
+static void LoadMusic(struct Resources *this) {
     InitAudioDevice();
 
     Music music[] = {
@@ -71,7 +71,7 @@ static void loadMusic(struct Resources *this) {
     }
 }
 
-static void loadBodyPosition(struct Resources *this) {
+static void LoadBodyPosition(struct Resources *this) {
     FILE *bodyMeasurements = fopen("dane\\bodyMeasurements.txt", "r");
     int i = 0;
     int j = 0;
@@ -116,7 +116,7 @@ static void loadBodyPart(int num, struct Resources *this) {
     UnloadDirectoryFiles(files);
 }
 
-static void loadBodyParts(struct Resources *this) {
+static void LoadBodyParts(struct Resources *this) {
     int i = 0;
 
     while (i < 10) {
@@ -134,6 +134,7 @@ static void loadArmorPart(int num, struct Resources *this) {
     unsigned int j = 0;
 
     this->armorPart[num] = malloc(sizeof(Texture2D[4]) * files.capacity);
+    this->armorPartsQuantity[num] = files.capacity;
 
     while (i < files.capacity) {
         j = 0;
@@ -149,7 +150,7 @@ static void loadArmorPart(int num, struct Resources *this) {
     UnloadDirectoryFiles(files);
 }
 
-static void loadArmor(struct Resources *this) {
+static void LoadArmor(struct Resources *this) {
     int i = 0;
 
     while (i < 9) {
@@ -159,7 +160,7 @@ static void loadArmor(struct Resources *this) {
     }
 }
 
-static void loadArmorPrice(struct Resources *this) {
+static void LoadArmorPrice(struct Resources *this) {
     FILE *file = fopen("dane\\przedmioty\\armor.txt", "r");
     int i = 0;
     int j = 0;
@@ -190,7 +191,7 @@ static void loadArmorPrice(struct Resources *this) {
     fclose(file);
 }
 
-static void loadArmorPosition(struct Resources *this) {
+static void LoadArmorPosition(struct Resources *this) {
     FILE *armorMeasurements = fopen("dane\\armorMeasurements.txt", "r");
     int i = 0;
     int j = 0;
@@ -209,7 +210,7 @@ static void loadArmorPosition(struct Resources *this) {
     fclose(armorMeasurements);
 }
 
-static void loadWeapons(struct Resources *this) {
+static void LoadWeapons(struct Resources *this) {
     FilePathList files = LoadDirectoryFiles("resources\\textures\\przedmioty\\weapon");
     int i = 0;
 
@@ -225,7 +226,7 @@ static void loadWeapons(struct Resources *this) {
     UnloadDirectoryFiles(files);
 }
 
-static void loadWeaponPrice(struct Resources *this) {
+static void LoadWeaponPrice(struct Resources *this) {
     FILE *file = fopen("dane\\przedmioty\\weapon.txt", "r");
     int j = 0;
     int quantity = 0;
@@ -251,7 +252,7 @@ static void loadWeaponPrice(struct Resources *this) {
     fclose(file);
 }
 
-static void loadItems(struct Resources *this) {
+static void LoadItems(struct Resources *this) {
     FilePathList files = LoadDirectoryFiles("resources\\textures\\przedmioty\\inne");
     int i = 0;
 
@@ -267,7 +268,7 @@ static void loadItems(struct Resources *this) {
     UnloadDirectoryFiles(files);
 }
 
-static void loadItemPrice(struct Resources *this) {
+static void LoadItemPrice(struct Resources *this) {
     FILE *file = fopen("dane\\przedmioty\\inne.txt", "r");
     int j = 0;
     int quantity = 0;
@@ -293,15 +294,15 @@ static void loadItemPrice(struct Resources *this) {
     fclose(file);
 }
 
-static void loadFloorTextures(struct Resources *this) {
+static void LoadFloors(struct Resources *this) {
     FilePathList f = LoadDirectoryFiles("resources\\textures\\floor");
     unsigned int i = 0;
 
-    this->floorTextureQuantity = f.capacity;
-    this->floorTextures = malloc(sizeof(Texture2D) * f.capacity);
+    this->floorQuantity = f.capacity;
+    this->floors = malloc(sizeof(Texture2D) * f.capacity);
 
     while (i < f.capacity) {
-        this->floorTextures[i] = LoadTexture(TextFormat("resources\\textures\\floor\\%i.png", i));
+        this->floors[i] = LoadTexture(TextFormat("resources\\textures\\floor\\%i.png", i));
 
         i += 1;
     }
@@ -309,15 +310,15 @@ static void loadFloorTextures(struct Resources *this) {
     UnloadDirectoryFiles(f);
 }
 
-static void loadWallTextures(struct Resources *this) {
+static void LoadWalls(struct Resources *this) {
     FilePathList f = LoadDirectoryFiles("resources\\textures\\wall");
     unsigned int i = 0;
 
-    this->wallTextureQuantity = f.capacity;
-    this->wallTextures = malloc(sizeof(Texture2D) * f.capacity);
+    this->wallQuantity = f.capacity;
+    this->walls = malloc(sizeof(Texture2D) * f.capacity);
 
     while (i < f.capacity) {
-        this->wallTextures[i] = LoadTexture(TextFormat("resources\\textures\\wall\\%i.png", i));
+        this->walls[i] = LoadTexture(TextFormat("resources\\textures\\wall\\%i.png", i));
 
         i += 1;
     }
@@ -325,18 +326,21 @@ static void loadWallTextures(struct Resources *this) {
     UnloadDirectoryFiles(f);
 }
 
-void loadResources(struct Resources *this) {
-    SetFonts(this);
-    loadMusic(this);
-    loadBodyPosition(this);
-    loadBodyParts(this);
-    loadArmor(this);
-    loadArmorPrice(this);
-    loadArmorPosition(this);
-    loadWeapons(this);
-    loadWeaponPrice(this);
-    loadItems(this);
-    loadItemPrice(this);
-    loadFloorTextures(this);
-    loadWallTextures(this);
+void LoadResources(struct Resources *this) {
+    LoadFonts(this);
+    LoadMusic(this);
+
+    LoadBodyPosition(this);
+    LoadBodyParts(this);
+
+    LoadArmorPosition(this);
+    LoadArmor(this);
+    LoadArmorPrice(this);
+
+    LoadWeapons(this);
+    LoadWeaponPrice(this);
+    LoadItems(this);
+    LoadItemPrice(this);
+    LoadFloors(this);
+    LoadWalls(this);
 }

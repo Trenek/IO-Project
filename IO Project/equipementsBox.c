@@ -166,7 +166,7 @@ void DrawEquipementBox(const struct equipementBox *const element, struct playInf
     DrawButton(element->destroy);
     DrawButton(element->goBack);
 
-    DrawTextureEx(*info->player.character.object.texture, element->playerPosition, 0, element->equip.boxRectangle.width / info->player.character.object.texture->width, WHITE);
+    DrawTextureEx(*info->save.player.character.object.texture, element->playerPosition, 0, element->equip.boxRectangle.width / info->save.player.character.object.texture->width, WHITE);
 }
 
 static void Equip(struct equipementBox *element) {
@@ -242,7 +242,7 @@ bool UpdateEquipementBox(struct equipementBox *const element, struct playInfo *i
 
     if (isMouseOver(element->activeItemType == 1 ? element->unequip : element->equip)) {
         (element->activeItemType == 1 ? Unequip : Equip)(element);
-        assemblePlayerTexture(info, &info->player.character);
+        assemblePlayerTexture(info->resources, &info->save.player.character);
     }
     else if (isMouseOver(element->destroy)) {
         Delete(element);

@@ -9,23 +9,23 @@
 #include "playState.h"
 
 struct Object2D **createRenderer(struct playInfo *info) {
-    struct Object2D **result = malloc(sizeof(struct Object2D *) * (info->enemyQuantity + info->sellersQuantity + 1));
+    struct Object2D **result = malloc(sizeof(struct Object2D *) * (info->save.enemyQuantity + info->save.sellersQuantity + 1));
     int i = 0;
     int j = 1;
 
-    result[0] = &info->player.character.object;
+    result[0] = &info->save.player.character.object;
 
     i = 0;
-    while (i < info->enemyQuantity) {
-        result[j] = &info->enemies[i].object;
+    while (i < info->save.enemyQuantity) {
+        result[j] = &info->save.enemies[i].object;
 
         i += 1;
         j += 1;
     }
 
     i = 0;
-    while (i < info->sellersQuantity) {
-        result[j] = &info->shops[i].character.object;
+    while (i < info->save.sellersQuantity) {
+        result[j] = &info->save.sellers[i].character.object;
 
         i += 1;
         j += 1;

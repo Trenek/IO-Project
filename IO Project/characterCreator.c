@@ -35,7 +35,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
     struct character bob = {
         .bodyPart = { 0 },
         .object.texture = &texture,
-        .direction = 0
+        .direction = 0,
     };
 
     struct button title = {
@@ -180,7 +180,8 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         CalculateButtonPosition(&labels[i]);
     }
 
-    mainAssemblePlayerTexture(info, &bob);
+    memset(bob.armorPart, -1, sizeof(int) * 9);
+    assemblePlayerTexture(&info->resources, &bob);
 
     Vector2 bobPosition = (Vector2){
        .x = GetScreenWidth() / 8.0f,
@@ -225,7 +226,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
                 else {
                     bob.direction -= 1;
                 }
-                mainAssemblePlayerTexture(info, &bob);
+                assemblePlayerTexture(&info->resources, &bob);
             }
             else if (isMouseOver(turnRight)) {
                 if (bob.direction == 3) {
@@ -234,14 +235,14 @@ void characterCreator(enum state* state, struct menuInfo* info) {
                 else {
                     bob.direction += 1;
                 }
-                mainAssemblePlayerTexture(info, &bob);
+                assemblePlayerTexture(&info->resources, &bob);
             }
         }
 
         for (int i = 0; i < 10; i++) {
             if (nUpdateSlideBox(&bodyPartSlideBoxes[i])) {
                 bob.bodyPart[i] = bodyPartSlideBoxes[i].currentOption;
-                mainAssemblePlayerTexture(info, &bob);
+                assemblePlayerTexture(&info->resources, &bob);
             }
         }
     }

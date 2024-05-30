@@ -8,7 +8,7 @@
 
 #include <raylib.h>
 
-static void createDate(const char *const saveName) {
+static void CreateDate(const char *const saveName) {
     FILE *file = fopen(saveName, "w");
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
@@ -23,7 +23,7 @@ static void createDate(const char *const saveName) {
     fclose(file);
 }
 
-static void createCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+static void CreateCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     FILE *file = fopen(saveName, "w");
     int i = 0;
 
@@ -48,7 +48,7 @@ static void createCharacter(const char *const saveName, const char *const charac
     fclose(file);
 }
 
-static void createEquipment(const char *const saveName) {
+static void CreateEquipment(const char *const saveName) {
     FILE *file = fopen(saveName, "w");
     int i = 0;
 
@@ -60,16 +60,8 @@ static void createEquipment(const char *const saveName) {
     fclose(file);
 }
 
-static void copyMaps(const char *const saveName) {
-    FilePathList list = LoadDirectoryFiles("dane\\mapy");
-    FILE *from = NULL;
-    FILE *to = NULL;
-    unsigned int i = 0;
+static void RecreateFile(FILE *from, FILE *to) {
     int c = 0;
-
-
-    from = fopen(TextFormat("dane\\mapy\\position.txt"), "r");
-    to = fopen(TextFormat("saves\\%s\\mapy\\position.txt", saveName), "w");
 
     while ((c = fgetc(from)) != EOF) {
         fputc(c, to);
@@ -77,46 +69,45 @@ static void copyMaps(const char *const saveName) {
 
     fclose(from);
     fclose(to);
-    while (i < list.capacity - 1) {
-        from = fopen(TextFormat("dane\\mapy\\%i.txt", i), "r");
-        to = fopen(TextFormat("saves\\%s\\mapy\\%i.txt", saveName, i), "w");
-
-        while ((c = fgetc(from)) != EOF) {
-            fputc(c, to);
-        }
-
-        fclose(from);
-        fclose(to);
-        i += 1;
-    }
-
-    UnloadDirectoryFiles(list);
 }
 
-static void copyShops(const char *const saveName) {
+static void CreatePosition(const char *const saveName) {
+    RecreateFile(fopen("dane\\mapy\\position.txt", "r"), fopen(TextFormat("saves\\%s\\mapy\\position.txt", saveName), "w"));
+}
+
+static void CreatePlayer(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+    CreateCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts);
+    CreateEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
+    CreatePosition(saveName);
+}
+
+static void CopyShops(const char *const saveName) {
     FilePathList list = LoadDirectoryFiles("dane\\sklepy");
-    FILE *from = NULL;
-    FILE *to = NULL;
     unsigned int i = 0;
-    int c = 0;
 
     while (i < list.capacity) {
-        from = fopen(TextFormat("dane\\sklepy\\%i.txt", i), "r");
-        to = fopen(TextFormat("saves\\%s\\sklepy\\%i.txt", saveName, i), "w");
+        RecreateFile(fopen(TextFormat("dane\\sklepy\\%i.txt", i), "r"), fopen(TextFormat("saves\\%s\\sklepy\\%i.txt", saveName, i), "w"));
 
-        while ((c = fgetc(from)) != EOF) {
-            fputc(c, to);
-        }
-
-        fclose(from);
-        fclose(to);
         i += 1;
     }
 
     UnloadDirectoryFiles(list);
 }
 
-bool createNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+static void CopyMaps(const char *const saveName) {
+    FilePathList list = LoadDirectoryFiles("dane\\mapy");
+    unsigned int i = 0;
+
+    while (i < list.capacity - 1) {
+        RecreateFile(fopen(TextFormat("dane\\mapy\\%i.txt", i), "r"), fopen(TextFormat("saves\\%s\\mapy\\%i.txt", saveName, i), "w"));
+
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(list);
+}
+
+bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
     bool result = 1;
@@ -126,15 +117,14 @@ bool createNewSave(const char *const saveName, const char *const characterName, 
 
         _mkdir(saveDirectory);
 
-        createCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts);
-        createEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
-        createDate(TextFormat("saves\\%s\\date.txt", saveName));
-
         _mkdir(TextFormat("saves\\%s\\mapy", saveName));
         _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
 
-        copyMaps(saveName);
-        copyShops(saveName);
+        CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
+
+        CreatePlayer(saveName, characterName, bodyParts);
+        CopyShops(saveName);
+        CopyMaps(saveName);
     }
 
     return result;

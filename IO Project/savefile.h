@@ -1,8 +1,41 @@
+#ifndef SAVEFILE_H
+#define SAVEFILE_H
+
 #include <stdbool.h>
 
-struct playInfo;
+#include "character.h"
+#include "player.h"
+#include "floor.h"
+#include "wall.h"
+#include "seller.h"
 
-bool createNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]);
-void loadSaveFile(struct playInfo *this, const char *saveName);
-void unloadSaveFile(struct playInfo *this);
-void saveSaveFile(struct playInfo *this, const char *saveName);
+struct SaveFile {
+    char *const saveName;
+    int mapID;
+
+    struct player player;
+
+    int(*shopEquipment)[10][3];
+    int shopQuantity;
+
+    struct map {
+        struct floors *floors;
+        int floorsQuantity;
+
+        struct wall *walls;
+        int wallQuantity;
+
+        struct character *enemies;
+        int enemyQuantity;
+
+        struct seller *sellers;
+        int sellersQuantity;
+    };
+};
+
+bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]);
+void LoadSaveFile(struct SaveFile *this, struct Resources *resources);
+void UnloadSaveFile(struct SaveFile *this);
+void SaveSaveFile(struct SaveFile *this);
+
+#endif
