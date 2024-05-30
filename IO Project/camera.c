@@ -3,6 +3,8 @@
 #include "player.h"
 #include "playState.h"
 
+#include <raymath.h>
+
 static void check(Vector3 *cameraPosition, Vector3 *playerPosition, struct playInfo *info) {
 	Vector2 cam = { cameraPosition->x, cameraPosition->z };
 	Vector2 pos = { playerPosition->x, playerPosition->z };
@@ -15,9 +17,12 @@ static void check(Vector3 *cameraPosition, Vector3 *playerPosition, struct playI
 		Vector2 wall2 = { info->walls[i].endPosition.x, info->walls[i].endPosition.z };
 
 		if (CheckCollisionLines(pos, cam, wall1, wall2, &result)) {
+			result = Vector2MoveTowards(result, pos, 0.05f);
+
 			cameraPosition->x = result.x;
 			cameraPosition->z = result.y;
 		}
+		
 		i += 1;
 	}
 }
