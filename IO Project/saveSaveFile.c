@@ -188,8 +188,17 @@ static void saveShops(struct playInfo *this, const char *saveName) {
     }
 }
 
+void savePosition(struct playInfo *this, const char *saveName) {
+    FILE *file = fopen(TextFormat("saves\\%s\\mapy\\position.txt", saveName), "w");
+
+    fprintf(file, "%i %f %f", this->mapID, this->player.character.object.position.x, this->player.character.object.position.z);
+
+    fclose(file);
+}
+
 void saveSaveFile(struct playInfo *this, const char *saveName) {
     saveShops(this, saveName);
+    savePosition(this, saveName);
     saveMap(this, saveName);
     saveCharacter(&this->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName));
     saveEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", saveName));

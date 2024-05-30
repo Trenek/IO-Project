@@ -133,13 +133,13 @@ int (*getPrice(int (*item)[3], const struct playInfo *info))[3] {
         case 0:
             break;
         case 1:
-            result = &info->weaponPrice[(*item)[1]];
+            result = &info->resources->weaponPrice[(*item)[1]];
             break;
         case 2:
-            result = &info->armorPrice[(*item)[1]][(*item)[2]];
+            result = &info->resources->armorPrice[(*item)[1]][(*item)[2]];
             break;
         case 3:
-            result = &info->itemsPrice[(*item)[1]];
+            result = &info->resources->itemsPrice[(*item)[1]];
             break;
     }
 

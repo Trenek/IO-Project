@@ -2,7 +2,6 @@
 
 #include "state.h"
 #include "playState.h"
-#include "load.h"
 #include "character.h"
 
 #include "menuElements.h"
@@ -50,7 +49,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 0,
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -68,7 +67,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 25,
         .fontColor = BLACK,
         .color = color2,
@@ -86,7 +85,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -96,13 +95,6 @@ void characterCreator(enum state* state, struct menuInfo* info) {
 
     struct button labels[10];
     struct nSlideBox bodyPartSlideBoxes[10];
-    
-    if (info->isLoaded == 0) {
-        loadBodyPosition(info);
-        loadBodyParts(info);
-
-        info->isLoaded = 1;
-    }
 
     for (int i = 0; i < 10; i++) {
         labels[i] = (struct button){
@@ -116,7 +108,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
                 .posX = 0,
                 .posY = 1
             },
-            .font = &info->fonts[0],
+            .font = &info->resources.fonts[0],
             .fontSize = FONT_SIZE,
             .fontColor = BLACK,
             .color = BLANK,
@@ -125,7 +117,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         };
 
         bodyPartSlideBoxes[i] = (struct nSlideBox){
-            .numberOfOptions = info->bodyPartsQuantity[i],
+            .numberOfOptions = info->resources.bodyPartsQuantity[i],
             .isActive = false,
             .currentOption = info->body[i],
             .init = {
@@ -137,7 +129,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
                 .posY = 1,
                 .width = 200
             },
-            .font = &info->fonts[1],
+            .font = &info->resources.fonts[1],
             .fontSize = 20,
             .fontColor = BLACK,
             .color = GREEN,

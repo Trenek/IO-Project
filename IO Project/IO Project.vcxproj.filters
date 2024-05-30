@@ -58,9 +58,6 @@
     <Filter Include="Pliki źródłowe\menu\choiceBox">
       <UniqueIdentifier>{c036f7ed-c007-4577-9850-9af560687f71}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\load">
-      <UniqueIdentifier>{fba7362b-44d7-46e2-a0e4-70e180e57577}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\choiceBox\saveData">
       <UniqueIdentifier>{01b9e571-fe57-4b56-8dea-88dfd6c1122e}</UniqueIdentifier>
     </Filter>
@@ -91,12 +88,6 @@
     <Filter Include="Pliki źródłowe\objects\characters\seller">
       <UniqueIdentifier>{50fbd292-d303-4b8c-aa9c-05d82c31231a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\load\armor">
-      <UniqueIdentifier>{3d770958-a3c7-4c18-8e94-7b73676ecd47}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\load\bodyParts">
-      <UniqueIdentifier>{57bf5347-d5d3-4ad2-9508-0d630b7f34ce}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\slideBox\string">
       <UniqueIdentifier>{ee0091ae-ed8f-47d2-a15c-4816a138413c}</UniqueIdentifier>
     </Filter>
@@ -111,6 +102,9 @@
     </Filter>
     <Filter Include="Pliki źródłowe\objects\hitbox">
       <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki nagłówkowe\resources">
+      <UniqueIdentifier>{ecb495d7-7510-4398-b29f-5f968a53ed19}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -201,9 +195,6 @@
     <ClCompile Include="achievements.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
-    <ClCompile Include="loadArmor.c">
-      <Filter>Pliki źródłowe\load\armor</Filter>
-    </ClCompile>
     <ClCompile Include="fscanfWithAllocation.c">
       <Filter>Pliki źródłowe\additions\fscanfWithAllocation</Filter>
     </ClCompile>
@@ -211,9 +202,6 @@
       <Filter>Pliki źródłowe\menu\choiceBox\saveData</Filter>
     </ClCompile>
     <ClCompile Include="createSaveFile.c">
-      <Filter>Pliki źródłowe\savefileOperations</Filter>
-    </ClCompile>
-    <ClCompile Include="loadSaveFile.c">
       <Filter>Pliki źródłowe\savefileOperations</Filter>
     </ClCompile>
     <ClCompile Include="saveSaveFile.c">
@@ -237,9 +225,6 @@
     <ClCompile Include="deathScreen.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
-    <ClCompile Include="loadBodyParts.c">
-      <Filter>Pliki źródłowe\load\bodyParts</Filter>
-    </ClCompile>
     <ClCompile Include="numberSlideBox.c">
       <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
     </ClCompile>
@@ -254,6 +239,15 @@
     </ClCompile>
     <ClCompile Include="camera.c">
       <Filter>Pliki źródłowe\objects\characters\player</Filter>
+    </ClCompile>
+    <ClCompile Include="loadSaveFile.c">
+      <Filter>Pliki źródłowe\savefileOperations</Filter>
+    </ClCompile>
+    <ClCompile Include="loadResources.c">
+      <Filter>Pliki nagłówkowe\resources</Filter>
+    </ClCompile>
+    <ClCompile Include="unloadResources.c">
+      <Filter>Pliki nagłówkowe\resources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -302,9 +296,6 @@
     <ClInclude Include="hitbox.h">
       <Filter>Pliki źródłowe\objects\hitbox</Filter>
     </ClInclude>
-    <ClInclude Include="load.h">
-      <Filter>Pliki źródłowe\load</Filter>
-    </ClInclude>
     <ClInclude Include="fscanfWithAllocation.h">
       <Filter>Pliki źródłowe\additions\fscanfWithAllocation</Filter>
     </ClInclude>
@@ -323,12 +314,6 @@
     <ClInclude Include="seller.h">
       <Filter>Pliki źródłowe\objects\characters\seller</Filter>
     </ClInclude>
-    <ClInclude Include="bodyParts.h">
-      <Filter>Pliki źródłowe\load\bodyParts</Filter>
-    </ClInclude>
-    <ClInclude Include="armor.h">
-      <Filter>Pliki źródłowe\load\armor</Filter>
-    </ClInclude>
     <ClInclude Include="numberSlideBox.h">
       <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
     </ClInclude>
@@ -340,6 +325,9 @@
     </ClInclude>
     <ClInclude Include="wall.h">
       <Filter>Pliki źródłowe\objects\wall</Filter>
+    </ClInclude>
+    <ClInclude Include="resources.h">
+      <Filter>Pliki nagłówkowe\resources</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

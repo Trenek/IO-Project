@@ -33,7 +33,7 @@ void fight(enum playState *playState, struct playInfo *info) {
             .posX = 2,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -51,7 +51,7 @@ void fight(enum playState *playState, struct playInfo *info) {
             .posX = 2,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -69,7 +69,7 @@ void fight(enum playState *playState, struct playInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -87,7 +87,7 @@ void fight(enum playState *playState, struct playInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -128,7 +128,7 @@ void fight(enum playState *playState, struct playInfo *info) {
     
     info->resumeState = FIGHT;
     while (!WindowShouldClose() && *playState == FIGHT) {
-        UpdateMusicStream(info->music[0]);
+        UpdateMusicStream(info->resources->music[0]);
 
         BeginTextureMode(*info->screenCamera);
             ClearBackground(color);

@@ -1,13 +1,14 @@
-#include <raylib.h>
-
 #ifndef PLAYSTATE_H
 #define PLAYSTATE_H
 
+#include <raylib.h>
+
 #include "player.h"
 #include "seller.h"
-#include "load.h"
 #include "floor.h"
 #include "wall.h"
+
+#include "resources.h"
 
 struct menuInfo;
 struct Object2D;
@@ -42,57 +43,42 @@ enum position {
 struct playInfo {
     char *const saveName;
 
-    RenderTexture *screenCamera;
-    Rectangle *screenRect;
-    Camera camera;
+    int mapID;
 
-    Font *fonts;
-    int fontsQuantity;
+    struct Resources *resources;
 
-    Music *music;
-    int musicQuantity;
-
-    enum playState resumeState;
-
-    struct player player;
-
-    struct character *enemies;
-    int enemyQuantity;
-
-    struct floor *floors;
-    int floorsQuantity;
-
-    struct wall *walls;
-    int wallQuantity;
-
-    int (*shopEquipment)[10][3];
+    int(*shopEquipment)[10][3];
     int shopQuantity;
 
-    struct seller *shops;
-    int sellersQuantity;
+    struct Objects {
+        struct character *enemies;
+        int enemyQuantity;
 
-    struct character chosen;
-    int chosenShop;
-    int shouldDestroy;
+        struct seller *shops;
+        int sellersQuantity;
 
-    int dialog;
+        struct floor *floors;
+        int floorsQuantity;
 
-    Texture2D (*(*bodyParts)[10])[4];
-    int height;
-    int width;
-    int (*bodyPosition)[4][10][2];
+        struct wall *walls;
+        int wallQuantity;
+    };
 
-    Texture2D(*armorPart[9])[4];
-    int (*armorPrice[9])[3];
-    int armorPosition[4][9][2];
+    struct CommonInfo {
+        RenderTexture *screenCamera;
+        Rectangle *screenRect;
+        Camera camera;
 
-    Texture2D *weapons;
-    int (*weaponPrice)[3];
-    int weaponsQuantity;
+        struct player player;
 
-    Texture2D *items;
-    int (*itemsPrice)[3];
-    int itemsQuantity;
+        enum playState resumeState;
+
+        struct character chosen;
+        int chosenShop;
+        int shouldDestroy;
+
+        int dialog;
+    };
 };
 
 struct playInfo initializePlayInfo(struct menuInfo *info);

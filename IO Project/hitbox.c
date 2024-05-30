@@ -72,23 +72,25 @@ void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	}
 }
 
+#define IN_BETWEEN(key, b, c, e) ((key >= (b - e) && key <= (c + e)) || (key >= (c - e) && key <= (b + e)))
+
 void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 	Vector3 *A = &obsticle->endPosition;
 	Vector3 *B = &obsticle->object.position;
 	Vector3 *C = &object->position;
 
-	if (A->x == B->x) {
-		if (fabsf(C->x - A->x) < object->sizeV.x) {
+	if (A->x == B->x && IN_BETWEEN(C->z, A->z, B->z, 0.0f)) {
+		if (fabsf(C->x - A->x) < object->sizeV.x / 2) {
 			C->x = (C->x - A->x >= 0) ? 
-				A->x + object->sizeV.x : 
-				A->x - object->sizeV.x;
+				A->x + object->sizeV.x / 2 : 
+				A->x - object->sizeV.x / 2;
 		}
 	}
-	else if (A->z == B->z) {
-		if (fabsf(C->z - A->z) < object->sizeV.x) {
+	if (A->z == B->z && IN_BETWEEN(C->x, A->x, B->x, 0.0f)) {
+		if (fabsf(C->z - A->z) < object->sizeV.x / 2) {
 			C->z = (C->z - A->z >= 0) ? 
-				A->z + object->sizeV.x : 
-				A->z - object->sizeV.x;
+				A->z + object->sizeV.x / 2 : 
+				A->z - object->sizeV.x / 2;
 		}
 	}
 }

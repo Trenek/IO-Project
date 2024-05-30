@@ -26,7 +26,7 @@ void pause(enum playState *state, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -44,7 +44,7 @@ void pause(enum playState *state, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -62,7 +62,7 @@ void pause(enum playState *state, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -80,7 +80,7 @@ void pause(enum playState *state, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -98,7 +98,7 @@ void pause(enum playState *state, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,

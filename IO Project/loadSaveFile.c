@@ -87,8 +87,7 @@ static void loadFloors(FILE *file, struct playInfo *info) {
 
         info->floors[i].object.position.y = 0.0f;
 
-        info->floors[i].object.texture = malloc(sizeof(Texture2D));
-        *info->floors[i].object.texture = LoadTexture(TextFormat("resources\\textures\\floor\\%i.png", info->floors[i].ID));
+        info->floors[i].object.texture = &info->resources->floorTextures[info->floors[i].ID];
 
         i += 1;
     }
@@ -113,8 +112,7 @@ static void loadWalls(FILE *file, struct playInfo *info) {
             &info->walls[i].endPosition.z
         );
 
-        info->walls[i].object.texture = malloc(sizeof(Texture2D));
-        *info->walls[i].object.texture = LoadTexture(TextFormat("resources\\textures\\wall\\%i.png", info->floors[i].ID));
+        info->walls[i].object.texture = &info->resources->wallTextures[info->walls[i].ID];
 
         i += 1;
     }
@@ -164,6 +162,59 @@ static void loadSellers(FILE *file, struct playInfo *info) {
     }
 }
 
+static void loadEquipment(struct player *player, const char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    int i = 0;
+
+    while (i < 25) {
+        fscanf(file, "%i", &player->equipment[i][0]);
+
+        if (player->equipment[i][0] != 0) {
+            fscanf(file, "%i", &player->equipment[i][1]);
+
+            if (player->equipment[i][0] == 2) {
+                fscanf(file, "%i", &player->equipment[i][2]);
+            }
+        }
+
+        i += 1;
+    }
+
+    fclose(file);
+}
+
+static void loadPlayer(struct playInfo *info, const char *saveName) {
+    loadCharacter(&info->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName), info->player.character.object.position.x, info->player.character.object.position.z);
+    assemblePlayerTexture(info, &info->player.character);
+    loadEquipment(&info->player, TextFormat("saves\\%s\\ekwipunek.txt", saveName));
+    createDate(TextFormat("saves\\%s\\date.txt", saveName));
+
+    info->player.speedY = 0;
+    info->player.r = 5;
+    info->player.b = 0;
+    info->player.a = 30 * PI / 180;
+}
+
+static void loadPosition(struct playInfo *this, const char *saveName) {
+    FILE *position = fopen(TextFormat("saves\\%s\\mapy\\position.txt", saveName), "r");
+
+    fscanf(position, "%i %f %f", &this->mapID, &this->player.character.object.position.x, &this->player.character.object.position.z);
+
+    fclose(position);
+}
+
+static void loadMap(struct playInfo *this, const char *saveName) {
+    FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\%i.txt", saveName, this->mapID), "r");
+
+    loadFloors(mapFile, this);
+    loadWalls(mapFile, this);
+    createEnemies(mapFile, this);
+    loadSellers(mapFile, this);
+
+    fclose(mapFile);
+}
+
+
 static void loadShop(int shopEquipment[10][3], const char *path) {
     FILE *file = fopen(path, "r");
     int i = 0;
@@ -202,50 +253,12 @@ static void loadShops(struct playInfo *this) {
     UnloadDirectoryFiles(f);
 }
 
-static void loadEquipment(struct player *player, const char *fileName) {
-    FILE *file = fopen(fileName, "r");
-    int i = 0;
-
-    while (i < 25) {
-        fscanf(file, "%i", &player->equipment[i][0]);
-
-        if (player->equipment[i][0] != 0) {
-            fscanf(file, "%i", &player->equipment[i][1]);
-
-            if (player->equipment[i][0] == 2) {
-                fscanf(file, "%i", &player->equipment[i][2]);
-            }
-        }
-
-        i += 1;
-    }
-
-    fclose(file);
-}
-
-static void loadPlayer(struct playInfo *info, const char *saveName) {
-    loadCharacter(&info->player.character, TextFormat("saves\\%s\\postaæ.txt", saveName), 4.0f, 0.0f);
-    assemblePlayerTexture(info, &info->player.character);
-    loadEquipment(&info->player, TextFormat("saves\\%s\\ekwipunek.txt", saveName));
-    createDate(TextFormat("saves\\%s\\date.txt", saveName));
-
-    info->player.speedY = 0;
-    info->player.r = 5;
-    info->player.b = 0;
-    info->player.a = 30 * PI / 180;
-}
 
 void loadSaveFile(struct playInfo *this, const char *saveName) {
-    FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", saveName), "r");
+    loadPosition(this, saveName);
 
     loadShops(this);
-
-    loadFloors(mapFile, this);
-    loadWalls(mapFile, this);
-    createEnemies(mapFile, this);
-    loadSellers(mapFile, this);
+    loadMap(this, saveName);
 
     loadPlayer(this, saveName);
-
-    fclose(mapFile);
 }

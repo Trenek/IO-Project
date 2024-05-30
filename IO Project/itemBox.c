@@ -31,18 +31,18 @@ void DrawItem(int b, int a, int c, Rectangle itemBox, const struct playInfo *inf
         case 0:
             break;
         case 1:
-            min1 = itemBox.width / info->weapons[a].width;
-            min2 = itemBox.height / info->weapons[a].height;
+            min1 = itemBox.width / info->resources->weapons[a].width;
+            min2 = itemBox.height / info->resources->weapons[a].height;
 
-            DrawTextureEx(info->weapons[a], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
+            DrawTextureEx(info->resources->weapons[a], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
             break;
         case 2:
-            min1 = itemBox.width / info->armorPart[a][c][0].width;
-            min2 = itemBox.height / info->armorPart[a][c][0].height;
+            min1 = itemBox.width / info->resources->armorPart[a][c][0].width;
+            min2 = itemBox.height / info->resources->armorPart[a][c][0].height;
 
-            DrawTextureEx(info->armorPart[a][c][0], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
+            DrawTextureEx(info->resources->armorPart[a][c][0], texturePosition, 0.0f, min1 < min2 ? min1 : min2, WHITE);
             break;
         case 3:
-            DrawTextureEx(info->items[a], texturePosition, 0.0f, itemBox.width / info->items[a].width, WHITE);
+            DrawTextureEx(info->resources->items[a], texturePosition, 0.0f, itemBox.width / info->resources->items[a].width, WHITE);
     }
 }

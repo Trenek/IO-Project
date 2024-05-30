@@ -32,7 +32,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -51,7 +51,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -69,7 +69,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -87,7 +87,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = BLANK,
@@ -106,7 +106,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = buttonBackgroundColor,
@@ -124,7 +124,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = buttonBackgroundColor,
@@ -142,7 +142,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = buttonBackgroundColor,
@@ -161,7 +161,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = RED,
@@ -182,7 +182,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = inputColor,
@@ -203,7 +203,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = inputColor,
@@ -230,7 +230,7 @@ void newGame(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = inputColor,

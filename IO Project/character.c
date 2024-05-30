@@ -9,18 +9,18 @@
 
 static void DrawBodyPart(struct playInfo *info, struct character *character, int i) {
     DrawTexture(
-        (*info->bodyParts)[i][character->bodyPart[i]][character->direction],
-        (*info->bodyPosition)[character->direction][i][0],
-        (*info->bodyPosition)[character->direction][i][1],
+        info->resources->bodyParts[i][character->bodyPart[i]][character->direction],
+        info->resources->bodyPosition[character->direction][i][0],
+        info->resources->bodyPosition[character->direction][i][1],
         WHITE);
 }
 
 static void DrawArmorPart(struct playInfo *info, struct character *character, int i) {
     if (character->armorPart[i] != -1)
     DrawTexture(
-        info->armorPart[i][character->armorPart[i]][character->direction],
-        info->armorPosition[character->direction][i][0],
-        info->armorPosition[character->direction][i][1],
+        info->resources->armorPart[i][character->armorPart[i]][character->direction],
+        info->resources->armorPosition[character->direction][i][0],
+        info->resources->armorPosition[character->direction][i][1],
         WHITE);
 }
 
@@ -64,8 +64,8 @@ static void DrawCharacter(struct playInfo *info, struct character *character) {
 }
 
 void assemblePlayerTexture(struct playInfo *info, struct character *character) {
-    RenderTexture2D render = LoadRenderTexture(info->width, info->height);
-    RenderTexture2D render2 = LoadRenderTexture(info->width, info->height);
+    RenderTexture2D render = LoadRenderTexture(info->resources->width, info->resources->height);
+    RenderTexture2D render2 = LoadRenderTexture(info->resources->width, info->resources->height);
 
     BeginTextureMode(render);
         ClearBackground(BLANK);
@@ -88,9 +88,9 @@ void assemblePlayerTexture(struct playInfo *info, struct character *character) {
 
 static void mainDrawBodyPart(struct menuInfo *info, struct character *character, int i) {
     DrawTexture(
-        info->bodyParts[i][character->bodyPart[i]][character->direction],
-        info->bodyPosition[character->direction][i][0],
-        info->bodyPosition[character->direction][i][1],
+        info->resources.bodyParts[i][character->bodyPart[i]][character->direction],
+        info->resources.bodyPosition[character->direction][i][0],
+        info->resources.bodyPosition[character->direction][i][1],
         WHITE);
 }
 
@@ -119,8 +119,8 @@ static void mainDrawBody(struct menuInfo *info, struct character *character) {
 }
 
 void mainAssemblePlayerTexture(struct menuInfo *info, struct character *character) {
-    RenderTexture2D render = LoadRenderTexture(info->width, info->height);
-    RenderTexture2D render2 = LoadRenderTexture(info->width, info->height);
+    RenderTexture2D render = LoadRenderTexture(info->resources.width, info->resources.height);
+    RenderTexture2D render2 = LoadRenderTexture(info->resources.width, info->resources.height);
 
     BeginTextureMode(render);
         ClearBackground(BLANK);

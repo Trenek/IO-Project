@@ -59,7 +59,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -78,7 +78,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -96,7 +96,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -114,7 +114,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -132,7 +132,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -150,7 +150,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -169,14 +169,14 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 2,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct button restart = {  //tutaj nie do końca wiem na czym stanęlśmy z restar/reload/akceptuj/zapisz
+    struct button restart = {
         .text = "Restart",
         .isActive = 1,
         .init = {
@@ -187,7 +187,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -205,7 +205,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -235,7 +235,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -282,7 +282,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -308,7 +308,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -333,7 +333,7 @@ void settings(enum state *state, struct menuInfo *info) {
             .posY = 1,
             .width = 300
         },
-        .font = &info->fonts[1],
+        .font = &info->resources.fonts[1],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,

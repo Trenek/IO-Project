@@ -29,7 +29,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -46,7 +46,7 @@ void tutorial(enum state* state, struct menuInfo* info) {
         .posX = 1,
         .posY = 1
     },
-    .font = &info->fonts[0],
+    .font = &info->resources.fonts[0],
     .fontSize = FONT_SIZE,
     .fontColor = BLACK,
     .backgroundColor = color2,

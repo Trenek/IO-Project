@@ -34,7 +34,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -52,7 +52,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -70,7 +70,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 0,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -88,7 +88,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 2,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -106,7 +106,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 2,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -124,7 +124,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
@@ -171,7 +171,7 @@ void explore(enum playState *playState, struct playInfo *info) {
             assemblePlayerTexture(info, &info->player.character);
         }
 
-        UpdateMusicStream(info->music[0]);
+        UpdateMusicStream(info->resources->music[0]);
         movePlayer(info, &info->player, &info->camera);
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_RIGHT)) {

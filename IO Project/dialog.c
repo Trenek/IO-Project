@@ -58,7 +58,7 @@ static void loadFile(const char* fileName, struct DialogData *saveData, struct b
                 .posX = 0,
                 .posY = 1
             },
-            .font = &info->fonts[0],
+            .font = &info->resources->fonts[0],
             .fontSize = 30,
             .fontColor = BLACK,
             .color = RED,
@@ -105,7 +105,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -130,8 +130,8 @@ void dialog(enum playState *playState, struct playInfo *info) {
             ClearBackground(VIOLET);
 
             DrawTextureEx(*info->chosen.object.texture, (Vector2) { 0.0f, 0.0f }, 0.0f, 2.5f * (float)screenCamera.texture.height / info->chosen.object.texture->height, WHITE);
-            DrawTextEx(info->fonts[0], info->chosen.name, (Vector2) { screenCamera.texture.width / 5.0f, 0.0f}, 40.0f, 0.0f, BLACK);
-            DrawTextEx(info->fonts[0], saveData.statement, (Vector2) { screenCamera.texture.width / 5.0f, 40.0f }, 30.0f, 0.0f, BLACK);
+            DrawTextEx(info->resources->fonts[0], info->chosen.name, (Vector2) { screenCamera.texture.width / 5.0f, 0.0f}, 40.0f, 0.0f, BLACK);
+            DrawTextEx(info->resources->fonts[0], saveData.statement, (Vector2) { screenCamera.texture.width / 5.0f, 40.0f }, 30.0f, 0.0f, BLACK);
         EndTextureMode();
 
         BeginDrawing();

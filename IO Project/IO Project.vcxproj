@@ -163,8 +163,7 @@
     <ClCompile Include="fscanfWithAllocation.c" />
     <ClCompile Include="inputBox.c" />
     <ClCompile Include="itemBox.c" />
-    <ClCompile Include="loadArmor.c" />
-    <ClCompile Include="loadBodyParts.c" />
+    <ClCompile Include="loadResources.c" />
     <ClCompile Include="loadSaveFile.c" />
     <ClCompile Include="hitbox.c" />
     <ClCompile Include="numberSlideBox.c" />
@@ -192,12 +191,11 @@
     <ClCompile Include="training.c" />
     <ClCompile Include="tutorial.c" />
     <ClCompile Include="tutorialSlide.c" />
+    <ClCompile Include="unloadResources.c" />
     <ClCompile Include="unloadSaveFile.c" />
     <ClCompile Include="wall.c" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="armor.h" />
-    <ClInclude Include="bodyParts.h" />
     <ClInclude Include="button.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
@@ -206,7 +204,6 @@
     <ClInclude Include="fscanfWithAllocation.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="itemBox.h" />
-    <ClInclude Include="load.h" />
     <ClInclude Include="loadSettings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="hitbox.h" />
@@ -215,6 +212,7 @@
     <ClInclude Include="playState.h" />
     <ClInclude Include="object2D.h" />
     <ClInclude Include="renderer.h" />
+    <ClInclude Include="resources.h" />
     <ClInclude Include="saveData.h" />
     <ClInclude Include="savefile.h" />
     <ClInclude Include="seller.h" />

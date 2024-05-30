@@ -22,7 +22,7 @@ void shop(enum playState* state, struct playInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources->fonts[0],
         .fontSize = 100,
         .fontColor = BLACK,
         .color = BLANK,
@@ -37,7 +37,7 @@ void shop(enum playState* state, struct playInfo* info) {
             .posY = 1,
             .itemBoxSize = 40,
             .gapSize = 10,
-            .buttonFont = &info->fonts[0],
+            .buttonFont = &info->resources->fonts[0],
             .buttonIncX = 5,
             .buttonIncY = 5
         },
@@ -54,7 +54,7 @@ void shop(enum playState* state, struct playInfo* info) {
             .posY = 1,
             .itemBoxSize = 40,
             .gapSize = 10,
-            .buttonFont = &info->fonts[0],
+            .buttonFont = &info->resources->fonts[0],
             .buttonIncX = 5,
             .buttonIncY = 5
         },

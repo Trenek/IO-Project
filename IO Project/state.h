@@ -3,7 +3,7 @@
 
 #include <raylib.h>
 
-#include "bodyParts.h"
+#include "resources.h"
 
 enum state {
     MENU,
@@ -19,28 +19,19 @@ enum state {
 };
 
 struct menuInfo {
-    Font *fonts;
-    int fontsQuantity;
-
-    Music *music;
-    int musicQuantity;
-
-    int isLoaded;
-    int bodyPartsQuantity[10];
-    Texture2D(*bodyParts[10])[4];
-    int width;
-    int height;
-    int bodyPosition[4][10][2];
-
     char saveName[125];
 
     int body[10];
 
-    int framesPerSecond;
-    int textureQuality;
-    int windowWidth;
-    int windowHeight;
-    int fullScreenMode;
+    struct Resources resources;
+
+    struct Settings {
+        int framesPerSecond;
+        int textureQuality;
+        int windowWidth;
+        int windowHeight;
+        int fullScreenMode;
+    };
 };
 
 void initializeState(struct menuInfo *info);
