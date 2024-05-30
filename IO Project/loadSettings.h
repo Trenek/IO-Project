@@ -1,1 +1,0 @@
-void loadSettings(struct menuInfo *info);

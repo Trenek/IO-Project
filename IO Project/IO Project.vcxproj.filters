@@ -19,9 +19,6 @@
     <Filter Include="Pliki źródłowe\menu\button">
       <UniqueIdentifier>{f8247681-2ac7-4638-9278-327f71bbb5cb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\loadSettings">
-      <UniqueIdentifier>{8932b5ee-13f1-44a4-be25-5d09806b3e1e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki nagłówkowe\state">
       <UniqueIdentifier>{d06f8d09-57e4-439e-8054-00d14e4a34f3}</UniqueIdentifier>
     </Filter>
@@ -33,9 +30,6 @@
     </Filter>
     <Filter Include="Pliki źródłowe\objects">
       <UniqueIdentifier>{ff3bef83-ecae-413f-9085-c7c960712b50}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\object">
-      <UniqueIdentifier>{713fff23-54aa-4fdc-9ec0-abb2346a8efa}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\menu\tutorialSlide">
       <UniqueIdentifier>{819b8b7c-f91d-4bc8-93bf-a0b3ddf74ea5}</UniqueIdentifier>
@@ -73,29 +67,11 @@
     <Filter Include="Pliki źródłowe\menu\itemBox">
       <UniqueIdentifier>{fd329b95-60f0-4073-96fd-967e08f2fe8b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Pliki źródłowe\objects\characters">
-      <UniqueIdentifier>{5888ec3f-4de9-4b56-9bd5-cd2a092b601f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\characters\character">
-      <UniqueIdentifier>{4dc0e363-baab-4c4d-a7ba-eda593dce31f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\characters\player">
-      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\characters\seller">
-      <UniqueIdentifier>{50fbd292-d303-4b8c-aa9c-05d82c31231a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pliki źródłowe\menu\slideBox\string">
       <UniqueIdentifier>{ee0091ae-ed8f-47d2-a15c-4816a138413c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\menu\slideBox\numbers">
       <UniqueIdentifier>{6a4c376f-ba2f-425f-b13e-2258acaad0b3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\floor">
-      <UniqueIdentifier>{ba551b34-9688-4d80-9ac2-3a5f23e20d6e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Pliki źródłowe\objects\wall">
-      <UniqueIdentifier>{4d56b004-0547-444d-b493-923b066aa5da}</UniqueIdentifier>
     </Filter>
     <Filter Include="Pliki źródłowe\objects\hitbox">
       <UniqueIdentifier>{3f61d6c3-8f25-462f-8d16-f7ee929c9966}</UniqueIdentifier>
@@ -112,13 +88,34 @@
     <Filter Include="Pliki nagłówkowe\saveFile\functions">
       <UniqueIdentifier>{d0b2bcec-cada-48f1-b433-a7ee4a495e2b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki nagłówkowe\state\settings">
+      <UniqueIdentifier>{8932b5ee-13f1-44a4-be25-5d09806b3e1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types">
+      <UniqueIdentifier>{9cc9ff94-01da-49cd-9ce6-2b97500e7b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\characters">
+      <UniqueIdentifier>{5888ec3f-4de9-4b56-9bd5-cd2a092b601f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\floor">
+      <UniqueIdentifier>{ba551b34-9688-4d80-9ac2-3a5f23e20d6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\wall">
+      <UniqueIdentifier>{4d56b004-0547-444d-b493-923b066aa5da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\characters\types">
+      <UniqueIdentifier>{d0d82692-9d96-47b6-b5df-918c4b7ec62d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\characters\types\player">
+      <UniqueIdentifier>{e0146a2f-f405-4994-ab7f-080ff0ec9e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\characters\types\seller">
+      <UniqueIdentifier>{50fbd292-d303-4b8c-aa9c-05d82c31231a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="object2D.c">
-      <Filter>Pliki źródłowe\objects\object</Filter>
-    </ClCompile>
     <ClCompile Include="player.c">
-      <Filter>Pliki źródłowe\objects\characters\player</Filter>
+      <Filter>Pliki źródłowe\objects\types\characters\types\player</Filter>
     </ClCompile>
     <ClCompile Include="menu.c">
       <Filter>Pliki źródłowe\state</Filter>
@@ -169,7 +166,7 @@
       <Filter>Pliki nagłówkowe\state</Filter>
     </ClCompile>
     <ClCompile Include="loadSettings.c">
-      <Filter>Pliki źródłowe\loadSettings</Filter>
+      <Filter>Pliki nagłówkowe\state\settings</Filter>
     </ClCompile>
     <ClCompile Include="playState.c">
       <Filter>Pliki nagłówkowe\playState</Filter>
@@ -216,9 +213,6 @@
     <ClCompile Include="characterCreator.c">
       <Filter>Pliki źródłowe\state</Filter>
     </ClCompile>
-    <ClCompile Include="character.c">
-      <Filter>Pliki źródłowe\objects\characters\character</Filter>
-    </ClCompile>
     <ClCompile Include="deathScreen.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
@@ -229,13 +223,13 @@
       <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
     </ClCompile>
     <ClCompile Include="floor.c">
-      <Filter>Pliki źródłowe\objects\floor</Filter>
+      <Filter>Pliki źródłowe\objects\types\floor</Filter>
     </ClCompile>
     <ClCompile Include="wall.c">
-      <Filter>Pliki źródłowe\objects\wall</Filter>
+      <Filter>Pliki źródłowe\objects\types\wall</Filter>
     </ClCompile>
     <ClCompile Include="camera.c">
-      <Filter>Pliki źródłowe\objects\characters\player</Filter>
+      <Filter>Pliki źródłowe\objects\types\characters\types\player</Filter>
     </ClCompile>
     <ClCompile Include="loadResources.c">
       <Filter>Pliki nagłówkowe\resources\functions</Filter>
@@ -255,16 +249,16 @@
     <ClCompile Include="unloadSaveFile.c">
       <Filter>Pliki nagłówkowe\saveFile\functions</Filter>
     </ClCompile>
+    <ClCompile Include="character.c">
+      <Filter>Pliki źródłowe\objects\types\characters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="object2D.h">
-      <Filter>Pliki źródłowe\objects\object</Filter>
-    </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Pliki źródłowe\objects\characters\player</Filter>
+      <Filter>Pliki źródłowe\objects\types\characters\types\player</Filter>
     </ClInclude>
-    <ClInclude Include="loadSettings.h">
-      <Filter>Pliki źródłowe\loadSettings</Filter>
+    <ClInclude Include="settings.h">
+      <Filter>Pliki nagłówkowe\state\settings</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
       <Filter>Pliki nagłówkowe\state</Filter>
@@ -311,11 +305,8 @@
     <ClInclude Include="shopInterface.h">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClInclude>
-    <ClInclude Include="character.h">
-      <Filter>Pliki źródłowe\objects\characters\character</Filter>
-    </ClInclude>
     <ClInclude Include="seller.h">
-      <Filter>Pliki źródłowe\objects\characters\seller</Filter>
+      <Filter>Pliki źródłowe\objects\types\characters\types\seller</Filter>
     </ClInclude>
     <ClInclude Include="numberSlideBox.h">
       <Filter>Pliki źródłowe\menu\slideBox\numbers</Filter>
@@ -324,16 +315,22 @@
       <Filter>Pliki źródłowe\menu\slideBox\string</Filter>
     </ClInclude>
     <ClInclude Include="floor.h">
-      <Filter>Pliki źródłowe\objects\floor</Filter>
+      <Filter>Pliki źródłowe\objects\types\floor</Filter>
     </ClInclude>
     <ClInclude Include="wall.h">
-      <Filter>Pliki źródłowe\objects\wall</Filter>
+      <Filter>Pliki źródłowe\objects\types\wall</Filter>
     </ClInclude>
     <ClInclude Include="resources.h">
       <Filter>Pliki nagłówkowe\resources</Filter>
     </ClInclude>
     <ClInclude Include="savefile.h">
       <Filter>Pliki nagłówkowe\saveFile</Filter>
+    </ClInclude>
+    <ClInclude Include="object2D.h">
+      <Filter>Pliki źródłowe\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="character.h">
+      <Filter>Pliki źródłowe\objects\types\characters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

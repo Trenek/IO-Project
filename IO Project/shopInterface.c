@@ -1,7 +1,6 @@
 #include "playState.h"
 
-#include "shopInterface.h"
-#include "button.h"
+#include "menuElements.h"
 
 static void DrawToRenderTexture(const struct shopInterface *const element) {
     RenderTexture2D temp = LoadRenderTexture(element->toDraw.texture.width, element->toDraw.texture.height);

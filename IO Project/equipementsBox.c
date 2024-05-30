@@ -1,7 +1,6 @@
 #include "playState.h"
 
-#include "equipementBox.h"
-#include "button.h"
+#include "menuElements.h"
 
 void InitializeEquipementBox(struct equipementBox *const element) {
     const struct equipementBoxPositionParameters init = element->init;

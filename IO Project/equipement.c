@@ -1,7 +1,8 @@
 #include <raylib.h>
+
 #include "playState.h"
-#include "button.h"
-#include "equipementBox.h"
+
+#include "menuElements.h"
 
 #define INC_Y (10)
 #define INC_X (10)

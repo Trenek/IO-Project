@@ -4,6 +4,7 @@
 #include <raylib.h>
 
 #include "resources.h"
+#include "settings.h"
 
 enum state {
     MENU,
@@ -24,14 +25,7 @@ struct menuInfo {
     int body[10];
 
     struct Resources resources;
-
-    struct Settings {
-        int framesPerSecond;
-        int textureQuality;
-        int windowWidth;
-        int windowHeight;
-        int fullScreenMode;
-    };
+    struct Settings;
 };
 
 void initializeState(struct menuInfo *info);

@@ -2,8 +2,6 @@
 
 #include "state.h"
 
-#include "loadSettings.h"
-
 int main(void) {
     enum state state = MENU;
     struct menuInfo info = { 0 };

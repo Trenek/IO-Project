@@ -183,7 +183,6 @@
     <ClCompile Include="pause.c" />
     <ClCompile Include="play.c" />
     <ClCompile Include="player.c" />
-    <ClCompile Include="object2D.c" />
     <ClCompile Include="save.c" />
     <ClCompile Include="settings.c" />
     <ClCompile Include="shop.c" />
@@ -204,7 +203,7 @@
     <ClInclude Include="fscanfWithAllocation.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="itemBox.h" />
-    <ClInclude Include="loadSettings.h" />
+    <ClInclude Include="settings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="hitbox.h" />
     <ClInclude Include="numberSlideBox.h" />
