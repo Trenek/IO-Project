@@ -150,10 +150,6 @@ void explore(enum playState *playState, struct playInfo *info) {
         info->shouldDestroy = 0;
     }
 
-    info->player.r = 5;
-    info->player.b = 0;
-    info->player.a = 30 * PI / 180;
-
     info->resumeState = EXPLORE;
     while (!WindowShouldClose() && *playState == EXPLORE) {
         i += 1;
