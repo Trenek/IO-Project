@@ -77,7 +77,7 @@ static void copyMaps(const char *const saveName) {
 
     fclose(from);
     fclose(to);
-    while (i < list.capacity) {
+    while (i < list.capacity - 1) {
         from = fopen(TextFormat("dane\\mapy\\%i.txt", i), "r");
         to = fopen(TextFormat("saves\\%s\\mapy\\%i.txt", saveName, i), "w");
 

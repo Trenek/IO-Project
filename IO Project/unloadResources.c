@@ -14,37 +14,37 @@ static const char *const armorNames[] = {
     [RIGHT_SLEEVE] = "right sleeve"
 };
 
-static void UnloadFonts(struct Resources *info) {
+static void UnloadFonts(struct Resources *this) {
     int i = 0;
 
-    while (i < info->fontsQuantity) {
-        UnloadFont(info->fonts[i]);
+    while (i < this->fontsQuantity) {
+        UnloadFont(this->fonts[i]);
 
         i += 1;
     }
-    free(info->fonts);
+    free(this->fonts);
 }
 
-static void unloadMusic(struct Resources *info) {
+static void unloadMusic(struct Resources *this) {
     int i = 0;
 
-    while (i < info->musicQuantity) {
-        UnloadMusicStream(info->music[i]);
+    while (i < this->musicQuantity) {
+        UnloadMusicStream(this->music[i]);
         i += 1;
     }
 
     CloseAudioDevice();
-    free(info->music);
+    free(this->music);
 }
 
-static void unloadBodyPart(int num, struct Resources *info) {
+static void unloadBodyPart(int num, struct Resources *this) {
     int i = 0;
     int j = 0;
 
-    while (i < info->bodyPartsQuantity[num]) {
+    while (i < this->bodyPartsQuantity[num]) {
         j = 0;
         while (j < 4) {
-            UnloadTexture(info->bodyParts[num][i][j]);
+            UnloadTexture(this->bodyParts[num][i][j]);
 
             j += 1;
         }
@@ -52,20 +52,20 @@ static void unloadBodyPart(int num, struct Resources *info) {
         i += 1;
     }
 
-    free(info->bodyParts[num]);
+    free(this->bodyParts[num]);
 }
 
-static void unloadBodyParts(struct Resources *info) {
+static void unloadBodyParts(struct Resources *this) {
     int i = 0;
 
     while (i < 10) {
-        unloadBodyPart(i, info);
+        unloadBodyPart(i, this);
 
         i += 1;
     }
 }
 
-static void unloadArmorPart(int num, struct Resources *info) {
+static void unloadArmorPart(int num, struct Resources *this) {
     const char *directory = TextFormat("resources\\textures\\przedmioty\\armor\\%s", armorNames[num]);
     FilePathList files = LoadDirectoryFiles(directory);
     unsigned int i = 0;
@@ -74,7 +74,7 @@ static void unloadArmorPart(int num, struct Resources *info) {
     while (i < files.capacity) {
         j = 0;
         while (j < 4) {
-            UnloadTexture(info->armorPart[num][i][j]);
+            UnloadTexture(this->armorPart[num][i][j]);
 
             j += 1;
         }
@@ -83,82 +83,82 @@ static void unloadArmorPart(int num, struct Resources *info) {
     }
 
     UnloadDirectoryFiles(files);
-    free(info->armorPart[num]);
+    free(this->armorPart[num]);
 }
 
-static void unloadArmor(struct Resources *info) {
+static void unloadArmor(struct Resources *this) {
     int i = 0;
 
     while (i < 9) {
-        unloadArmorPart(i, info);
+        unloadArmorPart(i, this);
 
         i += 1;
     }
 }
 
-static void unloadArmorPrice(struct Resources *info) {
+static void unloadArmorPrice(struct Resources *this) {
     int i = 0;
 
     for (i = 0; i < 9; i += 1) {
-        free(info->armorPrice[i]);
-        info->armorPrice[i] = NULL;
+        free(this->armorPrice[i]);
+        this->armorPrice[i] = NULL;
     }
 }
 
-static void unloadWeapons(struct Resources *info) {
+static void unloadWeapons(struct Resources *this) {
     int i = 0;
 
-    while (i < info->weaponsQuantity) {
-        UnloadTexture(info->weapons[i]);
+    while (i < this->weaponsQuantity) {
+        UnloadTexture(this->weapons[i]);
 
         i += 1;
     }
 
-    free(info->weapons);
+    free(this->weapons);
 }
 
-static void unloadWeaponPrice(struct Resources *info) {
-    free(info->weaponPrice);
+static void unloadWeaponPrice(struct Resources *this) {
+    free(this->weaponPrice);
 }
 
-static void unloadItems(struct Resources *info) {
+static void unloadItems(struct Resources *this) {
     int i = 0;
 
-    while (i < info->itemsQuantity) {
-        UnloadTexture(info->items[i]);
+    while (i < this->itemsQuantity) {
+        UnloadTexture(this->items[i]);
 
         i += 1;
     }
 
-    free(info->items);
+    free(this->items);
 }
 
-static void unloadItemPrice(struct Resources *info) {
-    free(info->itemsPrice);
+static void unloadItemPrice(struct Resources *this) {
+    free(this->itemsPrice);
 }
 
-static void unloadFloors(struct Resources *info) {
+static void unloadFloors(struct Resources *this) {
     int i = 0;
 
-    while (i < info->floorTextureQuantity) {
-        UnloadTexture(info->floorTextures[i]);
+    while (i < this->floorTextureQuantity) {
+        UnloadTexture(this->floorTextures[i]);
 
         i += 1;
     }
 
-    free(info->floorTextures);
+    free(this->floorTextures);
 }
 
-static void unloadWalls(struct Resources *info) {
+static void unloadWalls(struct Resources *this) {
     int i = 0;
 
-    while (i < info->wallTextureQuantity) {
-        UnloadTexture(info->wallTextures[i]);
+    while (i < this->wallTextureQuantity) {
+        UnloadTexture(this->wallTextures[i]);
 
         i += 1;
     }
 
-    free(info->wallTextures);
+    free(this->wallTextures);
 }
 
 void unloadResources(struct Resources *this) {
