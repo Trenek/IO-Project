@@ -104,7 +104,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 40,
         .fontColor = BLACK,
         .color = color2,
@@ -123,7 +123,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posX = 1,
             .posY = 1
         },
-        .font = &info->fonts[0],
+        .font = &info->resources.fonts[0],
         .fontSize = 40,
         .fontColor = BLACK,
         .color = color2,
