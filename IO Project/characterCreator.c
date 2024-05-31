@@ -180,6 +180,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         CalculateButtonPosition(&labels[i]);
     }
 
+    memcpy(bob.bodyPart, info->body, sizeof(int) * 10);
     memset(bob.armorPart, -1, sizeof(int) * 9);
     assemblePlayerTexture(&info->resources, &bob);
 
