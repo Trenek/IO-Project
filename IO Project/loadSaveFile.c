@@ -6,7 +6,7 @@
 #include "resources.h"
 
 static void CreateDate(struct SaveFile *this) {
-    FILE *file = fopen(this->saveName, "w");
+    FILE *file = fopen(TextFormat("saves\\%s\\date.txt", this->saveName), "w");
     time_t t = time(NULL);
     struct tm tm = *localtime(&t);
 
