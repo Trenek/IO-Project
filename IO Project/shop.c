@@ -8,7 +8,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void shop(enum playState* state, struct playInfo* info) {
+void shop(enum playState *state, struct playInfo *info) {
     Color color1 = { .r = 100, .g = 100, .b = 100, .a = 200 };
 
     struct button title = {

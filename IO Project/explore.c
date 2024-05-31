@@ -15,7 +15,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void explore(enum playState *playState, struct playInfo *info) {
+void explore(enum playState *state, struct playInfo *info) {
     const int height = GetScreenHeight() >> 4;
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -151,7 +151,7 @@ void explore(enum playState *playState, struct playInfo *info) {
     }
 
     info->resumeState = EXPLORE;
-    while (!WindowShouldClose() && *playState == EXPLORE) {
+    while (!WindowShouldClose() && *state == EXPLORE) {
         i += 1;
 
         if ((i / 10) % 4 == 0) {
@@ -207,23 +207,23 @@ void explore(enum playState *playState, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(save)) *playState = SAVE;
-            else if (isMouseOver(map)) *playState = MAP;
-            else if (isMouseOver(equipment)) *playState = EQUIPEMENT;
-            else if (isMouseOver(pause)) *playState = PAUSE;
-            else if (isMouseOver(missions)) *playState = MISSIONS;
+            if (isMouseOver(save)) *state = SAVE;
+            else if (isMouseOver(map)) *state = MAP;
+            else if (isMouseOver(equipment)) *state = EQUIPEMENT;
+            else if (isMouseOver(pause)) *state = PAUSE;
+            else if (isMouseOver(missions)) *state = MISSIONS;
             else if (shopInteraction) if (isMouseOver(shop)) {
-                *playState = DIALOG;
+                *state = DIALOG;
                 findShop(info);
             }
 
         }
         else if (IsKeyPressed(KEY_P)) {
             EnableCursor();
-            *playState = PAUSE;
+            *state = PAUSE;
         }
 
-        detectFight(info, playState);
+        detectFight(info, state);
         hitbox(info);
         followPlayer(info);
         hitboxShop(info, &shopInteraction);
