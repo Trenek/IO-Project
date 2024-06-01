@@ -72,9 +72,8 @@ void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	}
 }
 
-void detectHitbox2(struct Object2D *object, Vector3 obsticle) {
+void detectHitbox2(struct Object2D *object, Vector3 obsticle, const float minDistance) {
 	const float distance = sqrtf(powf(object->position.x - obsticle.x, 2.0) + powf(object->position.z - obsticle.z, 2.0));
-	const float minDistance = object->sizeV.x / 2;
 
 	if (distance < minDistance) {
 		object->position.x = obsticle.x + (minDistance / distance) * (object->position.x - obsticle.x);
@@ -89,7 +88,7 @@ void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 	Vector3 *B = &obsticle->object.position;
 	Vector3 *C = &object->position;
 
-	const float expectedDistance = object->sizeV.x / 2;
+	const float expectedDistance = object->sizeV.x;
 
 	if (A->x == B->x) {
 		if (IN_BETWEEN(C->z, A->z, B->z)) {
@@ -100,21 +99,21 @@ void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 			}
 		}
 		else {
-			detectHitbox2(object, *A);
-			detectHitbox2(object, *B);
+			detectHitbox2(object, *A, expectedDistance);
+			detectHitbox2(object, *B, expectedDistance);
 		}
 	}
 	if (A->z == B->z) {
 		if (IN_BETWEEN(C->x, A->x, B->x)) {
-			if (fabsf(C->z - A->z) < object->sizeV.x / 2) {
+			if (fabsf(C->z - A->z) < expectedDistance) {
 				C->z = (C->z - A->z >= 0) ?
-					A->z + object->sizeV.x / 2 :
-					A->z - object->sizeV.x / 2;
+					A->z + expectedDistance :
+					A->z - expectedDistance;
 			}
 		}
 		else {
-			detectHitbox2(object, *A);
-			detectHitbox2(object, *B);
+			detectHitbox2(object, *A, expectedDistance);
+			detectHitbox2(object, *B, expectedDistance);
 		}
 	}
 }
