@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <time.h>
 
 #include "savefile.h"
@@ -131,14 +130,39 @@ static void SaveFloors(FILE *file, struct SaveFile *this) {
 
     fprintf(file, "%i\n", this->floorsQuantity);
     while (i < this->floorsQuantity) {
-        fprintf(file, "% 4s%i %f %f %f %f %f %f\n", "",
+        fprintf(file, "% 4s%i %f %f %f\n% 8s%f %f\n% 8s%f %f\n", "",
             this->floors[i].ID,
             this->floors[i].object.sizeV.x,
             this->floors[i].object.sizeV.y,
+            this->floors[i].object.position.y,
+            "",
             this->floors[i].object.position.x,
             this->floors[i].object.position.z,
+            "",
             this->floors[i].actualSize.x,
             this->floors[i].actualSize.y
+        );
+
+        i += 1;
+    }
+}
+
+static void SaveCeilings(FILE *file, struct SaveFile *this) {
+    int i = 0;
+
+    fprintf(file, "%i\n", this->ceilingQuantity);
+    while (i < this->ceilingQuantity) {
+        fprintf(file, "% 4s%i %f %f %f\n% 8s%f %f\n% 8s%f %f\n", "",
+            this->ceiling[i].ID,
+            this->ceiling[i].object.sizeV.x,
+            this->ceiling[i].object.sizeV.y,
+            this->ceiling[i].object.position.y,
+            "",
+            this->ceiling[i].object.position.x,
+            this->ceiling[i].object.position.z,
+            "",
+            this->ceiling[i].actualSize.x,
+            this->ceiling[i].actualSize.y
         );
 
         i += 1;
@@ -192,6 +216,7 @@ static void SaveMap(struct SaveFile *this) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\0.txt", this->saveName), "w");
 
     SaveFloors(mapFile, this);
+    SaveCeilings(mapFile, this);
     SaveWalls(mapFile, this);
     SaveEnemies(mapFile, this);
     SaveSellers(mapFile, this);

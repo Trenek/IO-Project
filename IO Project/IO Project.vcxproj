@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="achievements.c" />
     <ClCompile Include="camera.c" />
+    <ClCompile Include="ceiling.c" />
     <ClCompile Include="character.c" />
     <ClCompile Include="characterCreator.c" />
     <ClCompile Include="choiceBox.c" />
@@ -196,6 +197,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="button.h" />
+    <ClInclude Include="ceiling.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="equipementBox.h" />

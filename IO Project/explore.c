@@ -188,6 +188,7 @@ void explore(enum playState *state, struct playInfo *info) {
 
             BeginMode3D(info->camera);
                 DrawFloors(info);
+                DrawCeilings(info);
                 DrawWalls(info);
 
                 RenderTextures(render, info->save.enemyQuantity + info->save.sellersQuantity + 1, info->camera);
