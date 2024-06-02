@@ -6,5 +6,6 @@
 #include "shopInterface.h"
 #include "stringSlideBox.h"
 #include "numberSlideBox.h"
-#include "tutorialSlide.h"
 #include "fighterLabel.h"
+#include "tutorialSlide.h"
+#include "achievementElem.h"

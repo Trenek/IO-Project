@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 
 #include "savefile.h"
 #include "resources.h"
@@ -96,7 +97,7 @@ static void LoadPosition(struct SaveFile *this) {
 }
 
 static void LoadPlayer(struct SaveFile *this, struct Resources *resources) {
-    LoadCharacter(&this->player.character, TextFormat("saves\\%s\\posta�.txt", this->saveName), this->player.character.object.position.x, this->player.character.object.position.z);
+    LoadCharacter(&this->player.character, TextFormat("saves\\%s\\postać.txt", this->saveName), this->player.character.object.position.x, this->player.character.object.position.z);
     assemblePlayerTexture(resources, &this->player.character);
     LoadEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", this->saveName));
     LoadPosition(this);
@@ -275,10 +276,54 @@ static void LoadMap(struct SaveFile *this, struct Resources *resources) {
     fclose(mapFile);
 }
 
+static void LoadAchievement(struct Achievement *achievement, const char* path) {
+    FILE* file = fopen(path, "r");
+    int i = 0;
+
+    fgets(achievement->name, sizeof(achievement->name), file);
+    achievement->name[strcspn(achievement->name, "\n")] = '\0';
+
+    fgets(achievement->description, sizeof(achievement->description), file);
+    achievement->description[strcspn(achievement->description, "\n")] = '\0';
+
+    fscanf(file, "%d\n", &achievement->requirementsCount);
+
+    achievement->requirements = malloc(achievement->requirementsCount * sizeof(char*));
+
+    while (i < achievement->requirementsCount) {
+        char buffer[300];
+
+        fgets(buffer, sizeof(buffer), file);
+        buffer[strcspn(buffer, "\n")] = '\0';
+        achievement->requirements[i] = _strdup(buffer);
+
+        i += 1;
+    }
+    fscanf(file, "%i", &achievement->status);
+
+    fclose(file);
+}
+
+static void LoadAchievements(struct SaveFile* this) {
+    FilePathList f = LoadDirectoryFiles(TextFormat("saves\\%s\\osiągnięcia", this->saveName));
+    int i = 0;
+
+    this->achievementsQuantity = f.capacity;
+    this->achievements = malloc(this->achievementsQuantity * sizeof(struct Achievement));
+
+    while (i < this->achievementsQuantity) {
+        LoadAchievement(&this->achievements[i], TextFormat("saves\\%s\\osiągnięcia\\%i.txt", this->saveName, i));
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(f);
+}
+
 void LoadSaveFile(struct SaveFile *this, struct Resources *resources) {
     CreateDate(this);
 
     LoadPlayer(this, resources);
     LoadShops(this);
     LoadMap(this, resources);
+    LoadAchievements(this);
 }

@@ -62,10 +62,26 @@ static void UnloadMap(struct SaveFile *this) {
     UnloadSellers(this);
 }
 
+static void UnloadAchievement(struct Achievement* achievement) {
+    for (int i = 0; i < achievement->requirementsCount; ++i) {
+        free(achievement->requirements[i]);
+    }
+    free(achievement->requirements);
+}
+
+static void UnloadAchievements(struct SaveFile* this) {
+    for (int i = 0; i < this->achievementsQuantity; ++i) {
+        UnloadAchievement(&this->achievements[i]);
+    }
+    free(this->achievements);
+}
+
 void UnloadSaveFile(struct SaveFile *this) {
     UnloadPlayer(this);
 
     UnloadShops(this);
 
     UnloadMap(this);
+
+    UnloadAchievements(this);
 }

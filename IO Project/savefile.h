@@ -10,6 +10,14 @@
 #include "seller.h"
 #include "ceiling.h"
 
+struct Achievement {
+    char name[200];
+    char description[300];
+    int status;
+    int requirementsCount;
+    char **requirements;
+};
+
 struct SaveFile {
     char *const saveName;
     int mapID;
@@ -35,6 +43,9 @@ struct SaveFile {
         struct seller *sellers;
         int sellersQuantity;
     };
+
+    int achievementsQuantity;
+    struct Achievement *achievements;
 };
 
 bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]);

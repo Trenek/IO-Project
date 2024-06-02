@@ -87,7 +87,7 @@ static void SavePosition(struct SaveFile *this) {
 }
 
 static void SavePlayer(struct SaveFile *this) {
-    SaveCharacter(&this->player.character, TextFormat("saves\\%s\\posta�.txt", this->saveName));
+    SaveCharacter(&this->player.character, TextFormat("saves\\%s\\postać.txt", this->saveName));
     SaveEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", this->saveName));
     SavePosition(this);
 }
@@ -224,10 +224,39 @@ static void SaveMap(struct SaveFile *this) {
     fclose(mapFile);
 }
 
+static void SaveAchievement(struct Achievement achievement, const char* fileName) {
+    FILE* file = fopen(fileName, "w");
+
+    fprintf(file, "%s\n", achievement.name);
+    fprintf(file, "%s\n", achievement.description);
+    fprintf(file, "%i\n", achievement.requirementsCount);
+    int i = 0;
+
+    while (i < achievement.requirementsCount) {
+        fprintf(file, "%s\n", achievement.requirements[i]);
+        i += 1;
+    }
+
+    fprintf(file, "%i\n", achievement.status);
+
+    fclose(file);
+}
+
+static void SaveAchievements(struct SaveFile* this) {
+    int i = 0;
+
+    while (i < this->achievementsQuantity) {
+        SaveAchievement(this->achievements[i], TextFormat("saves\\%s\\osiągnięcia\\%i.txt", this->saveName, i));
+
+        i += 1;
+    }
+}
+
 void SaveSaveFile(struct SaveFile *this) {
     CreateDate(TextFormat("saves\\%s\\date.txt", this->saveName));
 
     SavePlayer(this);
     SaveShops(this);
     SaveMap(this);
+    SaveAchievements(this);
 }

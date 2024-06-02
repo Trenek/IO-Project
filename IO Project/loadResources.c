@@ -29,7 +29,7 @@ static const char *const armorNames[] = {
 };
 
 static void LoadFonts(struct Resources *this) {
-    int letters[] = U"?!,._<>:()^/*a¹bcædeêfghijkl³mnñoópqrsœtuvwxyzŸ¿A¥BCÆDEÊFGHIJKL£MNÑOÓPQRSŒTUVWXYZ¯1234567890";
+    int letters[] = U"?!,._<>:()^-/*aÄ…bcÄ‡deÄ™fghijklÅ‚mnÅ„oÃ³pqrsÅ›tuvwxyzÅºÅ¼AÄ„BCÄ†DEÄ˜FGHIJKLÅMNÅƒOÃ“PQRSÅšTUVWXYZÅ¹Å»1234567890";
     Font fonts[] = {
         LoadFontEx("resources/fonts/font2.ttf", 100, letters, sizeof(letters) / sizeof(int)),
         LoadFontEx("resources/fonts/font5.ttf", 100, letters, sizeof(letters) / sizeof(int))
