@@ -115,6 +115,9 @@
     <Filter Include="Pliki źródłowe\objects\types\ceiling">
       <UniqueIdentifier>{1e5f85bb-ee7b-4d0b-9089-797c136fede7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\fighterLabel">
+      <UniqueIdentifier>{d1cd8ac7-4c28-4c20-bb89-aa04f226f726}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.c">
@@ -258,6 +261,9 @@
     <ClCompile Include="ceiling.c">
       <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
     </ClCompile>
+    <ClCompile Include="fighterLabel.c">
+      <Filter>Pliki źródłowe\menu\fighterLabel</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -340,6 +346,9 @@
     </ClInclude>
     <ClInclude Include="ceiling.h">
       <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
+    </ClInclude>
+    <ClInclude Include="fighterLabel.h">
+      <Filter>Pliki źródłowe\menu\fighterLabel</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -95,17 +95,53 @@ void fight(enum playState *state, struct playInfo *info) {
         .spaceing = 0
     };
 
-    struct character player = info->save.player.character;
-    struct character chosen = info->chosen;
+    struct fighterLabel me = {
+        .maxHealth = 100,
+        .maxDurability = 100,
+        .maxRest = 100,
+        .barWidth = (GetScreenHeight() >> 6) + (GetScreenHeight() >> 7),
+        .barGap = (GetScreenHeight() >> 7),
+        .fighter = info->save.player.character,
+        .init = {
+            .x = 0,
+            .y = 0,
+            .posX = 0,
+            .posY = 0,
+            .height = GetScreenHeight() >> 3
+        },
+        .font = &info->resources->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = VIOLET,
+        .spaceing = 0
+    };
 
-    player.direction = FRONT;
-    assemblePlayerTexture(info->resources, &player);
+    struct fighterLabel enemy = {
+        .maxHealth = 100,
+        .maxDurability = 100,
+        .maxRest = 100,
+        .barWidth = (GetScreenHeight() >> 6) + (GetScreenHeight() >> 7),
+        .barGap = (GetScreenHeight() >> 7),
+        .fighter = info->chosen,
+        .init = {
+            .x = GetScreenWidth(),
+            .y = 0,
+            .posX = 2,
+            .posY = 0,
+            .height = GetScreenHeight() >> 3
+        },
+        .font = &info->resources->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = VIOLET,
+        .spaceing = 0
+    };
 
     ShowCursor();
 
     struct Object2D *render[] = {
-        &player.object,
-        &chosen.object
+        &me.fighter.object,
+        &enemy.fighter.object
     };
 
     Camera3D fightCamera = {
@@ -118,35 +154,41 @@ void fight(enum playState *state, struct playInfo *info) {
         .fovy = 45
     };
 
-    player.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
-    chosen.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
+    me.fighter.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
+    enemy.fighter.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
 
     CalculateButtonPosition(&action);
     CalculateButtonPosition(&items);
     CalculateButtonPosition(&runAway);
     CalculateButtonPosition(&giveUp);
     
+    InitializeFighterLabel(&me, info->resources);
+    InitializeFighterLabel(&enemy, info->resources);
+
     info->resumeState = FIGHT;
     while (!WindowShouldClose() && *state == FIGHT) {
         UpdateMusicStream(info->resources->music[0]);
 
-        BeginTextureMode(*info->screenCamera);
-            ClearBackground(color);
+        BeginDrawing();
+            BeginTextureMode(*info->screenCamera);
+                ClearBackground(color);
 
-            BeginMode3D(fightCamera);
-                DrawGrid(100, 1);
+                BeginMode3D(fightCamera);
+                    DrawGrid(100, 1);
 
-                RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
-            EndMode3D();
+                    RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
+                EndMode3D();
+            EndTextureMode();
+
+            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
 
             DrawButton(action);
             DrawButton(items);
             DrawButton(runAway);
             DrawButton(giveUp);
-        EndTextureMode();
 
-        BeginDrawing();
-            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+            DrawFighterLabel(&me);
+            DrawFighterLabel(&enemy);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
@@ -155,5 +197,10 @@ void fight(enum playState *state, struct playInfo *info) {
         else if (IsKeyPressed(KEY_P)) {
             *state = PAUSE;
         }
+        UpdateFighterLabel(&me);
+        UpdateFighterLabel(&enemy);
     }
+
+    FreeFighterLabel(&me);
+    FreeFighterLabel(&enemy);
 }

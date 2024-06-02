@@ -27,13 +27,6 @@ enum playState {
     DESKTOP
 };
 
-enum position {
-    FRONT,
-    RIGHT,
-    BACK,
-    LEFT
-};
-
 struct playInfo {
     struct Resources *resources;
 

@@ -160,6 +160,7 @@
     <ClCompile Include="equipementsBox.c" />
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
+    <ClCompile Include="fighterLabel.c" />
     <ClCompile Include="floor.c" />
     <ClCompile Include="fscanfWithAllocation.c" />
     <ClCompile Include="inputBox.c" />
@@ -201,6 +202,7 @@
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
     <ClInclude Include="equipementBox.h" />
+    <ClInclude Include="fighterLabel.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="fscanfWithAllocation.h" />
     <ClInclude Include="inputBox.h" />

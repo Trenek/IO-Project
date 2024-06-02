@@ -1,8 +1,10 @@
 ﻿#include <raylib.h>
+#include <stdio.h>
 
 #include "state.h"
 
 int main(void) {
+    printf("lol");
     enum state state = MENU;
     struct menuInfo info = { 0 };
     void (*function[])(enum state *state, struct menuInfo *info) = {
