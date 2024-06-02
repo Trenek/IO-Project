@@ -72,25 +72,48 @@ void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	}
 }
 
-#define IN_BETWEEN(key, b, c, e) ((key >= (b - e) && key <= (c + e)) || (key >= (c - e) && key <= (b + e)))
+void detectHitbox2(struct Object2D *object, Vector3 obsticle, const float minDistance) {
+	const float distance = sqrtf(powf(object->position.x - obsticle.x, 2.0) + powf(object->position.z - obsticle.z, 2.0));
+
+	if (distance < minDistance) {
+		object->position.x = obsticle.x + (minDistance / distance) * (object->position.x - obsticle.x);
+		object->position.z = obsticle.z + (minDistance / distance) * (object->position.z - obsticle.z);
+	}
+}
+
+#define IN_BETWEEN(key, b, c) ((key >= b && key <= c) || (key >= c && key <= b))
 
 void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 	Vector3 *A = &obsticle->endPosition;
 	Vector3 *B = &obsticle->object.position;
 	Vector3 *C = &object->position;
 
-	if (A->x == B->x && IN_BETWEEN(C->z, A->z, B->z, 0.0f)) {
-		if (fabsf(C->x - A->x) < object->sizeV.x / 2) {
-			C->x = (C->x - A->x >= 0) ? 
-				A->x + object->sizeV.x / 2 : 
-				A->x - object->sizeV.x / 2;
+	const float expectedDistance = object->sizeV.x;
+
+	if (A->x == B->x) {
+		if (IN_BETWEEN(C->z, A->z, B->z)) {
+			if (fabsf(C->x - A->x) < expectedDistance) {
+				C->x = (C->x - A->x >= 0) ?
+					A->x + expectedDistance :
+					A->x - expectedDistance;
+			}
+		}
+		else {
+			detectHitbox2(object, *A, expectedDistance);
+			detectHitbox2(object, *B, expectedDistance);
 		}
 	}
-	if (A->z == B->z && IN_BETWEEN(C->x, A->x, B->x, 0.0f)) {
-		if (fabsf(C->z - A->z) < object->sizeV.x / 2) {
-			C->z = (C->z - A->z >= 0) ? 
-				A->z + object->sizeV.x / 2 : 
-				A->z - object->sizeV.x / 2;
+	if (A->z == B->z) {
+		if (IN_BETWEEN(C->x, A->x, B->x)) {
+			if (fabsf(C->z - A->z) < expectedDistance) {
+				C->z = (C->z - A->z >= 0) ?
+					A->z + expectedDistance :
+					A->z - expectedDistance;
+			}
+		}
+		else {
+			detectHitbox2(object, *A, expectedDistance);
+			detectHitbox2(object, *B, expectedDistance);
 		}
 	}
 }

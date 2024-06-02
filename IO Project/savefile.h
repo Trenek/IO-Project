@@ -3,11 +3,12 @@
 
 #include <stdbool.h>
 
-#include "character.h"
 #include "player.h"
 #include "floor.h"
 #include "wall.h"
+#include "character.h"
 #include "seller.h"
+#include "ceiling.h"
 
 struct Achievement {
     char name[200];
@@ -29,6 +30,9 @@ struct SaveFile {
     struct map {
         struct floors *floors;
         int floorsQuantity;
+
+        struct ceiling *ceiling;
+        int ceilingQuantity;
 
         struct wall *walls;
         int wallQuantity;

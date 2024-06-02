@@ -12,7 +12,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void fight(enum playState *playState, struct playInfo *info) {
+void fight(enum playState *state, struct playInfo *info) {
     //bool win = 0;
 
     const int height = (GetScreenHeight() >> 2) + (GetScreenHeight() >> 1);
@@ -127,7 +127,7 @@ void fight(enum playState *playState, struct playInfo *info) {
     CalculateButtonPosition(&giveUp);
     
     info->resumeState = FIGHT;
-    while (!WindowShouldClose() && *playState == FIGHT) {
+    while (!WindowShouldClose() && *state == FIGHT) {
         UpdateMusicStream(info->resources->music[0]);
 
         BeginTextureMode(*info->screenCamera);
@@ -150,10 +150,10 @@ void fight(enum playState *playState, struct playInfo *info) {
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(giveUp)) *playState = DEATH_SCREEN;
+            if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
         }
         else if (IsKeyPressed(KEY_P)) {
-            *playState = PAUSE;
+            *state = PAUSE;
         }
     }
 }

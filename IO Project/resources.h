@@ -32,6 +32,9 @@ struct Resources {
     Texture2D *floors;
     int floorQuantity;
 
+    Texture2D *ceiling;
+    int ceilingQuantity;
+
     Texture2D *walls;
     int wallQuantity;
 };

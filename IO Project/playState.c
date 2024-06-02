@@ -1,16 +1,9 @@
 #include <stdlib.h>
-#include <raylib.h>
 
-#include <stdio.h>
+#include <raylib.h>
 
 #include "state.h"
 #include "playState.h"
-
-#include "character.h"
-#include "object2D.h"
-#include "player.h"
-
-#include "savefile.h"
 
 struct playInfo initializePlayInfo(struct menuInfo *info) {
     struct playInfo result = {

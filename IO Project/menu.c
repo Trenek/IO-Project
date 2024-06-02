@@ -8,7 +8,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void menu(enum state* state, struct menuInfo* info) {
+void menu(enum state *state, struct menuInfo *info) {
     const int height = GetScreenHeight() >> 1;
     const int space = INC_Y + INC_Y + FONT_SIZE + 10;
 

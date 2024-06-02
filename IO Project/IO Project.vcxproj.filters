@@ -112,6 +112,9 @@
     <Filter Include="Pliki źródłowe\objects\types\characters\types\seller">
       <UniqueIdentifier>{50fbd292-d303-4b8c-aa9c-05d82c31231a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\objects\types\ceiling">
+      <UniqueIdentifier>{1e5f85bb-ee7b-4d0b-9089-797c136fede7}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Pliki źródłowe\menu\achievementElem">
       <UniqueIdentifier>{4980273a-728c-4f9c-bdb3-52e1754d9b44}</UniqueIdentifier>
     </Filter>
@@ -255,6 +258,9 @@
     <ClCompile Include="character.c">
       <Filter>Pliki źródłowe\objects\types\characters</Filter>
     </ClCompile>
+    <ClCompile Include="ceiling.c">
+      <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
+    </ClCompile>
     <ClCompile Include="achievementElem.c">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>
     </ClCompile>
@@ -337,6 +343,9 @@
     </ClInclude>
     <ClInclude Include="character.h">
       <Filter>Pliki źródłowe\objects\types\characters</Filter>
+    </ClInclude>
+    <ClInclude Include="ceiling.h">
+      <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
     </ClInclude>
     <ClInclude Include="achievementElem.h">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>

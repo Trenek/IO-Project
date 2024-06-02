@@ -310,6 +310,22 @@ static void LoadFloors(struct Resources *this) {
     UnloadDirectoryFiles(f);
 }
 
+static void LoadCeiling(struct Resources *this) {
+    FilePathList f = LoadDirectoryFiles("resources\\textures\\ceiling");
+    unsigned int i = 0;
+
+    this->ceilingQuantity = f.capacity;
+    this->ceiling = malloc(sizeof(Texture2D) * f.capacity);
+
+    while (i < f.capacity) {
+        this->ceiling[i] = LoadTexture(TextFormat("resources\\textures\\ceiling\\%i.png", i));
+
+        i += 1;
+    }
+
+    UnloadDirectoryFiles(f);
+}
+
 static void LoadWalls(struct Resources *this) {
     FilePathList f = LoadDirectoryFiles("resources\\textures\\wall");
     unsigned int i = 0;
@@ -342,5 +358,6 @@ void LoadResources(struct Resources *this) {
     LoadItems(this);
     LoadItemPrice(this);
     LoadFloors(this);
+    LoadCeiling(this);
     LoadWalls(this);
 }

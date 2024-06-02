@@ -10,7 +10,7 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void characterCreator(enum state* state, struct menuInfo* info) {  
+void characterCreator(enum state *state, struct menuInfo *info) {  
     const char *const bodyPartsNamesInPolish[10] = {
         [HEAD] = "Głowa",
         [LEFT_ARM] = "Lewe ramię",
@@ -68,7 +68,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
             .posY = 1
         },
         .font = &info->resources.fonts[0],
-        .fontSize = 25,
+        .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = color2,
         .hoverColor = color3,
@@ -180,6 +180,7 @@ void characterCreator(enum state* state, struct menuInfo* info) {
         CalculateButtonPosition(&labels[i]);
     }
 
+    memcpy(bob.bodyPart, info->body, sizeof(int) * 10);
     memset(bob.armorPart, -1, sizeof(int) * 9);
     assemblePlayerTexture(&info->resources, &bob);
 

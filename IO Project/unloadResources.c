@@ -134,6 +134,18 @@ static void UnloadFloors(struct Resources *this) {
     free(this->floors);
 }
 
+static void UnloadCeilings(struct Resources *this) {
+    int i = 0;
+
+    while (i < this->ceilingQuantity) {
+        UnloadTexture(this->ceiling[i]);
+
+        i += 1;
+    }
+
+    free(this->ceiling);
+}
+
 static void UnloadWalls(struct Resources *this) {
     int i = 0;
 
@@ -160,5 +172,6 @@ void UnloadResources(struct Resources *this) {
     UnloadItems(this);
     UnloadItemPrice(this);
     UnloadFloors(this);
+    UnloadCeilings(this);
     UnloadWalls(this);
 }

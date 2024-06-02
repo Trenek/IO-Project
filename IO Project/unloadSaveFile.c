@@ -1,8 +1,6 @@
-#include <stdio.h>
 #include <stdlib.h>
 
 #include "savefile.h"
-#include "playState.h"
 
 void UnloadCharacter(struct character *character) {
     if (character->object.texture != NULL) {
@@ -22,6 +20,10 @@ static void UnloadShops(struct SaveFile *this) {
 
 static void UnloadFloors(struct SaveFile *this) {
     free(this->floors);
+}
+
+static void UnloadCeilings(struct SaveFile *this) {
+    free(this->ceiling);
 }
 
 static void UnloadWalls(struct SaveFile *this) {
@@ -54,6 +56,7 @@ static void UnloadSellers(struct SaveFile *this) {
 
 static void UnloadMap(struct SaveFile *this) {
     UnloadFloors(this);
+    UnloadCeilings(this);
     UnloadWalls(this);
     UnloadEnemies(this);
     UnloadSellers(this);

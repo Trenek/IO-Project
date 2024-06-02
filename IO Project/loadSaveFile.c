@@ -153,19 +153,43 @@ static void LoadFloors(FILE *file, struct SaveFile *this, struct Resources *reso
     this->floors = malloc(sizeof(struct character) * this->floorsQuantity);
 
     while (i < this->floorsQuantity) {
-        fscanf(file, "%i %f %f %f %f %f %f",
+        fscanf(file, "%i %f %f %f %f %f %f %f",
             &this->floors[i].ID,
             &this->floors[i].object.sizeV.x,
             &this->floors[i].object.sizeV.y,
+            &this->floors[i].object.position.y,
+
             &this->floors[i].object.position.x,
             &this->floors[i].object.position.z,
             &this->floors[i].actualSize.x,
             &this->floors[i].actualSize.y
         );
 
-        this->floors[i].object.position.y = 0.0f;
-
         this->floors[i].object.texture = &resources->floors[this->floors[i].ID];
+
+        i += 1;
+    }
+}
+
+static void LoadCeilings(FILE *file, struct SaveFile *this, struct Resources *resources) {
+    int i = 0;
+
+    fscanf(file, "%i", &this->ceilingQuantity);
+    this->ceiling = malloc(sizeof(struct character) * this->ceilingQuantity);
+
+    while (i < this->ceilingQuantity) {
+        fscanf(file, "%i %f %f %f %f %f %f %f",
+            &this->ceiling[i].ID,
+            &this->ceiling[i].object.sizeV.x,
+            &this->ceiling[i].object.sizeV.y,
+            &this->ceiling[i].object.position.y,
+            &this->ceiling[i].object.position.x,
+            &this->ceiling[i].object.position.z,
+            &this->ceiling[i].actualSize.x,
+            &this->ceiling[i].actualSize.y
+        );
+
+        this->ceiling[i].object.texture = &resources->ceiling[this->ceiling[i].ID];
 
         i += 1;
     }
@@ -244,6 +268,7 @@ static void LoadMap(struct SaveFile *this, struct Resources *resources) {
     FILE *mapFile = fopen(TextFormat("saves\\%s\\mapy\\%i.txt", this->saveName, this->mapID), "r");
 
     LoadFloors(mapFile, this, resources);
+    LoadCeilings(mapFile, this, resources);
     LoadWalls(mapFile, this, resources);
     LoadEnemies(mapFile, this, resources);
     LoadSellers(mapFile, this, resources);

@@ -88,7 +88,7 @@ static void unloadFile(struct DialogData *saveData) {
     free(saveData->responses);
 }
 
-void dialog(enum playState *playState, struct playInfo *info) {
+void dialog(enum playState *state, struct playInfo *info) {
     RenderTexture screenCamera = LoadRenderTexture(GetScreenWidth(), GetScreenHeight() >> 2);
     Rectangle screenRect = (Rectangle){ 0.0f, 0.0f, (float)screenCamera.texture.width, (float)-screenCamera.texture.height };
 
@@ -125,7 +125,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
 
     loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &saveData, &options, info, &screenCamera);
 
-    while (*playState == DIALOG && !WindowShouldClose()) {
+    while (*state == DIALOG && !WindowShouldClose()) {
         BeginTextureMode(screenCamera);
             ClearBackground(VIOLET);
 
@@ -157,7 +157,7 @@ void dialog(enum playState *playState, struct playInfo *info) {
             while (i < saveData.numberOfPossibleResponses) {
                 if (isMouseOver(options[i])) {
                     if (saveData.responses[i].consequence == 0) {
-                        *playState = saveData.responses[i].state;
+                        *state = saveData.responses[i].state;
                         info->dialog = saveData.responses[i].next;
                     }
                     else {
