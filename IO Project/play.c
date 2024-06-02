@@ -14,6 +14,7 @@ void play(enum state *state, struct menuInfo *info) {
         [SHOP] = shop,
         [DIALOG] = dialog,
         [SAVE] = save,
+        [ACHIEVEMENTS] = achievements,
         [DEATH_SCREEN] = deathScreen
     };
 

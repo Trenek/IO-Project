@@ -53,7 +53,7 @@ void pause(enum playState *state, struct playInfo *info) {
     };
     struct button achivements = {
         .text = "Osiągnięcia",
-        .isActive = 0,
+        .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
             .y = height + space,
