@@ -143,8 +143,8 @@ void explore(enum playState *state, struct playInfo *info) {
     CalculateButtonPosition(&missions);
     CalculateButtonPosition(&shop);
 
-    info->chosen = info->save.enemies[0];
-    *state = FIGHT;
+//    info->chosen = info->save.enemies[0];
+//    *state = FIGHT;
 
     int i = 0;
 
