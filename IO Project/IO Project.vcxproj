@@ -154,6 +154,7 @@
     <ClCompile Include="character.c" />
     <ClCompile Include="characterCreator.c" />
     <ClCompile Include="choiceBox.c" />
+    <ClCompile Include="chooseAction.c" />
     <ClCompile Include="createSaveFile.c" />
     <ClCompile Include="deathScreen.c" />
     <ClCompile Include="dialog.c" />
@@ -203,6 +204,7 @@
     <ClInclude Include="ceiling.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
+    <ClInclude Include="chooseAction.h" />
     <ClInclude Include="equipementBox.h" />
     <ClInclude Include="fighterLabel.h" />
     <ClInclude Include="floor.h" />

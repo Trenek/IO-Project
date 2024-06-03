@@ -81,12 +81,12 @@ static void UnloadArmor(struct Resources *this) {
     }
 }
 
-static void UnloadArmorPrice(struct Resources *this) {
+static void UnloadArmorInfo(struct Resources *this) {
     int i = 0;
 
     for (i = 0; i < 9; i += 1) {
         free(this->armorPrice[i]);
-        this->armorPrice[i] = NULL;
+        free(this->armorDurability[i]);
     }
 }
 
@@ -104,6 +104,7 @@ static void UnloadWeapons(struct Resources *this) {
 
 static void UnloadWeaponPrice(struct Resources *this) {
     free(this->weaponPrice);
+    free(this->weaponAttack);
 }
 
 static void UnloadItems(struct Resources *this) {
@@ -158,6 +159,18 @@ static void UnloadWalls(struct Resources *this) {
     free(this->walls);
 }
 
+static void UnloadAttacks(struct Resources *this) {
+    int i = 0;
+
+    while (i < this->attackQuantity) {
+        free(this->attack[i].name);
+
+        i += 1;
+    }
+
+    free(this->attack);
+}
+
 void UnloadResources(struct Resources *this) {
     UnloadFonts(this);
     UnloadMusic(this);
@@ -165,7 +178,7 @@ void UnloadResources(struct Resources *this) {
     UnloadBodyParts(this);
 
     UnloadArmor(this);
-    UnloadArmorPrice(this);
+    UnloadArmorInfo(this);
 
     UnloadWeapons(this);
     UnloadWeaponPrice(this);
@@ -174,4 +187,6 @@ void UnloadResources(struct Resources *this) {
     UnloadFloors(this);
     UnloadCeilings(this);
     UnloadWalls(this);
+
+    UnloadAttacks(this);
 }

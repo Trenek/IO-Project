@@ -21,6 +21,9 @@ struct character {
 	int bodyPart[10];
 	int armorPart[9];
 	int weapon;
+
+	int attackQuantity;
+	int *attacks;
 };
 
 void UnloadCharacter(struct character *character);

@@ -13,8 +13,6 @@
 #define FONT_SIZE (25)
 
 void fight(enum playState *state, struct playInfo *info) {
-    //bool win = 0;
-
     const int height = (GetScreenHeight() >> 2) + (GetScreenHeight() >> 1);
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -107,7 +105,9 @@ void fight(enum playState *state, struct playInfo *info) {
             .y = 0,
             .posX = 0,
             .posY = 0,
-            .height = GetScreenHeight() >> 3
+            .height = GetScreenHeight() >> 3,
+            .durability = &info->resources->armorDurability,
+            .position = (Vector3){.x = 1, .y = 0, .z = 4 }
         },
         .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
@@ -128,13 +128,42 @@ void fight(enum playState *state, struct playInfo *info) {
             .y = 0,
             .posX = 2,
             .posY = 0,
-            .height = GetScreenHeight() >> 3
+            .height = GetScreenHeight() >> 3,
+            .durability = &info->resources->armorDurability,
+            .position = (Vector3){.x = 1, .y = 0, .z = -4 }
         },
         .font = &info->resources->fonts[0],
         .fontSize = FONT_SIZE,
         .fontColor = BLACK,
         .color = VIOLET,
         .spaceing = 0
+    };
+
+    struct chooseAction saves = {
+        .isActive = 0,
+        .rowQuantity = 5,
+        .wideness = 5,
+        .attacks = &info->resources->attack,
+        .attacksQuantity = info->resources->attackQuantity,
+        .active = &me,
+        .target = &enemy,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = GetScreenHeight() >> 1,
+            .width = GetScreenWidth() >> 2,
+            .incX = 15,
+            .incY = 15,
+            .posX = 0,
+            .posY = 0
+        },
+        .font = &info->resources->fonts[0],
+        .fontColor = BLACK,
+        .fontSize = 20,
+        .spaceing = 0,
+        .color = GREEN,
+        .activeBorderColor = RED,
+        .inactiveBorderColor = BLACK,
+        .hoverColor = PINK
     };
 
     ShowCursor();
@@ -154,13 +183,12 @@ void fight(enum playState *state, struct playInfo *info) {
         .fovy = 45
     };
 
-    me.fighter.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
-    enemy.fighter.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
-
     CalculateButtonPosition(&action);
     CalculateButtonPosition(&items);
     CalculateButtonPosition(&runAway);
     CalculateButtonPosition(&giveUp);
+
+    initializeChooseAction(&saves);
     
     InitializeFighterLabel(&me, info->resources);
     InitializeFighterLabel(&enemy, info->resources);
@@ -182,25 +210,50 @@ void fight(enum playState *state, struct playInfo *info) {
 
             DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
 
+
             DrawButton(action);
             DrawButton(items);
             DrawButton(runAway);
             DrawButton(giveUp);
 
+            DrawChooseAction(&saves);
+
             DrawFighterLabel(&me);
             DrawFighterLabel(&enemy);
         EndDrawing();
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
-        }
-        else if (IsKeyPressed(KEY_P)) {
-            *state = PAUSE;
+        UpdateChooseAction(&saves);
+
+        if (saves.isActive == 0) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
+                else if (isMouseOver(runAway)) { 
+                    if (rand() % 2) {
+                        *state = DEATH_SCREEN;
+                    }
+                    else {
+                        *state = DIALOG;
+                        info->dialog = 4;
+                    }
+                }
+                else if (isMouseOver(action)) saves.isActive = 1;
+            }
+            else if (IsKeyPressed(KEY_P)) {
+                *state = PAUSE;
+            }
         }
         UpdateFighterLabel(&me);
         UpdateFighterLabel(&enemy);
+
+        if (me.health == 0) {
+            *state = DEATH_SCREEN;
+        }
+        else if (enemy.health == 0) {
+            *state = DIALOG;
+        }
     }
 
     FreeFighterLabel(&me);
     FreeFighterLabel(&enemy);
+    FreeChooseAction(&saves);
 }

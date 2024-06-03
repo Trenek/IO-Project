@@ -9,3 +9,4 @@
 #include "fighterLabel.h"
 #include "tutorialSlide.h"
 #include "achievementElem.h"
+#include "chooseAction.h"

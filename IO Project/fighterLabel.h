@@ -10,6 +10,8 @@ struct fighterLabelPositionParameters {
     int posX; // 0 - left, 1 - center, 2 - right
     int posY; // 0 - up, 1 - center, 2 - bottom
     int height;
+    int *((*durability)[9]);
+    Vector3 position;
 };
 
 struct fighterLabel {
@@ -18,7 +20,6 @@ struct fighterLabel {
 
     int maxHealth;
     int maxRest; // wypoczêcie
-    int maxDurability; // armor thing
 
     int health;
     int rest;
@@ -31,6 +32,7 @@ struct fighterLabel {
             Vector2 leftCorner;
             Vector2 name;
             RenderTexture render;
+            int maxDurability; // armor thing
             int height;
             int width;
         };

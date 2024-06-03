@@ -121,6 +121,9 @@
     <Filter Include="Pliki źródłowe\menu\achievementElem">
       <UniqueIdentifier>{4980273a-728c-4f9c-bdb3-52e1754d9b44}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\chooseAction">
+      <UniqueIdentifier>{22c996a2-4e51-41b7-b1fd-8b496e2e3a72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.c">
@@ -270,6 +273,9 @@
     <ClCompile Include="achievementElem.c">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>
     </ClCompile>
+    <ClCompile Include="chooseAction.c">
+      <Filter>Pliki źródłowe\menu\chooseAction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -358,6 +364,9 @@
     </ClInclude>
     <ClInclude Include="achievementElem.h">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>
+    </ClInclude>
+    <ClInclude Include="chooseAction.h">
+      <Filter>Pliki źródłowe\menu\chooseAction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
