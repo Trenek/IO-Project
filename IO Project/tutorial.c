@@ -4,15 +4,13 @@
 
 #include "menuElements.h"
 
-#include "tutorialSlide.h"
 
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
 
-void tutorial(enum state *state, struct menuInfo *info) {
-    const int height = GetScreenHeight() >> 1;
-    const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
+void tutorial(enum state* state, struct menuInfo* info) {
+
 
     Color color = { .r = 100, .g = 100, .b = 100, .a = 255 };
     Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
@@ -40,23 +38,26 @@ void tutorial(enum state *state, struct menuInfo *info) {
     struct tutorialSlide slide = {
     .init = {
         .x = GetScreenWidth() >> 1,
-        .y = height + 4 * spaceY,
-        .incX = INC_X,
-        .incY = INC_Y,
+        .y = GetScreenHeight() >> 1,
+        .width = GetScreenWidth() >> 1,
+        .incX = 15,
+        .incY = 15,
         .posX = 1,
         .posY = 1
     },
     .font = &info->resources.fonts[0],
     .fontSize = FONT_SIZE,
     .fontColor = BLACK,
-    .backgroundColor = color2,
+    .backgroundColor = RED,
     .titleDescriptionColor = BLUE,
     .borderColor = RED,
-    .spaceing = 0
+    .spaceing = 0,
+    .color = GREEN,
     };
 
     CalculateButtonPosition(&goBack);
-    CalculateSlidePosition(&slide);
+
+    initializeTutorialSlideBox(&slide);
 
     FilePathList imgsList = LoadDirectoryFiles("dane/tutorialImgs");
 
@@ -65,15 +66,19 @@ void tutorial(enum state *state, struct menuInfo *info) {
 
     while (!WindowShouldClose() && *state == TUTORIAL) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(goBack);
-        DrawSlide(slide, "Title", "Description", imageAsTexture);
+            DrawButton(goBack);
+
+            DrawTutorialSlideBox(&slide, imageAsTexture);
 
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) *state = MENU;
+
+            UpdateTutorialSlideBox(&slide);
+
         }
     }
     UnloadTexture(imageAsTexture);

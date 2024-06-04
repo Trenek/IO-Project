@@ -3,49 +3,70 @@
 
 #include <raylib.h>
 
-#include "state.h"
+#include <string.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+
 
 struct slidePositionParameters {
     int x;
     int y;
+    int width;
     int incX;
     int incY;
-    int posX; // 0 - left, 1 - center, 2 - right
-    int posY; // 0 - up, 1 - center, 2 - bottom
+    int posX;
+    int posY;
 };
 
+struct textBox {
+    Rectangle rec;
+    Vector2 textLeftCorner;
+};
 struct tutorialSlide {
+    int numOfSlides;
+    int width;
 
+    float height;
+    float top;
 
+    int initx;
+    int initposX;
+
+    struct button prev;
+    struct button next;
+    struct textBox titleBox;
+    struct textBox descriptionBox;
     union {
         struct slidePositionParameters init;
         struct {
-            Vector2 BackgroundLeftCorner;
-            Vector2 TitleTextBoxLeftCorner;
-            Vector2 DescriptionTextBoxLeftCorner;
-            Vector2 ImageLeftCorner;
-
-
-            Rectangle backgroundBoxRectangle;
-            Rectangle titleBoxRectangle;
-            Rectangle descriptionBoxRectangle;
-
             FilePathList imgsList;
 
         };
+
+
+        int page;
+
+
     };
+
     Font* font;
     int fontSize;
     Color fontColor;
+
+    Color color;
     Color backgroundColor;
     Color titleDescriptionColor;
     Color borderColor;
+    Color hoverColor;
+
     int spaceing;
 };
 
-void CalculateSlidePosition(struct tutorialSlide* element);
-void DrawSlide(const struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture);
-
+void CalculateTutorialSlidePosition(struct tutorialSlide* this);
+void initializeTutorialSlideBox(struct tutorialSlide* this);
+void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture);
+void UpdateTutorialSlideBox(struct tutorialSlide* this);
 
 
 #endif
