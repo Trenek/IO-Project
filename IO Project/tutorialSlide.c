@@ -1,55 +1,139 @@
+#include <string.h>
+
+#include "state.h"
+
+#include "menuElements.h"
+
 #include "tutorialSlide.h"
 
-void CalculateSlidePosition(struct tutorialSlide* element) {
 
-    element->BackgroundLeftCorner = (Vector2){
-        .x = 125,
-        .y = 50
+
+void CalculateTutorialSlidePosition(struct tutorialSlide* this) {
+    struct slidePositionParameters init = this->init;
+    this->initposX = init.posX;
+    this-> initx = init.x;
+
+    //uzupe?ni? 2. argument jako wczytany tekst z title i description
+    float size[2] = {
+     MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
+     MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1)
     };
 
-    element->backgroundBoxRectangle = (Rectangle){
-        .x = element->BackgroundLeftCorner.x,
-        .y = element->BackgroundLeftCorner.y,
-        .width = 550,
-        .height = 500
+    this->height = this->fontSize + 2.0f * init.incY;
+    this->top = init.y - (this->height * init.posY) / 2;
+    printf(" H %f ", size[0]);
+    printf(" T %f ", size[1]);
+
+    this->titleBox = (struct textBox){
+            .rec = {
+                .x = (init.x - init.posX) / 2.0f,
+                .y = (this->top + this->height)/10,
+                .width = (float)init.width,
+                .height = this->height
+            },
+            .textLeftCorner = (Vector2) {
+                .x = init.x - init.posX * size[0] / 2.0f + init.incX,
+                .y = this->top * this->height + init.incY
+            }
     };
 
-    element->ImageLeftCorner = (Vector2){
-        .x = element->BackgroundLeftCorner.x,
-        .y = element->BackgroundLeftCorner.y + 75
+    this->descriptionBox = (struct textBox){
+            .rec = {
+                .x = (init.x - init.posX) / 2.0f,
+                .y = (this->top + this->height) / 10 + this->height + 500 * init.x/800, //500 - img width
+                .width = (float)init.width,
+                .height = this->height*2
+            },
+            .textLeftCorner = (Vector2) {
+                .x = init.x - init.posX * size[1] / 2.0f + init.incX,
+                .y = (this->top * this->height + init.incY)
+            }
     };
 
-    element->titleBoxRectangle = (Rectangle){
-        .x = element->backgroundBoxRectangle.x,
-        .y = element->backgroundBoxRectangle.y,
-        .width = 492,
-        .height = 100
-    };
-
-    element->descriptionBoxRectangle = (Rectangle){
-        .x = element->backgroundBoxRectangle.x,
-        .y = element->backgroundBoxRectangle.y + 380,
-        .width = 492,
-        .height = 130
-    };
-
-    element->TitleTextBoxLeftCorner = (Vector2){
-        .x = element->titleBoxRectangle.x + 5,
-        .y = element->titleBoxRectangle.y + 5
-    };
-
-    element->DescriptionTextBoxLeftCorner = (Vector2){
-        .x = element->descriptionBoxRectangle.x + 5,
-        .y = element->descriptionBoxRectangle.y + 5
-    };
 }
 
-void DrawSlide(const struct tutorialSlide element, const char* title, const char* description, Texture2D imageAsTexture) {
+static void initializeButtons(struct tutorialSlide* this) {
+    this->prev = (struct button){
+        .text = "Poprzednie",
+        .isActive = 1,
+        .init = {
+            .x = (int)this->descriptionBox.rec.x,
+            .y = (int)(this->descriptionBox.rec.y + this->descriptionBox.rec.height),
+            .incX = 10,
+            .incY = 10,
+            .posX = 0,
+            .posY = 0
+        },
+        .font = this->font,
+        .fontSize = this->fontSize,
+        .fontColor = this->fontColor,
+        .color = this->color,
+        .hoverColor = this->hoverColor,
+        .spaceing = this->spaceing
+    };
 
-    DrawRectangleRec(element.titleBoxRectangle, element.titleDescriptionColor);
-    DrawRectangleRec(element.descriptionBoxRectangle, element.titleDescriptionColor);
-    DrawTextEx(*element.font, title, element.TitleTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
-    DrawTextEx(*element.font, description, element.DescriptionTextBoxLeftCorner, (float)element.fontSize, (float)element.spaceing, element.fontColor);
+    this->next = (struct button){
+        .text = "Nastepne",
+        .isActive = 1,
+        .init = {
+            .x = (int)(this->descriptionBox.rec.x + this->descriptionBox.rec.width),
+            .y = (int)(this->descriptionBox.rec.y + this->descriptionBox.rec.height),
+            .incX = 10,
+            .incY = 10,
+            .posX = 2,
+            .posY = 0
+        },
+        .font = this->font,
+        .fontSize = this->fontSize,
+        .fontColor = this->fontColor,
+        .color = this->color,
+        .hoverColor = this->hoverColor,
+        .spaceing = this->spaceing
+    };
 
-    DrawTexture(imageAsTexture, (int) element.ImageLeftCorner.x, (int) element.ImageLeftCorner.y, WHITE);
+    CalculateButtonPosition(&this->prev);
+    CalculateButtonPosition(&this->next);
+}
+
+void initializeTutorialSlideBox(struct tutorialSlide* this) {
+    CalculateTutorialSlidePosition(this);
+    initializeButtons(this);
+
+    this->page = 0;
+
+    this->prev.isActive = (this->page == 0) ? 0 : 1;
+    this->next.isActive = ((this->page + 1) >= this->numOfSlides) ? 0 : 1;
+}
+
+void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture) {
+    Vector2 texturePosition;
+    texturePosition.x = (this->initx - this->initposX) / 2.0f;
+    texturePosition.y = (this->top + this->height) / 10.0f + this->height;
+
+
+    DrawRectangleRec(this->titleBox.rec, this->color);
+
+    DrawRectangleLinesEx(this->titleBox.rec, (float)this->width, this->borderColor);
+
+    DrawRectangleRec(this->descriptionBox.rec, this->backgroundColor);
+
+    DrawRectangleLinesEx(this->descriptionBox.rec, (float)this->width, this->borderColor);
+
+    //uzupe?ni? 2. argument jako wczytany tekst z title i description
+    DrawTextEx(*this->font, "title", this->titleBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+    DrawTextEx(*this->font, "description", this->descriptionBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+    DrawTextureEx(imageAsTexture, texturePosition, 0, (float)this->initx/800, BLUE);
+
+    DrawButton(this->next);
+    DrawButton(this->prev);
+
+}
+
+void UpdateTutorialSlideBox(struct tutorialSlide* this) {
+    if (isMouseOver(this->prev)) this->page -= 1;
+    else if (isMouseOver(this->next)) this->page += 1;
+
+    this->prev.isActive = (this->page == 0) ? 0 : 1;
+    this->next.isActive = ((this->page + 1) >= this->numOfSlides) ? 0 : 1;
+
 }
