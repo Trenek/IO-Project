@@ -182,6 +182,8 @@ void characterCreator(enum state *state, struct menuInfo *info) {
 
     memcpy(bob.bodyPart, info->body, sizeof(int) * 10);
     memset(bob.armorPart, -1, sizeof(int) * 9);
+    bob.weapon = -1;
+
     assemblePlayerTexture(&info->resources, &bob);
 
     Vector2 bobPosition = (Vector2){

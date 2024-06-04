@@ -154,6 +154,7 @@
     <ClCompile Include="character.c" />
     <ClCompile Include="characterCreator.c" />
     <ClCompile Include="choiceBox.c" />
+    <ClCompile Include="chooseAction.c" />
     <ClCompile Include="createSaveFile.c" />
     <ClCompile Include="deathScreen.c" />
     <ClCompile Include="dialog.c" />
@@ -161,6 +162,7 @@
     <ClCompile Include="equipementsBox.c" />
     <ClCompile Include="explore.c" />
     <ClCompile Include="fight.c" />
+    <ClCompile Include="fighterLabel.c" />
     <ClCompile Include="floor.c" />
     <ClCompile Include="fscanfWithAllocation.c" />
     <ClCompile Include="inputBox.c" />
@@ -175,7 +177,6 @@
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="loadGame.c" />
     <ClCompile Include="loadSettings.c" />
-    <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="button.c" />
     <ClCompile Include="playState.c" />
@@ -189,7 +190,6 @@
     <ClCompile Include="settings.c" />
     <ClCompile Include="shop.c" />
     <ClCompile Include="stringSlideBox.c" />
-    <ClCompile Include="training.c" />
     <ClCompile Include="tutorial.c" />
     <ClCompile Include="tutorialSlide.c" />
     <ClCompile Include="unloadResources.c" />
@@ -202,7 +202,9 @@
     <ClInclude Include="ceiling.h" />
     <ClInclude Include="character.h" />
     <ClInclude Include="choiceBox.h" />
+    <ClInclude Include="chooseAction.h" />
     <ClInclude Include="equipementBox.h" />
+    <ClInclude Include="fighterLabel.h" />
     <ClInclude Include="floor.h" />
     <ClInclude Include="fscanfWithAllocation.h" />
     <ClInclude Include="inputBox.h" />

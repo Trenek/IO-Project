@@ -13,8 +13,6 @@
 #define FONT_SIZE (25)
 
 void fight(enum playState *state, struct playInfo *info) {
-    //bool win = 0;
-
     const int height = (GetScreenHeight() >> 2) + (GetScreenHeight() >> 1);
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
 
@@ -95,17 +93,84 @@ void fight(enum playState *state, struct playInfo *info) {
         .spaceing = 0
     };
 
-    struct character player = info->save.player.character;
-    struct character chosen = info->chosen;
+    struct fighterLabel me = {
+        .maxHealth = 100,
+        .maxDurability = 100,
+        .maxRest = 100,
+        .barWidth = (GetScreenHeight() >> 6) + (GetScreenHeight() >> 7),
+        .barGap = (GetScreenHeight() >> 7),
+        .fighter = info->save.player.character,
+        .init = {
+            .x = 0,
+            .y = 0,
+            .posX = 0,
+            .posY = 0,
+            .height = GetScreenHeight() >> 3,
+            .durability = &info->resources->armorDurability,
+            .position = (Vector3){.x = 1, .y = 0, .z = 4 }
+        },
+        .font = &info->resources->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = VIOLET,
+        .spaceing = 0
+    };
 
-    player.direction = FRONT;
-    assemblePlayerTexture(info->resources, &player);
+    struct fighterLabel enemy = {
+        .maxHealth = 100,
+        .maxDurability = 100,
+        .maxRest = 100,
+        .barWidth = (GetScreenHeight() >> 6) + (GetScreenHeight() >> 7),
+        .barGap = (GetScreenHeight() >> 7),
+        .fighter = info->chosen,
+        .init = {
+            .x = GetScreenWidth(),
+            .y = 0,
+            .posX = 2,
+            .posY = 0,
+            .height = GetScreenHeight() >> 3,
+            .durability = &info->resources->armorDurability,
+            .position = (Vector3){.x = 1, .y = 0, .z = -4 }
+        },
+        .font = &info->resources->fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = VIOLET,
+        .spaceing = 0
+    };
+
+    struct chooseAction saves = {
+        .isActive = 0,
+        .rowQuantity = 5,
+        .wideness = 5,
+        .attacks = &info->resources->attack,
+        .attacksQuantity = info->resources->attackQuantity,
+        .active = &me,
+        .target = &enemy,
+        .init = {
+            .x = GetScreenWidth() >> 1,
+            .y = GetScreenHeight() >> 1,
+            .width = GetScreenWidth() >> 2,
+            .incX = 15,
+            .incY = 15,
+            .posX = 0,
+            .posY = 0
+        },
+        .font = &info->resources->fonts[0],
+        .fontColor = BLACK,
+        .fontSize = 20,
+        .spaceing = 0,
+        .color = GREEN,
+        .activeBorderColor = RED,
+        .inactiveBorderColor = BLACK,
+        .hoverColor = PINK
+    };
 
     ShowCursor();
 
     struct Object2D *render[] = {
-        &player.object,
-        &chosen.object
+        &me.fighter.object,
+        &enemy.fighter.object
     };
 
     Camera3D fightCamera = {
@@ -118,42 +183,77 @@ void fight(enum playState *state, struct playInfo *info) {
         .fovy = 45
     };
 
-    player.object.position = (Vector3){ .x = 1, .y = 0, .z = 4 };
-    chosen.object.position = (Vector3){ .x = 1, .y = 0, .z = -4 };
-
     CalculateButtonPosition(&action);
     CalculateButtonPosition(&items);
     CalculateButtonPosition(&runAway);
     CalculateButtonPosition(&giveUp);
+
+    initializeChooseAction(&saves);
     
+    InitializeFighterLabel(&me, info->resources);
+    InitializeFighterLabel(&enemy, info->resources);
+
     info->resumeState = FIGHT;
     while (!WindowShouldClose() && *state == FIGHT) {
         UpdateMusicStream(info->resources->music[0]);
 
-        BeginTextureMode(*info->screenCamera);
-            ClearBackground(color);
+        BeginDrawing();
+            BeginTextureMode(*info->screenCamera);
+                ClearBackground(color);
 
-            BeginMode3D(fightCamera);
-                DrawGrid(100, 1);
+                BeginMode3D(fightCamera);
+                    DrawGrid(100, 1);
 
-                RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
-            EndMode3D();
+                    RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
+                EndMode3D();
+            EndTextureMode();
+
+            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+
 
             DrawButton(action);
             DrawButton(items);
             DrawButton(runAway);
             DrawButton(giveUp);
-        EndTextureMode();
 
-        BeginDrawing();
-            DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+            DrawChooseAction(&saves);
+
+            DrawFighterLabel(&me);
+            DrawFighterLabel(&enemy);
         EndDrawing();
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
+        UpdateChooseAction(&saves);
+
+        if (saves.isActive == 0) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
+                else if (isMouseOver(runAway)) { 
+                    if (rand() % 2) {
+                        *state = DEATH_SCREEN;
+                    }
+                    else {
+                        *state = DIALOG;
+                        info->dialog = 4;
+                    }
+                }
+                else if (isMouseOver(action)) saves.isActive = 1;
+            }
+            else if (IsKeyPressed(KEY_P)) {
+                *state = PAUSE;
+            }
         }
-        else if (IsKeyPressed(KEY_P)) {
-            *state = PAUSE;
+        UpdateFighterLabel(&me);
+        UpdateFighterLabel(&enemy);
+
+        if (me.health == 0) {
+            *state = DEATH_SCREEN;
+        }
+        else if (enemy.health == 0) {
+            *state = DIALOG;
         }
     }
+
+    FreeFighterLabel(&me);
+    FreeFighterLabel(&enemy);
+    FreeChooseAction(&saves);
 }

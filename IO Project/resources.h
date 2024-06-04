@@ -3,6 +3,12 @@
 
 #include <raylib.h>
 
+struct attack {
+    char *name;
+    int force;
+    int cost;
+};
+
 struct Resources {
     Font *fonts;
     int fontsQuantity;
@@ -10,20 +16,27 @@ struct Resources {
     Music *music;
     int musicQuantity;
 
-    Texture2D(*bodyParts[10])[4];
     int height;
     int width;
-    int bodyPosition[4][10][2];
+
+    Texture2D(*bodyParts[10])[4];
+    int bodyPosition[10][4][2];
     int bodyPartsQuantity[10];
 
     Texture2D(*armorPart[9])[4];
     int(*armorPrice[9])[3];
-    int armorPosition[4][9][2];
-    int armorPartsQuantity[10];
+    int armorPosition[9][4][2];
+    int armorPartsQuantity[9];
+    int *(armorDurability[9]);
 
     Texture2D *weapons;
     int(*weaponPrice)[3];
+    int weaponPosition[2];
+    int *weaponAttack;
     int weaponsQuantity;
+
+    struct attack *attack;
+    int attackQuantity;
 
     Texture2D *items;
     int(*itemsPrice)[3];

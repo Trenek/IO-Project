@@ -31,7 +31,7 @@ struct DialogData {
 };
 
 static void loadFile(const char* fileName, struct DialogData *saveData, struct button **options, struct playInfo *info, RenderTexture *screenCamera) {
-    FILE *file = fopen(TextFormat("%s\\%i.txt", fileName, saveData->statementID), "r");
+    FILE *file = fopen(TextFormat("%s\\%i\\%i.txt", fileName, info->dialog, saveData->statementID), "r");
     int i = 0;
 
     fscanf(file, "%i %i ", &saveData->id, &saveData->numberOfPossibleResponses);
@@ -123,7 +123,7 @@ void dialog(enum playState *state, struct playInfo *info) {
     EnableCursor();
     CalculateButtonPosition(&title);
 
-    loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &saveData, &options, info, &screenCamera);
+    loadFile("dane\\dialogi", &saveData, &options, info, &screenCamera);
 
     while (*state == DIALOG && !WindowShouldClose()) {
         BeginTextureMode(screenCamera);

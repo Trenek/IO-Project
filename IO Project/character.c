@@ -10,8 +10,8 @@
 static void DrawBodyPart(struct Resources *info, struct character *character, int i) {
     DrawTexture(
         info->bodyParts[i][character->bodyPart[i]][character->direction],
-        info->bodyPosition[character->direction][i][0],
-        info->bodyPosition[character->direction][i][1],
+        info->bodyPosition[i][character->direction][0],
+        info->bodyPosition[i][character->direction][1],
         WHITE);
 }
 
@@ -19,12 +19,32 @@ static void DrawArmorPart(struct Resources *info, struct character *character, i
     if (character->armorPart[i] != -1)
     DrawTexture(
         info->armorPart[i][character->armorPart[i]][character->direction],
-        info->armorPosition[character->direction][i][0],
-        info->armorPosition[character->direction][i][1],
+        info->armorPosition[i][character->direction][0],
+        info->armorPosition[i][character->direction][1],
         WHITE);
 }
 
+static void DrawWeapon(struct Resources *info, struct character *character, int pos) {
+    Rectangle rec = {
+        .x = 0.0f,
+        .y = 0.0f,
+        .width = (float)info->weapons[character->weapon].width * pos,
+        .height = (float)info->weapons[character->weapon].height
+    };
+
+    Vector2 vec = {
+        .x = (float)info->weaponPosition[0],
+        .y = (float)info->weaponPosition[1]
+    };
+
+    if (character->weapon != -1)
+        DrawTextureRec(info->weapons[character->weapon], rec, vec, WHITE);
+}
+
 static void DrawCharacter(struct Resources *info, struct character *character) {
+    if (character->direction == BACK || character->direction == LEFT)
+        DrawWeapon(info, character, -1);
+
     DrawBodyPart(info, character, LEFT_LEG);
     DrawBodyPart(info, character, RIGHT_LEG);
     DrawArmorPart(info, character, PANTS);
@@ -61,6 +81,9 @@ static void DrawCharacter(struct Resources *info, struct character *character) {
         DrawBodyPart(info, character, HEAD);
         DrawArmorPart(info, character, HELMET);
     }
+
+    if (character->direction == FRONT || character->direction == RIGHT)
+    DrawWeapon(info, character, 1);
 }
 
 void assemblePlayerTexture(struct Resources *info, struct character *character) {

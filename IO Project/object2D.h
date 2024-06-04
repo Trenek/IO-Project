@@ -9,4 +9,11 @@ struct Object2D {
     Vector2 sizeV;
 };
 
+enum position {
+    FRONT,
+    RIGHT,
+    BACK,
+    LEFT
+};
+
 #endif

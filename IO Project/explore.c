@@ -59,24 +59,6 @@ void explore(enum playState *state, struct playInfo *info) {
         .hoverColor = color3,
         .spaceing = 0
     };
-    struct button map = {
-        .text = "Mapa",
-        .isActive = 0,
-        .init = {
-            .x = GetScreenWidth() >> 4,
-            .y = height + 2 * spaceY,
-            .incX = INC_X,
-            .incY = INC_Y,
-            .posX = 0,
-            .posY = 1
-        },
-        .font = &info->resources->fonts[0],
-        .fontSize = FONT_SIZE,
-        .fontColor = BLACK,
-        .color = color2,
-        .hoverColor = color3,
-        .spaceing = 0
-    };
     struct button pause = {
         .text = "Pauza",
         .isActive = 1,
@@ -138,7 +120,6 @@ void explore(enum playState *state, struct playInfo *info) {
 
     CalculateButtonPosition(&save);
     CalculateButtonPosition(&equipment);
-    CalculateButtonPosition(&map);
     CalculateButtonPosition(&pause);
     CalculateButtonPosition(&missions);
     CalculateButtonPosition(&shop);
@@ -196,7 +177,6 @@ void explore(enum playState *state, struct playInfo *info) {
 
             DrawButton(save);
             DrawButton(equipment);
-            DrawButton(map);
             DrawButton(pause);
             DrawButton(missions);
             if (shopInteraction) DrawButton(shop);
@@ -209,7 +189,6 @@ void explore(enum playState *state, struct playInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(save)) *state = SAVE;
-            else if (isMouseOver(map)) *state = MAP;
             else if (isMouseOver(equipment)) *state = EQUIPEMENT;
             else if (isMouseOver(pause)) *state = PAUSE;
             else if (isMouseOver(missions)) *state = MISSIONS;

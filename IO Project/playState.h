@@ -11,13 +11,11 @@ struct menuInfo;
 enum playState {
     EXPLORE,
     EQUIPEMENT,
-    MAP,
     SAVE,
     PAUSE,
     FIGHT,
     DIALOG,
     SHOP,
-    TRAINING,
     MISSIONS,
     ACHIEVEMENTS,
     DEATH_SCREEN,
@@ -25,13 +23,6 @@ enum playState {
     RELOAD_SAVE,
     RETURN,
     DESKTOP
-};
-
-enum position {
-    FRONT,
-    RIGHT,
-    BACK,
-    LEFT
 };
 
 struct playInfo {

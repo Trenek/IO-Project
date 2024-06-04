@@ -115,8 +115,14 @@
     <Filter Include="Pliki źródłowe\objects\types\ceiling">
       <UniqueIdentifier>{1e5f85bb-ee7b-4d0b-9089-797c136fede7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\menu\fighterLabel">
+      <UniqueIdentifier>{d1cd8ac7-4c28-4c20-bb89-aa04f226f726}</UniqueIdentifier>
+    </Filter>
     <Filter Include="Pliki źródłowe\menu\achievementElem">
       <UniqueIdentifier>{4980273a-728c-4f9c-bdb3-52e1754d9b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\menu\chooseAction">
+      <UniqueIdentifier>{22c996a2-4e51-41b7-b1fd-8b496e2e3a72}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -144,9 +150,6 @@
     <ClCompile Include="explore.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
-    <ClCompile Include="map.c">
-      <Filter>Pliki źródłowe\state\play</Filter>
-    </ClCompile>
     <ClCompile Include="save.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
@@ -160,9 +163,6 @@
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="shop.c">
-      <Filter>Pliki źródłowe\state\play</Filter>
-    </ClCompile>
-    <ClCompile Include="training.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="play.c">
@@ -261,8 +261,14 @@
     <ClCompile Include="ceiling.c">
       <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
     </ClCompile>
+    <ClCompile Include="fighterLabel.c">
+      <Filter>Pliki źródłowe\menu\fighterLabel</Filter>
+    </ClCompile>
     <ClCompile Include="achievementElem.c">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>
+    </ClCompile>
+    <ClCompile Include="chooseAction.c">
+      <Filter>Pliki źródłowe\menu\chooseAction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -347,8 +353,14 @@
     <ClInclude Include="ceiling.h">
       <Filter>Pliki źródłowe\objects\types\ceiling</Filter>
     </ClInclude>
+    <ClInclude Include="fighterLabel.h">
+      <Filter>Pliki źródłowe\menu\fighterLabel</Filter>
+    </ClInclude>
     <ClInclude Include="achievementElem.h">
       <Filter>Pliki źródłowe\menu\achievementElem</Filter>
+    </ClInclude>
+    <ClInclude Include="chooseAction.h">
+      <Filter>Pliki źródłowe\menu\chooseAction</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
