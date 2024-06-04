@@ -11,13 +11,11 @@ struct menuInfo;
 enum playState {
     EXPLORE,
     EQUIPEMENT,
-    MAP,
     SAVE,
     PAUSE,
     FIGHT,
     DIALOG,
     SHOP,
-    TRAINING,
     MISSIONS,
     ACHIEVEMENTS,
     DEATH_SCREEN,

@@ -177,7 +177,6 @@
     <ClCompile Include="IO Project.c" />
     <ClCompile Include="loadGame.c" />
     <ClCompile Include="loadSettings.c" />
-    <ClCompile Include="map.c" />
     <ClCompile Include="menu.c" />
     <ClCompile Include="button.c" />
     <ClCompile Include="playState.c" />
@@ -191,7 +190,6 @@
     <ClCompile Include="settings.c" />
     <ClCompile Include="shop.c" />
     <ClCompile Include="stringSlideBox.c" />
-    <ClCompile Include="training.c" />
     <ClCompile Include="tutorial.c" />
     <ClCompile Include="tutorialSlide.c" />
     <ClCompile Include="unloadResources.c" />

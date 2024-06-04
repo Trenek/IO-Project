@@ -150,9 +150,6 @@
     <ClCompile Include="explore.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
-    <ClCompile Include="map.c">
-      <Filter>Pliki źródłowe\state\play</Filter>
-    </ClCompile>
     <ClCompile Include="save.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
@@ -166,9 +163,6 @@
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="shop.c">
-      <Filter>Pliki źródłowe\state\play</Filter>
-    </ClCompile>
-    <ClCompile Include="training.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="play.c">
