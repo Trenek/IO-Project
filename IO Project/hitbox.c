@@ -62,7 +62,7 @@ void followPlayer(struct playInfo *info) {
 	}
 }
 
-void detectHitbox(struct Object2D *object, Vector3 obsticle) {
+static void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	const float distance = sqrtf(powf(object->position.x - obsticle.x, 2.0) + powf(object->position.z - obsticle.z, 2.0));
 	const float minDistance = object->sizeV.x;
 
@@ -72,7 +72,7 @@ void detectHitbox(struct Object2D *object, Vector3 obsticle) {
 	}
 }
 
-void detectHitbox2(struct Object2D *object, Vector3 obsticle, const float minDistance) {
+static void detectHitbox2(struct Object2D *object, Vector3 obsticle, const float minDistance) {
 	const float distance = sqrtf(powf(object->position.x - obsticle.x, 2.0) + powf(object->position.z - obsticle.z, 2.0));
 
 	if (distance < minDistance) {
@@ -83,7 +83,7 @@ void detectHitbox2(struct Object2D *object, Vector3 obsticle, const float minDis
 
 #define IN_BETWEEN(key, b, c) ((key >= b && key <= c) || (key >= c && key <= b))
 
-void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
+static void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 	Vector3 *A = &obsticle->endPosition;
 	Vector3 *B = &obsticle->object.position;
 	Vector3 *C = &object->position;
@@ -118,12 +118,30 @@ void detectWallHitbox(struct Object2D *object, struct wall *obsticle) {
 	}
 }
 
+static void detectCeilingHitbox(struct Object2D *object, struct ceiling *obsticle) {
+	Vector3 *B = &obsticle->object.position;
+	Vector3 rA = {
+		.x = B->x + obsticle->actualSize.x,
+		.y = B->y,
+		.z = B->z + obsticle->actualSize.y
+	};
+	Vector3 *A = &rA;
+	Vector3 *C = &object->position;
+
+	if (C->y > B->y) {
+		if (IN_BETWEEN(C->x, A->x, B->x) && IN_BETWEEN(C->z, A->z, B->z)) {
+			C->y = B->y;
+		}
+	}
+}
+
 void checkHitbox(struct Object2D *object, struct playInfo *info) {
 	int i = 0;
 
 	while (i < info->save.enemyQuantity) {
-		if (object != &info->save.enemies[i].object)
+		if (object != &info->save.enemies[i].object) {
 			detectHitbox(object, info->save.enemies[i].object.position);
+		}
 
 		i += 1;
 	}
@@ -138,6 +156,13 @@ void checkHitbox(struct Object2D *object, struct playInfo *info) {
 	i = 0;
 	while (i < info->save.wallQuantity) {
 		detectWallHitbox(object, &info->save.walls[i]);
+
+		i += 1;
+	}
+
+	i = 0;
+	while (i < info->save.ceilingQuantity) {
+		detectCeilingHitbox(object, &info->save.ceiling[i]);
 
 		i += 1;
 	}

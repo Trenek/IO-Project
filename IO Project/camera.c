@@ -5,6 +5,25 @@
 
 #include <raymath.h>
 
+#define IN_BETWEEN(key, b, c) ((key >= b && key <= c) || (key >= c && key <= b))
+
+static void detectCeilingHitbox(Vector3 *object, struct ceiling *obsticle) {
+	Vector3 *B = &obsticle->object.position;
+	Vector3 rA = {
+		.x = B->x + obsticle->actualSize.x,
+		.y = B->y,
+		.z = B->z + obsticle->actualSize.y
+	};
+	Vector3 *A = &rA;
+	Vector3 *C = object;
+
+	if (C->y > B->y) {
+		if (IN_BETWEEN(C->x, A->x, B->x) && IN_BETWEEN(C->z, A->z, B->z)) {
+			C->y = B->y;
+		}
+	}
+}
+
 static void check(Vector3 *cameraPosition, Vector3 *playerPosition, struct playInfo *info) {
 	Vector2 cam = { cameraPosition->x, cameraPosition->z };
 	Vector2 pos = { playerPosition->x, playerPosition->z };
@@ -23,6 +42,13 @@ static void check(Vector3 *cameraPosition, Vector3 *playerPosition, struct playI
 			cameraPosition->z = result.y;
 		}
 		
+		i += 1;
+	}
+
+	i = 0;
+	while (i < info->save.ceilingQuantity) {
+		detectCeilingHitbox(cameraPosition, &info->save.ceiling[i]);
+
 		i += 1;
 	}
 }

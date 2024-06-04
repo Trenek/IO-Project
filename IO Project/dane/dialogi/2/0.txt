@@ -1,2 +1,2 @@
 0 1 Przygotuj się do walki!
-    0 5 3 Ojoj
+    0 4 3 Ojoj
