@@ -125,7 +125,7 @@ void dialog(enum playState *state, struct playInfo *info) {
 
     loadFile("dane\\dialogi", &saveData, &options, info, &screenCamera);
 
-    while (*state == DIALOG && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == DIALOG) {
         BeginTextureMode(screenCamera);
             ClearBackground(VIOLET);
 

@@ -276,10 +276,14 @@ static void SaveAchievements(struct SaveFile* this) {
 }
 
 void SaveSaveFile(struct SaveFile *this) {
-    _mkdir(TextFormat("saves\\%s", this->saveName));
-    _mkdir(TextFormat("saves\\%s\\mapy", this->saveName));
-    _mkdir(TextFormat("saves\\%s\\sklepy", this->saveName));
-    _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", this->saveName));
+    struct stat st = { 0 };
+
+    if (stat(TextFormat("saves\\%s", this->saveName), &st) == 0) {
+        _mkdir(TextFormat("saves\\%s", this->saveName));
+        _mkdir(TextFormat("saves\\%s\\mapy", this->saveName));
+        _mkdir(TextFormat("saves\\%s\\sklepy", this->saveName));
+        _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", this->saveName));
+    }
 
     CreateDate(TextFormat("saves\\%s\\date.txt", this->saveName));
 

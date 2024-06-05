@@ -118,7 +118,7 @@ void save(enum playState *state, struct playInfo *info) {
     };
 
     struct button resume = {
-        .text = u8"Wróć",
+        .text = "Wróć",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -147,7 +147,7 @@ void save(enum playState *state, struct playInfo *info) {
     CalculateInputBoxPosition(&saveName);
     strcpy(saveName.text, info->save.saveName);
 
-    while (*state == SAVE && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == SAVE) {
         BeginDrawing();
             ClearBackground(color1);
             if (info->screenCamera != NULL) {
@@ -165,19 +165,9 @@ void save(enum playState *state, struct playInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(resume)) *state = EXPLORE;
-            else {
-                if (stat(TextFormat("saves\\%s", saveName.text), &st) == 0) {
-                    if (isMouseOver(overwrite)) {
-                        strcpy(info->save.saveName, saveName.text);
-                        SaveSaveFile(&info->save);
-                    }
-                }
-                else {
-                    if (isMouseOver(create)) {
-                        strcpy(info->save.saveName, saveName.text);
-                        SaveSaveFile(&info->save);
-                    }
-                }
+            else if (isMouseOver((stat(TextFormat("saves\\%s", saveName.text), &st) != 0) ? create : overwrite)) {
+                strcpy(info->save.saveName, saveName.text);
+                SaveSaveFile(&info->save);
             }
         }
 

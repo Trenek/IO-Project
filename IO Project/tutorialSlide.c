@@ -17,7 +17,7 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
     this->title = LoadFileText("samouczek\\tip1\\title.txt");
 
     this->texturePosition = (Vector2) {
-        .x = (init.x - init.posX) / 2.0f,
+        .x = init.x - (init.posX * init.width) / 2.0f,
         .y = top + height
     };
 
@@ -30,7 +30,7 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
         },
         .textLeftCorner = {
             .x = this->texturePosition.x + init.incX,
-            .y = top + init.incY,
+            .y = top + init.incY
         }
     };
 
@@ -43,7 +43,7 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
         },
         .textLeftCorner = {
             .x = this->texturePosition.x + init.incX,
-            .y = this->texturePosition.y + this->image.height * init.x / this->image.width + init.incY,
+            .y = this->texturePosition.y + this->image.height * init.x / this->image.width + init.incY
         }
     };
 

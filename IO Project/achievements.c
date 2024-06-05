@@ -106,7 +106,7 @@ void achievements(enum playState* state, struct playInfo* info) {
     CalculateButtonPosition(&turnLeft);
     CalculateButtonPosition(&turnRight);
 
-    while (*state == ACHIEVEMENTS && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == ACHIEVEMENTS) {
         BeginDrawing();
         ClearBackground(color1);
         if (info->screenCamera != NULL) {
