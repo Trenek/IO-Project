@@ -115,7 +115,7 @@ static void LoadPosition(struct SaveFile *this) {
 }
 
 static void LoadPlayer(struct SaveFile *this, struct Resources *resources) {
-    LoadCharacter(&this->player.character, TextFormat("saves\\%s\\posta?.txt", this->saveName), this->player.character.object.position.x, this->player.character.object.position.z);
+    LoadCharacter(&this->player.character, TextFormat("saves\\%s\\postaæ.txt", this->saveName), this->player.character.object.position.x, this->player.character.object.position.z);
     assemblePlayerTexture(resources, &this->player.character);
     LoadEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", this->saveName));
     LoadPosition(this);
@@ -323,14 +323,14 @@ static void LoadAchievement(struct Achievement *achievement, const char* path) {
 }
 
 static void LoadAchievements(struct SaveFile* this) {
-    FilePathList f = LoadDirectoryFiles(TextFormat("saves\\%s\\osi?gni?cia", this->saveName));
+    FilePathList f = LoadDirectoryFiles(TextFormat("saves\\%s\\osi¹gniêcia", this->saveName));
     int i = 0;
 
     this->achievementsQuantity = f.capacity;
     this->achievements = malloc(this->achievementsQuantity * sizeof(struct Achievement));
 
     while (i < this->achievementsQuantity) {
-        LoadAchievement(&this->achievements[i], TextFormat("saves\\%s\\osi?gni?cia\\%i.txt", this->saveName, i));
+        LoadAchievement(&this->achievements[i], TextFormat("saves\\%s\\osi¹gniêcia\\%i.txt", this->saveName, i));
         i += 1;
     }
 

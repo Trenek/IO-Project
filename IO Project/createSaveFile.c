@@ -76,7 +76,7 @@ static void CreatePosition(const char *const saveName) {
 }
 
 static void CreatePlayer(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
-    CreateCharacter(TextFormat("saves\\%s\\posta?.txt", saveName), characterName, bodyParts);
+    CreateCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts);
     CreateEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
     CreatePosition(saveName);
 }
@@ -108,10 +108,10 @@ static void CopyMaps(const char *const saveName) {
 }
 
 static void CreateAchievements(const char *const saveName) {
-    FILE *file = fopen(TextFormat("saves\\%s\\osi?gni?cia\\0.txt", saveName), "w");
+    FILE *file = fopen(TextFormat("saves\\%s\\osi¹gniêcia\\0.txt", saveName), "w");
 
-    fprintf(file, "Osi?gni?cie pierwsze\n");
-    fprintf(file, "Osi?gni?cie pierwsze - opis\n");
+    fprintf(file, "Osi¹gniêcie pierwsze\n");
+    fprintf(file, "Osi¹gniêcie pierwsze - opis\n");
     fprintf(file, "%i\n", 2);
     fprintf(file, "Pierwsze wymaganie\n");
     fprintf(file, "Drugie wymaganie\n");
@@ -119,10 +119,10 @@ static void CreateAchievements(const char *const saveName) {
 
     fclose(file);
 
-    file = fopen(TextFormat("saves\\%s\\osi?gni?cia\\1.txt", saveName), "w");
+    file = fopen(TextFormat("saves\\%s\\osi¹gniêcia\\1.txt", saveName), "w");
 
-    fprintf(file, "Osi?gni?cie drugie\n");
-    fprintf(file, "Osi?gni?cie drugie - opis\n");
+    fprintf(file, "Osi¹gniêcie drugie\n");
+    fprintf(file, "Osi¹gniêcie drugie - opis\n");
     fprintf(file, "%i\n", 2);
     fprintf(file, "Pierwsze wymaganie 2\n");
     fprintf(file, "Drugie wymaganie 2\n");
@@ -143,7 +143,7 @@ bool CreateNewSave(const char *const saveName, const char *const characterName, 
 
         _mkdir(TextFormat("saves\\%s\\mapy", saveName));
         _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
-        _mkdir(TextFormat("saves\\%s\\osi?gni?cia", saveName));
+        _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
 
         CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
 

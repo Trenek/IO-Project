@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <time.h>
 
+#include <sys/stat.h>
+#include <direct.h>
+
 #include "savefile.h"
 
 static void CreateDate(const char *const saveName) {
@@ -50,7 +53,7 @@ static void SaveCharacterAttacks(FILE *playerFile, struct character *character) 
     fprintf(playerFile, "%i\n", character->attackQuantity);
 
     while (i < character->attackQuantity) {
-        fprintf(playerFile, "%i", character->attacks[i]);
+        fprintf(playerFile, "%i ", character->attacks[i]);
 
         i += 1;
     }
@@ -107,7 +110,7 @@ static void SavePosition(struct SaveFile *this) {
 }
 
 static void SavePlayer(struct SaveFile *this) {
-    SaveCharacter(&this->player.character, TextFormat("saves\\%s\\posta?.txt", this->saveName));
+    SaveCharacter(&this->player.character, TextFormat("saves\\%s\\postaæ.txt", this->saveName));
     SaveEquipment(&this->player, TextFormat("saves\\%s\\ekwipunek.txt", this->saveName));
     SavePosition(this);
 }
@@ -245,7 +248,7 @@ static void SaveMap(struct SaveFile *this) {
 }
 
 static void SaveAchievement(struct Achievement achievement, const char* fileName) {
-    FILE* file = fopen(fileName, "w");
+    FILE *file = fopen(fileName, "w");
 
     fprintf(file, "%s\n", achievement.name);
     fprintf(file, "%s\n", achievement.description);
@@ -266,13 +269,18 @@ static void SaveAchievements(struct SaveFile* this) {
     int i = 0;
 
     while (i < this->achievementsQuantity) {
-        SaveAchievement(this->achievements[i], TextFormat("saves\\%s\\osi?gni?cia\\%i.txt", this->saveName, i));
+        SaveAchievement(this->achievements[i], TextFormat("saves\\%s\\osi¹gniêcia\\%i.txt", this->saveName, i));
 
         i += 1;
     }
 }
 
 void SaveSaveFile(struct SaveFile *this) {
+    _mkdir(TextFormat("saves\\%s", this->saveName));
+    _mkdir(TextFormat("saves\\%s\\mapy", this->saveName));
+    _mkdir(TextFormat("saves\\%s\\sklepy", this->saveName));
+    _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", this->saveName));
+
     CreateDate(TextFormat("saves\\%s\\date.txt", this->saveName));
 
     SavePlayer(this);

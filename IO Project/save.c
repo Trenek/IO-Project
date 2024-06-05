@@ -118,7 +118,7 @@ void save(enum playState *state, struct playInfo *info) {
     };
 
     struct button resume = {
-        .text = "Wróć",
+        .text = u8"Wróć",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -174,9 +174,6 @@ void save(enum playState *state, struct playInfo *info) {
                 }
                 else {
                     if (isMouseOver(create)) {
-                        _mkdir(TextFormat("saves\\%s", saveName.text));
-                        _mkdir(TextFormat("saves\\%s\\mapy", saveName.text));
-                        _mkdir(TextFormat("saves\\%s\\sklepy", saveName.text));
                         strcpy(info->save.saveName, saveName.text);
                         SaveSaveFile(&info->save);
                     }
