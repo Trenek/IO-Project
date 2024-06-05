@@ -55,11 +55,17 @@ void tutorial(enum state* state, struct menuInfo* info) {
     .color = GREEN,
     };
 
-    FilePathList imgsList = LoadDirectoryFiles("dane/tutorialImgs");
 
-    Image tutorialImage = LoadImage(imgsList.paths[0]);
+    char tipPath[15];
+    sprintf(tipPath, "samouczek/tip%i", 1);
+ 
+    FilePathList imgsList = LoadDirectoryFiles(tipPath);
+
+    Image tutorialImage = LoadImage(imgsList.paths[1]);
     Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);
-
+    char* description = LoadFileText(imgsList.paths[0]);   
+    char* title = LoadFileText(imgsList.paths[2]);
+    printf("%s %s", description, title);
     CalculateButtonPosition(&goBack);
 
     initializeTutorialSlideBox(&slide, tutorialImage);
@@ -71,18 +77,27 @@ void tutorial(enum state* state, struct menuInfo* info) {
 
             DrawButton(goBack);
 
-            DrawTutorialSlideBox(&slide, imageAsTexture);
+            DrawTutorialSlideBox(&slide, imageAsTexture, title, description);
 
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(goBack)) *state = MENU;
 
-            UpdateTutorialSlideBox(&slide);
+            UnloadFileText(title);                            
+            UnloadFileText(description);                            
+            UnloadTexture(imageAsTexture);
+            UnloadImage(tutorialImage);
+            UnloadDirectoryFiles(imgsList);
 
+            sprintf(tipPath, "samouczek/tip%i", UpdateTutorialSlideBox(&slide));
+            imgsList = LoadDirectoryFiles(tipPath);
+
+            tutorialImage = LoadImage(imgsList.paths[1]);
+            description = LoadFileText(imgsList.paths[0]);
+            title = LoadFileText(imgsList.paths[2]);
+            imageAsTexture = LoadTextureFromImage(tutorialImage);
         }
     }
-    UnloadTexture(imageAsTexture);
-    UnloadImage(tutorialImage);
-    UnloadDirectoryFiles(imgsList);
+
 }

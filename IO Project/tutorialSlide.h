@@ -46,8 +46,6 @@ struct tutorialSlide {
             FilePathList imgsList;
 
         };
-
-
         int page;
 
 
@@ -68,8 +66,8 @@ struct tutorialSlide {
 
 void CalculateTutorialSlidePosition(struct tutorialSlide* this, Image tutorialImage);
 void initializeTutorialSlideBox(struct tutorialSlide* this, Image tutorialImage);
-void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture);
-void UpdateTutorialSlideBox(struct tutorialSlide* this);
+void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture, char* title, char* description);
+int UpdateTutorialSlideBox(struct tutorialSlide* this);
 
 
 #endif
