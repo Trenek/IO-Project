@@ -55,14 +55,15 @@ void tutorial(enum state* state, struct menuInfo* info) {
     .color = GREEN,
     };
 
-    CalculateButtonPosition(&goBack);
-
-    initializeTutorialSlideBox(&slide);
-
     FilePathList imgsList = LoadDirectoryFiles("dane/tutorialImgs");
 
     Image tutorialImage = LoadImage(imgsList.paths[0]);
     Texture2D imageAsTexture = LoadTextureFromImage(tutorialImage);
+
+    CalculateButtonPosition(&goBack);
+
+    initializeTutorialSlideBox(&slide, tutorialImage);
+
 
     while (!WindowShouldClose() && *state == TUTORIAL) {
         BeginDrawing();

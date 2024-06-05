@@ -24,6 +24,9 @@ struct textBox {
     Vector2 textLeftCorner;
 };
 struct tutorialSlide {
+    int tutorialImageHeight;
+    int tutorialImageWidth;
+
     int numOfSlides;
     int width;
 
@@ -63,8 +66,8 @@ struct tutorialSlide {
     int spaceing;
 };
 
-void CalculateTutorialSlidePosition(struct tutorialSlide* this);
-void initializeTutorialSlideBox(struct tutorialSlide* this);
+void CalculateTutorialSlidePosition(struct tutorialSlide* this, Image tutorialImage);
+void initializeTutorialSlideBox(struct tutorialSlide* this, Image tutorialImage);
 void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture);
 void UpdateTutorialSlideBox(struct tutorialSlide* this);
 

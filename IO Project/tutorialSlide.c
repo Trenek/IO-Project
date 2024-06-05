@@ -8,21 +8,23 @@
 
 
 
-void CalculateTutorialSlidePosition(struct tutorialSlide* this) {
+void CalculateTutorialSlidePosition(struct tutorialSlide* this, Image tutorialImage) {
     struct slidePositionParameters init = this->init;
     this->initposX = init.posX;
     this-> initx = init.x;
+    this->tutorialImageHeight = tutorialImage.height;
+    this->tutorialImageWidth = tutorialImage.width;
+
 
     //uzupe?ni? 2. argument jako wczytany tekst z title i description
-    float size[2] = {
-     MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
-     MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1)
-    };
+    //float size[2] = {
+    // MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
+    // MeasureTextEx(*this->font, "_itoa(this->dataQuantity, buffor, 10)", (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1)
+    //};
 
     this->height = this->fontSize + 2.0f * init.incY;
     this->top = init.y - (this->height * init.posY) / 2;
-    printf(" H %f ", size[0]);
-    printf(" T %f ", size[1]);
+
 
     this->titleBox = (struct textBox){
             .rec = {
@@ -32,21 +34,21 @@ void CalculateTutorialSlidePosition(struct tutorialSlide* this) {
                 .height = this->height
             },
             .textLeftCorner = (Vector2) {
-                .x = init.x - init.posX * size[0] / 2.0f + init.incX,
-                .y = this->top * this->height + init.incY
+                .x = (init.x - init.posX) / 2.0f + 5,
+                .y = (this->top + this->height) / 10 + 5,
             }
     };
 
     this->descriptionBox = (struct textBox){
             .rec = {
                 .x = (init.x - init.posX) / 2.0f,
-                .y = (this->top + this->height) / 10 + this->height + 500 * init.x/800, //500 - img width
+                .y = (this->top + this->height) / 10 + this->height + this->tutorialImageHeight * init.x/this->tutorialImageWidth,
                 .width = (float)init.width,
                 .height = this->height*2
             },
             .textLeftCorner = (Vector2) {
-                .x = init.x - init.posX * size[1] / 2.0f + init.incX,
-                .y = (this->top * this->height + init.incY)
+                .x = (init.x - init.posX) / 2.0f + 5,
+                .y = (this->top + this->height) / 10 + this->height + this->tutorialImageHeight * init.x / this->tutorialImageWidth + 5,
             }
     };
 
@@ -95,8 +97,8 @@ static void initializeButtons(struct tutorialSlide* this) {
     CalculateButtonPosition(&this->next);
 }
 
-void initializeTutorialSlideBox(struct tutorialSlide* this) {
-    CalculateTutorialSlidePosition(this);
+void initializeTutorialSlideBox(struct tutorialSlide* this, Image tutorialImage) {
+    CalculateTutorialSlidePosition(this, tutorialImage);
     initializeButtons(this);
 
     this->page = 0;
@@ -122,7 +124,7 @@ void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture) 
     //uzupe?ni? 2. argument jako wczytany tekst z title i description
     DrawTextEx(*this->font, "title", this->titleBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
     DrawTextEx(*this->font, "description", this->descriptionBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
-    DrawTextureEx(imageAsTexture, texturePosition, 0, (float)this->initx/800, BLUE);
+    DrawTextureEx(imageAsTexture, texturePosition, 0, (float)this->initx/800, WHITE);
 
     DrawButton(this->next);
     DrawButton(this->prev);
