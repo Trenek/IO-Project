@@ -4,7 +4,7 @@
 #include "tutorialSlide.h"
 
 static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
-    FilePathList file = LoadDirectoryFiles("samouczek");
+    FilePathList file = LoadDirectoryFiles("dane\\samouczek");
     struct slidePositionParameters init = this->init;
 
     float height = this->fontSize + 2.0f * init.incY;
@@ -12,9 +12,9 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
 
     this->numOfSlides = file.capacity;
 
-    this->image = LoadTexture("samouczek\\tip1\\img.png");
-    this->description = LoadFileText("samouczek\\tip1\\description.txt");
-    this->title = LoadFileText("samouczek\\tip1\\title.txt");
+    this->image = LoadTexture("dane\\samouczek\\tip1\\img.png");
+    this->description = LoadFileText("dane\\samouczek\\tip1\\description.txt");
+    this->title = LoadFileText("dane\\samouczek\\tip1\\title.txt");
 
     this->texturePosition = (Vector2) {
         .x = init.x - (init.posX * init.width) / 2.0f,
@@ -152,8 +152,8 @@ void UpdateTutorialSlideBox(struct tutorialSlide *this) {
         UnloadFileText(this->description);
         UnloadTexture(this->image);
 
-        this->image = LoadTexture(TextFormat("samouczek\\tip%i\\img.png", this->page));
-        this->description = LoadFileText(TextFormat("samouczek\\tip%i\\description.txt", this->page));
-        this->title = LoadFileText(TextFormat("samouczek\\tip%i\\title.txt", this->page));
+        this->image = LoadTexture(TextFormat("dane\\samouczek\\tip%i\\img.png", this->page));
+        this->description = LoadFileText(TextFormat("dane\\samouczek\\tip%i\\description.txt", this->page));
+        this->title = LoadFileText(TextFormat("dane\\samouczek\\tip%i\\title.txt", this->page));
     }
 }
