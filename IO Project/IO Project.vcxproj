@@ -104,7 +104,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\dependencies\raylib\src; %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)\dependencies\raylib\src;$(SolutionDir)dependencies\CUnit\CUnit\Headers; %(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
@@ -197,6 +197,8 @@
     <ClCompile Include="unloadResources.c" />
     <ClCompile Include="unloadSaveFile.c" />
     <ClCompile Include="wall.c" />
+	 <ClCompile Include="dependencies\CUnit\CUnit\Sources\wxWidget\*.c" />
+
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="achievementElem.h" />
