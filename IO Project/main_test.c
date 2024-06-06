@@ -1,8 +1,8 @@
 //if you want to run tests simply uncomment below line and also uncomment the same line in file IO Project.c
 //#define RUN_TESTS
 
-#include "CUnit.h"
-#include "Basic.h"
+#include <Cunit/CUnit.h>
+#include <Cunit/Basic.h>
 
 
 
