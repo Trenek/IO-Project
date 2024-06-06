@@ -2,6 +2,7 @@
 
 #include "state.h"
 
+#ifndef RUN_TESTS
 int main(void) {
     enum state state = MENU;
     struct menuInfo info = { 0 };
@@ -32,3 +33,4 @@ int main(void) {
 
     return 0;
 }
+#endif
