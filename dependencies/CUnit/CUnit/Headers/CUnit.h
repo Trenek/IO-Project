@@ -54,7 +54,7 @@
 #include <math.h>
 
 /** CUnit version number. */
-#define CU_VERSION "@VERSION@-@RELEASE@"
+#define CU_VERSION "2.1-3"
 
 /*  Max string lengths for names (includes terminating NULL. */
 /** Maximum length of a test name string. */
@@ -92,7 +92,7 @@
 #endif
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) || defined(__WIN32__)
-#  ifdef CU_DLL
+#  if 1
 #    ifdef CU_BUILD_DLL
 #      define CU_EXPORT __declspec(dllexport)
 #    else
@@ -101,9 +101,9 @@
 #  else
 #    define CU_EXPORT
 #  endif
-#  ifdef _MSC_VER
-#    define snprintf _snprintf
-#  endif
+#ifdef snprintf
+#  define snprintf _snprintf
+#endif
 #else
 #  define CU_EXPORT
 #endif  /* WIN32 */

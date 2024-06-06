@@ -197,7 +197,7 @@
     <ClCompile Include="unloadResources.c" />
     <ClCompile Include="unloadSaveFile.c" />
     <ClCompile Include="wall.c" />
-	 <ClCompile Include="dependencies\CUnit\CUnit\Sources\wxWidget\*.c" />
+	 <ClCompile Include="dependencies\CUnit\CUnit\Sources\*.c" />
 
   </ItemGroup>
   <ItemGroup>

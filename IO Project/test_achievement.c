@@ -1,8 +1,8 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <CUnit/CUnit.h>
-#include <CUnit/Basic.h>
+#include "CUnit.h"
+#include "Basic.h"
 #include "achievementElem.h"
 #include "savefile.h"
 
