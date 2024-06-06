@@ -21,7 +21,7 @@
     <ClCompile Include="Unit Tests.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
-    <ClCompile Include="..\IO Project\test_achievement.c">
+    <ClCompile Include="test_achievement.c">
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
   </ItemGroup>
