@@ -39,7 +39,7 @@ void UpdateAchievementElem(struct achievementElem *element, struct Achievement a
         .spaceing = 0
     };
     element->status = (struct button){
-        .text = achievement.status == 1 ? "Zakończone" : "Niezakończone",
+        .text = achievement.status == 1 ? "Zakonczone" : "Niezakonczone",
         .isActive = 1,
         .init = {
             .x = element->x,
