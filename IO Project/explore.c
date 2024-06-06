@@ -180,7 +180,6 @@ void explore(enum playState *state, struct playInfo *info) {
             DrawButton(pause);
             DrawButton(missions);
             if (shopInteraction) DrawButton(shop);
-            DrawText(TextFormat("%f", info->save.player.a), 0, 0, 40, BLUE);
         EndTextureMode();
 
         BeginDrawing();
