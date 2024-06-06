@@ -213,7 +213,7 @@
     <ClCompile Include="shopInterface.c">
       <Filter>Pliki źródłowe\menu\shopInterface</Filter>
     </ClCompile>
-    <ClCompile Include="IO Project.c">
+    <ClCompile Include="stateManager.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
     <ClCompile Include="characterCreator.c">
