@@ -25,4 +25,9 @@
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\dependencies\CUnit\lib\cunit.dll">
+      <Filter>Pliki zasobów</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
 </Project>
