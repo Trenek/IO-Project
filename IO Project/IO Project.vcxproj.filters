@@ -124,9 +124,6 @@
     <Filter Include="Pliki źródłowe\menu\chooseAction">
       <UniqueIdentifier>{22c996a2-4e51-41b7-b1fd-8b496e2e3a72}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tests">
-      <UniqueIdentifier>{52751a31-9b56-4635-8306-62cd9f033591}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.c">
@@ -272,12 +269,6 @@
     </ClCompile>
     <ClCompile Include="chooseAction.c">
       <Filter>Pliki źródłowe\menu\chooseAction</Filter>
-    </ClCompile>
-    <ClCompile Include="test_achievement.c">
-      <Filter>Tests</Filter>
-    </ClCompile>
-    <ClCompile Include="main_test.c">
-      <Filter>Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

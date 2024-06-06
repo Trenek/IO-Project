@@ -1,14 +1,13 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include <Cunit/CUnit.h>
 #include <Cunit/Basic.h>
-#include "achievementElem.h"
-#include "savefile.h"
 
-// Function prototypes for the drawing functions assumed to exist
-void DrawButton(struct button button);
-void CalculateButtonPosition(struct button* button);
+#include "achievementElem.h" 
+#include "savefile.h"
+#include "button.h"
 
 int init_suite(void) {
     return 0;

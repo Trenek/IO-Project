@@ -1,11 +1,7 @@
-﻿//if you want to run tests simply uncomment below line and also uncomment the same line in file main_test.c
-//#define RUN_TESTS
-
-#include <raylib.h>
+﻿#include <raylib.h>
 
 #include "state.h"
 
-#ifndef RUN_TESTS
 int main(void) {
     enum state state = MENU;
     struct menuInfo info = { 0 };
@@ -36,4 +32,3 @@ int main(void) {
 
     return 0;
 }
-#endif
