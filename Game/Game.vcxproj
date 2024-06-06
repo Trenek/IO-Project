@@ -138,7 +138,7 @@
     <ClCompile Include="Game.c" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\IO Project\IO Project.vcxproj">
+    <ProjectReference Include="..\Game Code\Game Code.vcxproj">
       <Project>{5e90c476-2d30-40c8-9dfd-8099402b3082}</Project>
     </ProjectReference>
   </ItemGroup>

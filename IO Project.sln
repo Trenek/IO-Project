@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34616.47
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IO Project", "IO Project\IO Project.vcxproj", "{5E90C476-2D30-40C8-9DFD-8099402B3082}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Game Code", "Game Code\Game Code.vcxproj", "{5E90C476-2D30-40C8-9DFD-8099402B3082}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Unit Tests", "Unit Tests\Unit Tests.vcxproj", "{9E7AD65C-7463-43A1-B64A-4562F10A8331}"
 	ProjectSection(ProjectDependencies) = postProject
