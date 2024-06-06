@@ -112,7 +112,7 @@ void pause(enum playState *state, struct playInfo *info) {
     CalculateButtonPosition(&menu);
     CalculateButtonPosition(&exit);
 
-    while (*state == PAUSE && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == PAUSE) {
         BeginDrawing();
             ClearBackground(color1);
             if (info->screenCamera != NULL) {

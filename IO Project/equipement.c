@@ -49,7 +49,7 @@ void equipement(enum playState *state, struct playInfo *info) {
     CalculateButtonPosition(&title);
     InitializeEquipementBox(&equipement);
 
-    while (*state == EQUIPEMENT && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == EQUIPEMENT) {
         BeginDrawing();
         ClearBackground(color1);
         if (info->screenCamera != NULL) {

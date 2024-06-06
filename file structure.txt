@@ -1,50 +1,86 @@
 Game Fiels
 ├── config.cfg
 ├── dane
-│   ├── przedmioty
-│   │   ├── broń.txt
-│   │   ├── pancerz.txt
-│   │   └── przedmioty.txt
-│   ├── walka
-│   │   ├── ataki.txt
-│   │   ├── pozycje.txt
-│   │   └── umiejętności.txt
-│   ├── mapy
-│   │   └── mapa
-│   │       ├── mapa.txt
-│   │       └── sklepy
 │   ├── dialogi
-│   └── postacie
+│   ├── mapy
+│   │   ├── position.txt
+│   │   └── [index].txt - od 0 do n
+│   ├── measurements
+│   │   ├── armor.txt
+│   │   ├── body.txt
+│   │   └── weapon.txt
+│   ├── postacie
+│   │   └── [index].txt - od 0 do n
+│   ├── przedmioty
+│   │   ├── armor.txt
+│   │   ├── inne.txt
+│   │   └── weapon.txt
+│   ├── samouczek
+│   │   └── tip[index] od 1 do n
+│   │       ├── title.txt
+│   │       ├── description.txt
+│   │       └── img.png
+│   ├── sklepy
+│   │   └── [index].txt - od 0 do n
+│   └── walka
+│       └── attacks
+│           └── [index].txt - od 0 do n
 ├── resources
 │   ├── textures
 │   │   ├── body
 │   │   │   ├── head
-│   │   │   ├── face
-│   │   │   ├── hair
-│   │   │   ├── beard
-│   │   │   ├── torso
-│   │   │   ├── arms
-│   │   │   ├── hands
-│   │   │   ├── legs
-│   │   │   └── feet
-│   │   ├── armor
-│   │   │   ├── head
-│   │   │   ├── torso
-│   │   │   ├── arms
-│   │   │   ├── hands
-│   │   │   ├── legs
-│   │   │   └── feet
-│   │   ├── weapons
-│   │   ├── floors
-│   │   └── objects
+│   │   │   │   └── [index] od 0 do n
+│   │   │   │       ├── 0
+│   │   │   │       │   └── 0.png
+│   │   │   │       ├── 1
+│   │   │   │       │   └── 0.png
+│   │   │   │       ├── 2
+│   │   │   │       │   └── 0.png
+│   │   │   │       └── 3
+│   │   │   │           └── 0.png
+│   │   │   ├── left arm
+│   │   │   ├── left foot
+│   │   │   ├── left hand
+│   │   │   ├── left leg
+│   │   │   ├── right arm
+│   │   │   ├── right foot
+│   │   │   ├── right hand
+│   │   │   ├── right leg
+│   │   │   └── torso
+│   │   ├── objects
+│   │   │   ├── ceiling
+│   │   │   │   └── [index].txt - od 0 do n
+│   │   │   ├── floor
+│   │   │   │   └── [index].txt - od 0 do n
+│   │   │   └── wall
+│   │   │       └── [index].txt - od 0 do n
+│   │   └── przedmioty
+│   │       ├── armor
+│   │       │   ├── breastplate
+│   │       │   ├── helmet
+│   │       │   ├── left boot
+│   │       │   ├── left glove
+│   │       │   ├── left sleeve
+│   │       │   ├── pants
+│   │       │   ├── right boot
+│   │       │   ├── right glove
+│   │       │   └── right sleeve
+│   │       ├── inne
+│   │       │   └── [index].txt - od 0 do n
+│   │       └── weapon
+│   │           └── [index].txt - od 0 do n
 │   ├── music
 │   └── fonts
 └── saves
-    └── save
+    └── [save name]
+        ├── mapy
+        ├── osiągnięcia
+        │   └── [index].txt - od 0 do n
+        ├── sklepy
+        │   └── [index].txt - od 0 do n
+        ├── date.txt
         ├── ekwipunek.txt
-        ├── postać.txt
-        ├── postać.png
-        └── mapy
+        └── postać.txt
 
 config.cfg - plik zawierający zapisane ustawienia
     Struktura pliku:

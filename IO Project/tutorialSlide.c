@@ -1,65 +1,65 @@
-#include <string.h>
+#include <raylib.h>
 
-#include "state.h"
-
-#include "menuElements.h"
-
+#include "button.h"
 #include "tutorialSlide.h"
 
+static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
+    FilePathList file = LoadDirectoryFiles("dane\\samouczek");
+    struct slidePositionParameters init = this->init;
 
+    float height = this->fontSize + 2.0f * init.incY;
+    float top = (float)init.y - (init.height * init.posY) / 2.0f;
 
-void CalculateTutorialSlidePosition(struct tutorialSlide* this, Image tutorialImage) {
-    FilePathList file = LoadDirectoryFiles("samouczek");
     this->numOfSlides = file.capacity;
 
-    struct slidePositionParameters init = this->init;
-    this->initposX = init.posX;
-    this-> initx = init.x;
-    this->tutorialImageHeight = tutorialImage.height;
-    this->tutorialImageWidth = tutorialImage.width;
+    this->image = LoadTexture("dane\\samouczek\\tip1\\img.png");
+    this->description = LoadFileText("dane\\samouczek\\tip1\\description.txt");
+    this->title = LoadFileText("dane\\samouczek\\tip1\\title.txt");
 
-    this->height = this->fontSize + 2.0f * init.incY;
-    this->top = init.y - (this->height * init.posY) / 2;
-
+    this->texturePosition = (Vector2) {
+        .x = init.x - (init.posX * init.width) / 2.0f,
+        .y = top + height
+    };
 
     this->titleBox = (struct textBox){
-            .rec = {
-                .x = (init.x - init.posX) / 2.0f,
-                .y = (this->top + this->height)/10,
-                .width = (float)init.width,
-                .height = this->height
-            },
-            .textLeftCorner = (Vector2) {
-                .x = (init.x - init.posX) / 2.0f + 5,
-                .y = (this->top + this->height) / 10 + 5,
-            }
+        .rec = {
+            .x = this->texturePosition.x,
+            .y = top,
+            .width = (float)init.width,
+            .height = height
+        },
+        .textLeftCorner = {
+            .x = this->texturePosition.x + init.incX,
+            .y = top + init.incY
+        }
     };
 
     this->descriptionBox = (struct textBox){
-            .rec = {
-                .x = (init.x - init.posX) / 2.0f,
-                .y = (this->top + this->height) / 10 + this->height + this->tutorialImageHeight * init.x/this->tutorialImageWidth,
-                .width = (float)init.width,
-                .height = this->height*2
-            },
-            .textLeftCorner = (Vector2) {
-                .x = (init.x - init.posX) / 2.0f + 5,
-                .y = (this->top + this->height) / 10 + this->height + this->tutorialImageHeight * init.x / this->tutorialImageWidth + 5,
-            }
+        .rec = {
+            .x = this->texturePosition.x,
+            .y = this->texturePosition.y + this->image.height * init.x / this->image.width,
+            .width = (float)init.width,
+            .height = init.height - height - this->image.height
+        },
+        .textLeftCorner = {
+            .x = this->texturePosition.x + init.incX,
+            .y = this->texturePosition.y + this->image.height * init.x / this->image.width + init.incY
+        }
     };
 
+    UnloadDirectoryFiles(file);
 }
 
-static void initializeButtons(struct tutorialSlide* this) {
+static void initializeButtons(struct tutorialSlide *this) {
     this->prev = (struct button){
         .text = "Poprzednie",
         .isActive = 1,
         .init = {
-            .x = (int)this->descriptionBox.rec.x - 160,
+            .x = (int)this->descriptionBox.rec.x,
             .y = (int)(this->descriptionBox.rec.y + this->descriptionBox.rec.height),
             .incX = 10,
             .incY = 10,
-            .posX = 0,
+            .posX = 3,
             .posY = 0
         },
         .font = this->font,
@@ -74,11 +74,11 @@ static void initializeButtons(struct tutorialSlide* this) {
         .text = "Nastepne",
         .isActive = 1,
         .init = {
-            .x = (int)(this->descriptionBox.rec.x + this->descriptionBox.rec.width) + 150,
+            .x = (int)(this->descriptionBox.rec.x + this->descriptionBox.rec.width),
             .y = (int)(this->descriptionBox.rec.y + this->descriptionBox.rec.height),
             .incX = 10,
             .incY = 10,
-            .posX = 2,
+            .posX = -1,
             .posY = 0
         },
         .font = this->font,
@@ -93,69 +93,67 @@ static void initializeButtons(struct tutorialSlide* this) {
     CalculateButtonPosition(&this->next);
 }
 
-void initializeTutorialSlideBox(struct tutorialSlide* this, Image tutorialImage) {
-    CalculateTutorialSlidePosition(this, tutorialImage);
+void initializeTutorialSlideBox(struct tutorialSlide *this) {
+    CalculateTutorialSlidePosition(this);
     initializeButtons(this);
 
     this->page = 1;
 
-    this->prev.isActive = (this->page == 1) ? 0 : 1;
-    this->next.isActive = ((this->page + 1) >= this->numOfSlides) ? 0 : 1;
+    this->prev.isActive = this->page != 1;
+    this->next.isActive = (this->page + 1) < this->numOfSlides;
 }
 
-void DrawTutorialSlideBox(struct tutorialSlide* this, Texture2D imageAsTexture, char* title, char* description) {
-    struct slidePositionParameters init = this->init;
+void freeTutorialSlideBox(struct tutorialSlide *this) {
+    UnloadTexture(this->image);
+    UnloadFileText(this->description);
+    UnloadFileText(this->title);
+}
 
-    Vector2 texturePosition;
-    texturePosition.x = (this->initx - this->initposX) / 2.0f;
-    texturePosition.y = (this->top + this->height) / 10.0f + this->height;
-
-    this->descriptionBox = (struct textBox){
-        .rec = {
-            .x = texturePosition.x,
-            .y = texturePosition.y + imageAsTexture.height* (float)this->initx / imageAsTexture.width,
-            .width = (float)init.width,
-            .height = (float)GetScreenHeight() - (texturePosition.y + imageAsTexture.height * (float)this->initx / imageAsTexture.width) - 50
-        },
-        .textLeftCorner = (Vector2) {
-            .x = texturePosition.x,
-            .y = texturePosition.y + imageAsTexture.height * (float)this->initx / imageAsTexture.width,
-        }
-    };
-
-    float size[2] = {
-        MeasureTextEx(*this->font, title, (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
-        MeasureTextEx(*this->font, description, (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1)
-    };
-
+void DrawTutorialSlideBox(struct tutorialSlide *this) {
     DrawRectangleRec(this->titleBox.rec, this->color);
 
-    DrawRectangleLinesEx(this->titleBox.rec, (float)this->width, this->borderColor);
+    DrawRectangleLinesEx(this->titleBox.rec, (float)this->lineWidth, this->borderColor);
 
     DrawRectangleRec(this->descriptionBox.rec, this->backgroundColor);
 
-    DrawRectangleLinesEx(this->descriptionBox.rec, (float)this->width, this->borderColor);
+    DrawRectangleLinesEx(this->descriptionBox.rec, (float)this->lineWidth, this->borderColor);
 
-    DrawTextEx(*this->font, title, this->titleBox.textLeftCorner, size[0]/5, (float)this->spaceing, this->fontColor);
-    DrawTextEx(*this->font, description, this->descriptionBox.textLeftCorner, size[1]/5, (float)this->spaceing, this->fontColor);
-    DrawTextureEx(imageAsTexture, texturePosition, 0, (float)this->initx/imageAsTexture.width, WHITE);
+    DrawTextEx(*this->font, this->title, this->titleBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+    DrawTextEx(*this->font, this->description, this->descriptionBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+    DrawTextureEx(this->image, this->texturePosition, 0, (float)this->titleBox.rec.width/this->image.width, WHITE);
 
     DrawButton(this->next);
     DrawButton(this->prev);
-
 }
 
-int UpdateTutorialSlideBox(struct tutorialSlide* this) {
+void UpdateTutorialSlideBox(struct tutorialSlide *this) {
+    bool changed = false;
+
     if (isMouseOver(this->prev)) {
-        if(this->page > 1) this->page -= 1;
+        if (this->page > 1) {
+            this->page -= 1;
+
+            changed = true;
+        }
     }
     else if (isMouseOver(this->next)) {
-        if (this->page <= this->numOfSlides) this->page += 1;
+        if (this->page <= this->numOfSlides) {
+            this->page += 1;
+
+            changed = true;
+        }
     }
-    printf("          %i       ", this->page);
+
     this->prev.isActive = (this->page <= 1 ) ? 0 : 1;
     this->next.isActive = ((this->page + 1) > this->numOfSlides) ? 0 : 1;
 
-    return this->page;
+    if (changed) {
+        UnloadFileText(this->title);
+        UnloadFileText(this->description);
+        UnloadTexture(this->image);
 
+        this->image = LoadTexture(TextFormat("dane\\samouczek\\tip%i\\img.png", this->page));
+        this->description = LoadFileText(TextFormat("dane\\samouczek\\tip%i\\description.txt", this->page));
+        this->title = LoadFileText(TextFormat("dane\\samouczek\\tip%i\\title.txt", this->page));
+    }
 }

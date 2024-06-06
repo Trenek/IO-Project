@@ -69,7 +69,7 @@ void shop(enum playState *state, struct playInfo *info) {
     InitializeEquipementBox(&equipement);
     InitializeShopInterface(&shopInterface);
 
-    while (*state == SHOP && !WindowShouldClose()) {
+    while (!WindowShouldClose() && *state == SHOP) {
         BeginDrawing();
             ClearBackground(color1);
 
