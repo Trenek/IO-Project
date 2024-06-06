@@ -1,4 +1,7 @@
-﻿#include <raylib.h>
+﻿//if you want to run tests simply uncomment below line and also uncomment the same line in file main_test.c
+#define RUN_TESTS
+
+#include <raylib.h>
 
 #include "state.h"
 

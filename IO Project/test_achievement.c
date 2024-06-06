@@ -187,15 +187,15 @@ void test_UpdateAchievementElem_NoRequirements(void) {
 }
 
 int add_tests_achievementElem(void) {
-    CU_pSuite pSuite = CU_add_suite("Suite_AchievementElem", NULL, NULL);
+    CU_pSuite pSuite = CU_add_suite("Achievement tests", NULL, NULL);
     if (NULL == pSuite) {
         return CU_get_error();
     }
 
     if (NULL == CU_add_test(pSuite, "test of UpdateAchievementElem", test_UpdateAchievementElem) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem_Status0", test_UpdateAchievementElem_Status0) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem_MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem_NoRequirements", test_UpdateAchievementElem_NoRequirements)) {
+        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with Status0", test_UpdateAchievementElem_Status0) ||
+        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements) ||
+        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with NoRequirements", test_UpdateAchievementElem_NoRequirements)) {
         return CU_get_error();
     }
 
