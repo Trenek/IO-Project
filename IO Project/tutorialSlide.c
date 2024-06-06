@@ -8,7 +8,7 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
     struct slidePositionParameters init = this->init;
 
     float height = this->fontSize + 2.0f * init.incY;
-    float top = (float)init.y - (init.height * init.posY) / 2.0f;
+    float top = init.y - (init.height * init.posY) / 2.0f;
 
     this->numOfSlides = file.capacity;
 
@@ -120,7 +120,7 @@ void DrawTutorialSlideBox(struct tutorialSlide *this) {
 
     DrawTextEx(*this->font, this->title, this->titleBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
     DrawTextEx(*this->font, this->description, this->descriptionBox.textLeftCorner, (float)this->fontSize, (float)this->spaceing, this->fontColor);
-    DrawTextureEx(this->image, this->texturePosition, 0, (float)this->titleBox.rec.width/this->image.width, WHITE);
+    DrawTextureEx(this->image, this->texturePosition, 0.0f, this->titleBox.rec.width / this->image.width, WHITE);
 
     DrawButton(this->next);
     DrawButton(this->prev);
