@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-int main(void) {
+int stateManager(void) {
     enum state state = MENU;
     struct menuInfo info = { 0 };
     void (*function[])(enum state *state, struct menuInfo *info) = {
