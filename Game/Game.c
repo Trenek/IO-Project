@@ -1,4 +1,4 @@
-﻿int stateManager(void);
+﻿void stateManager(void);
 
 int main() {
     stateManager();

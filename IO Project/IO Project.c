@@ -2,7 +2,7 @@
 
 #include "state.h"
 
-int stateManager(void) {
+void stateManager(void) {
     enum state state = MENU;
     struct menuInfo info = { 0 };
     void (*function[])(enum state *state, struct menuInfo *info) = {
@@ -29,6 +29,4 @@ int stateManager(void) {
 
         CloseWindow();
     } while (state == RELOAD);
-
-    return 0;
 }
