@@ -14,7 +14,7 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Pliki źródłowe\Tests">
-      <UniqueIdentifier>{80b0c78c-0521-4838-80b3-02dde681351d}</UniqueIdentifier>
+      <UniqueIdentifier>{cbe5ace3-9942-44f4-b300-2656bfe42acc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
