@@ -2,29 +2,31 @@ Game Fiels
 ├── config.cfg
 ├── dane
 │   ├── dialogi
+│   │   └── [id_dialogu] - od 0 do n
+│   │       └── [id wypowiedzi].txt - od 0 do n
 │   ├── mapy
 │   │   ├── position.txt
-│   │   └── [index].txt - od 0 do n
+│   │   └── [id_mapy].txt - od 0 do n
 │   ├── measurements
 │   │   ├── armor.txt
 │   │   ├── body.txt
 │   │   └── weapon.txt
 │   ├── postacie
-│   │   └── [index].txt - od 0 do n
+│   │   └── [id_postaci].txt - od 0 do n
 │   ├── przedmioty
 │   │   ├── armor.txt
 │   │   ├── inne.txt
 │   │   └── weapon.txt
 │   ├── samouczek
-│   │   └── tip[index] od 1 do n
+│   │   └── tip[id_porady] od 1 do n
 │   │       ├── title.txt
 │   │       ├── description.txt
 │   │       └── img.png
 │   ├── sklepy
-│   │   └── [index].txt - od 0 do n
+│   │   └── [id_sklepu].txt - od 0 do n
 │   └── walka
 │       └── attacks
-│           └── [index].txt - od 0 do n
+│           └── [id_ataku].txt - od 0 do n
 ├── resources
 │   ├── textures
 │   │   ├── body
@@ -49,11 +51,11 @@ Game Fiels
 │   │   │   └── torso
 │   │   ├── objects
 │   │   │   ├── ceiling
-│   │   │   │   └── [index].txt - od 0 do n
+│   │   │   │   └── [index].png - od 0 do n
 │   │   │   ├── floor
-│   │   │   │   └── [index].txt - od 0 do n
+│   │   │   │   └── [index].png - od 0 do n
 │   │   │   └── wall
-│   │   │       └── [index].txt - od 0 do n
+│   │   │       └── [index].png - od 0 do n
 │   │   └── przedmioty
 │   │       ├── armor
 │   │       │   ├── breastplate
@@ -66,18 +68,17 @@ Game Fiels
 │   │       │   ├── right glove
 │   │       │   └── right sleeve
 │   │       ├── inne
-│   │       │   └── [index].txt - od 0 do n
+│   │       │   └── [index].png - od 0 do n
 │   │       └── weapon
-│   │           └── [index].txt - od 0 do n
+│   │           └── [index].png - od 0 do n
 │   ├── music
 │   └── fonts
 └── saves
     └── [save name]
         ├── mapy
         ├── osiągnięcia
-        │   └── [index].txt - od 0 do n
+        │   └── [id_osiągnięcia].txt - od 0 do n
         ├── sklepy
-        │   └── [index].txt - od 0 do n
         ├── date.txt
         ├── ekwipunek.txt
         └── postać.txt
@@ -85,11 +86,11 @@ Game Fiels
 config.cfg - plik zawierający zapisane ustawienia
     Struktura pliku:
         [liczba klatek na sekundę]
-        [rozdzielczość]
+        [jakość tekstur]
         [szerokość okna] [wysokość okna]
         [tryb pełnoekranowy]
 
-    [rozdzielczość] określa rozdzielczość tekstur poprzez
+    [jakość tekstur] określa rozdzielczość tekstur poprzez
         0 - niska
         1 - średnia
         2 - wysoka
@@ -99,156 +100,329 @@ config.cfg - plik zawierający zapisane ustawienia
         0 - tryb pełnoekranowy jest wyłączony
         1 - tryb pełnoekranowy jest włączony
 
-ekwipunek.txt - plik zawierający informacje o ekwipunku id_postaci
+dialog -> [id_wypowiedzi].txt - plik określający daną wypowiedź i odpowiedzi na nią
     Struktura pliku:
-	[liczba przedmiotów]
-            [typ przedmiotu] [ID przedmiotu]
+        [???] [liczba odpowiedzi] [Tekst Wypowiedzi]
+            [typ odpowiedzi] [dodatkowe informacje] [Tekst Odpowiedzi]
+    
+    [???] - prawdopowodnie id wypowiedzi - chyba nigdzie nie używane - do usunięcia
+    [typ odpowiedzi] określa co się dzieje po wybraniu odpowiedzi:
+        [0] - przechodzimy do innej sceny
+        [1] - przechodzimy do innej wypowiedzi
 
-    [typ przedmiotu]:
-        [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
-        [1] - broń
-        [2] - pancerz:
-            [0] - head
-            [1] - torso
-            [2] - arms
-            [3] - hands
-            [4] - legs
-            [5] - feet
-        [3] - inne
+    [dodatkowe informacje]:
+        dla [0] - [id sceny] [id dialogu powrotu ze sceny]
+        dla [1] - [id kolejnej wypowiedzi]
 
-broń.txt - plik zawierający informacje o wszystkich broniach
+mapy -> position.txt - plik określający pozycję gracza
     Struktura pliku:
-        [liczba]
-        [ID] [siła] [nazwa] [opis]
-        ...
+        [id obecnej mapy] [koordynat X] [koordynat Y]
 
-pancerz.txt - plik zawierający informacje o wszystkich pancerzach
+mapy -> [id_mapy].txt - plik określający daną mapę
     Struktura pliku:
-        [typ] [liczba]
-            [ID] [obrona] [nazwa] [opis]
-        ...
+        [liczba podłóg]
+            [id_tekstury] [długość] [szerokość] [wysokość] [coordynatX] [coordynatY] [długość całości] [szerokość całości]
+        [liczba sufitów]
+            [id_tekstury] [długość] [szerokość] [wysokość] [coordynatX] [coordynatY] [długość całości] [szerokość całości]
+        [liczba ścian]
+            [id_tekstury] [długość] [szerokość] 
+            [lewy coordynatX] [dolny coordynatY] [przedni coordynatZ] 
+            [prawy coordynatX] [górny coordynatY] [tylny coordynatZ]
+        [liczba przeciwników] 
+            [id_przeciwnika] [id dialogu] [coordynatX] [coordynatY]
+        [liczba sklepikarzy]
+            [id tekstury] [id sklepu] [id dialogu] [coordynatX] [coordynatY]
 
-    [typ] określa typ przedmiotu poprzez:
-        [0] - head
-        [1] - torso
-        [2] - arms
-        [3] - hands
-        [4] - legs
-        [5] - feet
-
-przedmioty.txt - plik zawierający informacje o wszystkich przedmiotach
+armor.txt - plik zawierający lewe górne koordynaty części zbroi
     Struktura pliku:
-        [liczba]
-            [ID] 
-            [nazwa] 
-            [opis]
-        ...
+        [Przód]
+            [Hełm]
+                [Koordynat X] [Koordynat Y]
+            [Napierśnik]
+                [Koordynat X] [Koordynat Y]
+            [Spodnie]
+                [Koordynat X] [Koordynat Y]
+            [Lewy But]
+                [Koordynat X] [Koordynat Y]
+            [Prawy But]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Lewy Rękaw]
+                [Koordynat X] [Koordynat Y]
+            [Prawy Rękaw]
+                [Koordynat X] [Koordynat Y]
+        [Prawo]
+            [Hełm]
+                [Koordynat X] [Koordynat Y]
+            [Napierśnik]
+                [Koordynat X] [Koordynat Y]
+            [Spodnie]
+                [Koordynat X] [Koordynat Y]
+            [Lewy But]
+                [Koordynat X] [Koordynat Y]
+            [Prawy But]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Lewy Rękaw]
+                [Koordynat X] [Koordynat Y]
+            [Prawy Rękaw]
+                [Koordynat X] [Koordynat Y]
+        [Tył]
+            [Hełm]
+                [Koordynat X] [Koordynat Y]
+            [Napierśnik]
+                [Koordynat X] [Koordynat Y]
+            [Spodnie]
+                [Koordynat X] [Koordynat Y]
+            [Lewy But]
+                [Koordynat X] [Koordynat Y]
+            [Prawy But]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Lewy Rękaw]
+                [Koordynat X] [Koordynat Y]
+            [Prawy Rękaw]
+                [Koordynat X] [Koordynat Y]
+        [Lewo]
+            [Hełm]
+                [Koordynat X] [Koordynat Y]
+            [Napierśnik]
+                [Koordynat X] [Koordynat Y]
+            [Spodnie]
+                [Koordynat X] [Koordynat Y]
+            [Lewy But]
+                [Koordynat X] [Koordynat Y]
+            [Prawy But]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Rękawica]
+                [Koordynat X] [Koordynat Y]
+            [Lewy Rękaw]
+                [Koordynat X] [Koordynat Y]
+            [Prawy Rękaw]
+                [Koordynat X] [Koordynat Y]
 
-postać.txt - plik zawierający informacje o postaciach
+body.txt - plik zawierający lewe górne koordynaty części ciała
+    Struktura pliku:
+        [Przód]
+            [Głowa]
+                [Koordynat X] [Koordynat Y]
+            [Torso]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Stopa]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Stopa]
+                [Koordynat X] [Koordynat Y]
+        [Prawo]
+            [Głowa]
+                [Koordynat X] [Koordynat Y]
+            [Torso]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Stopa]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Stopa]
+                [Koordynat X] [Koordynat Y]
+        [Tył]
+            [Głowa]
+                [Koordynat X] [Koordynat Y]
+            [Torso]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Stopa]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Stopa]
+                [Koordynat X] [Koordynat Y]
+        [Lewo]
+            [Głowa]
+                [Koordynat X] [Koordynat Y]
+            [Torso]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Ręka]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Noga]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Dłoń]
+                [Koordynat X] [Koordynat Y]
+            [Lewa Stopa]
+                [Koordynat X] [Koordynat Y]
+            [Prawa Stopa]
+                [Koordynat X] [Koordynat Y]
+
+weapon.txt - plik zawierający lewe górne koordynaty broni
+    Struktura pliku:
+        [Koordynat X] [Koordynat Y]
+
+[id_postaci].txt - plik zawierający informacje o postaciach
     Struktura pliku:
         [nazwa]
         [szerokość] [wysokość]
 
-        [head id]
-        [face id]
-        [hair id]
-        [beard id]
-        [torso id]
-        [arms id]
-        [hands id]
-        [legs id]
-        [feet id]
+        [ID Głowy]
+        [ID Torsu]
+        [ID Lewej Ręki]
+        [ID Prawej Ręki]
+        [ID Lewej Nogi]
+        [ID Prawej Nogi]
+        [ID Lewej Dłoni]
+        [ID Prawej Dłoni]
+        [ID Lewej Stopy]
+        [ID Prawej Stopy]
 
-        [head armor id]
-        [torso armor id]
-        [arms armor id]
-        [hands armor id]
-        [legs armor id]
-        [feet armor id]
-        [weapon id]
+        [ID Hełmu]
+        [ID Napierśnika]
+        [ID Spodni]
+        [ID Lewego Buta]
+        [ID Prawego Buta]
+        [ID Lewej Rękawicy]
+        [ID Prawej Rękawicy]
+        [ID Lewego Rękawa]
+        [ID Prawego Rękawa]
+
+        [ID Broni]
 
         [liczba akcji]
-            [długość akcji]
-                [typ ruchu] [id]
+            [ID Akcji]
 
-ataki.txt - plik zawierający informacje o atakach
+    Jeśli ID jest równe -1, to oznacza to brak danej rzeczy
+
+armor.txt - plik zawierający informacje o wszystkich pancerzach
     Struktura pliku:
-        [id]
-            [łączne obrażenia]
-            [strona wyprowadzenia ataku]
-            [cel ataku]
-            [nazwa] 
-            [opis]
+        [Liczba Hełmów]
+            [cena] [wytrzymałość]
+        [Liczba Napierśników]
+            [cena] [wytrzymałość]
+        [Liczba Spodni]
+            [cena] [wytrzymałość]
+        [Liczba Lewych Butów]
+            [cena] [wytrzymałość]
+        [Liczba Prawych Butów]
+            [cena] [wytrzymałość]
+        [Liczba Lewych Rękawic]
+            [cena] [wytrzymałość]
+        [Liczba Prawych Rękawic]
+            [cena] [wytrzymałość]
+        [Liczba Lewych Rękawów]
+            [cena] [wytrzymałość]
+        [Liczba Prawych Rękawów]
+            [cena] [wytrzymałość]
 
-    [cel ataku] - określa zaatakowaną część ciała
+    [cena] określa cenę jako identyfikator przedmiotu, analogicznie jak w ekwipunku
 
-pozycje.txt - plik zawierający informacje o pozycjach
+inne.txt - plik zawierający informacje o wszystkich pancerzach
     Struktura pliku:
-        [id] 
-            ["ulepszona" strona]
-            [nazwa] 
-            [opis]
+        [Liczba Przedmiotów]
+            [cena] [wytrzymałość]
 
-umiejętności.txt - plik zawierający informacje o umiejętnościach
+    [cena] określa cenę jako identyfikator przedmiotu, analogicznie jak w ekwipunku
+
+weapon.txt - plik zawierający informacje o wszystkich pancerzach
     Struktura pliku:
-        [id] 
-            [obrażenia] 
-            [strona] 
-            [cel] 
-            [nazwa] 
-            [opis]
+        [Liczba Broni]
+            [cena] [wytrzymałość]
 
-dialog.txt - plik zawierający pewien dialog
+    [cena] określa cenę jako identyfikator przedmiotu, analogicznie jak w ekwipunku
+
+samouczek -> ... -> title.txt - plik zawierający tytuł porady
     Struktura pliku:
-        [id adresanta] [liczba odpowiedzi] [wypowiedź]
-            [następstwo odpowiedzi] [dodatkowe informacje] [wypowiedź]
+        [Tytuł porady]
 
-    [następstwo odpowiedzi]:
-        [0] - przejście do innego panelu
-        [1] - przejście do innego dialogu
-
-    [dodatkowe informacje]:
-        dla [0] - [id panelu] [id kolejnego dialogu]
-        dla [1] - [id kolejnej wypowiedzi]
-
-sklep.txt - plik opisujący przedmioty znajdujące się w sklepie
+samouczek -> ... -> description.txt - plik zawierający tytuł porady
     Struktura pliku:
-        [id_postaci]
-        16x [typ przedmiotu] [ID przedmiotu]
+        [Opis]
 
-    [typ przedmiotu]:
-        [0] - brak przedmiotu, wtedy nie podajemy [ID przedmiotu]
+sklepy -> [id_sklepu].txt - plik zawierający informacje o przedmiotach w sklepie
+    Struktura pliku:
+        10x [ID przedmiotu]
+
+    [ID przedmiotu] określa przedmiot analogicznie jak w ekwipunku
+
+walka -> attacks -> [id_ataku].txt - plik zawierający informacje o atakach
+    Struktura pliku:
+        [Nazwa Ataku]
+        [Siła ataku] [Koszt ataku]
+
+[id_osiągnięcia].txt - plik opisujący dane osiągnięcie
+    Struktura pliku:
+        [Tytuł osiągnięcia]
+        [Opis osiągnięcia]
+        [Liczba wymagań]
+            [Nazwa wymagania]
+        [Stan Osiągnięcia]
+
+    [Stan Osiągnięcia]: 
+        [0] - nie zdobyte
+        [1] - zdobyte
+
+date.txt - plik zawierający informacje o dacie ostatniego zapisu / wczytania zapisu
+    Struktura pliku:
+        [Rok] [Miesiąc] [Dzień] [Godzina] [Minuta] [Sekunda]
+
+ekwipunek.txt - plik zawierający informacje o ekwipunku postaci
+    Struktura pliku:
+        25 x [typ przedmiotu] [ID przedmiotu]
+
+    [ID przedmiotu]:
+        [0] - brak przedmiotu, brak [ID przedmiotu]
         [1] - broń
         [2] - pancerz:
-            [0] - helmet
-            [1] - breastplate
-            [2] - pants
-            [3] - left boot
-            [4] - right boot
-            [5] - left glove
-            [6] - right glove
-            [7] - left sleeve
-            [8] - right sleeve
+            [0] - hełm
+            [1] - napierśnik
+            [2] - spodnie
+            [3] - lewy but
+            [4] - prawy but
+            [5] - lewa rękawica
+            [6] - prawa rękawica
+            [7] - lewy rękaw
+            [8] - prawy rękaw
         [3] - inne
-
-mapa.txt - plik zawierający mapę, znajdują się one w folderze mapy
-    Struktura pliku:
-        [długość mapy] [szerokość mapy]
-        [liczba podłóg]
-            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY] [długość całości] [szerokość całości]
-        [liczba ścian]
-            [id_tekstury] [długość] [szerokość] [coordynatX] [coordynatY] [coordynatZ] [końcowy coordynatX] [końcowy coordynatY] [końcowy coordynatZ]
-        [liczba obiektów nieprzenikliwych]:
-            [id_tekstury] [szerokość] [wysokość] [coordynatX] [coordynatY]
-        [liczba przeciwników] 
-            [id_przeciwnika] [id dialogu] [wysokość] [coordynatX] [coordynatY]
-        [liczba sklepów]
-            [id tekstury] [id sklepu] [id dialogu] [coordynatX] [coordynatY]
-        [liczba obiektów interaktywnych]
-            [id_tekstury] [typ interakcji] [szerokość] [wysokość] [coordynatX] [coordynatY] [* dodatkowa informacja]
-
-    [typ interakcji]:
-        [0] - dialog [id_dialogu]
-        [2] - trening
-        [3] - dialog rozpoczynający walkę z bossem [id_dialogu] [id_postaci]
-        [4] - dialog rozczynający misję [id_dialogu] [id_misji]
