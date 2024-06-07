@@ -30,4 +30,9 @@
       <Filter>Pliki zasobów</Filter>
     </CopyFileToFolders>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="tests.h">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

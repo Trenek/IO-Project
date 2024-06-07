@@ -1,8 +1,7 @@
 ﻿#include <Cunit/CUnit.h>
 #include <Cunit/Basic.h>
 
-// Prototypes for the test registration functions
-int add_tests_achievementElem(void);
+#include "tests.h"
 
 int main(void) {
     printf("RUNNING TESTS:\n");
