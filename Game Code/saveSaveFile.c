@@ -278,7 +278,7 @@ static void SaveAchievements(struct SaveFile* this) {
 void SaveSaveFile(struct SaveFile *this) {
     struct stat st = { 0 };
 
-    if (stat(TextFormat("saves\\%s", this->saveName), &st) == 0) {
+    if (stat(TextFormat("saves\\%s", this->saveName), &st) == -1) {
         _mkdir(TextFormat("saves\\%s", this->saveName));
         _mkdir(TextFormat("saves\\%s\\mapy", this->saveName));
         _mkdir(TextFormat("saves\\%s\\sklepy", this->saveName));

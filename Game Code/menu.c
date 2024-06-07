@@ -134,14 +134,14 @@ void menu(enum state *state, struct menuInfo *info) {
 
     while (!WindowShouldClose() && *state == MENU) {
         BeginDrawing();
-        ClearBackground(color);
+            ClearBackground(color);
 
-        DrawButton(menuTitle);
-        DrawButton(newGame);
-        DrawButton(loadGame);
-        DrawButton(settings);
-        DrawButton(achievements);
-        DrawButton(exit);
+            DrawButton(menuTitle);
+            DrawButton(newGame);
+            DrawButton(loadGame);
+            DrawButton(settings);
+            DrawButton(achievements);
+            DrawButton(exit);
         EndDrawing();
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

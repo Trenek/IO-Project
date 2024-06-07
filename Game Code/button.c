@@ -1,7 +1,6 @@
 #include "button.h"
 
 void CalculateButtonPosition(struct button *element) {
-
     Vector2 size = MeasureTextEx(*element->font, element->text, (float)element->fontSize, (float)element->spaceing);
     struct buttonPositionParameters initial = element->init;
 
