@@ -7,7 +7,14 @@ void test_CalculateButtonPosition_Center(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
-        .init = {100, 100, 10, 10, 1, 1},
+        .init = {
+            .x = 100,
+            .y = 100,
+            .incX = 10,
+            .incY = 10, 
+            .posX = 1,
+            .posY = 1
+        },
         .font = &(Font) { 0 },
         .fontSize = 20,
         .fontColor = (Color) {255, 255, 255, 255},
@@ -31,7 +38,14 @@ void test_CalculateButtonPosition_TopLeft(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
-        .init = {100, 100, 10, 10, 0, 0},
+        .init = {
+            .x = 100,
+            .y = 100,
+            .incX = 10,
+            .incY = 10,
+            .posX = 0,
+            .posY = 0
+        },
         .font = &(Font) { 0 },
         .fontSize = 20,
         .fontColor = (Color) {255, 255, 255, 255},
@@ -55,7 +69,14 @@ void test_CalculateButtonPosition_TopRight(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
-        .init = {100, 100, 10, 10, 2, 0},
+        .init = {
+            .x = 100,
+            .y = 100,
+            .incX = 10,
+            .incY = 10,
+            .posX = 2,
+            .posY = 0
+        },
         .font = &(Font) { 0 },
         .fontSize = 20,
         .fontColor = (Color) {255, 255, 255, 255},
@@ -79,7 +100,14 @@ void test_CalculateButtonPosition_BottomLeft(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
-        .init = {100, 100, 10, 10, 0, 2},
+        .init = {
+            .x = 100,
+            .y = 100,
+            .incX = 10,
+            .incY = 10,
+            .posX = 0,
+            .posY = 2
+        },
         .font = &(Font) { 0 },
         .fontSize = 20,
         .fontColor = (Color) {255, 255, 255, 255},
@@ -103,7 +131,14 @@ void test_CalculateButtonPosition_BottomRight(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
-        .init = {100, 100, 10, 10, 2, 2},
+        .init = {
+            .x = 100,
+            .y = 100,
+            .incX = 10,
+            .incY = 10,
+            .posX = 2,
+            .posY = 2
+        },
         .font = &(Font) { 0 },
         .fontSize = 20,
         .fontColor = (Color) {255, 255, 255, 255},
