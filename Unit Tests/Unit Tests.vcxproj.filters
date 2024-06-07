@@ -24,6 +24,9 @@
     <ClCompile Include="test_achievement.c">
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="test_button.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\dependencies\CUnit\lib\cunit.dll">

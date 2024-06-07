@@ -154,6 +154,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test_achievement.c" />
+    <ClCompile Include="test_button.c" />
     <ClCompile Include="Unit Tests.c" />
   </ItemGroup>
   <ItemGroup>
