@@ -43,9 +43,6 @@ void test_UpdateAchievementElem(void) {
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
 
-    // Debug print statement
-    printf("element.status.text: '%s'\n", element.status.text);
-
     // Assertions
     CU_ASSERT_EQUAL(element.numberOfRequirements, achievement.requirementsCount);
     CU_ASSERT_STRING_EQUAL(element.name.text, achievement.name);
@@ -82,9 +79,6 @@ void test_UpdateAchievementElem_Status0(void) {
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
-
-    // Debug print statement
-    printf("element.status.text: '%s'\n", element.status.text);
 
     // Assertions
     CU_ASSERT_EQUAL(element.numberOfRequirements, achievement.requirementsCount);
@@ -125,9 +119,6 @@ void test_UpdateAchievementElem_MultipleRequirements(void) {
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
 
-    // Debug print statement
-    printf("element.status.text: '%s'\n", element.status.text);
-
     // Assertions
     CU_ASSERT_EQUAL(element.numberOfRequirements, achievement.requirementsCount);
     CU_ASSERT_STRING_EQUAL(element.name.text, achievement.name);
@@ -162,9 +153,6 @@ void test_UpdateAchievementElem_NoRequirements(void) {
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
-
-    // Debug print statement
-    printf("element.status.text: '%s'\n", element.status.text);
 
     // Assertions
     CU_ASSERT_EQUAL(element.numberOfRequirements, achievement.requirementsCount);
