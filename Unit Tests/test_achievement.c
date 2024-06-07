@@ -23,23 +23,22 @@ void compareColors(Color color1, Color color2) {
 }
 
 void test_UpdateAchievementElem(void) {
-    struct achievementElem element;
-    struct Achievement achievement;
-
-    // Initialize element
-    element.x = 10;
-    element.y = 20;
-    element.space = 5;
-    Font font = { 0 }; // Assume an empty font for simplicity
-    element.font = &font;
-
-    // Initialize achievement
-    achievement.requirementsCount = 2;
-    strcpy(achievement.name, "Achievement 1");
-    strcpy(achievement.description, "This is the first achievement.");
-    achievement.status = 1;
-    char* reqs[] = { "Requirement 1", "Requirement 2" };
-    achievement.requirements = reqs;
+    struct achievementElem element = {
+        .x = 10,
+        .y = 20,
+        .space = 5,
+        .font = &(Font) { 0 }
+    };
+    struct Achievement achievement = {
+        .requirementsCount = 2,
+        .name = "Achievement 1",
+        .description = "This is the first achievement.",
+        .status = 1,
+        .requirements = (char *[]) {
+            "Requirement 1",
+            "Requirement 2"
+        }
+    };
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
@@ -65,23 +64,21 @@ void test_UpdateAchievementElem(void) {
 }
 
 void test_UpdateAchievementElem_Status0(void) {
-    struct achievementElem element;
-    struct Achievement achievement;
-
-    // Initialize element
-    element.x = 10;
-    element.y = 20;
-    element.space = 5;
-    Font font = { 0 }; // Assume an empty font for simplicity
-    element.font = &font;
-
-    // Initialize achievement
-    achievement.requirementsCount = 1;
-    strcpy(achievement.name, "Achievement 2");
-    strcpy(achievement.description, "This is the second achievement.");
-    achievement.status = 0;
-    char* reqs[] = { "Requirement 1" };
-    achievement.requirements = reqs;
+    struct achievementElem element = {
+        .x = 10,
+        .y = 20,
+        .space = 5,
+        .font = &(Font) { 0 }
+    };
+    struct Achievement achievement = {
+        .requirementsCount = 1,
+        .name = "Achievement 2",
+        .description = "This is the second achievement.",
+        .status = 0,
+        .requirements = (char *[]) {
+            "Requirement 1"
+        }
+    };
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
@@ -107,23 +104,23 @@ void test_UpdateAchievementElem_Status0(void) {
 }
 
 void test_UpdateAchievementElem_MultipleRequirements(void) {
-    struct achievementElem element;
-    struct Achievement achievement;
-
-    // Initialize element
-    element.x = 10;
-    element.y = 20;
-    element.space = 5;
-    Font font = { 0 }; // Assume an empty font for simplicity
-    element.font = &font;
-
-    // Initialize achievement
-    achievement.requirementsCount = 3;
-    strcpy(achievement.name, "Achievement 3");
-    strcpy(achievement.description, "This is the third achievement.");
-    achievement.status = 1;
-    char* reqs[] = { "Requirement 1", "Requirement 2", "Requirement 3" };
-    achievement.requirements = reqs;
+    struct achievementElem element = {
+        .x = 10,
+        .y = 20,
+        .space = 5,
+        .font = &(Font) { 0 }
+    };
+    struct Achievement achievement = {
+        .requirementsCount = 3,
+        .name = "Achievement 3",
+        .description = "This is the third achievement.",
+        .status = 1,
+        .requirements = (char *[]){
+            "Requirement 1",
+            "Requirement 2",
+            "Requirement 3"
+        }
+    };
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
@@ -149,22 +146,19 @@ void test_UpdateAchievementElem_MultipleRequirements(void) {
 }
 
 void test_UpdateAchievementElem_NoRequirements(void) {
-    struct achievementElem element;
-    struct Achievement achievement;
-
-    // Initialize element
-    element.x = 10;
-    element.y = 20;
-    element.space = 5;
-    Font font = { 0 }; // Assume an empty font for simplicity
-    element.font = &font;
-
-    // Initialize achievement
-    achievement.requirementsCount = 0;
-    strcpy(achievement.name, "Achievement 4");
-    strcpy(achievement.description, "This is the fourth achievement.");
-    achievement.status = 1;
-    achievement.requirements = NULL;
+    struct achievementElem element = {
+        .x = 10,
+        .y = 20,
+        .space = 5,
+        .font = &(Font) { 0 }
+    };
+    struct Achievement achievement = {
+        .requirementsCount = 0,
+        .name = "Achievement 4",
+        .description = "This is the fourth achievement.",
+        .status = 1,
+        .requirements = NULL,
+    };
 
     // Call the function to test
     UpdateAchievementElem(&element, achievement);
@@ -187,16 +181,13 @@ void test_UpdateAchievementElem_NoRequirements(void) {
 
 int add_tests_achievementElem(void) {
     CU_pSuite pSuite = CU_add_suite("Achievement tests", NULL, NULL);
-    if (NULL == pSuite) {
-        return CU_get_error();
+
+    if (NULL != pSuite) {
+        CU_add_test(pSuite, "test of UpdateAchievementElem", test_UpdateAchievementElem);
+        CU_add_test(pSuite, "test of UpdateAchievementElem with Status0", test_UpdateAchievementElem_Status0);
+        CU_add_test(pSuite, "test of UpdateAchievementElem with MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements);
+        CU_add_test(pSuite, "test of UpdateAchievementElem with NoRequirements", test_UpdateAchievementElem_NoRequirements);
     }
 
-    if (NULL == CU_add_test(pSuite, "test of UpdateAchievementElem", test_UpdateAchievementElem) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with Status0", test_UpdateAchievementElem_Status0) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements) ||
-        NULL == CU_add_test(pSuite, "test of UpdateAchievementElem with NoRequirements", test_UpdateAchievementElem_NoRequirements)) {
-        return CU_get_error();
-    }
-
-    return CUE_SUCCESS;
+    return CU_get_error();
 }
