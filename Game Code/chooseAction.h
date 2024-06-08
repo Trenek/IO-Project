@@ -62,10 +62,21 @@ struct chooseAction {
     Color hoverColor;
 };
 
+struct animateAttack {
+    int isAttacked;
+    int playerTurn; // 0 - player, 1 - enemy
+    int attackID;
+
+    struct fighterLabel *attacker;
+    struct fighterLabel *attacked;
+};
+
 void initializeChooseAction(struct chooseAction *const this);
 void FreeChooseAction(struct chooseAction *const this);
 
 void DrawChooseAction(const struct chooseAction *const this);
-void UpdateChooseAction(struct chooseAction *const this);
+void UpdateChooseActionScrool(struct chooseAction *const this);
+int UpdateChooseAction(struct chooseAction *const this, struct animateAttack *attack);
+void AttackPlayer(struct chooseAction *const this, struct animateAttack *attack);
 
 #endif

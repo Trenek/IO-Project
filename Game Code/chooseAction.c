@@ -118,13 +118,22 @@ void DrawChooseAction(const struct chooseAction *const this) {
     }
 }
 
-void UpdateChooseAction(struct chooseAction *const this) {
+void AttackPlayer(struct chooseAction *const this, struct animateAttack *attack) {
+    attack->isAttacked = 1;
+    attack->attacker = this->active;
+    attack->attacked = this->target;
+    attack->attackID = rand() % attack->attacker->fighter.attackQuantity;
+    attack->playerTurn = attack->playerTurn ? 0 : 1;
+
+    struct fighterLabel *temp = this->active;
+    this->active = this->target;
+    this->target = temp;
+}
+
+void UpdateChooseActionScrool(struct chooseAction *const this) {
     static float scroll = 0.0f;
 
     if (this->isActive) {
-        int i = 0;
-        int clicked = IsMouseButtonPressed(MOUSE_BUTTON_LEFT) ? 0 : 1;
-
         scroll -= GetMouseWheelMove();
         if (scroll < -1.0f) {
             if (this->upperRow > 0) {
@@ -138,25 +147,33 @@ void UpdateChooseAction(struct chooseAction *const this) {
             }
             scroll = 0.0f;
         }
+    }
+}
+
+int UpdateChooseAction(struct chooseAction *const this, struct animateAttack *attack) {
+    int i = 0;
+    int clicked = 0;
+
+    if (this->isActive) {
         this->chosenRow = -1;
         while (i < this->rowQuantity) {
             if (CheckCollisionPointRec(GetMousePosition(), this->row[i][MAIN].rec)) {
                 this->chosenRow = i;
-                if (clicked == 0 && i + this->upperRow < this->active->fighter.attackQuantity) {
-                    clicked = 1;
+                clicked |= 0x01;
+                if (i + this->upperRow < this->active->fighter.attackQuantity) {
+                    clicked |= 0x02;
+
+                    attack->isAttacked = 1;
+                    attack->attacker = this->active;
+                    attack->attacked = this->target;
 
                     if (this->active->rest >= (*this->attacks)[this->active->fighter.attacks[i + this->upperRow]].force) {
-                        this->target->durability -= (*this->attacks)[this->active->fighter.attacks[i + this->upperRow]].force;
-                        if (this->target->durability < 0) {
-                            this->target->health += this->target->durability;
-                            this->target->durability = 0;
-                        }
-                        if (this->target->health < 0) {
-                            this->target->health = 0;
-                        }
-                        this->active->rest -= (*this->attacks)[this->active->fighter.attacks[i + this->upperRow]].cost;
+                        attack->isAttacked = 1;
+                        attack->attackID = i + this->upperRow;
+                        attack->attacker = this->active;
+                        attack->attacked = this->target;
+                        attack->playerTurn = attack->playerTurn ? 0 : 1;
 
-                        this->upperRow = 0;
                         struct fighterLabel *temp = this->active;
                         this->active = this->target;
                         this->target = temp;
@@ -167,8 +184,12 @@ void UpdateChooseAction(struct chooseAction *const this) {
             i += 1;
         }
 
-        if (clicked == 0) {
+        if (clicked & 0x02 || ~clicked & 0x01) {
             this->isActive = 0;
+            this->chosenRow = -1;
+            this->upperRow = 0;
         }
     }
+
+    return clicked;
 }

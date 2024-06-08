@@ -12,6 +12,79 @@
 #define INC_X (10)
 #define FONT_SIZE (25)
 
+void animateAttack(struct playInfo *info, struct animateAttack *attack) {
+    Color color2 = { .r = 78, .g = 215, .b = 50, .a = 255 };
+
+    float time = 1.0f;
+    if (attack->isAttacked == 1) {
+        struct button attacker = {
+            .text = attack->attacker->fighter.name,
+            .isActive = 1,
+            .init = {
+                .x = GetScreenWidth() >> 1,
+                .y = (GetScreenHeight() >> 1) - FONT_SIZE * 2,
+                .incX = INC_X,
+                .incY = INC_Y,
+                .posX = 1,
+                .posY = 1
+            },
+            .font = &info->resources->fonts[0],
+            .fontSize = FONT_SIZE,
+            .fontColor = BLACK,
+            .color = color2,
+            .hoverColor = color2,
+            .spaceing = 0
+        };
+
+        struct button button = {
+            .text = info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].name,
+            .isActive = 1,
+            .init = {
+                .x = GetScreenWidth() >> 1,
+                .y = GetScreenHeight() >> 1,
+                .incX = INC_X,
+                .incY = INC_Y,
+                .posX = 1,
+                .posY = 1
+            },
+            .font = &info->resources->fonts[0],
+            .fontSize = FONT_SIZE,
+            .fontColor = BLACK,
+            .color = color2,
+            .hoverColor = color2,
+            .spaceing = 0
+        };
+        CalculateButtonPosition(&attacker);
+        CalculateButtonPosition(&button);
+        while (time > 0) {
+            UpdateMusicStream(info->resources->music[0]);
+
+            BeginDrawing();
+                DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
+                DrawButton(button);
+                DrawButton(attacker);
+            EndDrawing();
+
+            time -= GetFrameTime();
+        }
+
+        attack->attacked->durability -= info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].force;
+
+        if (attack->attacked->durability < 0) {
+            attack->attacked->health += attack->attacked->durability;
+            attack->attacked->durability = 0;
+        }
+
+        if (attack->attacked->health < 0) {
+            attack->attacked->health = 0;
+        }
+
+        attack->attacker->rest -= info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].cost;
+    }
+
+    attack->isAttacked = 0;
+}
+
 void fight(enum playState *state, struct playInfo *info) {
     const int height = (GetScreenHeight() >> 2) + (GetScreenHeight() >> 1);
     const int spaceY = INC_Y + INC_Y + FONT_SIZE + 10;
@@ -166,6 +239,8 @@ void fight(enum playState *state, struct playInfo *info) {
         .hoverColor = PINK
     };
 
+    struct animateAttack attack = { 0 };
+
     ShowCursor();
 
     struct Object2D *render[] = {
@@ -206,28 +281,27 @@ void fight(enum playState *state, struct playInfo *info) {
 
                     RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
                 EndMode3D();
+
+                DrawButton(action);
+                DrawButton(items);
+                DrawButton(runAway);
+                DrawButton(giveUp);
+
+                DrawFighterLabel(&me);
+                DrawFighterLabel(&enemy);
             EndTextureMode();
 
             DrawTextureRec(info->screenCamera->texture, *info->screenRect, (Vector2) { 0, 0 }, WHITE);
 
-
-            DrawButton(action);
-            DrawButton(items);
-            DrawButton(runAway);
-            DrawButton(giveUp);
-
             DrawChooseAction(&saves);
-
-            DrawFighterLabel(&me);
-            DrawFighterLabel(&enemy);
         EndDrawing();
 
-        UpdateChooseAction(&saves);
-
-        if (saves.isActive == 0) {
+        UpdateChooseActionScrool(&saves);
+        if (attack.playerTurn == 0) {
             if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                if (!UpdateChooseAction(&saves, &attack));
                 if (isMouseOver(giveUp)) *state = DEATH_SCREEN;
-                else if (isMouseOver(runAway)) { 
+                else if (isMouseOver(runAway)) {
                     if (rand() % 2) {
                         *state = DEATH_SCREEN;
                     }
@@ -242,6 +316,12 @@ void fight(enum playState *state, struct playInfo *info) {
                 *state = PAUSE;
             }
         }
+        else {
+            AttackPlayer(&saves, &attack);
+        }
+
+        animateAttack(info, &attack);
+
         UpdateFighterLabel(&me);
         UpdateFighterLabel(&enemy);
 
