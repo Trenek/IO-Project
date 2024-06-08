@@ -5,6 +5,7 @@
 #include "menuElements.h"
 
 #include "saveData.h"
+#include "animateAttack.h"
 
 static void initializeRows(struct chooseAction *const this) {
     struct chooseActionPositionParameters init = this->init;

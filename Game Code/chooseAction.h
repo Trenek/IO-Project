@@ -9,6 +9,7 @@
 
 struct saveData;
 struct menuInfo;
+struct animateAttack;
 
 struct chooseActionPositionParameters {
     int x;
@@ -60,15 +61,6 @@ struct chooseAction {
     Color activeBorderColor;
     Color inactiveBorderColor;
     Color hoverColor;
-};
-
-struct animateAttack {
-    int isAttacked;
-    int playerTurn; // 0 - player, 1 - enemy
-    int attackID;
-
-    struct fighterLabel *attacker;
-    struct fighterLabel *attacked;
 };
 
 void initializeChooseAction(struct chooseAction *const this);

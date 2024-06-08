@@ -124,6 +124,12 @@
     <Filter Include="Pliki źródłowe\menu\chooseAction">
       <UniqueIdentifier>{22c996a2-4e51-41b7-b1fd-8b496e2e3a72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\state\play\fight">
+      <UniqueIdentifier>{1bd5224f-7e6c-41e7-856e-35f4ab3c06c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pliki źródłowe\state\play\fight\animateAttack">
+      <UniqueIdentifier>{cb0ca5b9-8fa9-4a65-bea3-7da81d3368ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.c">
@@ -154,9 +160,6 @@
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="pause.c">
-      <Filter>Pliki źródłowe\state\play</Filter>
-    </ClCompile>
-    <ClCompile Include="fight.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
     <ClCompile Include="dialog.c">
@@ -270,6 +273,12 @@
     <ClCompile Include="chooseAction.c">
       <Filter>Pliki źródłowe\menu\chooseAction</Filter>
     </ClCompile>
+    <ClCompile Include="animateAttack.c">
+      <Filter>Pliki źródłowe\state\play\fight\animateAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="fight.c">
+      <Filter>Pliki źródłowe\state\play</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -361,6 +370,9 @@
     </ClInclude>
     <ClInclude Include="chooseAction.h">
       <Filter>Pliki źródłowe\menu\chooseAction</Filter>
+    </ClInclude>
+    <ClInclude Include="animateAttack.h">
+      <Filter>Pliki źródłowe\state\play\fight\animateAttack</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
