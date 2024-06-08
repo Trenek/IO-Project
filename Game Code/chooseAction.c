@@ -10,10 +10,8 @@
 static void initializeRows(struct chooseAction *const this) {
     struct chooseActionPositionParameters init = this->init;
 
-    char buffor[9] = { 0 };
-
     float size[4] = {
-        [NUM] = MeasureTextEx(*this->font, _itoa(this->attacksQuantity, buffor, 10), (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
+        [NUM] = MeasureTextEx(*this->font, TextFormat("%i", this->attacksQuantity), (float)this->fontSize, (float)this->spaceing).x + (init.incX << 1),
         [NAME] = (float)init.width + (init.incX << 1)
     };
 
