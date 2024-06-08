@@ -3,7 +3,7 @@
 #include <CUnit/Basic.h>
 #include "button.h"
 
-void test_CalculateButtonPosition_Center(void) {
+static void test_CalculateButtonPosition_Center(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
@@ -34,7 +34,7 @@ void test_CalculateButtonPosition_Center(void) {
     CU_ASSERT_DOUBLE_EQUAL(element.textLeftCorner.y, 100.0, 0.001); // 85 + 10
 }
 
-void test_CalculateButtonPosition_TopLeft(void) {
+static void test_CalculateButtonPosition_TopLeft(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
@@ -65,7 +65,7 @@ void test_CalculateButtonPosition_TopLeft(void) {
     CU_ASSERT_EQUAL(element.textLeftCorner.y, 110.0); // 100 + 10
 }
 
-void test_CalculateButtonPosition_TopRight(void) {
+static void test_CalculateButtonPosition_TopRight(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
@@ -96,7 +96,7 @@ void test_CalculateButtonPosition_TopRight(void) {
     CU_ASSERT_EQUAL(element.textLeftCorner.y, 110.0); // 100 + 10
 }
 
-void test_CalculateButtonPosition_BottomLeft(void) {
+static void test_CalculateButtonPosition_BottomLeft(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,
@@ -127,7 +127,7 @@ void test_CalculateButtonPosition_BottomLeft(void) {
     CU_ASSERT_EQUAL(element.textLeftCorner.y, 90.0); // 55 + 10
 }
 
-void test_CalculateButtonPosition_BottomRight(void) {
+static void test_CalculateButtonPosition_BottomRight(void) {
     struct button element = {
         .text = "Button",
         .isActive = true,

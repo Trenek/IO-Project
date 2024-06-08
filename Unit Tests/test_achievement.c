@@ -9,20 +9,14 @@
 #include "savefile.h"
 #include "button.h"
 
-int init_suite(void) {
-    return 0;
-}
-int clean_suite(void) {
-    return 0;
-}
-void compareColors(Color color1, Color color2) {
+static void compareColors(Color color1, Color color2) {
     CU_ASSERT_EQUAL(color1.r, color2.r);
     CU_ASSERT_EQUAL(color1.g, color2.g);
     CU_ASSERT_EQUAL(color1.b, color2.b);
     CU_ASSERT_EQUAL(color1.a, color2.a);
 }
 
-void test_UpdateAchievementElem(void) {
+static void test_UpdateAchievementElem(void) {
     struct achievementElem element = {
         .x = 10,
         .y = 20,
@@ -60,7 +54,7 @@ void test_UpdateAchievementElem(void) {
     free(element.requirements);
 }
 
-void test_UpdateAchievementElem_Status0(void) {
+static void test_UpdateAchievementElem_Status0(void) {
     struct achievementElem element = {
         .x = 10,
         .y = 20,
@@ -97,7 +91,7 @@ void test_UpdateAchievementElem_Status0(void) {
     free(element.requirements);
 }
 
-void test_UpdateAchievementElem_MultipleRequirements(void) {
+static void test_UpdateAchievementElem_MultipleRequirements(void) {
     struct achievementElem element = {
         .x = 10,
         .y = 20,
@@ -136,7 +130,7 @@ void test_UpdateAchievementElem_MultipleRequirements(void) {
     free(element.requirements);
 }
 
-void test_UpdateAchievementElem_NoRequirements(void) {
+static void test_UpdateAchievementElem_NoRequirements(void) {
     struct achievementElem element = {
         .x = 10,
         .y = 20,
