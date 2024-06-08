@@ -32,7 +32,7 @@ struct slideBox {
     Color borderActiveColor;
     Color borderColor;
     int spaceing;
-    const char *options[];
+    const char **options;
 };
 
 void CalculateSlideBoxPosition(struct slideBox *element);

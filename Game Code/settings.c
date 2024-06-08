@@ -217,7 +217,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .numberOfOptions = 6,
         .isActive = false,
         .currentOption = 0,
-        .options = {
+        .options = (const char *[]){
             "15",
             "30",
             "60",
@@ -247,7 +247,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .numberOfOptions = 23,
         .isActive = false,
         .currentOption = 0,
-        .options = {
+        .options = (const char *[]){
             "640x360",
             "640x480",
             "800x600",
@@ -294,7 +294,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 1,
-        .options = {
+        .options = (const char *[]){
             "Low",
             "Medium",
             "High"
@@ -320,7 +320,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .numberOfOptions = 2,
         .isActive = false,
         .currentOption = 0,
-        .options = {
+        .options = (const char *[]){
             "Wyłączony",
             "Włączony"
         },

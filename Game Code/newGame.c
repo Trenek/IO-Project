@@ -216,7 +216,7 @@ void newGame(enum state *state, struct menuInfo *info) {
         .numberOfOptions = 3,
         .isActive = false,
         .currentOption = 0,
-        .options = {
+        .options = (const char *[]){
             "Easy",
             "Medium",
             "Hard"

@@ -110,7 +110,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200;4201;6031</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4820;5045;4711;4710;4201</DisableSpecificWarnings>
       <CompileAs>CompileAsC</CompileAs>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
@@ -149,7 +149,7 @@
       <ExternalWarningLevel>Level3</ExternalWarningLevel>
       <TreatAngleIncludeAsExternal>true</TreatAngleIncludeAsExternal>
       <ExternalTemplatesDiagnostics>false</ExternalTemplatesDiagnostics>
-      <DisableSpecificWarnings>4820;5045;4711;4710;4206;4200;4201;6031</DisableSpecificWarnings>
+      <DisableSpecificWarnings>4820;5045;4711;4710;4201</DisableSpecificWarnings>
       <CompileAs>CompileAsC</CompileAs>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
