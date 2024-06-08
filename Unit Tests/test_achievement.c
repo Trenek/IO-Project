@@ -161,7 +161,7 @@ static void test_UpdateAchievementElem_NoRequirements(void) {
     free(element.requirements);
 }
 
-int add_tests_achievementElem(void) {
+CU_ErrorCode add_tests_achievementElem(void) {
     CU_pSuite pSuite = CU_add_suite("Achievement tests", NULL, NULL);
 
     if (NULL != pSuite) {

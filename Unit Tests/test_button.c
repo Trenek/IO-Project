@@ -158,7 +158,7 @@ static void test_CalculateButtonPosition_BottomRight(void) {
     CU_ASSERT_EQUAL(element.textLeftCorner.y, 90.0); // 55 + 10
 }
 
-int add_tests_button(void) {
+CU_ErrorCode add_tests_button(void) {
     CU_pSuite pSuite = CU_add_suite("Button tests", NULL, NULL);
 
     if (NULL != pSuite) {

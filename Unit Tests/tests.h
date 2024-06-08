@@ -1,2 +1,2 @@
-int add_tests_achievementElem(void);
-int add_tests_button(void);
+CU_ErrorCode add_tests_achievementElem(void);
+CU_ErrorCode add_tests_button(void);
