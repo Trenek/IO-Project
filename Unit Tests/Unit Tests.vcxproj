@@ -153,6 +153,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="test_createSaveFile.c" />
     <ClCompile Include="test_inputBox.c" />
     <ClCompile Include="test_chooseAction.c" />
     <ClCompile Include="test_achievement.c" />

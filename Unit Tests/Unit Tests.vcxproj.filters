@@ -46,9 +46,12 @@
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_numberSlideBox.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_stringSlideBox.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_createSaveFile.c">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
   </ItemGroup>
