@@ -72,7 +72,7 @@ static void test_AttackPlayer(void) {
 
     AttackPlayer(&action, &attack);
 
-
+    // Assertions
     CU_ASSERT_EQUAL(attack.isAttacked, 1);
     CU_ASSERT_EQUAL(attack.attacker, &fighter1);
     CU_ASSERT_EQUAL(attack.attacked, &fighter2);

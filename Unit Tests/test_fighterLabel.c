@@ -11,21 +11,6 @@
 int countDurability(int* ((*durability)[9]), int(*armorPart)[9]);
 
 
-// Print function for debugging
-void printFighterLabel(const struct fighterLabel* label) {
-    printf("fighterLabel:\n");
-    printf("  leftCorner: {x: %f, y: %f}\n", label->leftCorner.x, label->leftCorner.y);
-    printf("  name: {x: %f, y: %f}\n", label->name.x, label->name.y);
-    printf("  width: %d\n", label->width);
-    printf("  height: %d\n", label->height);
-    printf("  health: %d\n", label->health);
-    printf("  durability: %d\n", label->durability);
-    printf("  rest: %d\n", label->rest);
-    printf("  maxHealth: %d\n", label->maxHealth);
-    printf("  maxRest: %d\n", label->maxRest);
-    printf("  maxDurability: %d\n", label->maxDurability);
-}
-
 void MockInitializeFighterLabel(struct fighterLabel* this) {
     struct fighterLabelPositionParameters init = this->init;
     const int width = 3 * init.height;

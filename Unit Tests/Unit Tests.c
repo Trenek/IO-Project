@@ -3,11 +3,16 @@
 #include <raylib.h>
 #include "tests.h"
 
-int main(void) {
-    // Initialize Raylib
+int setup(void) {
     SetTraceLogLevel(LOG_NONE);
     InitWindow(800, 600, "Test Window");
     SetTargetFPS(60);
+    return 0;
+}
+
+
+int main(void) {
+    setup();
     CU_basic_set_mode(CU_BRM_VERBOSE);
 
     if (CUE_SUCCESS == CU_initialize_registry())
@@ -16,7 +21,9 @@ int main(void) {
     if (CUE_SUCCESS == add_tests_saveData())
     if (CUE_SUCCESS == add_tests_chooseAction())
     if (CUE_SUCCESS == add_tests_equipementBox())
-    if (CUE_SUCCESS == add_tests_fighterLabel()) {
+    if (CUE_SUCCESS == add_tests_fighterLabel())
+    if (CUE_SUCCESS == add_tests_inputBox())
+    if (CUE_SUCCESS == add_tests_itemBox()) {
         CU_basic_run_tests();
     }
 
