@@ -6,3 +6,5 @@ CU_ErrorCode add_tests_equipementBox(void);
 CU_ErrorCode add_tests_fighterLabel(void);
 CU_ErrorCode add_tests_inputBox(void);
 CU_ErrorCode add_tests_itemBox(void);
+CU_ErrorCode add_tests_numberSlideBox(void);
+CU_ErrorCode add_tests_stringSlideBox(void);

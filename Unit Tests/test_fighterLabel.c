@@ -11,7 +11,7 @@
 int countDurability(int* ((*durability)[9]), int(*armorPart)[9]);
 
 
-void MockInitializeFighterLabel(struct fighterLabel* this) {
+static void MockInitializeFighterLabel(struct fighterLabel* this) {
     struct fighterLabelPositionParameters init = this->init;
     const int width = 3 * init.height;
 
@@ -38,7 +38,7 @@ void MockInitializeFighterLabel(struct fighterLabel* this) {
 }
 
 // Test CountDurability
-void test_CountDurability(void) {
+static void test_CountDurability(void) {
     // Allocate memory for the durability array and initialize it
     int* durability[9];
     for (int i = 0; i < 9; i++) {
@@ -65,7 +65,7 @@ void test_CountDurability(void) {
 }
 
 // Test InitializeFighterLabel
-void test_InitializeFighterLabel(void) {
+static void test_InitializeFighterLabel(void) {
     // Allocate and initialize durability array
     int* durability[9];
     for (int i = 0; i < 9; i++) {
@@ -111,7 +111,7 @@ void test_InitializeFighterLabel(void) {
 }
 
 // Test FreeFighterLabel
-void test_FreeFighterLabel(void) {
+static void test_FreeFighterLabel(void) {
     struct fighterLabel label = {
         .render = LoadRenderTexture(100, 50)
     };
@@ -123,7 +123,7 @@ void test_FreeFighterLabel(void) {
 }
 
 // Test DrawFighterLabel
-void test_DrawFighterLabel(void) {
+static void test_DrawFighterLabel(void) {
     struct fighterLabel label = {
         .leftCorner = {50, 50},
         .render = LoadRenderTexture(100, 50)

@@ -3,7 +3,7 @@
 #include <raylib.h>
 #include "inputBox.h"
 
-void test_CalculateInputBoxPosition(void) {
+static void test_CalculateInputBoxPosition(void) {
     struct inputBox element = {
         .init = {
             .x = 100,
@@ -28,7 +28,7 @@ void test_CalculateInputBoxPosition(void) {
     CU_ASSERT_EQUAL(element.lengthArrayLength, 0);
 }
 
-void test_DrawInputBox(void) {
+static void test_DrawInputBox(void) {
     struct inputBox element = {
         .init = {
             .x = 100,
@@ -60,7 +60,7 @@ void test_DrawInputBox(void) {
     CU_ASSERT_TRUE(true);
 }
 
-void test_InternalUpdateInputBox(void) {
+static void test_InternalUpdateInputBox(void) {
     struct inputBox element = {
         .init = {
             .x = 100,

@@ -160,7 +160,9 @@
     <ClCompile Include="test_equipmentBox.c" />
     <ClCompile Include="test_fighterLabel.c" />
     <ClCompile Include="test_itemBox.c" />
+    <ClCompile Include="test_numberSlideBox.c" />
     <ClCompile Include="test_saveData.c" />
+    <ClCompile Include="test_stringSlideBox.c" />
     <ClCompile Include="Unit Tests.c" />
   </ItemGroup>
   <ItemGroup>

@@ -23,7 +23,9 @@ int main(void) {
     if (CUE_SUCCESS == add_tests_equipementBox())
     if (CUE_SUCCESS == add_tests_fighterLabel())
     if (CUE_SUCCESS == add_tests_inputBox())
-    if (CUE_SUCCESS == add_tests_itemBox()) {
+    if (CUE_SUCCESS == add_tests_itemBox())
+    if (CUE_SUCCESS == add_tests_numberSlideBox())
+    if (CUE_SUCCESS == add_tests_stringSlideBox()) {
         CU_basic_run_tests();
     }
 

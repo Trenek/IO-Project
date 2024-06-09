@@ -4,7 +4,7 @@
 #include "itemBox.h"
 #include "playState.h"
 
-void test_CalculateItemBoxPosition(void) {
+static void test_CalculateItemBoxPosition(void) {
     struct itemBox element = {
         .init = {
             .x = 100,
@@ -29,7 +29,7 @@ void test_CalculateItemBoxPosition(void) {
     CU_ASSERT_EQUAL(element.boxRectangle.height, 50);
 }
 
-void test_DrawItemBox(void) {
+static void test_DrawItemBox(void) {
     struct itemBox element = {
         .init = {
             .x = 100,
