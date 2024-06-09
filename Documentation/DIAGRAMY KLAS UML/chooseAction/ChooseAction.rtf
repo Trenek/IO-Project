@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg1250\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 @startuml\
+class chooseAction \{\
+  +int rowQuantity\
+  +int wideness\
+  +int isActive\
+  +attack** attacks\
+  +int attacksQuantity\
+  +fighterLabel* active\
+  +fighterLabel* target\
+  +chooseActionPositionParameters init\
+  +int upperRow\
+  +int chosenRow\
+  +celle row[4]\
+  +Rectangle prevRec\
+  +Rectangle nextRec\
+  +Font* font\
+  +Color fontColor\
+  +int fontSize\
+  +int spaceing\
+  +Color color\
+  +Color activeBorderColor\
+  +Color inactiveBorderColor\
+  +Color hoverColor\
+  +initializeChooseAction(chooseAction* this)\
+  +FreeChooseAction(chooseAction* this)\
+  +DrawChooseAction(const chooseAction* this)\
+  +UpdateChooseActionScrool(chooseAction* this)\
+  +UpdateChooseAction(chooseAction* this, animateAttack* attack)\
+  +AttackPlayer(chooseAction* this, animateAttack* attack)\
+\}\
+\
+class chooseActionPositionParameters \{\
+  +int x\
+  +int y\
+  +int width\
+  +int incX\
+  +int incY\
+  +int posX\
+  +int posY\
+\}\
+\
+class fighterLabel \{\
+  +int barWidth\
+  +int barGap\
+  +int maxHealth\
+  +int maxRest\
+  +int health\
+  +int rest\
+  +int durability\
+  +character fighter\
+  +fighterLabelPositionParameters init\
+  +Vector2 leftCorner\
+  +Vector2 name\
+  +RenderTexture render\
+  +int maxDurability\
+  +int height\
+  +int width\
+  +Font* font\
+  +int fontSize\
+  +Color fontColor\
+  +int spaceing\
+  +Color color\
+  +InitializeFighterLabel(fighterLabel* this, Resources* resources)\
+  +FreeFighterLabel(fighterLabel* this)\
+  +DrawFighterLabel(fighterLabel* this)\
+  +UpdateFighterLabel(fighterLabel* this)\
+\}\
+\
+class attack \{\
+  +char* name\
+  +int force\
+  +int cost\
+\}\
+\
+class celle \{\
+  +Rectangle rec\
+  +Vector2 textLeftCorner\
+\}\
+\
+chooseAction --> attack : <<use>>\
+chooseAction --> fighterLabel : <<use>>\
+chooseAction --> celle : <<use>>\
+chooseAction o-- chooseActionPositionParameters : agregacja\
+fighterLabel o-- fighterLabelPositionParameters : agregacja\
+fighterLabel o-- character : agregacja\
+@enduml}
