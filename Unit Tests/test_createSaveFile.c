@@ -7,6 +7,7 @@
 #include <string.h>
 #include <stdio.h>
 #include <time.h>
+#include <ctype.h>
 #include "state.h"
 
 static void CreateDate(const char* const saveName) {
@@ -132,27 +133,42 @@ static void CreateAchievements(const char* const saveName) {
     fclose(file);
 }
 
-static bool CreateNewSave(const char* const saveName, const char* const characterName, const int bodyParts[10]) {
+static bool isValidSaveName(const char* saveName) {
+    while (*saveName) {
+        if (!isalnum((unsigned char)*saveName) && *saveName != ' ') {
+            return false;
+        }
+        saveName++;
+    }
+    return true;
+}
+
+static int CreateNewSave(const char* const saveName, const char* const characterName, const int bodyParts[10]) {
     const char* saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
-    bool result = 1;
 
-     if (stat(saveDirectory, &st) != 0) {
-        result = 0;
-        _mkdir(saveDirectory);
-        _mkdir(TextFormat("saves\\%s\\mapy", saveName));
-        _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
-        _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
+    if (stat(saveDirectory, &st) == 0)
+        return 1;
 
-        CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
-        CreatePlayer(saveName, characterName, bodyParts);
-        CopyShops(saveName);
-        CopyMaps(saveName);
-        CreateAchievements(saveName);
-    }
+    if (!isValidSaveName(saveName))
+        return 2;
 
-    return result;
+    _mkdir(saveDirectory);
+
+    _mkdir(TextFormat("saves\\%s\\mapy", saveName));
+    _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
+    _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
+
+    CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
+
+    CreatePlayer(saveName, characterName, bodyParts);
+    CopyShops(saveName);
+    CopyMaps(saveName);
+    CreateAchievements(saveName);
+
+    return 0;
 }
+
 
 // Test cases
 
@@ -199,7 +215,7 @@ static void test_CreateNewSave_space_in_character_name(void) {
 static void test_CreateNewSave_invalid_characters_in_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("test*Save?", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 //Test z nazw¹ postaci zawieraj¹c¹ nieprawid³owe znaki
@@ -213,7 +229,7 @@ static void test_CreateNewSave_invalid_characters_in_character_name(void) {
 static void test_CreateNewSave_non_ascii_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("testŒave", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 //Test z nazw¹ postaci zawieraj¹c¹ znaki spoza ASCII
@@ -262,7 +278,7 @@ static void test_CreateNewSave_empty_save_and_character_name(void) {
 static void test_CreateNewSave_special_characters_in_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("test@Save#", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 //Test z nazw¹ postaci zawieraj¹c¹ znaki specjalne
@@ -276,7 +292,7 @@ static void test_CreateNewSave_special_characters_in_character_name(void) {
 static void test_CreateNewSave_mixed_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("test123@Save#", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 //Test z nazw¹ postaci zawieraj¹c¹ kombinacjê liter, cyfr i znaków specjalnych
@@ -290,7 +306,7 @@ static void test_CreateNewSave_mixed_character_name(void) {
 static void test_CreateNewSave_gibberish_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("][/-/&*E@", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 // Test z losowymi znakami w nazwie postaci
@@ -318,7 +334,7 @@ static void test_CreateNewSave_short_character_name(void) {
 static void test_CreateNewSave_newline_in_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("test\nSave", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 // Test z nazw¹ postaci zawieraj¹ca znak nowej linii
@@ -332,7 +348,7 @@ static void test_CreateNewSave_newline_in_character_name(void) {
 static void test_CreateNewSave_tab_in_save_name(void) {
     int bodyParts[10] = { 0 };
     bool result = CreateNewSave("test\tSave", "testCharacter", bodyParts);
-    CU_ASSERT_FALSE(result);
+    CU_ASSERT_TRUE(result);
 }
 
 // Test z nazw¹ postaci zawieraj¹ca znak TAB
@@ -379,7 +395,7 @@ CU_ErrorCode add_tests_CreateNewSave(void) {
         CU_add_test(pSuite, "test of CreateNewSave - empty strings", test_CreateNewSave_empty_strings);
         CU_add_test(pSuite, "test of CreateNewSave - space in save name", test_CreateNewSave_space_in_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - space in character name", test_CreateNewSave_space_in_character_name);
-        //CU_add_test(pSuite, "test of CreateNewSave - invalid characters in save name", test_CreateNewSave_invalid_characters_in_save_name);
+        CU_add_test(pSuite, "test of CreateNewSave - invalid characters in save name", test_CreateNewSave_invalid_characters_in_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - invalid characters in character name", test_CreateNewSave_invalid_characters_in_character_name);
         CU_add_test(pSuite, "test of CreateNewSave - non ASCII save name", test_CreateNewSave_non_ascii_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - non ASCII character name", test_CreateNewSave_non_ascii_character_name);
@@ -392,13 +408,13 @@ CU_ErrorCode add_tests_CreateNewSave(void) {
         CU_add_test(pSuite, "test of CreateNewSave - special characters in character name", test_CreateNewSave_special_characters_in_character_name);
         CU_add_test(pSuite, "test of CreateNewSave - mixed save name", test_CreateNewSave_mixed_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - mixed character name", test_CreateNewSave_mixed_character_name);
-        //CU_add_test(pSuite, "test of CreateNewSave - gibberish save name", test_CreateNewSave_gibberish_save_name);
+        CU_add_test(pSuite, "test of CreateNewSave - gibberish save name", test_CreateNewSave_gibberish_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - gibberish character name", test_CreateNewSave_gibberish_character_name);
         CU_add_test(pSuite, "test of CreateNewSave - short save name", test_CreateNewSave_short_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - short character name", test_CreateNewSave_short_character_name);
-       //CU_add_test(pSuite, "test of CreateNewSave - newline in save name", test_CreateNewSave_newline_in_save_name);
+        CU_add_test(pSuite, "test of CreateNewSave - newline in save name", test_CreateNewSave_newline_in_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - newline in character name", test_CreateNewSave_newline_in_character_name);
-        //CU_add_test(pSuite, "test of CreateNewSave - tab in save name", test_CreateNewSave_tab_in_save_name);
+        CU_add_test(pSuite, "test of CreateNewSave - tab in save name", test_CreateNewSave_tab_in_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - tab in character name", test_CreateNewSave_tab_in_character_name);
         CU_add_test(pSuite, "test of CreateNewSave - leading spaces in save name", test_CreateNewSave_leading_spaces_in_save_name);
         CU_add_test(pSuite, "test of CreateNewSave - leading spaces in character name", test_CreateNewSave_leading_spaces_in_character_name);
