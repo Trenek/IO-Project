@@ -1,0 +1,78 @@
+{\rtf1\ansi\ansicpg1250\cocoartf2636
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww37900\viewh18420\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 @startuml\
+class Resources \{\
+  +Font* fonts\
+  +int fontsQuantity\
+  +Music* music\
+  +int musicQuantity\
+  +int height\
+  +int width\
+  +Texture2D(*bodyParts[10])[4]\
+  +int bodyPosition[10][4][2]\
+  +int bodyPartsQuantity[10]\
+  +Texture2D(*armorPart[9])[4]\
+  +int(*armorPrice[9])[3]\
+  +int armorPosition[9][4][2]\
+  +int armorPartsQuantity[9]\
+  +int *(armorDurability[9])\
+  +Texture2D* weapons\
+  +int(*weaponPrice)[3]\
+  +int weaponPosition[2]\
+  +int* weaponAttack\
+  +int weaponsQuantity\
+  +attack* attack\
+  +int attackQuantity\
+  +Texture2D* items\
+  +int(*itemsPrice)[3]\
+  +int itemsQuantity\
+  +Texture2D* floors\
+  +int floorQuantity\
+  +Texture2D* ceiling\
+  +int ceilingQuantity\
+  +Texture2D* walls\
+  +int wallQuantity\
+  +LoadResources(struct Resources *this)\
+  +UnloadResources(struct Resources *this)\
+\}\
+\
+class attack \{\
+  +char* name\
+  +int force\
+  +int cost\
+\}\
+\
+enum BodyPartTexture \{\
+  HEAD,\
+  TORSO,\
+  LEFT_ARM,\
+  RIGHT_ARM,\
+  LEFT_LEG,\
+  RIGHT_LEG,\
+  LEFT_HAND,\
+  RIGHT_HAND,\
+  LEFT_FOOT,\
+  RIGHT_FOOT\
+\}\
+\
+enum ArmorPartTexture \{\
+  HELMET,\
+  BREASTPLATE,\
+  PANTS,\
+  LEFT_BOOT,\
+  RIGHT_BOOT,\
+  LEFT_GLOVE,\
+  RIGHT_GLOVE,\
+  LEFT_SLEEVE,\
+  RIGHT_SLEEVE\
+\}\
+\
+Resources --> attack : <<use>>\
+Resources --> BodyPartTexture : <<use>>\
+Resources --> ArmorPartTexture : <<use>>\
+@enduml}
