@@ -27,23 +27,23 @@
     <ClCompile Include="test_button.c">
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
-    <ClCompile Include="test_saveData.c">
-      <Filter>Pliki źródłowe</Filter>
-    </ClCompile>
     <ClCompile Include="test_chooseAction.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_equipmentBox.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_fighterLabel.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_inputBox.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
     <ClCompile Include="test_itemBox.c">
-      <Filter>Pliki źródłowe</Filter>
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_saveData.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
