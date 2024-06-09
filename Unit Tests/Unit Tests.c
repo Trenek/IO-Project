@@ -3,16 +3,14 @@
 #include <raylib.h>
 #include "tests.h"
 
-int setup(void) {
+void raylibSetup(void) {
     SetTraceLogLevel(LOG_NONE);
     InitWindow(800, 600, "Test Window");
     SetTargetFPS(60);
-    return 0;
 }
 
-
 int main(void) {
-    setup();
+    raylibSetup();
     CU_basic_set_mode(CU_BRM_VERBOSE);
 
     if (CUE_SUCCESS == CU_initialize_registry())
