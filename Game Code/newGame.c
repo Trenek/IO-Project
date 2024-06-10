@@ -151,7 +151,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
 
     struct button errorButton = {
-        .text = "Zapis o takiej nazwie już istnieje!",
+        .text = "Wprowadzono niepoprawną nazwę!",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -266,7 +266,11 @@ void newGame(enum state *state, struct menuInfo *info) {
             DrawButton(startGame);
             DrawButton(goBack);
 
-            if (error) DrawButton(errorButton);
+
+            if (error) {
+                errorButton.text = (error == 1) ? "Zapis o takiej nazwie już istnieje" : "Wprowadzono niepoprawną nazwę!";
+                DrawButton(errorButton);
+            }
 
             DrawInputBox(&inputGameSaveName);
             DrawInputBox(&inputCharacterName);

@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 #include <sys/stat.h>
 #include <direct.h>
@@ -146,27 +147,38 @@ static void CreateAchievements(const char *const saveName) {
     fclose(file);
 }
 
-bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+static bool isValidSaveName(const char* saveName) {
+    while (*saveName) {
+        if (!isalnum((unsigned char)*saveName) && *saveName != ' ') {
+            return false;
+        }
+        saveName++;
+    }
+    return true;
+}
+
+int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
-    bool result = 1;
 
-    if (stat(saveDirectory, &st) != 0) {
-        result = 0;
+    if (stat(saveDirectory, &st) == 0)
+        return 1;
+    
+    if (!isValidSaveName(saveName)) 
+        return 2;
 
-        _mkdir(saveDirectory);
+    _mkdir(saveDirectory);
 
-        _mkdir(TextFormat("saves\\%s\\mapy", saveName));
-        _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
-        _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
+    _mkdir(TextFormat("saves\\%s\\mapy", saveName));
+    _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
+    _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
 
-        CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
+    CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
 
-        CreatePlayer(saveName, characterName, bodyParts);
-        CopyShops(saveName);
-        CopyMaps(saveName);
-        CreateAchievements(saveName);
-    }
+    CreatePlayer(saveName, characterName, bodyParts);
+    CopyShops(saveName);
+    CopyMaps(saveName);
+    CreateAchievements(saveName);
 
-    return result;
+    return 0;
 }
