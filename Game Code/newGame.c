@@ -274,6 +274,11 @@ void newGame(enum state *state, struct menuInfo *info) {
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(startGame)) {
+                while (inputGameSaveName.text[inputGameSaveName.currentLength - 1] == ' ') {
+                    inputGameSaveName.text[inputGameSaveName.currentLength - 1] = 0;
+                    inputGameSaveName.currentLength -= 1;
+                }
+
                 error = CreateNewSave(inputGameSaveName.text, inputCharacterName.text, info->body);
                 if (error == 0) {
                     *state = PLAY;
