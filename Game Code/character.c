@@ -74,6 +74,10 @@ static void DrawCharacter(struct Resources *info, struct character *character) {
         DrawArmorPart(info, character, LEFT_SLEEVE);
         DrawBodyPart(info, character, RIGHT_ARM);
         DrawArmorPart(info, character, RIGHT_SLEEVE);
+        
+        if (character->direction == FRONT || character->direction == RIGHT)
+            DrawWeapon(info, character, 1);
+        
         DrawBodyPart(info, character, LEFT_HAND);
         DrawArmorPart(info, character, LEFT_GLOVE);
         DrawBodyPart(info, character, RIGHT_HAND);
@@ -81,9 +85,6 @@ static void DrawCharacter(struct Resources *info, struct character *character) {
         DrawBodyPart(info, character, HEAD);
         DrawArmorPart(info, character, HELMET);
     }
-
-    if (character->direction == FRONT || character->direction == RIGHT)
-    DrawWeapon(info, character, 1);
 }
 
 void assemblePlayerTexture(struct Resources *info, struct character *character) {
