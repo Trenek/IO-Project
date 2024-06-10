@@ -3,10 +3,14 @@
 #include "state.h"
 
 #include "menuElements.h"
+#include "removeDirectory.h"
+#include "saveData.h"
 
 #define INC_Y (10)
 #define INC_X (10)
 #define FONT_SIZE (25)
+
+#define RELOAD_SAVES break
 
 void loadGame(enum state *state, struct menuInfo *info) {
     const int height = GetScreenHeight() >> 1;
@@ -40,6 +44,24 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .isActive = 0,
         .init = {
             .x = (GetScreenWidth() >> 1) - spaceX,
+            .y = height + 4 * spaceY,
+            .incX = INC_X,
+            .incY = INC_Y,
+            .posX = 1,
+            .posY = 1
+        },
+        .font = &info->resources.fonts[0],
+        .fontSize = FONT_SIZE,
+        .fontColor = BLACK,
+        .color = color2,
+        .hoverColor = color3,
+        .spaceing = 0
+    };
+    struct button remove = {
+        .text = "Remove",
+        .isActive = 1,
+        .init = {
+            .x = (GetScreenWidth() >> 1),
             .y = height + 4 * spaceY,
             .incX = INC_X,
             .incY = INC_Y,
@@ -96,6 +118,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
 
     CalculateButtonPosition(&title);
     CalculateButtonPosition(&loadGame);
+    CalculateButtonPosition(&remove);
     CalculateButtonPosition(&goBack);
 
     initializeChoiceBox(&saves);
@@ -106,6 +129,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
 
             DrawButton(title);
             DrawButton(loadGame);
+            DrawButton(remove);
             DrawButton(goBack);
 
             DrawChoiceBox(&saves);
@@ -114,8 +138,14 @@ void loadGame(enum state *state, struct menuInfo *info) {
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             if (isMouseOver(loadGame)) *state = PLAY;
             else if (isMouseOver(goBack)) *state = MENU;
+            else if (isMouseOver(remove)) {
+                removeDirectory(TextFormat("saves\\%s", saves.saveData[saves.chosenRow + saves.rowQuantity * saves.page].text));
+                RELOAD_SAVES;
+            }
 
             UpdateChoiceBox(&saves, info);
+
+            remove.isActive = loadGame.isActive;
         }
     }
 

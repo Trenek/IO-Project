@@ -37,13 +37,13 @@ static void CalculateTutorialSlidePosition(struct tutorialSlide *this) {
     this->descriptionBox = (struct textBox){
         .rec = {
             .x = this->texturePosition.x,
-            .y = this->texturePosition.y + this->image.height * init.x / this->image.width,
+            .y = this->texturePosition.y + this->image.height * this->titleBox.rec.width / this->image.width,
             .width = (float)init.width,
             .height = init.height - height - this->image.height
         },
         .textLeftCorner = {
             .x = this->texturePosition.x + init.incX,
-            .y = this->texturePosition.y + this->image.height * init.x / this->image.width + init.incY
+            .y = this->texturePosition.y + this->image.height * this->titleBox.rec.width / this->image.width + init.incY
         }
     };
 

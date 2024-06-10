@@ -135,23 +135,6 @@ void explore(enum playState *state, struct playInfo *info) {
     while (!WindowShouldClose() && *state == EXPLORE) {
         i += 1;
 
-        if ((i / 10) % 4 == 0) {
-            info->save.player.character.direction = 0;
-            assemblePlayerTexture(info->resources, &info->save.player.character);
-        }
-        else if ((i / 10) % 4 == 1) {
-            info->save.player.character.direction = 1;
-            assemblePlayerTexture(info->resources, &info->save.player.character);
-        }
-        else if ((i / 10) % 4 == 2) {
-            info->save.player.character.direction = 2;
-            assemblePlayerTexture(info->resources, &info->save.player.character);
-        }
-        else if ((i / 10) % 4 == 3) {
-            info->save.player.character.direction = 3;
-            assemblePlayerTexture(info->resources, &info->save.player.character);
-        }
-
         UpdateMusicStream(info->resources->music[0]);
         movePlayer(info, &info->save.player, &info->camera);
 
