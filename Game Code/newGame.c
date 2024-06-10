@@ -151,7 +151,7 @@ void newGame(enum state *state, struct menuInfo *info) {
     };
 
     struct button errorButton = {
-        .text = "Wprowadzono niepoprawną nazwę!",
+        .text = "Zapis o takiej nazwie już istnieje!",
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
