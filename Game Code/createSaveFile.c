@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <ctype.h>
 
 #include <sys/stat.h>
 #include <direct.h>
@@ -20,6 +19,19 @@ static void CreateDate(const char *const saveName) {
     fprintf(file, "%i ", tm.tm_hour);
     fprintf(file, "%i ", tm.tm_min);
     fprintf(file, "%i", tm.tm_sec);
+
+    fclose(file);
+}
+
+static void CreateAttacks(FILE *toWrite) {
+    FILE *file = fopen("dane\\walka\\basic attackSet.txt", "r");
+    int c = 0;
+
+    fprintf(toWrite, "\n");
+  
+    while ((c = fgetc(file)) != EOF) {
+        fputc(c, toWrite);
+    }
 
     fclose(file);
 }
@@ -45,6 +57,8 @@ static void CreateCharacter(const char *const saveName, const char *const charac
     }
 
     fprintf(file, "\n%i", 0);
+
+    CreateAttacks(file);
 
     fclose(file);
 }
@@ -132,38 +146,27 @@ static void CreateAchievements(const char *const saveName) {
     fclose(file);
 }
 
-static bool isValidSaveName(const char* saveName) {
-    while (*saveName) {
-        if (!isalnum((unsigned char)*saveName) && *saveName != ' ') {
-            return false;
-        }
-        saveName++;
-    }
-    return true;
-}
-
 int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
+    bool result = 1;
 
-    if (stat(saveDirectory, &st) == 0)
-        return 1;
-    
-    if (!isValidSaveName(saveName)) 
-        return 2;
+    if (stat(saveDirectory, &st) != 0) {
+        result = 0;
 
-    _mkdir(saveDirectory);
+        _mkdir(saveDirectory);
 
-    _mkdir(TextFormat("saves\\%s\\mapy", saveName));
-    _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
-    _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
+        _mkdir(TextFormat("saves\\%s\\mapy", saveName));
+        _mkdir(TextFormat("saves\\%s\\sklepy", saveName));
+        _mkdir(TextFormat("saves\\%s\\osi¹gniêcia", saveName));
 
-    CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
+        CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
 
-    CreatePlayer(saveName, characterName, bodyParts);
-    CopyShops(saveName);
-    CopyMaps(saveName);
-    CreateAchievements(saveName);
+        CreatePlayer(saveName, characterName, bodyParts);
+        CopyShops(saveName);
+        CopyMaps(saveName);
+        CreateAchievements(saveName);
+    }
 
-    return 0;
+    return result;
 }

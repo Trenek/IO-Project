@@ -121,9 +121,12 @@ void AttackPlayer(struct chooseAction *const this, struct animateAttack *attack)
     attack->isAttacked = 1;
     attack->attacker = this->active;
     attack->attacked = this->target;
-    attack->attackID = rand() % attack->attacker->fighter.attackQuantity;
-    attack->playerTurn = attack->playerTurn ? 0 : 1;
 
+    do {
+        attack->attackID = rand() % attack->attacker->fighter.attackQuantity;
+    } while (this->active->rest < (*this->attacks)[this->active->fighter.attacks[attack->attackID]].force);
+
+    attack->playerTurn = 0;
     struct fighterLabel *temp = this->active;
     this->active = this->target;
     this->target = temp;

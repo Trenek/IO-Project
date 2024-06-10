@@ -130,6 +130,9 @@
     <Filter Include="Pliki źródłowe\state\play\fight\animateAttack">
       <UniqueIdentifier>{cb0ca5b9-8fa9-4a65-bea3-7da81d3368ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Pliki źródłowe\additions\removeDirectory">
+      <UniqueIdentifier>{f39d1bef-ba5a-43a5-9ae7-0c1683048acb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="player.c">
@@ -279,6 +282,9 @@
     <ClCompile Include="fight.c">
       <Filter>Pliki źródłowe\state\play</Filter>
     </ClCompile>
+    <ClCompile Include="removeDirectory.c">
+      <Filter>Pliki źródłowe\additions\removeDirectory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="player.h">
@@ -373,6 +379,9 @@
     </ClInclude>
     <ClInclude Include="animateAttack.h">
       <Filter>Pliki źródłowe\state\play\fight\animateAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="removeDirectory.h">
+      <Filter>Pliki źródłowe\additions\removeDirectory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

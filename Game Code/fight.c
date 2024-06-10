@@ -213,7 +213,9 @@ void fight(enum playState *state, struct playInfo *info) {
                 ClearBackground(color);
 
                 BeginMode3D(fightCamera);
-                    DrawGrid(100, 1);
+                    DrawFloors(info);
+                    DrawCeilings(info);
+                    DrawWalls(info);
 
                     RenderTextures(render, sizeof(render) / sizeof(struct Object2D *), fightCamera);
                 EndMode3D();
