@@ -62,10 +62,10 @@ static void DrawCharacter(struct Resources *info, struct character *character) {
         DrawArmorPart(info, character, LEFT_SLEEVE);
         DrawBodyPart(info, character, RIGHT_ARM);
         DrawArmorPart(info, character, RIGHT_SLEEVE);
-        DrawBodyPart(info, character, HEAD);
-        DrawArmorPart(info, character, HELMET);
         DrawBodyPart(info, character, TORSO);
+        DrawBodyPart(info, character, HEAD);
         DrawArmorPart(info, character, BREASTPLATE);
+        DrawArmorPart(info, character, HELMET);
     }
     else {
         DrawBodyPart(info, character, TORSO);
