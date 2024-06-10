@@ -164,7 +164,7 @@ void dialog(enum playState *state, struct playInfo *info) {
                         saveData.statementID = saveData.responses[i].next;
 
                         unloadFile(&saveData);
-                        loadFile(TextFormat("dane\\dialogi\\%i", info->dialog), &saveData, &options, info, &screenCamera);
+                        loadFile("dane\\dialogi", &saveData, &options, info, &screenCamera);
                     }
                 }
 

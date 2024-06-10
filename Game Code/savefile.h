@@ -48,7 +48,7 @@ struct SaveFile {
     struct Achievement *achievements;
 };
 
-bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]);
+int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]);
 void LoadSaveFile(struct SaveFile *this, struct Resources *resources);
 void UnloadSaveFile(struct SaveFile *this);
 void SaveSaveFile(struct SaveFile *this);

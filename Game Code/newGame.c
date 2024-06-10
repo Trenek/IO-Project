@@ -265,7 +265,6 @@ void newGame(enum state *state, struct menuInfo *info) {
             DrawButton(createCharacter);
             DrawButton(startGame);
             DrawButton(goBack);
-
             if (error) DrawButton(errorButton);
 
             DrawInputBox(&inputGameSaveName);

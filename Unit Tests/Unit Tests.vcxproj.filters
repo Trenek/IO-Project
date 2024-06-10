@@ -45,6 +45,15 @@
     <ClCompile Include="test_saveData.c">
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClCompile>
+    <ClCompile Include="test_numberSlideBox.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_stringSlideBox.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
+    <ClCompile Include="test_createSaveFile.c">
+      <Filter>Pliki źródłowe\Tests</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CopyFileToFolders Include="..\dependencies\CUnit\lib\cunit.dll">

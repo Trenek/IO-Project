@@ -23,6 +23,19 @@ static void CreateDate(const char *const saveName) {
     fclose(file);
 }
 
+static void CreateAttacks(FILE *toWrite) {
+    FILE *file = fopen("dane\\walka\\basic attackSet.txt", "r");
+    int c = 0;
+
+    fprintf(toWrite, "\n");
+  
+    while ((c = fgetc(file)) != EOF) {
+        fputc(c, toWrite);
+    }
+
+    fclose(file);
+}
+
 static void CreateCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     FILE *file = fopen(saveName, "w");
     int i = 0;
@@ -44,6 +57,8 @@ static void CreateCharacter(const char *const saveName, const char *const charac
     }
 
     fprintf(file, "\n%i", 0);
+
+    CreateAttacks(file);
 
     fclose(file);
 }
@@ -131,7 +146,7 @@ static void CreateAchievements(const char *const saveName) {
     fclose(file);
 }
 
-bool CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
     bool result = 1;

@@ -197,6 +197,7 @@
     <ClCompile Include="loadSaveFile.c" />
     <ClCompile Include="hitbox.c" />
     <ClCompile Include="numberSlideBox.c" />
+    <ClCompile Include="removeDirectory.c" />
     <ClCompile Include="saveData.c" />
     <ClCompile Include="saveSaveFile.c" />
     <ClCompile Include="shopInterface.c" />
@@ -236,6 +237,7 @@
     <ClInclude Include="fscanfWithAllocation.h" />
     <ClInclude Include="inputBox.h" />
     <ClInclude Include="itemBox.h" />
+    <ClInclude Include="removeDirectory.h" />
     <ClInclude Include="settings.h" />
     <ClInclude Include="menuElements.h" />
     <ClInclude Include="hitbox.h" />

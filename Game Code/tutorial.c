@@ -35,13 +35,13 @@ void tutorial(enum state* state, struct menuInfo* info) {
     struct tutorialSlide slide = {
         .init = {
             .x = GetScreenWidth() >> 1,
-            .y = (GetScreenHeight() >> 1),
-            .height = GetScreenHeight() - (GetScreenHeight() >> 3),
-            .width = GetScreenWidth() >> 1,
+            .y = (GetScreenHeight() >> 5),
+            .height = GetScreenHeight(),
+            .width = (GetScreenWidth() >> 1) - (GetScreenWidth() >> 4),
             .incX = 15,
             .incY = 15,
             .posX = 1,
-            .posY = 1
+            .posY = 0
         },
 
         .lineWidth = 1,
