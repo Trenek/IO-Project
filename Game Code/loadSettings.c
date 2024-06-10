@@ -21,6 +21,7 @@ void loadSettings(struct menuInfo *info) {
         FLAG_VSYNC_HINT
     );
 
+    SetExitKey(KEY_NULL);
 
     InitWindow(info->windowWidth, info->windowHeight, "Project");
     if ((info->fullScreenMode == 1 && IsWindowFullscreen() == false) || (info->fullScreenMode == 0 && IsWindowFullscreen() == true)) ToggleFullscreen();
