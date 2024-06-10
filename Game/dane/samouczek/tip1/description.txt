@@ -1,1 +1,2 @@
-Opsi porady.1
+Aby poruszać się po mapie używaj klawiszy WASD
+Aby przejąć kamerę kliknij prawy przycisk myszy
