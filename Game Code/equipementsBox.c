@@ -245,6 +245,7 @@ bool UpdateEquipementBox(struct equipementBox *const element, struct playInfo *i
     }
     else if (isMouseOver(element->destroy)) {
         Delete(element);
+        assemblePlayerTexture(info->resources, &info->save.player.character);
     }
     else if (isMouseOver(element->goBack)) {
         result = true;

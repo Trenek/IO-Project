@@ -34,7 +34,7 @@ void animateAttack(struct playInfo *info, struct animateAttack *attack) {
         .spaceing = 0
     };
     struct button button = {
-        .text = info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].name,
+        .text = info->resources->attack[attack->attackID].name,
         .isActive = 1,
         .init = {
             .x = GetScreenWidth() >> 1,
@@ -67,7 +67,7 @@ void animateAttack(struct playInfo *info, struct animateAttack *attack) {
         time -= GetFrameTime();
     }
 
-    attack->attacked->durability -= info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].force;
+    attack->attacked->durability -= info->resources->attack[attack->attackID].force;
 
     if (attack->attacked->durability < 0) {
         attack->attacked->health += attack->attacked->durability;
@@ -78,7 +78,7 @@ void animateAttack(struct playInfo *info, struct animateAttack *attack) {
         attack->attacked->health = 0;
     }
 
-    attack->attacker->rest -= info->resources->attack[attack->attacker->fighter.attacks[attack->attackID]].cost;
+    attack->attacker->rest -= info->resources->attack[attack->attackID].cost;
 
     attack->isAttacked = 0;
 }

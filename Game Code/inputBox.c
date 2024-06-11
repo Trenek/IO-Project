@@ -56,6 +56,25 @@ void DrawInputBox(const struct inputBox *element) {
 
 }
 
+bool isWrong(int key) {
+    bool result = false;
+
+    switch (key) {
+        case ':':
+        case '\\':
+        case '/':
+        case '*':
+        case '?':
+        case '"':
+        case '<':
+        case '>':
+        case '|':
+            result = true;
+    }
+
+    return result;
+}
+
 void InternalUpdateInputBox(struct inputBox *element) {
     static float backspace = 0.0f;
     static int interval = 0;
@@ -64,20 +83,22 @@ void InternalUpdateInputBox(struct inputBox *element) {
     float incX = element->textLeftCorner.x - element->boxRectangle.x;
 
     while (key > 0) {
-        if (element->currentLength < MAX_INPUT_CHARS) {
-            element->text[element->currentLength] = '\0';
+        if (false == isWrong(key)) {
+            if (element->currentLength < MAX_INPUT_CHARS) {
+                element->text[element->currentLength] = '\0';
 
-            strcat(element->text, CodepointToUTF8(key, &size));
-            element->currentLength += size;
+                strcat(element->text, CodepointToUTF8(key, &size));
+                element->currentLength += size;
 
-            element->length[element->lengthArrayLength] = size;
-            element->lengthArrayLength += 1;
+                element->length[element->lengthArrayLength] = size;
+                element->lengthArrayLength += 1;
 
-            element->text[element->currentLength] = '\0';
-        }
+                element->text[element->currentLength] = '\0';
+            }
 
-        while (MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x + 2 * incX > element->boxRectangle.width) {
-            element->textOffset += 1;
+            while (MeasureTextEx(*element->font, element->text + element->textOffset, (float)element->fontSize, (float)element->spaceing).x + 2 * incX > element->boxRectangle.width) {
+                element->textOffset += 1;
+            }
         }
 
         key = GetCharPressed();

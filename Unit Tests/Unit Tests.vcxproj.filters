@@ -56,11 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="..\dependencies\CUnit\lib\cunit.dll">
-      <Filter>Pliki zasobów</Filter>
-    </CopyFileToFolders>
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="tests.h">
       <Filter>Pliki źródłowe\Tests</Filter>
     </ClInclude>

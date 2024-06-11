@@ -63,8 +63,8 @@
 
 #include <setjmp.h>   /* jmp_buf */
 
-#include "CUnit.h"
-#include "CUError.h"
+#include "CUnit/CUnit.h"
+#include "CUnit/CUError.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -116,6 +116,19 @@ typedef struct CU_Test
   struct CU_Test* pNext;      /**< Pointer to the next test in linked list. */
   struct CU_Test* pPrev;      /**< Pointer to the previous test in linked list. */
 
+  CU_BOOL         fSkipped;   /**< Flag for whether the test was skipped during a run */
+  unsigned        uFailedRuns; /**< Number of times this test has failed */
+
+  double          dStarted;   /** clock time test started */
+  double          dEnded;     /** clock time test ended */
+
+  const char*     pSkipReason;
+  const char*     pSkipFunction;
+  const char*     pSkipFile;
+  unsigned int    uiSkipLine;
+
+  CU_BOOL         fSuiteSetup;   /**< Flag set if this is a suite setup entry (not an actual test) */
+  CU_BOOL         fSuiteCleanup; /**< Flag set if this is a suite cleanup entry (not an actual test) */
 } CU_Test;
 typedef CU_Test* CU_pTest;    /**< Pointer to a CUnit test case. */
 
@@ -155,12 +168,31 @@ typedef struct CU_Suite
   CU_SetUpFunc      pSetUpFunc;       /**< Pointer to the test SetUp function. */
   CU_TearDownFunc   pTearDownFunc;    /**< Pointer to the test TearDown function. */
 
+  CU_pTest          pInitializeFuncTest;  /**< Pointer to the "test" entry representing suite setup */
+  CU_pTest          pCleanupFuncTest;  /**< Pointer to the "test" entry representing suite cleanup */
+
   unsigned int      uiNumberOfTests;  /**< Number of tests in the suite. */
   struct CU_Suite*  pNext;            /**< Pointer to the next suite in linked list. */
   struct CU_Suite*  pPrev;            /**< Pointer to the previous suite in linked list. */
 
   unsigned int      uiNumberOfTestsFailed;  /**< Number of failed tests in the suite. */
   unsigned int      uiNumberOfTestsSuccess; /**< Number of success tests in the suite. */
+
+  CU_BOOL           fSetUpError;     /**< Flag set if the suite setup function failed  a CU_ASSERT */
+  CU_BOOL           fCleanupError;   /**< Flag set if the suite cleanup function failed a CU_ASSERT*/
+  CU_BOOL           fInSetUp;	       /**< Flag set if we are running the suite setup function */
+  CU_BOOL           fInClean;	       /**< Flag set if we are running the suite cleanup function */
+  CU_BOOL           fSkipped;        /**< Flag for whether the suite was skipped during a run */
+  CU_BOOL           fInTestSetup;    /**< Flag set if we are running a test setup function */
+  CU_BOOL           fInTestClean;    /**< Flag set if we are running a test teardown function */
+
+  const char*       pSkipReason;
+  const char*       pSkipFunction;
+  const char*       pSkipFile;
+  unsigned int      uiSkipLine;
+
+  double            dStarted;   /** clock time suite started */
+  double            dEnded;     /** clock time suite ended */
 } CU_Suite;
 typedef CU_Suite* CU_pSuite;          /**< Pointer to a CUnit suite. */
 
@@ -651,6 +683,21 @@ unsigned int CU_get_test_pos_by_name(CU_pSuite pSuite, const char *strName);
 
 #define CU_ADD_TEST(suite, test) (CU_add_test(suite, #test, (CU_TestFunc)test))
 /**< Shortcut macro for adding a test to a suite. */
+
+CU_EXPORT
+CU_ErrorCode CU_set_all_active(CU_BOOL fNewActive);
+/**<
+ *  Activates or deactivates all tests.
+ *  Only activated tests can be executed during a test run.
+ *  By default a test is active upon creation, but can be deactvated
+ *  all by passing it along with CU_FALSE to this function. All test
+ *  can be reactivated by passing it along with CU_TRUE.
+ *
+ *  @param fNewActive If CU_TRUE then all tests will be activated;
+ *                    if CU_FALSE all tests will be deactivated.
+ *  @return Returns CUE_NOREGISTRY if CU_initialize_registry
+ *          isn't called, CUE_SUCCESS if all is well.
+*/
 
 /*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*/
 /*  This section is based conceptually on code

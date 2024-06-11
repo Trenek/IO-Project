@@ -151,6 +151,10 @@ int CreateNewSave(const char *const saveName, const char *const characterName, c
     struct stat st = { 0 };
     bool result = 1;
 
+    if (stat("saves", &st) != 0) {
+        _mkdir("saves");
+    }
+
     if (stat(saveDirectory, &st) != 0) {
         result = 0;
 

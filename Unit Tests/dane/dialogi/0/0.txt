@@ -1,3 +1,0 @@
-0 2 Witaj podróżniku, czyś łaskaw jest coś zakupić?
-    0 6 1 Tak
-    1 1 Nie

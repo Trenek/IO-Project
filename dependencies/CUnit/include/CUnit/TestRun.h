@@ -67,9 +67,9 @@
 #ifndef CUNIT_TESTRUN_H_SEEN
 #define CUNIT_TESTRUN_H_SEEN
 
-#include "CUnit.h"
-#include "CUError.h"
-#include "TestDB.h"
+#include "CUnit/CUnit.h"
+#include "CUnit/CUError.h"
+#include "CUnit/TestDB.h"
 #include <stdio.h>
 
 #ifdef __cplusplus
@@ -93,6 +93,7 @@ typedef struct CU_FailureRecord
   CU_FailureType  type;           /**< Failure type. */
   unsigned int    uiLineNumber;   /**< Line number of failure. */
   char*           strFileName;    /**< Name of file where failure occurred. */
+  const char*     strFunction;    /**< Function of failure. */
   char*           strCondition;   /**< Test condition which failed. */
   CU_pTest        pTest;          /**< Test containing failure. */
   CU_pSuite       pSuite;         /**< Suite containing test having failure. */
@@ -118,6 +119,8 @@ typedef struct CU_RunSummary
   unsigned int nAssertsFailed;    /**< Number of failed assertions. */
   unsigned int nFailureRecords;   /**< Number of failure records generated. */
   double       ElapsedTime;       /**< Elapsed time for run in seconds. */
+  unsigned int nTestsSkipped;     /**< Number of tests skipped during execution */
+  unsigned int nSuitesSkipped;    /**< Number of suites skipped during execution */
 } CU_RunSummary;
 typedef CU_RunSummary* CU_pRunSummary;  /**< Pointer to CU_RunSummary. */
 
@@ -141,6 +144,14 @@ typedef void (*CU_TestCompleteMessageHandler)(const CU_pTest pTest, const CU_pSu
  *  the first failure record applicable to this test.  If the test did
  *  not have any assertion failures, pFailure will be NULL.  The test run
  *  is considered in progress when the message handler is called.
+ */
+
+typedef void (*CU_TestSkippedMessageHandler)(const CU_pTest pTest, const CU_pSuite pSuite);
+/**< Message handler called when a test is skipped.
+ *  The parameters are the test and suite being skipped.  The message
+ *  handler will be called when the test is marked as inactive inside
+ *  an active suite or when the whole suite is marked as inactive.
+ *  Neither pTest nor pSuite may be null.
  */
 
 typedef void (*CU_SuiteCompleteMessageHandler)(const CU_pSuite pSuite,
@@ -169,6 +180,10 @@ typedef void (*CU_SuiteCleanupFailureMessageHandler)(const CU_pSuite pSuite);
  *  The test run is considered in progress when the message handler is called.
  */
 
+typedef void (*CU_SuiteSkippedMessageHandler)(const CU_pSuite pSuite);
+/**< Message handler called when a suite is skipped during setup.
+ */
+
 /*--------------------------------------------------------------------
  * Get/Set functions for Message Handlers
  *--------------------------------------------------------------------*/
@@ -178,6 +193,8 @@ CU_EXPORT void CU_set_test_start_handler(CU_TestStartMessageHandler pTestStartMe
 /**< Sets the message handler to call before each test is run. */
 CU_EXPORT void CU_set_test_complete_handler(CU_TestCompleteMessageHandler pTestCompleteMessage);
 /**< Sets the message handler to call after each test is run. */
+CU_EXPORT void CU_set_test_skipped_handler(CU_TestSkippedMessageHandler pTestSkippedMessage);
+/**< Sets the message handler to call when a test is skipped. */
 CU_EXPORT void CU_set_suite_complete_handler(CU_SuiteCompleteMessageHandler pSuiteCompleteMessage);
 /**< Sets the message handler to call after each suite is run. */
 CU_EXPORT void CU_set_all_test_complete_handler(CU_AllTestsCompleteMessageHandler pAllTestsCompleteMessage);
@@ -187,12 +204,17 @@ CU_EXPORT void CU_set_suite_init_failure_handler(CU_SuiteInitFailureMessageHandl
 CU_EXPORT void CU_set_suite_cleanup_failure_handler(CU_SuiteCleanupFailureMessageHandler pSuiteCleanupFailureMessage);
 /**< Sets the message handler to call when a suite cleanup function returns an error. */
 
+CU_EXPORT void CU_set_suite_skipped_handler(CU_SuiteSkippedMessageHandler pSuiteSkipped);
+/**< Sets the message handler to call when a suite is skipped */
+
 CU_EXPORT CU_SuiteStartMessageHandler          CU_get_suite_start_handler(void);
 /**< Retrieves the message handler called before each suite is run. */
 CU_EXPORT CU_TestStartMessageHandler           CU_get_test_start_handler(void);
 /**< Retrieves the message handler called before each test is run. */
 CU_EXPORT CU_TestCompleteMessageHandler        CU_get_test_complete_handler(void);
 /**< Retrieves the message handler called after each test is run. */
+CU_EXPORT CU_TestSkippedMessageHandler         CU_get_test_skipped_handler(void);
+/**< Retrieves the message handler called when a test is skipped. */
 CU_EXPORT CU_SuiteCompleteMessageHandler       CU_get_suite_complete_handler(void);
 /**< Retrieves the message handler called after each suite is run. */
 CU_EXPORT CU_AllTestsCompleteMessageHandler    CU_get_all_test_complete_handler(void);
@@ -350,6 +372,43 @@ CU_EXPORT CU_pFailureRecord CU_get_failure_list(void);
  *  when the client initiates a run using CU_run_all_tests(), CU_run_suite(),
  *  or CU_run_test().
  */
+
+CU_EXPORT CU_pFailureRecord CU_iterate_test_failures(CU_pTest test, CU_pFailureRecord previous);
+/**<
+ *  Iterate over the recorded failure records of a given test
+ * @return
+ */
+
+CU_EXPORT int CU_count_test_failures(CU_pTest pTest);
+/**<
+ *  Count the number of failures from the given test
+ * @return
+ */
+
+CU_EXPORT int CU_count_suite_failures(CU_pSuite pSuite);
+/**<
+ *  Count the number of failed tests in a suite.
+ * @return
+ */
+
+CU_EXPORT int CU_count_all_failures(CU_pTestRegistry pRegistry);
+/**<
+ *  Count the number of failed tests overall.
+ * @return
+ */
+
+CU_EXPORT int CU_count_suite_tests(CU_pSuite pSuite);
+/**
+ *  Count the number of tests in a suite.
+ * @return
+ */
+
+CU_EXPORT int CU_count_all_tests(CU_pTestRegistry pRegistry);
+/**
+ *  Count the number of tests in all suites.
+ * @return
+ */
+
 CU_EXPORT CU_pRunSummary CU_get_run_summary(void);
 /**<
  *  Retrieves the entire run summary for the last test run (reset each run).
@@ -385,6 +444,16 @@ CU_EXPORT void CU_print_run_results(FILE *file);
  *  file may not be NULL (checked by assertion).
  *
  *  @param file Pointer to stream to receive the printed summary (non-NULL).
+ */
+
+CU_EXPORT double CU_get_test_duration(CU_pTest pTest);
+/**<
+ * @return Get the number of seconds this test took to execute.
+ */
+
+CU_EXPORT double CU_get_suite_duration(CU_pSuite pSuite);
+/**<
+ * @return Get the number of seconds this test took to execute.
  */
 
 /*--------------------------------------------------------------------
@@ -428,6 +497,27 @@ CU_EXPORT CU_BOOL CU_assertImplementation(CU_BOOL bValue,
  *  @param bFatal        CU_TRUE to abort test (via longjmp()), CU_FALSE to continue test.
  *  @return As a convenience, returns the value of the assertion (i.e. bValue).
  */
+
+CU_EXPORT void CU_SkipImplementation(CU_BOOL bValue,
+                                     unsigned int uiLine,
+                                     const char *strCondition,
+                                     const char *strFile,
+                                     const char *strFunction);
+/**<
+ *  Skip Implementation
+ *  Called to skip execution of current test or current suite.
+ *  @param bValue        CU_TRUE to skip
+ *  @param uiLine        Line number of skip statement.
+ *  @param strCondition  String containing logical test that was failed.
+ *  @param strFile       Source file where skip happened.
+ *  @param strFunction   Function where test skip happened.
+ */
+
+/** Skip the current suite or test if true. */
+#define CU_SKIP_IF(value) \
+  { CU_SkipImplementation((value), __LINE__, ("CU_SKIP_IF(" #value ")"), __FILE__, CU_FUNC); }
+
+
 
 #ifdef USE_DEPRECATED_CUNIT_NAMES
 typedef CU_FailureRecord  _TestResult;  /**< @deprecated Use CU_FailureRecord. */

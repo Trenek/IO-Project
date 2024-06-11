@@ -58,14 +58,15 @@ void UpdateFighterLabel(struct fighterLabel *this) {
         ClearBackground(this->color);
         DrawTextureEx(*this->fighter.object.texture, (Vector2) { 0.0f, 0.0f }, 0.0f, (float)this->height / this->fighter.object.texture->width, WHITE);
         DrawTextEx(*this->font, this->fighter.name, (Vector2) { (float)this->height, 0 }, (float)this->fontSize, (float)this->spaceing, this->fontColor);
+        
         DrawRectangle(this->height, this->fontSize, this->height * 15 / 8, this->barWidth, DARKBROWN);
-        DrawRectangle(this->height, this->fontSize, (this->height * 15 / 8) * this->health / this->maxHealth, this->barWidth, RED);
+        DrawRectangle(this->height, this->fontSize, 0 == this->maxHealth ? 0 : (this->height * 15 / 8) * this->health / this->maxHealth, this->barWidth, RED);
 
         DrawRectangle(this->height, this->fontSize + this->barWidth + this->barGap, this->height * 15 / 8, this->barWidth, DARKBROWN);
-        DrawRectangle(this->height, this->fontSize + this->barWidth + this->barGap, (this->height * 15 / 8) * this->durability / this->maxDurability, this->barWidth, BLUE);
+        DrawRectangle(this->height, this->fontSize + this->barWidth + this->barGap, 0 == this->maxDurability ? 0 : (this->height * 15 / 8) * this->durability / this->maxDurability, this->barWidth, BLUE);
 
         DrawRectangle(this->height, this->fontSize + (this->barWidth + this->barGap) * 2, this->height * 15 / 8, this->barWidth, DARKBROWN);
-        DrawRectangle(this->height, this->fontSize + (this->barWidth + this->barGap) * 2, (this->height * 15 / 8) * this->rest / this->maxRest, this->barWidth, GREEN);
+        DrawRectangle(this->height, this->fontSize + (this->barWidth + this->barGap) * 2, 0 == this->maxRest ? 0 : (this->height * 15 / 8) * this->rest / this->maxRest, this->barWidth, GREEN);
     EndTextureMode();
 
     BeginTextureMode(this->render);
