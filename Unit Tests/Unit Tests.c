@@ -1,6 +1,4 @@
-﻿#include <direct.h>
-
-#include <CUnit/CUnit.h>
+﻿#include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include <raylib.h>
 
@@ -14,7 +12,6 @@ static void raylibSetup(void) {
     SetTargetFPS(60);
 
     removeDirectory("saves");
-    _mkdir("saves");
 }
 
 int main(void) {
