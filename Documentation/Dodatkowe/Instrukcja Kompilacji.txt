@@ -1,0 +1,7 @@
+1. Otwórz plik `IO Project.sln` znajdujący się w folderze `IO Project`
+2. W Eksploratorze rozwiązań wybierz lub otwórz rozwiązanie.
+3. Na pasku menu wybierz pozycję Kompiluj, a następnie wybierz jedno z następujących poleceń:
+   * Wybierz pozycję Kompiluj lub Kompiluj rozwiązanie albo naciśnij klawisze Ctrl+Shift+B, aby skompilować tylko te pliki i składniki projektu, które uległy zmianie od najnowszej kompilacji.
+   * Wybierz pozycję Odbuduj rozwiązanie , aby "wyczyścić" rozwiązanie, a następnie skompiluj wszystkie pliki i składniki projektu.
+   * Wybierz pozycję Czyste rozwiązanie , aby usunąć wszystkie pliki pośrednie i wyjściowe. Po pozostawieniu tylko plików projektu i składnika można utworzyć nowe wystąpienia plików pośrednich i wyjściowych.
+
