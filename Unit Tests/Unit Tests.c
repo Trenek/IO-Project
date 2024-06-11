@@ -1,16 +1,13 @@
-﻿#include <CUnit/CUnit.h>
+﻿#include <direct.h>
+
+#include <CUnit/CUnit.h>
 #include <CUnit/Basic.h>
 #include <raylib.h>
-#include <stdio.h>
-#include <direct.h>
-#include <io.h>
-#include <sys/stat.h>
-#include <string.h>
+
 #include "tests.h"
 
 #include "removeDirectory.h"
 
-// Setup function for raylib
 void raylibSetup(void) {
     SetTraceLogLevel(LOG_NONE);
     InitWindow(800, 600, "Test Window");
