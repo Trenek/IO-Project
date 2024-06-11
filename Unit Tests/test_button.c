@@ -162,11 +162,11 @@ CU_ErrorCode add_tests_button(void) {
     CU_pSuite pSuite = CU_add_suite("Button tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of CalculateButtonPosition_Center", test_CalculateButtonPosition_Center);
-        CU_add_test(pSuite, "test of CalculateButtonPosition_TopLeft", test_CalculateButtonPosition_TopLeft);
-        CU_add_test(pSuite, "test of CalculateButtonPosition_TopRight", test_CalculateButtonPosition_TopRight);
-        CU_add_test(pSuite, "test of CalculateButtonPosition_BottomLeft", test_CalculateButtonPosition_BottomLeft);
-        CU_add_test(pSuite, "test of CalculateButtonPosition_BottomRight", test_CalculateButtonPosition_BottomRight);
+        CU_add_test(pSuite, "CalculateButtonPosition_Center", test_CalculateButtonPosition_Center);
+        CU_add_test(pSuite, "CalculateButtonPosition_TopLeft", test_CalculateButtonPosition_TopLeft);
+        CU_add_test(pSuite, "CalculateButtonPosition_TopRight", test_CalculateButtonPosition_TopRight);
+        CU_add_test(pSuite, "CalculateButtonPosition_BottomLeft", test_CalculateButtonPosition_BottomLeft);
+        CU_add_test(pSuite, "CalculateButtonPosition_BottomRight", test_CalculateButtonPosition_BottomRight);
     }
 
     return CU_get_error();

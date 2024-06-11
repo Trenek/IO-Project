@@ -87,8 +87,8 @@ CU_ErrorCode add_tests_equipementBox(void) {
     CU_pSuite pSuite = CU_add_suite("Equipement Box tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of InitializeEquipementBox", test_InitializeEquipementBox);
-        CU_add_test(pSuite, "test of UpdateEquipementBox", test_UpdateEquipementBox);
+        CU_add_test(pSuite, "InitializeEquipementBox", test_InitializeEquipementBox);
+        CU_add_test(pSuite, "UpdateEquipementBox", test_UpdateEquipementBox);
     }
 
     return CU_get_error();

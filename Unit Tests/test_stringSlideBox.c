@@ -108,8 +108,8 @@ CU_ErrorCode add_tests_stringSlideBox(void) {
     CU_pSuite pSuite = CU_add_suite("String SlideBox tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of CalculateSlideBoxPosition", test_CalculateSlideBoxPosition);
-        CU_add_test(pSuite, "test of InternalUpdateSlideBox", test_InternalUpdateSlideBox);
+        CU_add_test(pSuite, "CalculateSlideBoxPosition", test_CalculateSlideBoxPosition);
+        CU_add_test(pSuite, "InternalUpdateSlideBox", test_InternalUpdateSlideBox);
     }
 
     return CU_get_error();
