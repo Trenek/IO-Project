@@ -120,7 +120,8 @@
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E; 
-xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E</Command>
+xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E;
+copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)";</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E</Command>
@@ -152,7 +153,8 @@ xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E</Comm
     </Link>
     <PostBuildEvent>
       <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E; 
-xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E</Command>
+xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E;
+copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)";</Command>
     </PostBuildEvent>
     <PreBuildEvent>
       <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E</Command>
