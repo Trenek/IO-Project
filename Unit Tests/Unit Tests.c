@@ -8,7 +8,7 @@
 
 #include "removeDirectory.h"
 
-void raylibSetup(void) {
+static void raylibSetup(void) {
     SetTraceLogLevel(LOG_NONE);
     InitWindow(800, 600, "Test Window");
     SetTargetFPS(60);
