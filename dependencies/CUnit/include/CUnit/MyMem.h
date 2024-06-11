@@ -49,20 +49,20 @@ extern "C" {
 #endif
 
 #ifdef MEMTRACE
-  void* CU_calloc(size_t nmemb, size_t size, unsigned int uiLine, const char* szFileName);
-  void* CU_malloc(size_t size, unsigned int uiLine, const char* szFileName);
-  void  CU_free(void *ptr, unsigned int uiLine, const char* szFileName);
-  void* CU_realloc(void *ptr, size_t size, unsigned int uiLine, const char* szFileName);
+  void* CU_calloc(size_t nmemb, size_t size, unsigned int uiLine, const char* szFileName, const char *szFunction);
+  void* CU_malloc(size_t size, unsigned int uiLine, const char* szFileName, const char *szFunction);
+  void  CU_free(void *ptr, unsigned int uiLine, const char* szFileName, const char *szFunction);
+  void* CU_realloc(void *ptr, size_t size, unsigned int uiLine, const char* szFileName, const char *szFunction);
   CU_EXPORT void CU_dump_memory_usage(const char*);
 
   /** c-allocate with memory tracking. */
-  #define CU_CALLOC(x, y)         CU_calloc((x), (y), __LINE__, __FILE__)
+  #define CU_CALLOC(x, y)         CU_calloc((x), (y), __LINE__, __FILE__, CU_FUNC)
   /** m-allocate with memory tracking. */
-  #define CU_MALLOC(x)            CU_malloc((x), __LINE__, __FILE__)
+  #define CU_MALLOC(x)            CU_malloc((x), __LINE__, __FILE__, CU_FUNC)
   /** Free with memory tracking. */
-  #define CU_FREE(x)              CU_free((x), __LINE__, __FILE__)
+  #define CU_FREE(x)              CU_free((x), __LINE__, __FILE__, CU_FUNC)
   /** Reallocate with memory tracking. */
-  #define CU_REALLOC(x, y)        CU_realloc((x), (y), __LINE__, __FILE__)
+  #define CU_REALLOC(x, y)        CU_realloc((x), (y), __LINE__, __FILE__, CU_FUNC)
   /** Generate report on tracked memory. */
   #define CU_CREATE_MEMORY_REPORT(x) CU_dump_memory_usage((x))
   /** Generate report on tracked memory (old macro). */
@@ -82,6 +82,8 @@ extern "C" {
   #define CU_DUMP_MEMORY_USAGE(x)
 #endif  /* MEMTRACE */
 
+/** Free then set x to NULL */
+#define CU_FREE_ZERO(x)           do { CU_FREE(x); x = NULL; } while(0)
 #ifdef CUNIT_BUILD_TESTS
 /** Disable memory allocation for testing purposes. */
 void test_cunit_deactivate_malloc(void);

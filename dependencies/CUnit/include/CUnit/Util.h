@@ -48,7 +48,8 @@
 #ifndef CUNIT_UTIL_H_SEEN
 #define CUNIT_UTIL_H_SEEN
 
-#include "CUnit.h"
+#include <stdlib.h>
+#include "CUnit/CUnit.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -128,6 +129,14 @@ CU_EXPORT size_t CU_number_width(int number);
  *  Calulates the number of places required to display
  *  number in decimal.
  */
+
+CU_EXPORT const char* CU_get_basename(const char* path);
+/**<
+ *  Given a file path, return a pointer to the last component (the basename).
+ *  If on windows, the result will not contain ".exe"
+ */
+
+#define CU_MAIN_EXE_NAME CU_get_basename(argv[0])
 
 #ifdef CUNIT_BUILD_TESTS
 void test_cunit_Util(void);

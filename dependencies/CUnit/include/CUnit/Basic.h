@@ -33,8 +33,8 @@
 #ifndef CUNIT_BASIC_H_SEEN
 #define CUNIT_BASIC_H_SEEN
 
-#include "CUnit.h"
-#include "TestDB.h"
+#include "CUnit/CUnit.h"
+#include "CUnit/TestDB.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -105,6 +105,11 @@ CU_EXPORT void CU_basic_show_failures(CU_pFailureRecord pFailure);
  *
  *  @param pFailure List of CU_pFailureRecord's to output.
  */
+
+/**
+ * Append the basic (stdout) test event handlers
+ */
+CU_EXPORT void CCU_basic_add_handlers(void);
 
 #ifdef __cplusplus
 }

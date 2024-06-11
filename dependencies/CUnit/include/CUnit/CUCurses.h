@@ -40,8 +40,8 @@
 #ifndef CUNIT_CURSES_H_SEEN
 #define CUNIT_CURSES_H_SEEN
 
-#include "CUnit.h"
-#include "TestDB.h"
+#include "CUnit/CUnit.h"
+#include "CUnit/TestDB.h"
 
 #ifdef __cplusplus
 extern "C" {
