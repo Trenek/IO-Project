@@ -119,12 +119,13 @@
       <AdditionalDependencies>cunit.lib;raylib.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winmm.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E; 
-xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E;
-copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)";</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E</Command>
+      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E &amp;
+xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E &amp;
+copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -152,12 +153,13 @@ copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)";</Command>
       <AdditionalDependencies>cunit.lib;raylib.lib;opengl32.lib;kernel32.lib;user32.lib;gdi32.lib;winmm.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E; 
-xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E;
-copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)";</Command>
+      <Command>
+      </Command>
     </PostBuildEvent>
     <PreBuildEvent>
-      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E</Command>
+      <Command>xcopy "$(SolutionDir)Game\dane\*.*" "$(ProjectDir)dane" /Y /I /E &amp;
+xcopy "$(SolutionDir)Game\resources\*.*" "$(ProjectDir)resources" /Y /I /E &amp;
+copy /y "$(SolutionDir)Game\config.cfg" "$(ProjectDir)"</Command>
     </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
