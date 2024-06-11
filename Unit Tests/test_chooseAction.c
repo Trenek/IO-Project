@@ -123,9 +123,9 @@ CU_ErrorCode add_tests_chooseAction(void) {
     CU_pSuite pSuite = CU_add_suite("Choose Action tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of initializeChooseAction", test_initializeChooseAction);
-        //CU_add_test(pSuite, "test of AttackPlayer", test_AttackPlayer);
-        CU_add_test(pSuite, "test of UpdateChooseAction", test_UpdateChooseAction);
+        CU_add_test(pSuite, "initializeChooseAction", test_initializeChooseAction);
+        //CU_add_test(pSuite, "AttackPlayer", test_AttackPlayer);
+        CU_add_test(pSuite, "UpdateChooseAction", test_UpdateChooseAction);
     }
 
     return CU_get_error();

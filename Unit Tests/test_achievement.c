@@ -165,10 +165,10 @@ CU_ErrorCode add_tests_achievementElem(void) {
     CU_pSuite pSuite = CU_add_suite("Achievement tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of UpdateAchievementElem", test_UpdateAchievementElem);
-        CU_add_test(pSuite, "test of UpdateAchievementElem with Status0", test_UpdateAchievementElem_Status0);
-        CU_add_test(pSuite, "test of UpdateAchievementElem with MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements);
-        CU_add_test(pSuite, "test of UpdateAchievementElem with NoRequirements", test_UpdateAchievementElem_NoRequirements);
+        CU_add_test(pSuite, "UpdateAchievementElem", test_UpdateAchievementElem);
+        CU_add_test(pSuite, "UpdateAchievementElem with Status0", test_UpdateAchievementElem_Status0);
+        CU_add_test(pSuite, "UpdateAchievementElem with MultipleRequirements", test_UpdateAchievementElem_MultipleRequirements);
+        CU_add_test(pSuite, "UpdateAchievementElem with NoRequirements", test_UpdateAchievementElem_NoRequirements);
     }
 
     return CU_get_error();

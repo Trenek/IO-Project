@@ -88,9 +88,9 @@ CU_ErrorCode add_tests_inputBox(void) {
     CU_pSuite pSuite = CU_add_suite("Input Box tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of CalculateInputBoxPosition", test_CalculateInputBoxPosition);
-        CU_add_test(pSuite, "test of DrawInputBox", test_DrawInputBox);
-        CU_add_test(pSuite, "test of InternalUpdateInputBox", test_InternalUpdateInputBox);
+        CU_add_test(pSuite, "CalculateInputBoxPosition", test_CalculateInputBoxPosition);
+        CU_add_test(pSuite, "DrawInputBox", test_DrawInputBox);
+        CU_add_test(pSuite, "InternalUpdateInputBox", test_InternalUpdateInputBox);
     }
 
     return CU_get_error();

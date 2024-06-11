@@ -140,10 +140,10 @@ CU_ErrorCode add_tests_fighterLabel(void) {
     CU_pSuite pSuite = CU_add_suite("Fighter Label tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of countDurability", test_CountDurability);
-        CU_add_test(pSuite, "test of InitializeFighterLabel", test_InitializeFighterLabel);
-        CU_add_test(pSuite, "test of FreeFighterLabel", test_FreeFighterLabel);
-        CU_add_test(pSuite, "test of DrawFighterLabel", test_DrawFighterLabel);
+        CU_add_test(pSuite, "countDurability", test_CountDurability);
+        CU_add_test(pSuite, "InitializeFighterLabel", test_InitializeFighterLabel);
+        CU_add_test(pSuite, "FreeFighterLabel", test_FreeFighterLabel);
+        CU_add_test(pSuite, "DrawFighterLabel", test_DrawFighterLabel);
     }
 
     return CU_get_error();

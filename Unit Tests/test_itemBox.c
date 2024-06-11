@@ -61,8 +61,8 @@ CU_ErrorCode add_tests_itemBox(void) {
     CU_pSuite pSuite = CU_add_suite("Item Box tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of CalculateItemBoxPosition", test_CalculateItemBoxPosition);
-        CU_add_test(pSuite, "test of DrawItemBox", test_DrawItemBox);
+        CU_add_test(pSuite, "CalculateItemBoxPosition", test_CalculateItemBoxPosition);
+        CU_add_test(pSuite, "DrawItemBox", test_DrawItemBox);
     }
 
     return CU_get_error();

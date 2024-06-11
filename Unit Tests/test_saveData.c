@@ -68,8 +68,8 @@ CU_ErrorCode add_tests_saveData(void) {
     CU_pSuite pSuite = CU_add_suite("Save Data tests", NULL, NULL);
 
     if (NULL != pSuite) {
-        CU_add_test(pSuite, "test of initializeSaveData", test_initializeSaveData);
-        CU_add_test(pSuite, "test of cmpSaveData", test_cmpSaveData);
+        CU_add_test(pSuite, "initializeSaveData", test_initializeSaveData);
+        CU_add_test(pSuite, "cmpSaveData", test_cmpSaveData);
     }
 
     return CU_get_error();
