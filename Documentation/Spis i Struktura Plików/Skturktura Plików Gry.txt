@@ -1,4 +1,4 @@
-Game Fiels
+Game Files
 ├── config.cfg
 ├── dane
 │   ├── dialogi
