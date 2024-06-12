@@ -1,0 +1,7 @@
+Podział ról w zespole:
+Mateusz Sas - lider, główny programista, dodatkowe role - nadzorowanie jakości oraz tworzenie części dokumentacji
+Bartek Korbiel - członek zespołu programistycznego
+Miłosz Adamczyk - członek zespołu programistycznego
+Michał Skrobot - główny tester, kompozytor muzyki
+Marek Kotulski - grafik
+Emil Madetko - główny dokumentalista
