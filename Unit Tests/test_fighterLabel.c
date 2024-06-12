@@ -7,11 +7,9 @@
 #include "character.h"
 #include "resources.h"
 
+int countDurability(int *((*durability)[9]), int (*armorPart)[9]);
 
-int countDurability(int* ((*durability)[9]), int(*armorPart)[9]);
-
-
-static void MockInitializeFighterLabel(struct fighterLabel* this) {
+static void MockInitializeFighterLabel(struct fighterLabel *this) {
     struct fighterLabelPositionParameters init = this->init;
     const int width = 3 * init.height;
 
@@ -39,21 +37,16 @@ static void MockInitializeFighterLabel(struct fighterLabel* this) {
 
 // Test CountDurability
 static void test_CountDurability(void) {
-    // Allocate memory for the durability array and initialize it
-    int* durability[9];
+    int *(durability[9]);
     for (int i = 0; i < 9; i++) {
-        durability[i] = (int*)malloc(9 * sizeof(int));
+        durability[i] = malloc(9 * sizeof(int));
         for (int j = 0; j < 9; j++) {
             durability[i][j] = j + 1;
         }
     }
-
-    // Initialize the armorPart array
     int armorPart[9] = { 0, 1, 2, 3, 4, 5, 6, 7, 8 };
 
-    // Cast to the correct types and call the function
-    int* (*durability_cast)[9] = (int* (*)[9])durability;
-    int result = countDurability(durability_cast, (int(*)[9])armorPart);
+    int result = countDurability(&durability, &armorPart);
 
     // Assertions
     CU_ASSERT_EQUAL(result, 45);
@@ -67,9 +60,9 @@ static void test_CountDurability(void) {
 // Test InitializeFighterLabel
 static void test_InitializeFighterLabel(void) {
     // Allocate and initialize durability array
-    int* durability[9];
+    int *(durability[9]);
     for (int i = 0; i < 9; i++) {
-        durability[i] = (int*)malloc(9 * sizeof(int));
+        durability[i] = malloc(9 * sizeof(int));
         for (int j = 0; j < 9; j++) {
             durability[i][j] = j + 1;
         }
@@ -84,7 +77,7 @@ static void test_InitializeFighterLabel(void) {
             .posX = 1,
             .posY = 1,
             .height = 50,
-            .durability = (int* (*)[9])durability,
+            .durability = &durability,
             .position = {0, 0, 0}
         },
         .maxHealth = 100,
