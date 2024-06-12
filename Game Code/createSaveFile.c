@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include <stdbool.h>
 
 #include <sys/stat.h>
@@ -36,10 +37,13 @@ static void CreateAttacks(FILE *toWrite) {
     fclose(file);
 }
 
-static void CreateCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+static void CreateCharacter(const char *const saveName, const char *const characterName, const int bodyParts[10], const int difficultyLevel) {
     FILE *file = fopen(saveName, "w");
+    int armorParts[10] = { 0 };
     int i = 0;
 
+    memset(armorParts, -1, sizeof(int) * ((difficultyLevel * 10) / 2));
+    
     fprintf(file, "%s\n", characterName);
     fprintf(file, "%f %f\n\n", 0.91666, 2.0);
 
@@ -52,11 +56,11 @@ static void CreateCharacter(const char *const saveName, const char *const charac
 
     i = 0;
     while (i < 9) {
-        fprintf(file, "%i\n", 0);
+        fprintf(file, "%i\n", armorParts[i]);
         i += 1;
     }
 
-    fprintf(file, "\n%i", 0);
+    fprintf(file, "\n%i", armorParts[9]);
 
     CreateAttacks(file);
 
@@ -90,8 +94,8 @@ static void CreatePosition(const char *const saveName) {
     RecreateFile(fopen("dane\\mapy\\position.txt", "r"), fopen(TextFormat("saves\\%s\\mapy\\position.txt", saveName), "w"));
 }
 
-static void CreatePlayer(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
-    CreateCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts);
+static void CreatePlayer(const char *const saveName, const char *const characterName, const int bodyParts[10], const int difficultyLevel) {
+    CreateCharacter(TextFormat("saves\\%s\\postaæ.txt", saveName), characterName, bodyParts, difficultyLevel);
     CreateEquipment(TextFormat("saves\\%s\\ekwipunek.txt", saveName));
     CreatePosition(saveName);
 }
@@ -146,7 +150,8 @@ static void CreateAchievements(const char *const saveName) {
     fclose(file);
 }
 
-int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10]) {
+// difficultyLevel - 0, 1, 2
+int CreateNewSave(const char *const saveName, const char *const characterName, const int bodyParts[10], int difficultyLevel) {
     const char *saveDirectory = TextFormat("saves\\%s", saveName);
     struct stat st = { 0 };
     bool result = 1;
@@ -166,7 +171,7 @@ int CreateNewSave(const char *const saveName, const char *const characterName, c
 
         CreateDate(TextFormat("saves\\%s\\date.txt", saveName));
 
-        CreatePlayer(saveName, characterName, bodyParts);
+        CreatePlayer(saveName, characterName, bodyParts, difficultyLevel);
         CopyShops(saveName);
         CopyMaps(saveName);
         CreateAchievements(saveName);

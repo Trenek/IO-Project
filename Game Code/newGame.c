@@ -279,7 +279,7 @@ void newGame(enum state *state, struct menuInfo *info) {
                     inputGameSaveName.currentLength -= 1;
                 }
 
-                error = CreateNewSave(inputGameSaveName.text, inputCharacterName.text, info->body);
+                error = CreateNewSave(inputGameSaveName.text, inputCharacterName.text, info->body, setDifficultyLevel.currentOption);
                 if (error == 0) {
                     *state = PLAY;
                     strcpy(info->saveName, inputGameSaveName.text);

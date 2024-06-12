@@ -95,6 +95,7 @@ void fight(enum playState *state, struct playInfo *info) {
         .spaceing = 0
     };
 
+    info->save.player.character.direction = FRONT;
     struct fighterLabel me = {
         .maxHealth = 100,
         .maxDurability = 100,

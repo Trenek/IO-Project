@@ -159,7 +159,7 @@ void settings(enum state *state, struct menuInfo *info) {
     };
 
     struct button accept = {
-        .text = "Accept",
+        .text = "Zaakceptuj",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1) - (GetScreenWidth() >> 3),
@@ -177,7 +177,7 @@ void settings(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     struct button restart = {
-        .text = "Restart",
+        .text = "Zrestartuj",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1),

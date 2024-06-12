@@ -58,7 +58,7 @@ void loadGame(enum state *state, struct menuInfo *info) {
         .spaceing = 0
     };
     struct button remove = {
-        .text = "Remove",
+        .text = "Usuń",
         .isActive = 1,
         .init = {
             .x = (GetScreenWidth() >> 1),

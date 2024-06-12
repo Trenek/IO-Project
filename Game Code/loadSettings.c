@@ -1,7 +1,9 @@
 #include <raylib.h>
 #include <rlgl.h>
 
+#include <stdlib.h>
 #include <stdio.h>
+#include <time.h>
 #include <stdbool.h>
 
 #include "state.h"
@@ -26,7 +28,8 @@ void loadSettings(struct menuInfo *info) {
     SetTargetFPS(info->framesPerSecond);
 
     SetExitKey(KEY_END);
-
+    
+    srand((unsigned int)time(NULL));
     rlEnableDepthTest();
 
     fclose(file);
