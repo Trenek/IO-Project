@@ -1,6 +1,6 @@
 ﻿void stateManager(void);
 
-int main() {
+int WinMain() {
     stateManager();
 
     return 0;
