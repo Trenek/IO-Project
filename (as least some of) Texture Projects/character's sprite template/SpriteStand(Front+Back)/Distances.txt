@@ -1,0 +1,26 @@
+Przesunięcie punktu (0,0) danej części ciała od punktu (0,0) całego obrazka wyrażona w pikselach. dla obrazu postaci wielkości (330x720)
+
+		x		y
+Głowa		80		0
+Ciało		40		150
+Prawa Ręka	240		220
+Prawa Dłoń	240		410
+Prawa Noga	160		490
+Prawa Stopa	180		680
+Lewa Ręka	0		220
+Lewa Dłoń	20		410
+Lewa Noga	70		490
+Lewa Stopa	70		680
+
+Odległości wyrażone stosunkiem do wysokości obrazka
+		x		y
+Głowa		0,(1)		0
+Ciało		0,0(5)		0,208(3)
+Prawa Dłoń	0,(3)		0,569(4)
+Prawa Ręka	0,(3)		0,30(5)
+Prawa Noga	0,(2)		0,680(5)
+Prawa Stopa	0,25		0,9(4)
+Lewa Ręka	0		0,30(5)
+Lewa Dłoń	0,02(7)		0,569(4)
+Lewa Noga	0,097(2)	0,680(5)
+Lewa Stopa	0,097(2)	0,9(4)
