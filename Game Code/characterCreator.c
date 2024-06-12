@@ -20,7 +20,7 @@ void characterCreator(enum state *state, struct menuInfo *info) {
         [LEFT_HAND] = "Lewa dłoń",
         [RIGHT_HAND] = "Prawa dłoń",
         [LEFT_LEG] = "Lewa noga",
-        [RIGHT_LEG] = "Prawa dłoń",
+        [RIGHT_LEG] = "Prawa noga",
         [TORSO] = "Tors"
     };
 

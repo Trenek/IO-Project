@@ -1,7 +1,8 @@
 Wszystkie podstawowe oraz pożądane wymagania funkcjonalne zostały zrealizowane.
 
 Zmiany zwględem wymagań:
-Zastąpienie opcjonalnego umieszczenia w Menu Startowym Osiągnięć Samouczkiem, ze względu na fakt, że osiągnięcia powinny być powiązane z konkretnym zapisem, a także brak przewidzianego przejścia do Samouczka.
+1. Zastąpienie opcjonalnego umieszczenia w Menu Startowym Osiągnięć Samouczkiem, ze względu na fakt, że osiągnięcia powinny być powiązane z konkretnym zapisem, a także brak przewidzianego przejścia do Samouczka.
+2. Redukcja ilości slotów na przedmioty znajdujące się w ekwipunku. Decyzja została podyktowana konsultacjami wewnątrz zespołu oraz konsultacjami z potencjalną grupą odbiorczą która oczekiwała takiej zmiany
 
 Zrealizowane wymagania opcjonalne:
 I Wymagania Podstawowe
