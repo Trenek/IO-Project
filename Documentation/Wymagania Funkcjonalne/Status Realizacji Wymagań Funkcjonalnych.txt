@@ -1,0 +1,32 @@
+Wszystkie podstawowe oraz pożądane wymagania funkcjonalne zostały zrealizowane.
+
+Zmiany zwględem wymagań:
+Zastąpienie opcjonalnego umieszczenia w Menu Startowym Osiągnięć Samouczkiem, ze względu na fakt, że osiągnięcia powinny być powiązane z konkretnym zapisem, a także brak przewidzianego przejścia do Samouczka.
+
+Zrealizowane wymagania opcjonalne:
+I Wymagania Podstawowe
+2. Tworzenie Nowej Gry:
+    System
+    * ma możliwość skorzystania z kreatora postaci
+    * ma możliwość wyboru poziomu trudności
+
+6. Zapisywanie stanu rozgrywki
+    System będzie zawierał menu zapisywania stanu rozgrywki w ramach którego możliwy będzie można wybór jednej z poniższych opcji:
+    * Stwórz - Tworzy nowy plik zapisu gry o wybranej przez użytkownika nazwie i wraca do gry
+
+9. Tryb Walki
+    System będzie zawierał interface walki w ramach którego możliwy będzie wybór jednej z poniższych opcji:
+    * Ucieczka - Z pewnym prawdopodobieństwem albo zakończy walkę, albo spowoduje pominięcie tury użytkownika
+
+    Po zakończeniu walki system wyświetla podsumowanie walki.
+
+11. Dialogi
+    System będzie zawierał menu dialogowe, w ramach którego wyświetlane są:
+    * Twarz Adresanta
+
+    W ramach menu dialogowego poprzez kliknięcie odpowiedniego przycisku możliwa będzie opcja:
+    * wybrania jednej z dostępnych odpowiedzi na wiadomość
+
+II Wymagania Opcjonalne
+1. Kreator postaci
+2. Poziom trudności

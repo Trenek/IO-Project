@@ -19,5 +19,10 @@ Wybór tej biblioteki został umotywowany dobrą jej znajomością przez główn
 Biblioteka CUnit[2] jest biblioteką którą wykorzystaliśmy do stworzenia testów jednostkowych. Sama biblioteka jest porzucona przez oryginalnych twórców, tak więc skorzystaliśmy z wersji której rozwój został kontynuowany przez społeczność.
 Wybór tej biblioteki był umotywowany jej prostotą oraz znajomością przez głównego testera.
 
+Algorytmy warte wspomnienia
+
+Do renderowania tekstur postaci w poprawnej kolejności użyto algorytmu sortowania przez wstawianie. Zdecydowano się na ten algorytm, ze względu na fakt iż przez większość czasu sortuje on elementy już posortowane co jest jego optymistycznym przypadkiem dającym złożoność liniową. Przy gwałtownych ruchach kamery, gdy położenie tekstur względem kamery się zmienia złożoność może sięgać O(n^2), jednak jest to statystycznie rzadki przypadek. 
+Warto nadmienić, że po każdym sortowaniu nowa kolejność jest zapamiętywana, co właśnie umożliwia opisaną wyżej złożoność liniową.
+
 [1] raylib.com
 [2] https://gitlab.com/cunity/cunit

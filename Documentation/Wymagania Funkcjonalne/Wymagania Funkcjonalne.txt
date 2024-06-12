@@ -1,0 +1,256 @@
+Podstawowe Wymagania Funkcjonalne:
+1. Menu Startowe:
+    System będzie zawierał menu startowe w ramach którego możliwy będzie wybór jednej z poniższych opcji:
+    * Nowa Gra
+    * Wczytaj Grę
+    * Ustawienia
+    * (Opcjonalnie) Osiągnięcia
+    * Opuść Grę
+
+    Ponadto menu startowe:
+    * Posiada Tło
+    * (Opcjonalnie) Posiada odpowiedni soundtrack
+    * (Opcjonalnie) Po kliknięciu 7 razy w określone miejsce pojawia się easter egg.
+    
+2. Tworzenie Nowej Gry
+    System będzie zawierał menu tworzenia zapisu nowej gry w ramach którego użytkownik:
+    * podaje własną nazwę zapisu gry. W wypadku jej nie podania wyświetlany jest błąd.
+    * podaje własną nazwę postaci. W wypadku jej nie podania wyświetlany jest błąd.
+    * (Opcjonalne) ma możliwość skorzystania z kreatora postaci
+    * (Opcjonalne) ma możliwość wyboru poziomu trudności
+
+    Ponadto w ramach tego menu możliwy będzie wybór jednej z poniższych opcji:
+    * Rozpocznij - Tworzy i uruchamia nową grę
+    * Powrót - Powrót do Menu Głównego
+
+3. Wczytywanie Zapisów
+    System będzie zawierał menu zarządzania zapisami gier w ramach którego użytkownik:
+    * wybiera jeden z dostępnych zapisów
+
+    Ponadto w ramach tego menu możliwy będzie wybór jednej z poniższych opcji:
+    * Wczytaj - Wczytuje wybrany zapis
+    * Usuń - Usuwa wybrany zapis
+    * Powrót - Powrót do Menu Głównego
+
+    Przy każdym zapisie wyświetlane są:
+    * Unikalna nazwa
+    * Data i godzina ostatniej modyfikacji
+    * (Opcjonalnie) Zrzut ekranu wykonany podczas zapisywania
+
+4. Ustawienia
+    System będzie zawierał menu ustawień w ramach będzie można zmienić:
+    * Rozdzielczość Tekstur - Możliwość wyboru niskiej, średniej i wysokiej rozdzielczości
+    * Wymiary Okna - Zmiana wymiarów okna spośród paru z góry podanych
+    * Tryb Pełnoekranowy - Możliwość Włączenia/Wyłączenia
+
+    Wybrane ustawienia zostają zapamiętane w specjalnym pliku konfiguracji
+
+    Ponadto w ramach tego menu możliwy będzie wybór jednej z poniższych opcji:
+    * Zresetuj ustawienia - Przywraca początkowe ustawienia
+    * Powrót - Powrót do Menu Głównego
+
+5. Tryb eksploracji świata gry
+    System będzie zawierał interface towarzyszący eksploracji świata gry w ramach którego możliwy będzie wybór jednej z poniżyszch opcji:
+    * Zapisz - Zapisanie Stanu Rozgrywki
+    * Ekwipunek - Otwarcie Ekwipunku
+    * (Opcjonalnie) Mapa - Podejrzenie mapy świata
+    * Pauza - Zatrzymanie Rozgrywki
+    * Wyjdź - Powrót Do Menu Głównego
+
+    Ponadto pod interfacem system będzie wyświetlał postać przemieszczającą się po mapie.
+    System będzie zapawniać możliwość:
+    * Poruszania się postacią za pomocą klawiatury
+    * Natknięcia się na rozmieszczonych na mapie ((opcjonalnie) losowo) przeciwników, co wywołuje walkę
+    * Interakcji ze specjalnymi obiektami, które poprzedza odpowiednie menu dialogowe, takimi jak:
+        * Sklep
+        * (Opcjonalnie) Sala Treningowa
+        * (Opcjonalnie) Walka z Bossem
+        * (Opcjonalnie) Postacie dające misje
+    * Wejścia w Dialog ze specjalnymi postaciami
+
+    (Opcjonalnie) Przeciwnicy znajdujący się na mapie poruszają się w pewien z góry określiny sposób
+
+6. Zapisywanie stanu rozgrywki
+    System będzie zawierał menu zapisywania stanu rozgrywki w ramach którego możliwy będzie można wybór jednej z poniższych opcji:
+    * Nadpisz - Nadpisuje stan rozgrywki i wraca do gry
+    * (Opcjonalnie) Stwórz - Tworzy nowy plik zapisu gry o wybranej przez użytkownika nazwie i wraca do gry
+    * Wróć - powraca do gry bez innych zmian
+
+7. Pauza
+    System będzie zawierał menu wstrzymania rozgrywki w ramach którego będzie można wybrać jedną z poniższych opcji:
+    * Wznowienie - Wznawia wstrzymaną rozgrywkę
+    * Menu - Przejście do menu głównego
+
+    Dodatkowo system wyświetla w tle zamrożoną, ściemnioną rozgrywkę
+
+8. Ekwipunek
+    System będzie zawierał menu zarządzania ekwipunkiem w ramach którego użytkownik będzie mógł:
+    * wybrać przedmiot znajdujący się w ekwipunku
+    * (Opcjonalnie) zmienić położenie przedmiotu w ekwipunku
+
+    Ponadto w ramach tego menu możliwy będzie wybór jednej z poniższych opcji:
+    * Wyposaż - Jeśli użytkownik wybrał element wyposażenia, to system zakłada ten element na jego postać i ewentualne stare wyposażenie przenosi do ekwipunku.
+                Jeśli nie wybrano wyposażenia, to opcja jest niedostępna
+    * Zniszcz - Niszczy wybrany przedmiot
+    * Powrót - Powraca do trybu eksploracji
+
+    Ekwipunek posiada 32 miejsca na przedmioty.
+
+9. Tryb Walki
+    System będzie zawierał interface walki w ramach którego możliwy będzie wybór jednej z poniższych opcji:
+    * Akcja - Powoduje wyświetlenie listy możliwych akcji. Kliknięcie jednej z tych akcji powoduje jej wykonanie.
+    * (Opcjonalne) Przedmioty - Powoduje wyświetlenie listy przedmiotów pomocniczych. Kliknięcie jednego z tych przedmiotów powoduje jego użycie.
+    * (Opcjonalne) Ucieczka - Z pewnym prawdopodobieństwem albo zakończy walkę, albo spowoduje pominięcie tury użytkownika
+    * (Opcjonalnie) Misje - Rozpiska wszystkich możliwych misji
+    * Poddanie się - Powoduje porażkę
+
+    Ponadto interface wyświetla:
+    * statystyki postaci uczestnicząnych w walce oraz ich części ciała takich jak:
+        * żywotność
+        * zmęcznenie
+        * pozostała wytrzymałość
+    * nazwę postaci wykonującej aktualnie ruch
+
+    (Opcjonalnie) Po zakończeniu walki system wyświetla podsumowanie walki.
+
+10. Sztuczna inteligencja przeciwnika
+    System będzie zawierał mechanizmy zarządzające ruchem sztucznej inteligencji przeciwnika podczas walki.
+
+    Strategia wyboru ruchów:
+    * wybór losowy z równomiernym rozkładem prawdopodobieństwa
+    albo
+    * (Opcjonalnie) wybór ruchów w sposób inteligentny, zgodnie z jakimś algorytmem
+
+11. Dialogi
+    System będzie zawierał menu dialogowe, w ramach którego wyświetlane są:
+    * Wiadomość
+    * Nazwa Adresata
+    * (Opcjonalnie) Twarz Adresanta
+
+    W ramach menu dialogowego poprzez kliknięcie odpowiedniego przycisku możliwa będzie opcja:
+    * przejścia do kolejnej wiadomości lub w wypadku braku takowej zakończenia dialogu
+    * (Opcjonalnie) wybrania jednej z dostępnych odpowiedzi na wiadomość
+
+12. Sklep
+    System będzie zawierał interface sklepu który:
+    * wyświetla przedmioty Handlarza
+    * wyświetla przedmioty użytkownika
+    * przy każdym przedmiocie wyświetla jego koszt w postaci:
+        * wymaganej ilości innych przedmiotów
+        * (Opcjonalnie) waluty
+    
+    W ramach interface'u System zapewnia możliwość:
+    * wybrania jednego z dostępnych przedmiotów
+
+    Ponadto w ramach tego interface'u użytkownik będzie mógł wybrać jedną z poniższych opcji:
+    * Kup - Przenosi wybrany spośród przedmiotów handlarza przedmiot do ekwipunku oraz odejmuje koszt. 
+            Jeśli nie wybrano takiego przedmiotu, lub nie posiada się przedmiotów / waluty stanowiących koszt, to tak opcja jest niedostępna
+    * Sprzedaj - Usuwa wybrany spośród przedmiotów z ekwipunku przedmiot oraz oddaje postaci użytkownika ich koszt. 
+                 Jeśli nie wybrano takiego przedmiotu, to opcja jest niedostępna
+    * Powrót - Powraca do Trybu Eksploracji
+
+Pożądane Wymagania Funkcjonalne
+1. Samouczek
+    System będzie zawierał samouczek w ramach którego w formie obrazów i opisów przedstawione są informacje takie jak:
+    * Mapowanie klawiszy
+    * Podstawy systemu rozgrywki
+    * Wskazówki dla początkujących
+
+    (Opcjonalnie) Możliwość przejścia specjalnego, samouczkowego etapu rozgrywki
+
+Opcjonalne Wymagania Funkcjonalne
+
+1. Kreator postaci
+    System będzie zawierał menu dostosowywania postaci w ramach którego możliwe będzie:
+    * Wybranie sylwetki
+    * Wybranie fryzury
+    * Wybranie twarzy
+
+    Ponadto w menu będzie możliwy wybór jednej z poniższych opcji:
+    * Zatwierdź - Zapisuje postać i wraca do menu tworzenia zapisu
+    * Anuluj - Anuluje zmiany i wraca do menu tworzenia zapisu
+
+2. Poziom trudności
+    System zawiera możliwość wyboru jednego z trzech poniższych poziomów trudności: 
+    * łatwy
+    * średni 
+    * trudny. 
+
+    Wybrany poziom trudności definiuje siłę napotkanych przez nas przeciwników. 
+    Im wyższy poziom trudności tym większy mnożnik statystyk przeciwników.
+
+3. Podejrzenie mapy świata w trybie eksploracji
+    System zawiera interface mapy w ramach którego możliwy jest wybór jednej z poniższych opcji:
+    * Powrót - Wraca do Trybu Eksploracji
+
+    Ponadto interface wyświetla:
+    * Mapę zawierającą informacje o:
+        * aktualnym położeniu gracza
+        * położeniu wszystkich przeciwników
+        * położeniu sklepu
+        * (Opcjonalnie) położeniu sali treningowej
+        * (Opcjonalnie) zaznaczeniu celu misji i trasy do niego
+    * Legendę mapy
+
+4. Sala Treningowa
+    System zawiera menu Sali Treningowej w ramach którego możliwy będzie wybór jednej z poniższych opcji:
+    * Kreator Akcji - przechodzi do kreatora akcji
+    * Testowa Walka - przechodzi do walki testowej
+    * Powrót - Powrót do trybu eksploracji mapy
+
+    W ramach Kreatora Akcji możliwy będzie wybór jednej z poniższych opcji:
+    * Modyfikuj - wyświetla wszystkie posiadane akcje i daje możliwość wyboru jednej z nich
+    * Stwórz - przechodzi do menu tworzenia akcji
+    * Powrót - powraca do menu sali treningowej
+
+    W ramach opcji modyfukuj użytkownik będzie mieć możliwość wyboru jednej z istniejących akcji.
+    Ponadto w ramach opcji modyfikuj możliwy będzie wybór jednej z poniższych opcji:
+    * Modyfikuj - przechodzi do menu tworzenia akcji, w którym mamy ustawioną wybraną akcję, po zatwierdzeniu wybrana akcja zostaje zmodyfikowana
+    * Powrót - Wraca do Kreatora Akcji
+
+    W ramach menu tworzenia akcji użytkownik będzie mieć możliwość:
+    * Wyboru określonego kroku akcji
+    * Wyboru ataku, umiejętności bądź pozycji mającej wykonywać się w wybranym kroku
+    * Zmiany nazwy akcji
+
+    (Opcjonalnie) Długość akcji jest ograniczona od góry poprzez wartość zależącą od poziomu postaci
+
+    Walka Testowa to walka którą charakteryzuje:
+    * Możliwość powrotu do menu Sali Treningowej
+    * Regeneracja żywotności oraz zmęczenia postaci
+
+5. Osiągnięcia
+    System będzie zawierał menu Osiągnięć w którym istnieje opcja:
+    * Powrót - Powraca do Menu Głównego
+
+    Menu wyświetla wszystkie osiągnięcia. Przy każdym z nich wyświetla:
+    * Nazwę
+    * Opis
+    * Wymagania
+    * Status (zdobyte / niezdobyte)
+
+6. Misje
+    System będzie zawierał menu misji w którym będzie można wybrać jedną z poniższych opcji:
+    * Wybierz - Ustawia wybraną misję jako aktualną
+    * Powrót - Powraca do Trybu Eksploracji
+
+    Ponadto System będzie zawierał możliwość wyboru jednej z wyświetlonych misji.
+    Menu wyświetla wszystkie misje. Przy każdej z nich wyświetla:
+    * Nazwę
+    * Opis
+    * Wymagania
+    * Nagrodę
+
+7. Muzyka
+    System będzie grał muzykę zmieniająca się w zależności od czynności wykonywanej przez gracza
+    Przykłady możliwych czynności:
+    * Walka
+    * Eksploracja Mapy
+    * (Opcjonalnie) Przeglądanie Mapy
+    * Przeglądanie Ekwipunku
+    * Zmiana ustawień
+
+    (Opcjonalnie) Dodanie efektów audio podczas:
+    * Interakcji z NPC
+    * Wykonywania akcji w czasie walki
+    * Przemieszczania się po mapie (chodzenia)

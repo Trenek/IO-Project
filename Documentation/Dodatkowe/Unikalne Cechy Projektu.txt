@@ -1,0 +1,5 @@
+Projekt ma wiele cech które mimo nie wycia wymaganymi zostały do niego dodane zwiększając jego wartość. Są to między innymi:
+* System Hitbox'ów zapewniający, że postacie nie przenikają przez siebie samych, ani przez inne obiekty, jak na przykład ściany. System obsługuje również wchodzenie w interakcje z postaciami komputerowymi
+* System poruszania się kamery. System bazuje na współrzędnych sferycznych i jednocześnie upewnia się, że kamera nie przenika przez obiekty umieszczone na mapie, jak przykładowo ściana. 
+* Generacja postaci poprzez rysowanie tekstur położonych ortogonalnie w stosunku do podłogi
+* System renderowania bazujący na algorytmie sortowania przez wstawianie
